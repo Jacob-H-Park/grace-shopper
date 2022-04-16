@@ -19,9 +19,12 @@ const Product = db.define("product", {
   image_url: {
     type: STRING,
   },
-  quantity: {
+  stock: {
     type: INTEGER,
   },
+  category: {
+    type: TEXT,
+  }
 });
 
 module.exports = Product;

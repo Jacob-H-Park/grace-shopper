@@ -16,7 +16,9 @@ class Products extends Component {
     return (
       <div>
         {product.map((product) => {
-          return <div key={product.id}>{product.name}</div>;
+          return (<div key={product.id}>
+            {product.name}
+            </div>);
         })}
       </div>
     );
