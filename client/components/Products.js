@@ -18,6 +18,7 @@ class Products extends Component {
         {product.map((product) => {
           return (<div key={product.id}>
             {product.name}
+            <img src={product.image_url}/>
             </div>);
         })}
       </div>
