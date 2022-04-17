@@ -23,15 +23,15 @@ async function seed() {
   //Create Products
 
   //Roses
-  await Product.create({ name: "SM Bunch-o Pink Roses", price: 35.00, image_url: "public/Images/roses/7-pink-roses-400x400-39400.jpeg", category:"rose", stock: 20 });
-  await Product.create({ name: "MD Bunch-o Pink Roses", price: 58.00, image_url: "public/Images/roses/pink-roses-bouquet-400x400-37411.jpeg", category:"rose", stock: 20 });
-  await Product.create({ name: "LG Bunch-o Pink Roses", price: 120.00, image_url: "public/Images/roses/100-pink-rose.jpeg", category:"rose", stock: 20 });
-  await Product.create({ name: "SM Bunch-o Red Roses", price: 38.00, image_url: "public/Images/roses/7-red-roses-400x400-39251.jpeg", category:"rose", stock: 20 });
-  await Product.create({ name: "MD Bunch-o Red Roses", price: 61.00, image_url: "public/Images/roses/red-roses-bouquet-400x400-37412.jpeg", category:"rose", stock: 20 });
-  await Product.create({ name: "LG Bunch-o Red Roses", price: 125.00, image_url: "public/Images/roses/100-red-rose.jpeg", category:"rose", stock: 20 });
-  await Product.create({ name: "SM Bunch-o White Roses", price: 45.00, image_url: "public/Images/roses/7-white-roses-400x400-37428.jpeg", category:"rose", stock: 20 });
-  await Product.create({ name: "MD Bunch-o White Roses", price: 68.00, image_url: "public/Images/roses/white-roses-bouquet-400x400-37413.jpeg", category:"rose", stock: 20 });
-  await Product.create({ name: "LG Bunch-o White Roses", price: 135.00, image_url: "public/Images/roses/100-white-rose.jpeg", category:"rose", stock: 20 });
+  await Product.create({ name: "SM Bunch-o Pink Roses", price: 35.00, image_url: "/Images/roses/7-pink-roses-400x400-39400.jpeg", category:"rose", stock: 20 });
+  await Product.create({ name: "MD Bunch-o Pink Roses", price: 58.00, image_url: "/Images/roses/pink-roses-bouquet-400x400-37411.jpeg", category:"rose", stock: 20 });
+  await Product.create({ name: "LG Bunch-o Pink Roses", price: 120.00, image_url: "/Images/roses/100-pink-rose.jpeg", category:"rose", stock: 20 });
+  await Product.create({ name: "SM Bunch-o Red Roses", price: 38.00, image_url: "/Images/roses/7-red-roses-400x400-39251.jpeg", category:"rose", stock: 20 });
+  await Product.create({ name: "MD Bunch-o Red Roses", price: 61.00, image_url: "/Images/roses/red-roses-bouquet-400x400-37412.jpeg", category:"rose", stock: 20 });
+  await Product.create({ name: "LG Bunch-o Red Roses", price: 125.00, image_url: "/Images/roses/100-red-rose.jpeg", category:"rose", stock: 20 });
+  await Product.create({ name: "SM Bunch-o White Roses", price: 45.00, image_url: "/Images/roses/7-white-roses-400x400-37428.jpeg", category:"rose", stock: 20 });
+  await Product.create({ name: "MD Bunch-o White Roses", price: 68.00, image_url: "/Images/roses/white-roses-bouquet-400x400-37413.jpeg", category:"rose", stock: 20 });
+  await Product.create({ name: "LG Bunch-o White Roses", price: 135.00, image_url: "/Images/roses/100-white-rose.jpeg", category:"rose", stock: 20 });
 
 
   console.log(`seeded ${users.length} users`);
