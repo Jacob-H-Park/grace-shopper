@@ -2,7 +2,7 @@
 
 const {
   db,
-  models: { User, Product },
+  models: { User, Product, LineItem, Order },
 } = require("../server/db");
 
 /**
@@ -12,7 +12,6 @@ const {
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log("db synced!");
-
   // Creating Users
   const users = await Promise.all([
     User.create({ username: "cody", password: "123" }),
@@ -33,6 +32,7 @@ async function seed() {
   await Product.create({ name: "MD Bunch-o White Roses", price: 68.00, image_url: "/Images/roses/white-roses-bouquet-400x400-37413.jpeg", category:"rose", stock: 20 });
   await Product.create({ name: "LG Bunch-o White Roses", price: 135.00, image_url: "/Images/roses/100-white-rose.jpeg", category:"rose", stock: 20 });
 
+  
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
