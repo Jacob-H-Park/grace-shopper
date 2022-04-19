@@ -10,8 +10,6 @@ const Order = require("./models/Order");
 Order.belongsTo(User);
 User.hasMany(Order);
 
-Order.hasMany(LineItem);
-LineItem.belongsTo(Order);
 
 Order.belongsToMany(Product, {through: LineItem});
 Product.belongsToMany(Order, {through: LineItem});
