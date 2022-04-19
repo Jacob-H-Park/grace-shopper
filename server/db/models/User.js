@@ -1,4 +1,4 @@
-const { STRING, BOOLEAN } = require("sequelize");
+const { STRING, BOOLEAN, INTEGER } = require("sequelize");
 const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
