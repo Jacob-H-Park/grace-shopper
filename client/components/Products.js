@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../store/products";
+import { Link } from "react-router-dom";
 
 class Products extends Component {
   constructor() {
@@ -16,10 +17,16 @@ class Products extends Component {
     return (
       <div>
         {product.map((product) => {
-          return (<div key={product.id}>
-            {product.name}
-            <img src={product.image_url}/>
-            </div>);
+          return (
+            <div key={product.id}>
+              {product.name}
+              <div>
+                <Link to={`/flower/${product.id}`}>
+                  <img src={product.image_url} />
+                </Link>
+              </div>
+            </div>
+          );
         })}
       </div>
     );
@@ -27,7 +34,6 @@ class Products extends Component {
 }
 
 const mapState = (state) => {
-  // console.log(state);
   return state;
 };
 
