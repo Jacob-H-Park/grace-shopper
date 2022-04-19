@@ -1,13 +1,24 @@
-const { STRING, BOOLEAN, INTEGER, DECIMAL } = require("sequelize");
+const Sequelize = require("sequelize");
 const db = require("../db");
+const User = require("./User");
 
 const Order = db.define("order", {
-  isCart: {
-    type: BOOLEAN,
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
   },
-  total: {
-    type: DECIMAL
-  }
+  userId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: User,
+      key: "id"
+    }
+  },
+  isFulfilled: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
 });
 
 module.exports = Order;
