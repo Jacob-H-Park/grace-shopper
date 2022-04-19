@@ -8,13 +8,13 @@ const LineItem = require("./models/LineItem");
 const Order = require("./models/Order");
 
 Order.belongsTo(User);
-User.hasOne(Order);
+User.hasMany(Order);
 
 Order.hasMany(LineItem);
 LineItem.belongsTo(Order);
 
-Product.hasMany(LineItem);
-LineItem.belongsTo(Product);
+Order.belongsToMany(Product, {through: LineItem});
+Product.belongsToMany(Order, {through: LineItem});
 
 module.exports = {
   db,

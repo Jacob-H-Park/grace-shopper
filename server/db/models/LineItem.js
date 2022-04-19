@@ -1,13 +1,28 @@
-const { DECIMAL, INTEGER } = require("sequelize");
+const Sequelize = require("sequelize");
 const db = require("../db");
+const Order = require("./Order");
+const Product = require("./Product");
 
 
 const LineItem = db.define('lineItem', {
-  quantity: {
-    type: INTEGER,
+  orderId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: Order,
+      key: "id"
+    },
   },
-  price: {
-    type: DECIMAL
+  productId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: Product,
+      key: "id"
+    },
+  },
+
+  quantity: {
+    type: Sequelize.INTEGER,
+    defaultValue: 1
   }
 });
 
