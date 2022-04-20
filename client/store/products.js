@@ -1,5 +1,5 @@
 import axios from "axios";
-import history from "../history";
+
 
 /* Action Types */
 const SET_PRODUCTS = "SET_PRODUCTS";
@@ -19,6 +19,13 @@ const _loadFlowersByCategory = (flowersByCategory) => {
     flowersByCategory,
   };
 };
+
+const _fetchProducts = (products) => {
+  return {
+    type: SET_PRODUCTS,
+    products
+  }
+}
 
 /* Thunks */
 
