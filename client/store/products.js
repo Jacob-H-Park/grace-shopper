@@ -1,16 +1,26 @@
 import axios from "axios";
-import history from "../history";
+
 
 /* Action Types */
 const SET_PRODUCTS = "SET_PRODUCTS";
+
+const _fetchProducts = (products) => {
+  return {
+    type: SET_PRODUCTS,
+    products
+  }
+}
 
 /* Thunks */
 
 export const fetchProducts = () => {
   return async (dispatch) => {
-    const { data } = await axios.get("/api/products");
-    console.log(data);
-    dispatch({ type: SET_PRODUCTS, products: data });
+    try{  
+      const { data } = await axios.get("/api/products");
+      dispatch(_fetchProducts(data));
+    } catch(e) {
+      console.log(e);
+    }
   };
 };
 
