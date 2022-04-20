@@ -6,28 +6,69 @@ import { Link } from "react-router-dom";
 class Products extends Component {
   constructor() {
     super();
+    this.state = {
+      name: "",
+    };
+    this.handleChange = this.handleChange.bind(this);
   }
-
   componentDidMount() {
     this.props.loadProducts();
   }
 
+  handleChange(ev) {
+    this.setState({
+      [ev.target.name]: ev.target.value,
+    });
+  }
   render() {
+    const { handleChange } = this;
     const { product } = this.props;
+
     return (
       <div>
-        {product.map((product) => {
-          return (
-            <div key={product.id}>
-              {product.name}
-              <div>
-                <Link to={`/flower/${product.id}`}>
-                  <img src={product.image_url} />
-                </Link>
-              </div>
-            </div>
-          );
-        })}
+        <div>
+          <label htmlFor="flower-category"></label>
+          <select name="name" id="flower-category" onChange={handleChange}>
+            <option value="rose">Roses</option>
+            <option value="tulip">Tulips</option>
+            <option value="orchid">Orchids</option>
+          </select>
+        </div>
+
+        {/* When a category is selected, page renders flowers by the given type */}
+        {this.state.name ? (
+          <div>
+            {product
+              .filter((flower) => flower.category === this.state.name)
+              .map((flower) => {
+                return (
+                  <div key={flower.id}>
+                    {flower.name}
+                    <div>
+                      <Link to={`/flower/${flower.id}`}>
+                        <img src={flower.image_url} />
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}{" "}
+          </div>
+        ) : (
+          <div>
+            {product.map((flower) => {
+              return (
+                <div key={flower.id}>
+                  {flower.name}
+                  <div>
+                    <Link to={`/flower/${flower.id}`}>
+                      <img src={flower.image_url} />
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     );
   }

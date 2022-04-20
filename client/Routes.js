@@ -13,6 +13,7 @@ import Cart from "./components/Cart";
 import Products from "./components/Products";
 import SingleFlower from "./components/SingleFlower";
 
+
 import { me } from "./store";
 
 class Routes extends Component {
@@ -29,7 +30,8 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={Home} />
             <Route path="/cart" component={Cart} />
-            <Redirect to="/home" />
+            <Redirect to="/" />
+
           </Switch>
         ) : (
           <Switch>

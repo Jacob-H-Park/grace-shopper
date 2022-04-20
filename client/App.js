@@ -12,7 +12,7 @@ const App = () => {
       <Routes />
 
       <Switch>
-        <Route exact path="/" component={Products} />
+        <Route path="/" component={Products} />
         <Route path="/flower/:id" component={SingleFlower} />
       </Switch>
     </Router>
