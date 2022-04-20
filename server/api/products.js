@@ -15,16 +15,4 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/flowers/:category", async (req, res, next) => {
-  console.log(req.params.id);
-  try {
-    const flowers = await Product.findAll({
-      where: { category: req.params.id },
-    });
-    res.send(flowers);
-  } catch (err) {
-    next(err);
-  }
-});
-
 module.exports = router;

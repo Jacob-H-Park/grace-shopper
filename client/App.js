@@ -2,7 +2,7 @@ import React from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Routes from "./Routes";
-import Products from "./components/Products";
+import Flowers from "./components/Flowers";
 import SingleFlower from "./components/SingleFlower";
 
 const App = () => {
@@ -12,7 +12,7 @@ const App = () => {
       <Routes />
 
       <Switch>
-        <Route path="/" component={Products} />
+        <Route path="/" component={Flowers} />
         <Route path="/flower/:id" component={SingleFlower} />
       </Switch>
     </Router>
