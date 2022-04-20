@@ -6,18 +6,18 @@ const Order = db.define("order", {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   userId: {
     type: Sequelize.INTEGER,
     references: {
       model: User,
-      key: "id"
-    }
+      key: "id",
+    },
   },
   isFulfilled: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
 });
 

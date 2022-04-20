@@ -94,6 +94,14 @@ async function seed() {
     category: "rose",
     stock: 20,
   });
+  await Product.create({
+    name: "danielle",
+    price: 109,
+    image_url: "/Images/tulips/danielle-400x400-39708.jpeg",
+    description: faker.lorem.sentences(),
+    category: "tulip",
+    stock: 20,
+  });
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
