@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchProducts } from "../store/products";
+import { fetchProducts } from "../store/flowers";
 import { Link } from "react-router-dom";
 
-class Products extends Component {
+class Flowers extends Component {
   constructor() {
     super();
     this.state = {
@@ -22,7 +22,7 @@ class Products extends Component {
   }
   render() {
     const { handleChange } = this;
-    const { product } = this.props;
+    const { flowers } = this.props;
 
     return (
       <div>
@@ -38,7 +38,7 @@ class Products extends Component {
         {/* When a category is selected, page renders flowers by the given type */}
         {this.state.name ? (
           <div>
-            {product
+            {flowers
               .filter((flower) => flower.category === this.state.name)
               .map((flower) => {
                 return (
@@ -51,11 +51,11 @@ class Products extends Component {
                     </div>
                   </div>
                 );
-              })}{" "}
+              })}
           </div>
         ) : (
           <div>
-            {product.map((flower) => {
+            {flowers.map((flower) => {
               return (
                 <div key={flower.id}>
                   {flower.name}
@@ -84,4 +84,4 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-export default connect(mapState, mapDispatch)(Products);
+export default connect(mapState, mapDispatch)(Flowers);

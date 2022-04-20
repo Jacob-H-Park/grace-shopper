@@ -2,10 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const SingleFlower = (props) => {
-  const flower = useSelector(({ product }) => {
-    return product.find((flower) => flower.id === props.match.params.id * 1);
+  const flower = useSelector(({ flowers }) => {
+    return flowers.find((flower) => flower.id === props.match.params.id * 1);
   });
-  console.log(flower);
+
   return (
     <div>
       <div>Name: {flower.name}</div>

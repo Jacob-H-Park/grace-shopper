@@ -15,7 +15,7 @@ async function seed() {
   console.log("db synced!");
   // Creating Users
   const users = await Promise.all([
-    User.create({ username: "cody", password: "123" }),
+    User.create({ username: "cody", password: "123", isAdmin: true }),
     User.create({ username: "murphy", password: "123" }),
   ]);
 
@@ -106,7 +106,7 @@ async function seed() {
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
 
-  await Order.create({userId: 1});
+  await Order.create({ userId: 1 });
   // await LineItem.create({orderId: 1, productId: 1, quantity: 1});
 
   return {
