@@ -20,12 +20,6 @@ const _loadFlowersByCategory = (flowersByCategory) => {
   };
 };
 
-const _fetchProducts = (products) => {
-  return {
-    type: SET_PRODUCTS,
-    products
-  }
-}
 
 /* Thunks */
 
