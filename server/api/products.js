@@ -14,5 +14,13 @@ router.get("/", async (req, res, next) => {
     next(err);
   }
 });
-
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const product = await Product.findByPk(req.params.id)
+    await product.destroy();
+    res.sendStatus(204)
+  } catch (err) {
+    next(err);
+  }
+});
 module.exports = router;
