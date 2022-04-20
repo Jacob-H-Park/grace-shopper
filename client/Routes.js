@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
+import Cart from "./components/Cart";
 import Products from "./components/Products";
 import SingleFlower from "./components/SingleFlower";
 
@@ -27,6 +28,7 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
+            <Route path="/cart" component={Cart} />
             <Redirect to="/home" />
           </Switch>
         ) : (

@@ -29,7 +29,8 @@ router.get('/:userId', async (req, res, next) => {
 
 router.get('/:userID/cart', async (req, res, next) => {
   try {
-    const cart = Order.findOne({
+    
+    const cart = await Order.findOne({
       where: {
         userId: req.params.userID,
         isFulfilled: false
@@ -38,10 +39,11 @@ router.get('/:userID/cart', async (req, res, next) => {
         model: Product
       }
     });
-
+    console.log(req.params);
+    console.log(cart);
     res.json(cart);
   } catch(e) {
-    console.log(e);
+    next(e);
   }
 });
 

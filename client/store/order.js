@@ -40,7 +40,7 @@ export const fetchCart = (userId) => {
   }
 };
 
-export default function orderReducer(state ={}, action) {
+export default function (state ={}, action) {
   switch(action.type) {
     case ADD_TO_CART:
       return action.cart;

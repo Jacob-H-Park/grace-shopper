@@ -10,7 +10,7 @@ router.get("/:userId", async(req, res, next) => {
         isFulfilled: false
       },
       include: {
-        module: Product
+        model: Product
       },
     });
     res.json(cart);
