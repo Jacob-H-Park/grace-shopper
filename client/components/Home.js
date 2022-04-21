@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import auth from "../store/auth";
+import Flowers from "./Flowers";
 
 /**
  * COMPONENT
@@ -8,12 +9,18 @@ import auth from "../store/auth";
 export const Home = (props) => {
   const { username, isAdmin } = props;
   return isAdmin ? (
-    <h3>
-      Welcome Admin {username.slice(0, 1).toUpperCase()}
-      {username.slice(1)}
-    </h3>
+    <div>
+      <h3>
+        Welcome Admin {username.slice(0, 1).toUpperCase()}
+        {username.slice(1)}
+      </h3>
+      <Flowers />
+    </div>
   ) : (
-    <h3>Welcome, {username}</h3>
+    <div>
+      <h3>Welcome, {username}</h3>
+      <Flowers />
+    </div>
   );
 };
 
