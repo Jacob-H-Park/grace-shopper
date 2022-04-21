@@ -36,7 +36,8 @@ router.post("/:userId", async (req, res, next) => {
 
     const addedItem = await LineItem.create({
       orderId: req.body.orderId,
-      productId: req.body.productId
+      productId: req.body.productId,
+      quantity: req.body.quantity
     });
   
   
