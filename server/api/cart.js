@@ -19,13 +19,22 @@ router.get("/:userId", async(req, res, next) => {
   }
 });
 
-// router.post("/", async (req, res, next) => {
-//   try {
-//     const cart = await Order.create(req.body.userId);
-//     res.json(cart);
-//   } catch(e) {
-//     console.log(e);
-//   }
-// })
+router.post("/:userId", async (req, res, next) => {
+  try {
+    const cart = await Order.Create({
+      where: {
+        userId: req.params.userId,
+        isFulfilled: false,
+      },
+      include: {
+        model: Product
+      }
+    });
+
+    res.json(cart);
+  } catch(e) {
+    next(e);
+  }
+})
 
 module.exports = router;

@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const { models: { User }} = require('../db');
-const Order = require('../db/models/Order');
-const Product = require('../db/models/Product');
+
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -27,35 +26,3 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
-router.get('/:userID/cart', async (req, res, next) => {
-  try {
-    
-    const cart = await Order.findOne({
-      where: {
-        userId: req.params.userID,
-        isFulfilled: false
-      },
-      include: {
-        model: Product
-      }
-    });
-    console.log(req.params);
-    console.log(cart);
-    res.json(cart);
-  } catch(e) {
-    next(e);
-  }
-});
-
-router.post('/:userId/cart', async (req, res, next) => {
-  try {
-    const cart = Order.create({
-      userId: req.params.userId,
-      isFulfilled: false
-    });
-
-    res.json(cart);
-  } catch(e) {
-    next(e);
-  }
-})

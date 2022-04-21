@@ -1,29 +1,24 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { me } from "../store/auth";
-import { fetchCart } from "../store/order";
+import { getCart } from "../store/order";
 
 const Cart = () => {
 
   const user = useSelector((state) => state.auth);
-  const order = useSelector((state) => state.order);
+  const order = useSelector((state) => state.order) || { products: ['test']};
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(me());
-  },[]);
-
-  useEffect(() => {
-    dispatch(fetchCart(user.id));
-  }, [user]);
+    dispatch(getCart(user.id));
+  }, []);
 
   console.log(order);
 
-  if(order.products && order.products.length > 0) {
+  if(order.products) {
     return(
       <div>
-        <h3>{user.username}'s Cart</h3>
+        <h3>Your Cart:</h3>
         <ul>
           {order.products.map((product) => {
             return(
