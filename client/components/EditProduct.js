@@ -1,81 +1,75 @@
-
-import axios from "axios";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import store from "../store";
 import { updateProducts } from "../store/flowers";
 
-
-class EditProduct extends Component{
-    constructor(props){
-        super(props);
-        const flower = this.props.flowers.find((flower)=> flower.id ===this.props.id);
-        this.state = {
-            id: flower.id,
-            name: flower.name,
-            price: flower.price,
-            stock: flower.stock
-        }
-        this.handleChange = this.handleChange.bind(this);
-    }
-    componentDidUpdate(prevState) {
-        if(prevState.id !== this.props.id){
-            console.log('update!')
-            const flower = this.props.flowers.find((flower)=> flower.id ===this.props.id);
-            this.setState({
-              id:flower.id,
-              name: flower.name,
-              price: flower.price,
-              stock: flower.stock,
-            });
-        }
-    }
-
-    handleChange(evt) {
-        this.setState({
-            [evt.target.name]: evt.target.value
-            
-        });
-        
-    }
-    render() {
-        const { id,name,price,stock} = this.state;
-        const { handleChange } = this;
-        return (
-            <div>
-                <form 
-                    onSubmit={(ev)=>{
-                        ev.preventDefault()
-                        console.log('submit!')
-                        this.props.updateProduct(id,name,price,stock)
-                        console.log('history',this.props.history)
-                    }}
-                >
-                <label htmlFor='name'>Product Name:</label>
-                <input name='name' onChange={handleChange} value={name} />
-        
-                <label htmlFor='price'>Price:</label>
-                <input name='price' onChange={handleChange} value={price} />
-        
-                <label htmlFor='stock'>Stock:</label>
-                <input name='stock' onChange={handleChange} value={stock} />
-                
-                <button type='submit'>Update</button>
-                </form>
-            </div>
-        );
-      }
-}
-    
-const mapState = (state)=>{
-    return state
-}
-const mapDispatch = (dispatch) => {
-    return {
-      updateProduct: (id,name,price,stock)=>{
-          dispatch(updateProducts(id,name,price,stock))
-      }
-      
+class EditProduct extends Component {
+  constructor(props) {
+    super(props);
+    const { flowerToEdit } = this.props;
+    this.state = {
+      id: flowerToEdit ? flowerToEdit.id : "",
+      name: flowerToEdit ? flowerToEdit.name : "",
+      price: flowerToEdit ? flowerToEdit.price : 0,
+      stock: flowerToEdit ? flowerToEdit.stock : 0,
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  componentDidUpdate(prevProps) {
+    if (!prevProps.flowerToEdit && flowerToEdit) {
+      console.log("update!");
+      this.setState({
+        id: flowerToEdit.id,
+        name: flowerToEdit.name,
+        price: flowerToEdit.price,
+        stock: flowerToEdit.stock,
+      });
+    }
+  }
+
+  handleSubmit(ev) {
+    ev.preventDefault();
+    this.props.updateProduct({ ...this.props.flowerToEdit, ...this.state });
+  }
+  handleChange(evt) {
+    this.setState({
+      [evt.target.name]: evt.target.value,
+    });
+  }
+  render() {
+    const { name, price, stock } = this.state;
+    const { handleSubmit, handleChange } = this;
+    return (
+      <div>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="name">Product Name:</label>
+          <input name="name" onChange={handleChange} value={name} />
+
+          <label htmlFor="price">Price:</label>
+          <input name="price" onChange={handleChange} value={price} />
+
+          <label htmlFor="stock">Stock:</label>
+          <input name="stock" onChange={handleChange} value={stock} />
+
+          <button type="submit">Update</button>
+        </form>
+      </div>
+    );
+  }
+}
+
+const mapState = ({ flowers }, { match }) => {
+  const flowerToEdit = flowers.find(
+    (flower) => flower.id === match.params.id * 1
+  );
+  return { flowerToEdit };
 };
-export default connect(mapState,mapDispatch)(EditProduct)
+
+const mapDispatch = (dispatch, { history }) => {
+  return {
+    updateProduct: (flower) => {
+      dispatch(updateProducts(flower, history));
+    },
+  };
+};
+export default connect(mapState, mapDispatch)(EditProduct);

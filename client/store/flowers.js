@@ -3,7 +3,7 @@ import axios from "axios";
 /* Action Types */
 const SET_PRODUCTS = "SET_PRODUCTS";
 const REMOVE_PRODUCT = "REMOVE_PRODUCT";
-const UPDATE_PRODUCT = "UPDATE_PRODUCT"
+const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 /* Action Creators */
 const _fetchProducts = (allFlowers) => {
   return {
@@ -17,10 +17,10 @@ const _removeProducts = (flowerId) => {
     flowerId,
   };
 };
-const _updateProducts = (allFlowers) => {
+const _updateProducts = (flowerToUpdate) => {
   return {
     type: UPDATE_PRODUCT,
-    allFlowers,
+    flowerToUpdate,
   };
 };
 /* Thunks */
@@ -33,16 +33,18 @@ export const fetchProducts = () => {
 };
 export const removeProducts = (id) => {
   return async (dispatch) => {
-    await axios.delete(`/api/products/${id}`)
+    await axios.delete(`/api/products/${id}`);
     dispatch(_removeProducts(id));
   };
 };
-export const updateProducts = (id,name,price,stock) => {
+export const updateProducts = (flower, history) => {
   return async (dispatch) => {
-    const data = (await axios.put(`/api/products/${id}`,{name:name,price:price,stock:stock}))
-    console.log('update',data)
-    const flowers = (await axios.get("/api/products")).data;
-    dispatch(_updateProducts(flowers));
+    const { data: flowerToUpdate } = await axios.put(
+      `/api/products/${flower.id}`,
+      flower
+    );
+    dispatch(_updateProducts(flowerToUpdate));
+    history.push("/inventory_management");
   };
 };
 /* Flower Reducer */
@@ -51,9 +53,11 @@ export default function (state = [], action) {
     case SET_PRODUCTS:
       return action.allFlowers;
     case REMOVE_PRODUCT:
-      return state.filter(flower => flower.id !== action.flowerId)
+      return state.filter((flower) => flower.id !== action.flowerId);
     case UPDATE_PRODUCT:
-      return action.allFlowers
+      return state.map((flower) =>
+        flower.id !== action.flowerToUpdate.id ? flower : action.flowerToUpdate
+      );
     default:
       return state;
   }
