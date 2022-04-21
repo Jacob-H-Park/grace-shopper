@@ -1,28 +1,30 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import auth from '../store/auth'
-
+import React from "react";
+import { connect } from "react-redux";
+import auth from "../store/auth";
 
 /**
  * COMPONENT
  */
-export const Home = props => {
-  const {username,isAdmin} = props
-  return isAdmin? (
-    <h3>Welcome Admin {username}</h3>
-  ): ( 
+export const Home = (props) => {
+  const { username, isAdmin } = props;
+  return isAdmin ? (
+    <h3>
+      Welcome Admin {username.slice(0, 1).toUpperCase()}
+      {username.slice(1)}
+    </h3>
+  ) : (
     <h3>Welcome, {username}</h3>
-  )
-}
+  );
+};
 
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
     username: state.auth.username,
-    isAdmin: state.auth.isAdmin
-  }
-}
+    isAdmin: state.auth.isAdmin,
+  };
+};
 
-export default connect(mapState)(Home)
+export default connect(mapState)(Home);
