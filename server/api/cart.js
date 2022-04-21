@@ -19,7 +19,7 @@ router.get("/:userId", async(req, res, next) => {
   }
 });
 
-router.post("/:userId", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     const cart = await Order.Create({
       where: {

@@ -31,6 +31,19 @@ export const createCart = (userId) => {
   }
 }
 
+export const addToCart =(userId, product) => {
+  return async (dispatch) => {
+    try {
+      const data = await axios.post(`/api/cart/${userId}`, {
+        productId: product.id
+      });
+      console.log(data);
+      dispatch(_addToCart(data)); 
+    } catch(e) {
+      console.log(e)
+    }
+  }
+}
 
 export const getCart = (userId) => {
   return async (dispatch) => {
@@ -49,6 +62,8 @@ export const getCart = (userId) => {
 const order = (state ={}, action) => {
   switch(action.type) {
     case GET_CART: 
+      return action.cart
+    case ADD_TO_CART:
       return action.cart
     default:
       return state

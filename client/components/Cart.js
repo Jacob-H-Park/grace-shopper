@@ -5,7 +5,7 @@ import { getCart } from "../store/order";
 const Cart = () => {
 
   const user = useSelector((state) => state.auth);
-  const order = useSelector((state) => state.order) || { products: ['test']};
+  const order = useSelector((state) => state.order) || { products: []};
 
   const dispatch = useDispatch();
 
@@ -15,7 +15,15 @@ const Cart = () => {
 
   console.log(order);
 
-  if(order.products) {
+  if(!order.products || order.products.length < 1) {
+    return(
+      <div>
+        <h1>Your cart is empty!</h1>
+      </div>
+    )
+  }
+  
+  if(order) {
     return(
       <div>
         <h3>Your Cart:</h3>
@@ -29,13 +37,6 @@ const Cart = () => {
       </div>
     )
   }
-
-  return(
-    <div>
-      <h1>Your cart is empty!</h1>
-    </div>
-  )
-
 }
 
 export default Cart;
