@@ -103,6 +103,8 @@ async function seed() {
     stock: 20,
   });
 
+  Order.create({userId: 1});
+
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
 
