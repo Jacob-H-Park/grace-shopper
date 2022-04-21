@@ -48,7 +48,7 @@ const Flowers = () => {
                       <img src={flower.image_url} />
                     </Link>
                   </div>
-                  <button onClick={() => dispatch(addToCart(user.id,flower))}>Add to cart</button>
+                  <button onClick={() => dispatch(addToCart(user.id, flower))}>Add to cart</button>
                 </div>
               );
             })}
@@ -64,7 +64,7 @@ const Flowers = () => {
                     <img src={flower.image_url} />
                   </Link>
                 </div>
-                <button onClick={() => dispatch(addToCart(user.id,flower))}>Add to cart</button>
+                <button onClick={() => dispatch(addToCart(user.id, flower))}>Add to cart</button>
               </div>
             );
           })}
