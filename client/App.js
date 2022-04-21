@@ -13,6 +13,7 @@ import Cart from "./components/Cart";
 import Navbar from "./components/Navbar";
 import Flowers from "./components/Flowers";
 import SingleFlower from "./components/SingleFlower";
+import EditProduct from "./components/EditProduct";
 import ProductInfo from "./components/ProductInfo";
 import UserInfo from "./components/UserInfo";
 import Checkout from "./components/Checkout";
@@ -39,6 +40,7 @@ class App extends Component {
                 path="/inventory_management"
                 component={ProductInfo}
               />
+              <Route path="/editflowerinfo/:id" component={EditProduct} />
               <Route exact path="/user_management" component={UserInfo} />
             </Switch>
           ) : (

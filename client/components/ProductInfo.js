@@ -1,15 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchProducts, removeProducts } from "../store/flowers";
-import EditProdcut from "./EditProduct";
+import { Link } from "react-router-dom";
 
 class ProductInfo extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      isFormVisible: false,
-    };
-  }
   componentDidMount() {
     this.props.loadProducts();
   }
@@ -20,32 +14,29 @@ class ProductInfo extends React.Component {
         {flowers.map((flower) => {
           return (
             <div key={flower.id}>
-              <ul>{flower.name}</ul>
-              <button
-                onClick={() => {
-                  this.setState({ isFormVisible: true });
-                }}
-              >
-                edit
-              </button>
-
+              <img src={flower.image_url} />
+              <ul>Name: {flower.name}</ul>
+              <ul>Stock: {flower.stock}</ul>
+              <ul>Price: {flower.price}</ul>
+              <Link to={`/editflowerinfo/${flower.id}`}>
+                <button>Edit</button>
+              </Link>
               <button
                 onClick={() => {
                   removeProducts(flower.id);
                 }}
               >
-                remove product
+                Remove Product
               </button>
             </div>
           );
         })}
-        {this.state.isFormVisible ? <EditProdcut /> : null}
       </div>
     );
   }
 }
-const mapState = (state) => {
-  return state;
+const mapState = ({ flowers }) => {
+  return { flowers };
 };
 
 const mapDispatch = (dispatch) => {
