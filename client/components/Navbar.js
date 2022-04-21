@@ -6,7 +6,7 @@ import { logout } from "../store";
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
   return (
     <nav>
-      <Link to="/home">
+      <Link to="/">
         <h1>Bloom</h1>
       </Link>
       {isLoggedIn ? (
@@ -35,6 +35,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
         <div>
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
+          <Link to="/cart">Cart</Link>
         </div>
       )}
     </nav>
