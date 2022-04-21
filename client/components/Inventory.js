@@ -7,6 +7,7 @@ class ProductInfo extends React.Component{
         super();
         this.state = {
             isFormVisible: false,
+            id: null
         }
     };
     componentDidMount(){
@@ -19,8 +20,9 @@ class ProductInfo extends React.Component{
                 {flowers.map((flower)=>{
                     return <div id={flower.id}>
                                 <ul>{flower.name}</ul>
+                                <p>Price:{flower.price} Stock:{flower.stock}</p>
                                 <button onClick={()=>{
-                                    this.setState({ isFormVisible: true})
+                                    this.setState({ isFormVisible: true, id: flower.id})
                                 }}>edit</button>
                                 
                                 <button onClick={()=>{
@@ -28,7 +30,7 @@ class ProductInfo extends React.Component{
                                 }}>remove product</button>
                            </div>
                 })}
-                { this.state.isFormVisible ? <EditProdcut /> : null}
+                { this.state.isFormVisible ? <EditProdcut id = {this.state.id}/> : null}
             </div>
         )
     }
