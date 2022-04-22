@@ -34,13 +34,13 @@ router.post("/:userId", async (req, res, next) => {
 
     const orderId = cart[0].id;
 
-    const cartHasLineItem = await LineItem.findOne({
+    const lineItemInCart = await LineItem.findOne({
       where: { orderId, productId: req.body.productId },
     });
 
-    if (cartHasLineItem) {
-      cartHasLineItem.quantity += 1;
-      await cartHasLineItem.save();
+    if (lineItemInCart) {
+      lineItemInCart.quantity += 1;
+      await lineItemInCart.save();
     } else {
       await LineItem.create({
         orderId,
