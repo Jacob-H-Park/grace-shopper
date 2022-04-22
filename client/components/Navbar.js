@@ -1,9 +1,14 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 
-const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
+const Navbar = () => {
+
+  const isLoggedIn = useSelector((state) => !!state.auth.id);
+  const isAdmin = useSelector((state) => state.auth.isAdmin);
+  const dispatch = useDispatch();
+
   return (
     <nav>
       <Link to="/">
@@ -14,7 +19,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
           <div>
             <Link to="/home">Home</Link>
 
-            <a href="#" onClick={handleClick}>
+            <a onClick={() => dispatch(logout())}>
               Logout
             </a>
             <Link to="/cart">Cart</Link>
@@ -25,7 +30,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
           <div>
             <Link to="/home">Home</Link>
 
-            <a href="#" onClick={handleClick}>
+            <a onClick={() => dispatch(logout())}>
               Logout
             </a>
             <Link to="/cart">Cart</Link>
@@ -42,22 +47,5 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
   );
 };
 
-/**
- * CONTAINER
- */
-const mapState = (state) => {
-  return {
-    isLoggedIn: !!state.auth.id,
-    isAdmin: state.auth.isAdmin,
-  };
-};
 
-const mapDispatch = (dispatch) => {
-  return {
-    handleClick() {
-      dispatch(logout());
-    },
-  };
-};
-
-export default connect(mapState, mapDispatch)(Navbar);
+export default Navbar;

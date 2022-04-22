@@ -18,6 +18,7 @@ import ProductInfo from "./components/ProductInfo";
 import UserInfo from "./components/UserInfo";
 import Checkout from "./components/Checkout";
 import { me } from "./store";
+import Welcome from "./components/Welcome";
 
 class App extends Component {
   componentDidMount() {
@@ -28,40 +29,42 @@ class App extends Component {
     const { isLoggedIn, isAdmin } = this.props;
 
     return (
-      <Router>
-        <Navbar />
-        {isLoggedIn ? (
-          isAdmin ? (
-            <Switch>
-              <Route path="/home" component={Home} />
-              <Route path="/cart" component={Cart} />
-              <Route
-                exact
-                path="/inventory_management"
-                component={ProductInfo}
-              />
-              <Route path="/editflowerinfo/:id" component={EditProduct} />
-              <Route exact path="/user_management" component={UserInfo} />
-            </Switch>
+      <div className="root-container">
+        <Router>
+          <Navbar />
+          {isLoggedIn ? (
+            isAdmin ? (
+              <Switch>
+                <Route path="/home" component={Home} />
+                <Route path="/cart" component={Cart} />
+                <Route
+                  exact
+                  path="/inventory_management"
+                  component={ProductInfo}
+                />
+                <Route path="/editflowerinfo/:id" component={EditProduct} />
+                <Route exact path="/user_management" component={UserInfo} />
+              </Switch>
+            ) : (
+              <Switch>
+                <Route path="/home" component={Home} />
+                <Route path="/cart" component={Cart} />
+              </Switch>
+            )
           ) : (
             <Switch>
-              <Route path="/home" component={Home} />
+              <Route path="/login" component={Login} />
+              <Route path="/signup" component={Signup} />
               <Route path="/cart" component={Cart} />
             </Switch>
-          )
-        ) : (
+          )}
           <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/cart" component={Cart} />
+            <Route exact path="/" component={Home} />
+            <Route path="/flower/:id" component={SingleFlower} />
+            <Route path="/checkout" component={Checkout} />
           </Switch>
-        )}
-        <Switch>
-          <Route exact path="/" component={Flowers} />
-          <Route path="/flower/:id" component={SingleFlower} />
-          <Route path="/checkout" component={Checkout} />
-        </Switch>
-      </Router>
+        </Router>
+      </div>
     );
   }
 }
