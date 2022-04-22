@@ -16,6 +16,11 @@ form div {
   display: inline-block;
 }
 
+table {
+  text-align: center;
+}
+
+
 
 
 /***CLASS SELECTORS***/ 
