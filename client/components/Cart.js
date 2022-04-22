@@ -4,10 +4,9 @@ import { getCart } from "../store/order";
 import { me } from "../store/auth";
 import { Link } from "react-router-dom";
 
-
 const Cart = () => {
   const user = useSelector((state) => state.auth);
-  const order = useSelector((state) => state.order) || { products: []};
+  const order = useSelector((state) => state.order) || { products: [] };
 
   const dispatch = useDispatch();
 
@@ -15,9 +14,7 @@ const Cart = () => {
     dispatch(getCart(user.id));
   }, []);
 
-  console.log(order);
-
-  if(!order.products || order.products.length < 1) {
+  if (!order.products || order.products.length < 1) {
     return (
       <div>
         <h1>Your cart is empty!</h1>
@@ -27,21 +24,42 @@ const Cart = () => {
       </div>
     );
   }
-  
-  if(order) {
-    return(
+
+  if (order) {
+    let total = order.products.reduce(
+      (acc, flower) => (acc += flower.price * flower.lineItem.quantity),
+      0
+    );
+
+    return (
       <div>
         <h3>Your Cart:</h3>
-        <ul>
-          {order.products.map((product) => {
-            return(
-              <li>{product.name}</li>
-            )
-          })}
-        </ul>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            {order.products.map((product) => {
+              return (
+                <tr>
+                  <td>{product.name} </td>
+                  <td>{product.price}</td>
+                  <td>{product.lineItem.quantity}</td>
+                  <td>${product.price * product.lineItem.quantity}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <h4>Total: ${total}</h4>
       </div>
-    )
+    );
   }
-}
+};
 
 export default Cart;
