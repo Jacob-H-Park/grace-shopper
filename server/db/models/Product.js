@@ -12,6 +12,7 @@ const Product = db.define("product", {
     validate: {
       min: 0,
     },
+    allowNull: false,
   },
   description: {
     type: TEXT,
@@ -24,7 +25,8 @@ const Product = db.define("product", {
   },
   category: {
     type: TEXT,
-  }
+    allowNull: false,
+  },
 });
 
 module.exports = Product;
