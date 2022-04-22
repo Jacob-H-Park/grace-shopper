@@ -1,6 +1,6 @@
 body {
   font-family: sans-serif;
-  background-color: #ffccd2;
+  background-color: #E9CFCC;
 }
 
 a {
@@ -11,12 +11,24 @@ label {
   display: block;
 }
 
-nav a {
-  display: inline-block;
-  margin: 1em;
-}
-
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+
+
+/***CLASS SELECTORS***/ 
+
+.navbar {
+  background-color: #D99BB4 !important;
+  color: white !important;
+}
+
+.nav-link {
+  color: white !important;
+}
+
+.nav-link:hover {
+  color: rgb(233, 233, 233) !important;
 }
