@@ -3,7 +3,7 @@ const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
-require('dotenv').config()
+require("dotenv").config();
 const SALT_ROUNDS = 5;
 
 const User = db.define("user", {
@@ -16,17 +16,17 @@ const User = db.define("user", {
     type: STRING,
     allowNull: false,
   },
-  //email allowing null true for now
   email: {
     type: STRING,
+    unique: true,
+    validate: {
+      isEmail: true,
+    },
+    allowNull: false,
   },
   isAdmin: {
     type: BOOLEAN,
     defaultValue: false,
-  },
-  //address allowing null true for now
-  address: {
-    type: STRING,
   },
 });
 
