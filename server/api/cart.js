@@ -3,19 +3,19 @@ const Order = require("../db/models/Order");
 const Product = require("../db/models/Product");
 const LineItem = require("../db/models/LineItem");
 
-router.get("/:userId", async(req, res, next) => {
+router.get("/:userId", async (req, res, next) => {
   try {
     const cart = await Order.findOne({
       where: {
         userId: req.params.userId,
-        isFulfilled: false
+        isFulfilled: false,
       },
       include: {
-        model: Product
+        model: Product,
       },
     });
     res.json(cart);
-  } catch(e) {
+  } catch (e) {
     next(e);
   }
 });
@@ -28,23 +28,31 @@ router.post("/:userId", async (req, res, next) => {
         isFulfilled: false,
       },
       include: {
-        model: Product
-      }
+        model: Product,
+      },
     });
 
-    req.body.orderId = cart[0].id
+    const orderId = cart[0].id;
 
-    const addedItem = await LineItem.create({
-      orderId: req.body.orderId,
-      productId: req.body.productId,
-      quantity: req.body.quantity
+    const lineItemInCart = await LineItem.findOne({
+      where: { orderId, productId: req.body.productId },
     });
-  
-  
+
+    if (lineItemInCart) {
+      lineItemInCart.quantity += 1;
+      await lineItemInCart.save();
+    } else {
+      await LineItem.create({
+        orderId,
+        productId: req.body.productId,
+        quantity: req.body.quantity,
+      });
+    }
+
     res.json(cart);
-  } catch(e) {
+  } catch (e) {
     next(e);
   }
-})
+});
 
 module.exports = router;
