@@ -20,6 +20,7 @@ import UserInfo from "./components/UserInfo";
 import Checkout from "./components/Checkout";
 import Welcome from "./components/Welcome";
 import EditUserInfo from "./components/EditUserInfo";
+import ChangePassword from "./components/ChangePassword";
 
 import { me } from "./store";
 
@@ -44,14 +45,16 @@ class App extends Component {
                   component={ProductInfo}
                 />
                 <Route path="/editflowerinfo/:id" component={EditProduct} />
+                <Route exact path="/account" component={UserInfo} />
+                <Route path="/account/edit" component={EditUserInfo} />
+                <Route path="/account/password" component={ChangePassword} />
                 <Route path="/cart" component={Cart} />
-                <Route path="/profile" component={UserInfo} />
-                <Route path="/profile/edit" component={EditUserInfo} />
               </Switch>
             ) : (
               <Switch>
-                <Route path="/profile" component={UserInfo} />
-                <Route path="/profile/edit" component={EditUserInfo} />
+                <Route exact path="/account" component={UserInfo} />
+                <Route path="/account/edit" component={EditUserInfo} />
+                <Route path="/account/password" component={ChangePassword} />
                 <Route path="/cart" component={Cart} />
               </Switch>
             )

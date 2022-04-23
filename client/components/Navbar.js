@@ -51,8 +51,9 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li class="nav-item">
-                  <Link class="nav-link" to="/profile">
-                    Profile
+                  <Link class="nav-link" to="/account">
+                    Account
+
                   </Link>
                 </li>
                 <li class="nav-item">
@@ -90,8 +91,9 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li class="nav-item">
-                  <Link class="nav-link" to="/profile">
-                    Profile
+                  <Link class="nav-link" to="/account">
+                    Account
+
                   </Link>
                 </li>
                 <li class="nav-item">
