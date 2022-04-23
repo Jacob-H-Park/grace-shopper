@@ -1,12 +1,12 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   withRouter,
   HashRouter as Router,
   Route,
   Switch,
-  Redirect,
 } from "react-router-dom";
+
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import Cart from "./components/Cart";
@@ -17,9 +17,11 @@ import EditProduct from "./components/EditProduct";
 import ProductInfo from "./components/ProductInfo";
 import UserInfo from "./components/UserInfo";
 import Checkout from "./components/Checkout";
-import { me } from "./store";
 import Welcome from "./components/Welcome";
 import EditUserInfo from "./components/EditUserInfo";
+
+import { me } from "./store";
+
 class App extends Component {
   componentDidMount() {
     this.props.loadInitialData();
@@ -35,8 +37,6 @@ class App extends Component {
           {isLoggedIn ? (
             isAdmin ? (
               <Switch>
-                <Route path="/home" component={Home} />
-                <Route path="/cart" component={Cart} />
                 <Route
                   exact
                   path="/inventory_management"
@@ -48,8 +48,6 @@ class App extends Component {
               </Switch>
             ) : (
               <Switch>
-                <Route path="/home" component={Home} />
-                <Route path="/cart" component={Cart} />
                 <Route path="/profile" component={UserInfo} />
                 <Route path="/profile/edit" component={EditUserInfo} />
               </Switch>
@@ -58,11 +56,12 @@ class App extends Component {
             <Switch>
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
-              <Route path="/cart" component={Cart} />
             </Switch>
           )}
           <Switch>
             <Route path="/home" component={Home} />
+            <Route path="/cart" component={Cart} />
+            <Route path="/flowers" component={Flowers} />
             <Route path="/flower/:id" component={SingleFlower} />
             <Route path="/checkout" component={Checkout} />
           </Switch>

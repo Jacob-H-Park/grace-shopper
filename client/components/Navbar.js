@@ -36,7 +36,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li class="nav-item">
-                  <Link class="nav-link" to="#">
+                  <Link class="nav-link" to="/flowers">
                     Flowers
                   </Link>
                 </li>
@@ -52,7 +52,7 @@ const Navbar = () => {
                 </li>
                 <li class="nav-item">
                   <Link class="nav-link" to="/profile">
-                    profile
+                    Profile
                   </Link>
                 </li>
                 <li class="nav-item">
@@ -80,7 +80,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li class="nav-item">
-                  <Link class="nav-link" to="#">
+                  <Link class="nav-link" to="/flowers">
                     Flowers
                   </Link>
                 </li>
@@ -91,7 +91,7 @@ const Navbar = () => {
                 </li>
                 <li class="nav-item">
                   <Link class="nav-link" to="/profile">
-                    profile
+                    Profile
                   </Link>
                 </li>
                 <li class="nav-item">
@@ -120,7 +120,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li class="nav-item">
-                <Link class="nav-link" to="#">
+                <Link class="nav-link" to="/flowers">
                   Flowers
                 </Link>
               </li>
