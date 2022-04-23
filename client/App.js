@@ -20,6 +20,7 @@ import Checkout from "./components/Checkout";
 import { me } from "./store";
 import Welcome from "./components/Welcome";
 import EditUserInfo from "./components/EditUserInfo";
+import ChangePassword from "./components/ChangePassword";
 class App extends Component {
   componentDidMount() {
     this.props.loadInitialData();
@@ -43,15 +44,17 @@ class App extends Component {
                   component={ProductInfo}
                 />
                 <Route path="/editflowerinfo/:id" component={EditProduct} />
-                <Route path="/profile" component={UserInfo} />
-                <Route path="/profile/edit" component={EditUserInfo} />
+                <Route exact path="/account" component={UserInfo} />
+                <Route path="/account/edit" component={EditUserInfo} />
+                <Route path="/account/password" component={ChangePassword} />
               </Switch>
             ) : (
               <Switch>
                 <Route path="/home" component={Home} />
                 <Route path="/cart" component={Cart} />
-                <Route path="/profile" component={UserInfo} />
-                <Route path="/profile/edit" component={EditUserInfo} />
+                <Route exact path="/account" component={UserInfo} />
+                <Route path="/account/edit" component={EditUserInfo} />
+                <Route path="/account/password" component={ChangePassword} />
               </Switch>
             )
           ) : (

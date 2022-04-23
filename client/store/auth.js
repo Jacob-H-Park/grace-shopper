@@ -7,12 +7,12 @@ const TOKEN = 'token'
  * ACTION TYPES
  */
 const SET_AUTH = 'SET_AUTH'
-
+const UPDATE = 'UPDATE'
 /**
  * ACTION CREATORS
  */
 const setAuth = auth => ({type: SET_AUTH, auth})
-
+const _updateAuth = auth => ({type: UPDATE, auth})
 /**
  * THUNK CREATORS
  */
@@ -39,6 +39,22 @@ export const authenticate = (username, password, method) => async dispatch => {
   }
 }
 
+export const updateAuth = (username, email, password, history) => async dispatch => {
+  try {
+    const token = window.localStorage.getItem(TOKEN)
+    const res = await axios.put(`/auth/edit`, {username, email, password},
+      {headers:{
+        authorization: token 
+      }}
+    )
+    console.log('update',res.data)
+    dispatch(_updateAuth(res.data))
+    history.push("/account");
+  } catch (authError) {
+    return dispatch(setAuth({error: authError}))
+  }
+}
+
 export const logout = () => {
   window.localStorage.removeItem(TOKEN)
   history.push('/login')
@@ -54,6 +70,8 @@ export const logout = () => {
 export default function(state = {}, action) {
   switch (action.type) {
     case SET_AUTH:
+      return action.auth
+    case UPDATE:
       return action.auth
     default:
       return state
