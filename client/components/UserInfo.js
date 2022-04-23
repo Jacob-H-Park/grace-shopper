@@ -12,8 +12,11 @@ class UserInfo extends React.Component {
         return(
             <div>
                 <div>Your Profile</div>
-                <Link to ="/profile/edit">
-                    <button>Edit</button>
+                <Link to ="/account/edit">
+                    <button>Basic Information</button>
+                </Link>
+                <Link to ="/account/password">
+                    <button>Login/Authentication</button>
                 </Link>
                 <h1>{auth.username}</h1>
                 <h1>{auth.email}</h1>
