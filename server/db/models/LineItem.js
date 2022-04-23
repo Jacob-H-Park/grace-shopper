@@ -5,20 +5,20 @@ const Product = require("./Product");
 
 
 const LineItem = db.define('lineItem', {
-  // orderId: {
-  //   type: Sequelize.INTEGER,
-  //   references: {
-  //     model: Order,
-  //     key: "id"
-  //   },
-  // },
-  // productId: {
-  //   type: Sequelize.INTEGER,
-  //   references: {
-  //     model: Product,
-  //     key: "id"
-  //   },
-  // },
+  orderId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: Order,
+      key: "id"
+    },
+  },
+  productId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: Product,
+      key: "id"
+    },
+  },
 
   quantity: {
     type: Sequelize.INTEGER,

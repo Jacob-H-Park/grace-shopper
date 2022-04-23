@@ -3,6 +3,8 @@ const Order = require("../db/models/Order");
 const Product = require("../db/models/Product");
 const LineItem = require("../db/models/LineItem");
 
+// Route "/api/cart"
+
 router.get("/:userId", async (req, res, next) => {
   try {
     const cart = await Order.findOne({

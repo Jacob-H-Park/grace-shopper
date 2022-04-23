@@ -3,6 +3,8 @@ const { models: { User }} = require('../db');
 
 module.exports = router
 
+// Route "/api/users"
+
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -21,8 +23,8 @@ router.get('/:userId', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.userId);
     res.json(user);
-  } catch(e) {
-    next(e);
+  } catch (err) {
+    next(err);
   }
 })
 

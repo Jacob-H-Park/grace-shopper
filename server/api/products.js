@@ -3,7 +3,7 @@ const {
   models: { Product },
 } = require("../db");
 
-// /api/products
+// Route "/api/products"
 
 router.delete("/:id", async (req, res, next) => {
   try {
