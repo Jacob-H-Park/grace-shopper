@@ -59,7 +59,7 @@ class App extends Component {
             </Switch>
           )}
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route path="/home" component={Home} />
             <Route path="/flower/:id" component={SingleFlower} />
             <Route path="/checkout" component={Checkout} />
           </Switch>
