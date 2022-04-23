@@ -10,6 +10,7 @@ import {
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import Cart from "./components/Cart";
+import GuestCart from "./components/GuestCart";
 import Navbar from "./components/Navbar";
 import Flowers from "./components/Flowers";
 import SingleFlower from "./components/SingleFlower";
@@ -47,26 +48,25 @@ class App extends Component {
                 <Route exact path="/account" component={UserInfo} />
                 <Route path="/account/edit" component={EditUserInfo} />
                 <Route path="/account/password" component={ChangePassword} />
+                <Route path="/cart" component={Cart} />
               </Switch>
             ) : (
               <Switch>
-                <Route path="/home" component={Home} />
-                <Route path="/cart" component={Cart} />
                 <Route exact path="/account" component={UserInfo} />
                 <Route path="/account/edit" component={EditUserInfo} />
                 <Route path="/account/password" component={ChangePassword} />
-
+                <Route path="/cart" component={Cart} />
               </Switch>
             )
           ) : (
             <Switch>
+              <Route path="/cart" component={GuestCart} />
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
             </Switch>
           )}
           <Switch>
             <Route path="/home" component={Home} />
-            <Route path="/cart" component={Cart} />
             <Route path="/flowers" component={Flowers} />
             <Route path="/flower/:id" component={SingleFlower} />
             <Route path="/checkout" component={Checkout} />

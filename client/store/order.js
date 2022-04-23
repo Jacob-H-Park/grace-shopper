@@ -34,12 +34,43 @@ export const createCart = (userId) => {
 export const addToCart = (userId, flower, quantity = 1) => {
   return async (dispatch) => {
     try {
-      const data = await axios.post(`/api/cart/${userId}`, {
-        productId: flower.id,
-        quantity: quantity,
-      });
+      // if (!userId) {
+      //   const cart = JSON.parse(localStorage.getItem("cart"));
+      //   if (!cart) {
+      //     const cart = [];
+      //     cart.push({ [flower.name]: { price: flower.price, quantity: 1 } });
+      //     localStorage.setItem("cart", JSON.stringify(cart));
+      //   } else if (!Object.keys(cart).includes(flower.name)) {
+      //     cart.push({ [flower.name]: { price: flower.price, quantity: 1 } });
+      //     localStorage.setItem("cart", JSON.stringify(cart));
+      //   } else {
+      //     cart.filter( flower => flower[0][flower.name].quantity += 1;
+      //     localStorage.setItem("cart", JSON.stringify(cart));
+      //   }
 
-      dispatch(_addToCart(data));
+      if (!userId) {
+        const cart = JSON.parse(localStorage.getItem("cart"));
+
+        if (!cart) {
+          const cart = Object.assign(
+            {},
+            { [flower.name]: { price: flower.price, quantity: 1 } }
+          );
+          localStorage.setItem("cart", JSON.stringify(cart));
+        } else if (!Object.keys(cart).includes(flower.name)) {
+          cart[flower.name] = { price: flower.price, quantity: 1 };
+          localStorage.setItem("cart", JSON.stringify(cart));
+        } else {
+          cart[flower.name].quantity += 1;
+          localStorage.setItem("cart", JSON.stringify(cart));
+        }
+      } else {
+        const data = await axios.post(`/api/cart/${userId}`, {
+          productId: flower.id,
+          quantity: quantity,
+        });
+        dispatch(_addToCart(data));
+      }
     } catch (e) {
       console.log(e);
     }
@@ -71,3 +102,14 @@ const order = (state = {}, action) => {
 };
 
 export default order;
+
+/*put this into the log-in
+        Object.entries(cart).forEach((item) => {
+          const name = item[0];
+          const quantity = item[1].quantity;
+          const data = await axios.post(`/api/cart/${userId}`, {
+            productId: flower.id,
+            quantity: quantity,
+          });
+        });
+        */
