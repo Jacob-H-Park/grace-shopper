@@ -23,8 +23,15 @@ const _getCart = (cart) => {
 export const createCart = (userId) => {
   return async (dispatch) => {
     try {
-      const cart = (await axios.post(`/api/cart/${userId}`)).data;
-      dispatch(_addToCart(cart));
+      const token = window.localStorage.getItem('token');
+      if (token) {
+        const cart = (await axios.post(`/api/cart/${userId}`, {
+          headers: {
+            authorization: token
+          }
+        })).data;
+        dispatch(_addToCart(cart));
+      }
     } catch (e) {
       console.log(e);
     }
@@ -34,12 +41,20 @@ export const createCart = (userId) => {
 export const addToCart = (userId, flower, quantity = 1) => {
   return async (dispatch) => {
     try {
-      const data = await axios.post(`/api/cart/${userId}`, {
-        productId: flower.id,
-        quantity: quantity,
-      });
+      const token = window.localStorage.getItem('token');
+      if (token) {
+        const data = await axios.post(`/api/cart/${userId}`, {
+          productId: flower.id,
+          quantity: quantity,
+          }, {
+                headers: {
+                  authorization: token
+                }
+              }
+        );
 
-      dispatch(_addToCart(data));
+        dispatch(_addToCart(data));
+      }
     } catch (e) {
       console.log(e);
     }
@@ -49,8 +64,16 @@ export const addToCart = (userId, flower, quantity = 1) => {
 export const getCart = (userId) => {
   return async (dispatch) => {
     try {
-      const cart = (await axios.get(`/api/cart/${userId}`)).data;
-      dispatch(_getCart(cart));
+      const token = window.localStorage.getItem('token');
+      if (token) {
+        const cart = (await axios.get(`/api/cart/${userId}`, {
+          headers: {
+            authorization: token
+          }
+        })).data;
+
+        dispatch(_getCart(cart));
+      }
     } catch (e) {
       console.log(e);
     }

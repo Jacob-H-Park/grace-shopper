@@ -2,10 +2,13 @@ const router = require("express").Router();
 const Order = require("../db/models/Order");
 const Product = require("../db/models/Product");
 const LineItem = require("../db/models/LineItem");
+const User = require("../db/models/User");
+const { isLoggedIn } = require('./backendProtect');
+
 
 // Route "/api/cart"
 
-router.get("/:userId", async (req, res, next) => {
+router.get("/:userId", isLoggedIn, async (req, res, next) => {
   try {
     const cart = await Order.findOne({
       where: {
@@ -22,7 +25,7 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
-router.post("/:userId", async (req, res, next) => {
+router.post("/:userId", isLoggedIn, async (req, res, next) => {
   try {
     const cart = await Order.findOrCreate({
       where: {

@@ -7,6 +7,7 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
+
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import Cart from "./components/Cart";
@@ -17,8 +18,9 @@ import EditProduct from "./components/EditProduct";
 import ProductInfo from "./components/ProductInfo";
 import UserInfo from "./components/UserInfo";
 import Checkout from "./components/Checkout";
-import { me } from "./store";
 import Welcome from "./components/Welcome";
+
+import { me } from "./store";
 
 class App extends Component {
   componentDidMount() {

@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 import { getCart } from "../store/order";
 import { me } from "../store/auth";
-import { Link } from "react-router-dom";
 
 const Cart = () => {
   const user = useSelector((state) => state.auth);

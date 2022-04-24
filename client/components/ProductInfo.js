@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchProducts, removeProducts } from "../store/flowers";
 import { Link } from "react-router-dom";
+
+import { fetchProducts, removeProducts } from "../store/flowers";
 
 class ProductInfo extends React.Component {
   componentDidMount() {

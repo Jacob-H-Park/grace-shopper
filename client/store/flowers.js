@@ -33,8 +33,15 @@ export const fetchProducts = () => {
 };
 export const removeProducts = (id) => {
   return async (dispatch) => {
-    await axios.delete(`/api/products/${id}`);
-    dispatch(_removeProducts(id));
+    const token = window.localStorage.getItem('token');
+    if (token) {
+      await axios.delete(`/api/products/${id}`, {
+        headers: {
+          authorization: token
+        }
+      });
+      dispatch(_removeProducts(id));
+    }
   };
 };
 export const updateProducts = (flower, history) => {
