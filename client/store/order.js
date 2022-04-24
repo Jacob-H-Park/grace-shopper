@@ -23,13 +23,15 @@ const _getCart = (cart) => {
 export const createCart = (userId) => {
   return async (dispatch) => {
     try {
-      const token = window.localStorage.getItem('token');
+      const token = window.localStorage.getItem("token");
       if (token) {
-        const cart = (await axios.post(`/api/cart/${userId}`, {
-          headers: {
-            authorization: token
-          }
-        })).data;
+        const cart = (
+          await axios.post(`/api/cart/${userId}`, {
+            headers: {
+              authorization: token,
+            },
+          })
+        ).data;
         dispatch(_addToCart(cart));
       }
     } catch (e) {
@@ -41,22 +43,7 @@ export const createCart = (userId) => {
 export const addToCart = (userId, flower, quantity = 1) => {
   return async (dispatch) => {
     try {
-
-      const token = window.localStorage.getItem('token');
-      
-      // if (!userId) {
-      //   const cart = JSON.parse(localStorage.getItem("cart"));
-      //   if (!cart) {
-      //     const cart = [];
-      //     cart.push({ [flower.name]: { price: flower.price, quantity: 1 } });
-      //     localStorage.setItem("cart", JSON.stringify(cart));
-      //   } else if (!Object.keys(cart).includes(flower.name)) {
-      //     cart.push({ [flower.name]: { price: flower.price, quantity: 1 } });
-      //     localStorage.setItem("cart", JSON.stringify(cart));
-      //   } else {
-      //     cart.filter( flower => flower[0][flower.name].quantity += 1;
-      //     localStorage.setItem("cart", JSON.stringify(cart));
-      //   }
+      const token = window.localStorage.getItem("token");
 
       if (!userId) {
         const cart = JSON.parse(localStorage.getItem("cart"));
@@ -75,23 +62,22 @@ export const addToCart = (userId, flower, quantity = 1) => {
           localStorage.setItem("cart", JSON.stringify(cart));
         }
       } else {
-        
         if (token) {
-        const data = await axios.post(`/api/cart/${userId}`, {
-          productId: flower.id,
-          quantity: quantity,
-          }, {
-                headers: {
-                  authorization: token
-                }
-              }
-        );
-//         const data = await axios.post(`/api/cart/${userId}`, {
-//           productId: flower.id,
-//           quantity: quantity,
-//         });
+          const data = await axios.post(
+            `/api/cart/${userId}`,
+            {
+              productId: flower.id,
+              quantity: quantity,
+            },
+            {
+              headers: {
+                authorization: token,
+              },
+            }
+          );
 
-        dispatch(_addToCart(data));
+          dispatch(_addToCart(data));
+        }
       }
     } catch (e) {
       console.log(e);
@@ -102,13 +88,15 @@ export const addToCart = (userId, flower, quantity = 1) => {
 export const getCart = (userId) => {
   return async (dispatch) => {
     try {
-      const token = window.localStorage.getItem('token');
+      const token = window.localStorage.getItem("token");
       if (token) {
-        const cart = (await axios.get(`/api/cart/${userId}`, {
-          headers: {
-            authorization: token
-          }
-        })).data;
+        const cart = (
+          await axios.get(`/api/cart/${userId}`, {
+            headers: {
+              authorization: token,
+            },
+          })
+        ).data;
 
         dispatch(_getCart(cart));
       }
@@ -142,4 +130,4 @@ export default order;
             quantity: quantity,
           });
         });
-        */
+*/
