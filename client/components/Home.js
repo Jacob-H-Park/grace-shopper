@@ -1,7 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import auth from "../store/auth";
+
 import Flowers from "./Flowers";
+
+import auth from "../store/auth";
 
 /**
  * COMPONENT

@@ -1,12 +1,36 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
 import { logout } from "../store";
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.id);
   const isAdmin = useSelector((state) => state.auth.isAdmin);
   const dispatch = useDispatch();
+
+  // Nav Tabs display differently for different role: Admin, User, Guest
+  const navTabsAdmin = [
+    { tab: "Flowers", url: "#"},
+    { tab: "Meet The Team", url: "#"},
+    { tab: "Inventory Management", url: "/inventory_management"},
+    { tab: "User Management", url: "/user_management"},
+    { tab: "Cart", url: "/cart"}
+  ];
+
+  const navTabsUser = [
+    { tab: "Flowers", url: "#"},
+    { tab: "Meet The Team", url: "#"},
+    { tab: "Cart", url: "/cart"}
+  ];
+
+  const navTabsGuest = [
+    { tab: "Flowers", url: "#"},
+    { tab: "Meet The Team", url: "#"},
+    { tab: "Sign Up", url: "/signup"},
+    { tab: "Login", url: "/login"},
+    { tab: "Cart", url: "/cart"}
+  ];
 
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -35,32 +59,18 @@ const Navbar = () => {
                     Home
                   </Link>
                 </li>
-                <li class="nav-item">
-                  <Link class="nav-link" to="/flowers">
-                    Flowers
-                  </Link>
-                </li>
-                <li class="nav-item">
-                  <Link class="nav-link" to="#">
-                    Meet The Team
-                  </Link>
-                </li>
-                <li class="nav-item">
-                  <Link class="nav-link" to="/inventory_management">
-                    Inventory Management
-                  </Link>
-                </li>
-                <li class="nav-item">
-                  <Link class="nav-link" to="/account">
-                    Account
 
-                  </Link>
-                </li>
-                <li class="nav-item">
-                  <Link class="nav-link" to="/cart">
-                    Cart
-                  </Link>
-                </li>
+                { navTabsAdmin.map(({ tab, url }) => {
+                    return (
+                      <li class="nav-item">
+                        <Link class="nav-link" to={url}>
+                          {tab}
+                        </Link>
+                      </li>
+                    )
+                  }) 
+                }
+
                 <li class="nav-item">
                   <Link
                     class="nav-link"
@@ -80,25 +90,20 @@ const Navbar = () => {
                     Home
                   </Link>
                 </li>
-                <li class="nav-item">
-                  <Link class="nav-link" to="/flowers">
-                    Flowers
-                  </Link>
-                </li>
-                <li class="nav-item">
-                  <Link class="nav-link" to="#">
-                    Meet The Team
-                  </Link>
-                </li>
+                { navTabsUser.map(({ tab, url }) => {
+                    return (
+                      <li class="nav-item">
+                        <Link class="nav-link" to={url}>
+                          {tab}
+                        </Link>
+                      </li>
+                    )
+                  }) 
+                }
                 <li class="nav-item">
                   <Link class="nav-link" to="/account">
                     Account
 
-                  </Link>
-                </li>
-                <li class="nav-item">
-                  <Link class="nav-link" to="/cart">
-                    Cart
                   </Link>
                 </li>
                 <li class="nav-item">
@@ -121,31 +126,16 @@ const Navbar = () => {
                   Home
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/flowers">
-                  Flowers
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="#">
-                  Meet The Team
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/signup">
-                  Sign Up
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/login">
-                  Login
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/cart">
-                  Cart
-                </Link>
-              </li>
+              { navTabsGuest.map(({ tab, url }) => {
+                  return (
+                    <li class="nav-item">
+                      <Link class="nav-link" to={url}>
+                        {tab}
+                      </Link>
+                    </li>
+                  )
+                }) 
+              }
             </ul>
           </div>
         )}

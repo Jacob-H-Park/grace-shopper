@@ -23,8 +23,15 @@ const _getCart = (cart) => {
 export const createCart = (userId) => {
   return async (dispatch) => {
     try {
-      const cart = (await axios.post(`/api/cart/${userId}`)).data;
-      dispatch(_addToCart(cart));
+      const token = window.localStorage.getItem('token');
+      if (token) {
+        const cart = (await axios.post(`/api/cart/${userId}`, {
+          headers: {
+            authorization: token
+          }
+        })).data;
+        dispatch(_addToCart(cart));
+      }
     } catch (e) {
       console.log(e);
     }
@@ -34,6 +41,9 @@ export const createCart = (userId) => {
 export const addToCart = (userId, flower, quantity = 1) => {
   return async (dispatch) => {
     try {
+
+      const token = window.localStorage.getItem('token');
+      
       // if (!userId) {
       //   const cart = JSON.parse(localStorage.getItem("cart"));
       //   if (!cart) {
@@ -65,10 +75,22 @@ export const addToCart = (userId, flower, quantity = 1) => {
           localStorage.setItem("cart", JSON.stringify(cart));
         }
       } else {
+        
+        if (token) {
         const data = await axios.post(`/api/cart/${userId}`, {
           productId: flower.id,
           quantity: quantity,
-        });
+          }, {
+                headers: {
+                  authorization: token
+                }
+              }
+        );
+//         const data = await axios.post(`/api/cart/${userId}`, {
+//           productId: flower.id,
+//           quantity: quantity,
+//         });
+
         dispatch(_addToCart(data));
       }
     } catch (e) {
@@ -80,8 +102,16 @@ export const addToCart = (userId, flower, quantity = 1) => {
 export const getCart = (userId) => {
   return async (dispatch) => {
     try {
-      const cart = (await axios.get(`/api/cart/${userId}`)).data;
-      dispatch(_getCart(cart));
+      const token = window.localStorage.getItem('token');
+      if (token) {
+        const cart = (await axios.get(`/api/cart/${userId}`, {
+          headers: {
+            authorization: token
+          }
+        })).data;
+
+        dispatch(_getCart(cart));
+      }
     } catch (e) {
       console.log(e);
     }

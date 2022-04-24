@@ -1,7 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { authenticate } from "../store";
 import { Link, Redirect } from "react-router-dom";
+
+import { authenticate } from "../store";
+
 /**
  * COMPONENT
  */

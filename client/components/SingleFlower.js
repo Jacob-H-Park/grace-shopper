@@ -1,6 +1,7 @@
 import React from "react";
-import { addToCart } from "../store/order";
 import { useSelector, useDispatch } from "react-redux";
+
+import { addToCart } from "../store/order";
 
 const SingleFlower = (props) => {
   const flower = useSelector(({ flowers }) => {
