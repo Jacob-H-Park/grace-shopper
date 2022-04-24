@@ -59,6 +59,7 @@ const Navbar = () => {
                     Home
                   </Link>
                 </li>
+
                 { navTabsAdmin.map(({ tab, url }) => {
                     return (
                       <li class="nav-item">
@@ -69,6 +70,7 @@ const Navbar = () => {
                     )
                   }) 
                 }
+
                 <li class="nav-item">
                   <Link
                     class="nav-link"
@@ -98,6 +100,12 @@ const Navbar = () => {
                     )
                   }) 
                 }
+                <li class="nav-item">
+                  <Link class="nav-link" to="/account">
+                    Account
+
+                  </Link>
+                </li>
                 <li class="nav-item">
                   <Link
                     class="nav-link"

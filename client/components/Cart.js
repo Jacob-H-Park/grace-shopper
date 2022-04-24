@@ -6,8 +6,10 @@ import { getCart } from "../store/order";
 import { me } from "../store/auth";
 
 const Cart = () => {
-  const user = useSelector((state) => state.auth);
-  const order = useSelector((state) => state.order) || { products: [] };
+  const { user, order } = useSelector((state) => ({
+    user: state.auth,
+    order: state.order || { products: [] },
+  }));
 
   const dispatch = useDispatch();
 

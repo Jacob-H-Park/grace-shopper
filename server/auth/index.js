@@ -25,7 +25,19 @@ router.post('/signup', async (req, res, next) => {
     }
   }
 })
-
+router.put('/edit', async (req, res, next) => {
+  try {
+    const user = await User.findByToken(req.headers.authorization)
+    const updated_user = await user.update(req.body)
+    res.send(updated_user)
+  } catch (err) {
+    if (err.name === 'SequelizeUniqueConstraintError') {
+      res.status(401).send('User already exists')
+    } else {
+      next(err)
+    }
+  }
+})
 router.get('/me', async (req, res, next) => {
   try {
     res.send(await User.findByToken(req.headers.authorization))

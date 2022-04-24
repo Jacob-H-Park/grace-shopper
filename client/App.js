@@ -1,16 +1,16 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   withRouter,
   HashRouter as Router,
   Route,
   Switch,
-  Redirect,
 } from "react-router-dom";
 
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import Cart from "./components/Cart";
+import GuestCart from "./components/GuestCart";
 import Navbar from "./components/Navbar";
 import Flowers from "./components/Flowers";
 import SingleFlower from "./components/SingleFlower";
@@ -19,6 +19,10 @@ import ProductInfo from "./components/ProductInfo";
 import UserInfo from "./components/UserInfo";
 import Checkout from "./components/Checkout";
 import Welcome from "./components/Welcome";
+import EditUserInfo from "./components/EditUserInfo";
+import ChangePassword from "./components/ChangePassword";
+
+import { me } from "./store";
 
 import { me } from "./store";
 
@@ -37,31 +41,35 @@ class App extends Component {
           {isLoggedIn ? (
             isAdmin ? (
               <Switch>
-                <Route path="/home" component={Home} />
-                <Route path="/cart" component={Cart} />
                 <Route
                   exact
                   path="/inventory_management"
                   component={ProductInfo}
                 />
                 <Route path="/editflowerinfo/:id" component={EditProduct} />
-                <Route exact path="/user_management" component={UserInfo} />
+                <Route exact path="/account" component={UserInfo} />
+                <Route path="/account/edit" component={EditUserInfo} />
+                <Route path="/account/password" component={ChangePassword} />
+                <Route path="/cart" component={Cart} />
               </Switch>
             ) : (
               <Switch>
-                <Route path="/home" component={Home} />
+                <Route exact path="/account" component={UserInfo} />
+                <Route path="/account/edit" component={EditUserInfo} />
+                <Route path="/account/password" component={ChangePassword} />
                 <Route path="/cart" component={Cart} />
               </Switch>
             )
           ) : (
             <Switch>
+              <Route path="/cart" component={GuestCart} />
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
-              <Route path="/cart" component={Cart} />
             </Switch>
           )}
           <Switch>
             <Route path="/home" component={Home} />
+            <Route path="/flowers" component={Flowers} />
             <Route path="/flower/:id" component={SingleFlower} />
             <Route path="/checkout" component={Checkout} />
           </Switch>
