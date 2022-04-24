@@ -24,7 +24,6 @@ import ChangePassword from "./components/ChangePassword";
 
 import { me } from "./store";
 
-import { me } from "./store";
 
 class App extends Component {
   componentDidMount() {
