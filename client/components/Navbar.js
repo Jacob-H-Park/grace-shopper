@@ -23,20 +23,17 @@ const Navbar = () => {
     { tab: "Meet The Team", url: "#" },
     { tab: "Inventory Management", url: "/inventory_management" },
     { tab: "User Management", url: "/user_management" },
-    { tab: "Cart", url: "/cart" },
   ];
 
   const navTabsUser = [
     { tab: "Flowers", url: "/flowers" },
     { tab: "Meet The Team", url: "#" },
     { tab: "Account", url: "/account" },
-    { tab: "Cart", url: "/cart" },
   ];
 
   const navTabsGuest = [
     { tab: "Flowers", url: "/flowers" },
     { tab: "Meet The Team", url: "#" },
-    { tab: "Cart", url: "/cart" },
     { tab: "Sign Up", url: "/signup" },
     { tab: "Login", url: "/login" },
   ];
@@ -53,25 +50,57 @@ const Navbar = () => {
         >
           <Link to="/home">Bloom.</Link>
         </Typography>
+
         {isLoggedIn ? (
-          <Stack
-            direction="row"
-            divider={<Divider color="white" orientation="vertical" flexItem />}
-            spacing={2}
-          >
-            {navTabsUser.map(({ tab, url }) => {
-              return (
-                <Link to={url}>
-                  <Button color="inherit">{tab}</Button>
-                </Link>
-              );
-            })}
-            <Link to="/login">
-              <Button color="inherit" onClick={() => dispatch(logout())}>
-                Logout
-              </Button>
-            </Link>
-          </Stack>
+          isAdmin ? (
+            <Stack
+              direction="row"
+              divider={
+                <Divider color="white" orientation="vertical" flexItem />
+              }
+              spacing={2}
+            >
+              {navTabsAdmin.map(({ tab, url }) => {
+                return (
+                  <Link to={url}>
+                    <Button color="inherit">{tab}</Button>
+                  </Link>
+                );
+              })}
+              <Link to="/login">
+                <Button color="inherit" onClick={() => dispatch(logout())}>
+                  Logout
+                </Button>
+              </Link>
+              <Link to="/cart">
+                <Button color="inherit">Cart</Button>
+              </Link>
+            </Stack>
+          ) : (
+            <Stack
+              direction="row"
+              divider={
+                <Divider color="white" orientation="vertical" flexItem />
+              }
+              spacing={2}
+            >
+              {navTabsUser.map(({ tab, url }) => {
+                return (
+                  <Link to={url}>
+                    <Button color="inherit">{tab}</Button>
+                  </Link>
+                );
+              })}
+              <Link to="/login">
+                <Button color="inherit" onClick={() => dispatch(logout())}>
+                  Logout
+                </Button>
+              </Link>
+              <Link to="/cart">
+                <Button color="inherit">Cart</Button>
+              </Link>
+            </Stack>
+          )
         ) : (
           <Stack
             direction="row"
@@ -85,6 +114,9 @@ const Navbar = () => {
                 </Link>
               );
             })}
+            <Link to="/cart">
+              <Button color="inherit">Cart</Button>
+            </Link>
           </Stack>
         )}
       </Toolbar>
