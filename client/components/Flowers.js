@@ -30,6 +30,9 @@ const Flowers = () => {
           <option value="rose">Roses</option>
           <option value="tulip">Tulips</option>
           <option value="orchid">Orchids</option>
+          <option value="signature_bouquets">Signature Bouquets</option>
+          <option value="sympathy">Sympathy</option>
+          <option value="preserved_rose">Preserved Roses</option>
         </select>
       </div>
 
