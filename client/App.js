@@ -67,7 +67,7 @@ class App extends Component {
             </Switch>
           )}
           <Switch>
-            <Route path="/home" component={Home} />
+            <Route path="/home" component={Welcome} />
             <Route path="/flowers" component={Flowers} />
             <Route path="/flower/:id" component={SingleFlower} />
             <Route path="/checkout" component={Checkout} />
