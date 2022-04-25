@@ -23,8 +23,8 @@ const Cart = () => {
     if (Object.entries(cart).length) {
       dispatch(combineCart(user.id, cart));
       // dispatch(getCart(user.id))
-      // localStorage.setItem("cart", JSON.stringify({}));
-      localStorage.removeItem("cart");
+      localStorage.setItem("cart", JSON.stringify({}));
+      // localStorage.removeItem("cart");
     }
   }
 
