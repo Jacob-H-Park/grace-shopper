@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { Product, User },
+  models: { Product },
 } = require("../db");
 const { isAdmin } = require('./backendProtect');
 

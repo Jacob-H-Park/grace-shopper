@@ -2,7 +2,6 @@ const router = require("express").Router();
 const Order = require("../db/models/Order");
 const Product = require("../db/models/Product");
 const LineItem = require("../db/models/LineItem");
-const User = require("../db/models/User");
 const { isLoggedIn } = require('./backendProtect');
 
 
