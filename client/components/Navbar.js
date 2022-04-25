@@ -8,7 +8,9 @@ import {
   Stack,
   Button,
   Divider,
+  IconButton,
 } from "@mui/material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import { logout } from "../store";
 
@@ -73,7 +75,9 @@ const Navbar = () => {
                 </Button>
               </Link>
               <Link to="/cart">
-                <Button color="inherit">Cart</Button>
+                <IconButton color="inherit">
+                  <ShoppingCartIcon />
+                </IconButton>
               </Link>
             </Stack>
           ) : (
@@ -97,7 +101,9 @@ const Navbar = () => {
                 </Button>
               </Link>
               <Link to="/cart">
-                <Button color="inherit">Cart</Button>
+                <IconButton color="inherit">
+                  <ShoppingCartIcon />
+                </IconButton>
               </Link>
             </Stack>
           )
@@ -115,7 +121,9 @@ const Navbar = () => {
               );
             })}
             <Link to="/cart">
-              <Button color="inherit">Cart</Button>
+              <IconButton color="inherit">
+                <ShoppingCartIcon />
+              </IconButton>
             </Link>
           </Stack>
         )}
