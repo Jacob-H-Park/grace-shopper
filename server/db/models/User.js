@@ -37,6 +37,12 @@ module.exports = User;
  */
 User.prototype.correctPassword = function (candidatePwd) {
   //we need to compare the plain version to an encrypted version of the password
+  
+  if(!(bcrypt.compare(candidatePwd, this.password))){
+    const error = Error('Old password is not correct');
+    error.status = 401;
+    throw error
+  }
   return bcrypt.compare(candidatePwd, this.password);
 };
 

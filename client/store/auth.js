@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 import history from '../history'
 
 const TOKEN = 'token'
@@ -47,10 +48,40 @@ export const updateAuth = (username, email, password, history) => async dispatch
         authorization: token 
       }}
     )
-    console.log('update',res.data)
     dispatch(_updateAuth(res.data))
     history.push("/account");
   } catch (authError) {
+    return dispatch(setAuth({error: authError}))
+  }
+}
+export const comparePass = (oldPassword) => async dispatch => {
+  try{
+    const token = window.localStorage.getItem(TOKEN)
+    const res = await axios.post('/auth/comparepassword',{oldPassword},
+    {
+      headers:{
+        authorization:token
+      }
+    })
+    console.log('compare pass',res.data.isTrue)
+    return res.data.isTrue
+  }catch(err){
+    return dispatch(setAuth({error: authError}))
+  }
+}
+
+export const updatePass = (password,history) => async dispatch => {
+  try{
+    const token = window.localStorage.getItem(TOKEN)
+    const res = await axios.put('/auth/changepassword',{password},
+    {
+      headers:{
+        authorization:token
+      }
+    })
+    console.log("changed!",res.data)
+    history.push('/account')
+  }catch(err){
     return dispatch(setAuth({error: authError}))
   }
 }
