@@ -41,6 +41,7 @@ export function authenticate (username, password, method, email) {
       }
       window.localStorage.setItem(TOKEN, res.data.token)
       dispatch(me())
+      // history.push("/flowers");
     } catch (authError) {
       return dispatch(setAuth({error: authError}))
     }

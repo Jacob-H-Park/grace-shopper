@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { getCart } from "../store/order";
+import { combineCart, getCart } from "../store/order";
 import { me } from "../store/auth";
 
 const Cart = () => {
@@ -16,6 +16,17 @@ const Cart = () => {
   useEffect(() => {
     dispatch(getCart(user.id));
   }, []);
+
+  // Check if there is a cart in the browser local storage
+  const cart = JSON.parse(localStorage.getItem("cart"));
+  if (cart) {
+    if (Object.entries(cart).length) {
+      dispatch(combineCart(user.id, cart));
+      // dispatch(getCart(user.id))
+      // localStorage.setItem("cart", JSON.stringify({}));
+      localStorage.removeItem("cart");
+    }
+  }
 
   if (!order.products || order.products.length < 1) {
     return (
