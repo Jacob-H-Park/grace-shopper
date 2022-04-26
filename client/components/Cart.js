@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { combineCart, getCart } from "../store/order";
 import { me } from "../store/auth";
 import {
   decreaseQuantity,
   deleteLineItem,
   getCart,
+  combineCart,
   increaseQuantity,
 } from "../store/order";
 
