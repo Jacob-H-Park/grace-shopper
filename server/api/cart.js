@@ -2,13 +2,11 @@ const router = require("express").Router();
 const Order = require("../db/models/Order");
 const Product = require("../db/models/Product");
 const LineItem = require("../db/models/LineItem");
-const User = require("../db/models/User");
-const { isLoggedIn } = require('./backendProtect');
-
+const { requireLoggedIn, not_requireLoggedIn } = require('./backendProtect');
 
 // Route "/api/cart"
 
-router.get("/:userId", isLoggedIn, async (req, res, next) => {
+router.get("/:userId", not_requireLoggedIn, async (req, res, next) => {
   try {
     const cart = await Order.findOne({
       where: {
@@ -55,7 +53,7 @@ router.put("/:userId", async (req, res, next) => {
   }
 })
 
-router.post("/:userId", isLoggedIn, async (req, res, next) => {
+router.post("/:userId", not_requireLoggedIn, async (req, res, next) => {
   try {
     const cart = await Order.findOrCreate({
       where: {
@@ -66,7 +64,7 @@ router.post("/:userId", isLoggedIn, async (req, res, next) => {
         model: Product,
       },
     });
-
+    // console.log('BACKEND CART CART', cart);
     const orderId = cart[0].id;
 
     const lineItemInCart = await LineItem.findOne({
@@ -74,7 +72,7 @@ router.post("/:userId", isLoggedIn, async (req, res, next) => {
     });
 
     if (lineItemInCart) {
-      lineItemInCart.quantity += 1;
+      lineItemInCart.quantity += req.body.quantity;
       await lineItemInCart.save();
     } else {
       await LineItem.create({
@@ -83,7 +81,6 @@ router.post("/:userId", isLoggedIn, async (req, res, next) => {
         quantity: req.body.quantity,
       });
     }
-
     res.json(cart);
   } catch (e) {
     next(e);

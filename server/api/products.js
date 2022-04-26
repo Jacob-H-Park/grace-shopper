@@ -1,12 +1,12 @@
 const router = require("express").Router();
 const {
-  models: { Product, User },
+  models: { Product },
 } = require("../db");
-const { isAdmin } = require('./backendProtect');
+const { requireAdmin } = require('./backendProtect');
 
 // Route "/api/products"
 
-router.delete("/:id", isAdmin, async (req, res, next) => {
+router.delete("/:id", requireAdmin, async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.id);
     await product.destroy();

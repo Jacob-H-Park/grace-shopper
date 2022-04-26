@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { me } from "../store/auth";
 import {
   decreaseQuantity,
   deleteLineItem,
   getCart,
+  combineCart,
   increaseQuantity,
 } from "../store/order";
 
@@ -21,6 +23,13 @@ const Cart = () => {
     dispatch(getCart(user.id));
   }, []);
 
+  // Check if there is a cart in the browser local storage
+  const cart = JSON.parse(localStorage.getItem("cart"));
+  if (cart) {
+    dispatch(combineCart(user.id, cart));
+    // dispatch(getCart(user.id))
+    localStorage.removeItem("cart");
+  }
   const handleIncrease = (productId) => {
     dispatch(increaseQuantity(user.id, productId, order.id));
   };
