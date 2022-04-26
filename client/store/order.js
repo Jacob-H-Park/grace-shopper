@@ -96,7 +96,7 @@ export const getCart = (userId) => {
             },
           })
         ).data;
-        console.log("GET GET GET CART:", cart);
+        
         dispatch(_getCart(cart));
       }
     } catch (e) {

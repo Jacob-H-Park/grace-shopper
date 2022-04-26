@@ -64,7 +64,7 @@ router.post("/:userId", not_requireLoggedIn, async (req, res, next) => {
         model: Product,
       },
     });
-
+    // console.log('BACKEND CART CART', cart);
     const orderId = cart[0].id;
 
     const lineItemInCart = await LineItem.findOne({
@@ -72,7 +72,7 @@ router.post("/:userId", not_requireLoggedIn, async (req, res, next) => {
     });
 
     if (lineItemInCart) {
-      lineItemInCart.quantity += 1;
+      lineItemInCart.quantity += req.body.quantity;
       await lineItemInCart.save();
     } else {
       await LineItem.create({
