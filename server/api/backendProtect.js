@@ -19,7 +19,13 @@ const requireLoggedIn = async (req, res, next) => {
 
 // Use this function during development, in order to access API routes in browser without protection
 // This dev function generally does nothing, just let the api request skip user verification and jump to the next callback
-not_requireLoggedIn = async(req, res, next) => next();
+not_requireLoggedIn = (req, res, next) => {
+  try {
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
 
 // Only Admin has the right to access and modify backend products
 const requireAdmin = async (req, res, next) => {
@@ -42,6 +48,12 @@ const requireAdmin = async (req, res, next) => {
 
 // Use this function during development, in order to access API routes in browser WITHOUT protection
 // This dev function generally does nothing, just let the api request skip admin verification and jump to the next callback
-const not_requireAdmin = async (req, res, next) => next();
+const not_requireAdmin = (req, res, next) => {
+  try {
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
 
 module.exports = { requireLoggedIn, requireAdmin, not_requireLoggedIn, not_requireAdmin }

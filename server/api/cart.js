@@ -51,7 +51,6 @@ router.post("/:userId", not_requireLoggedIn, async (req, res, next) => {
         quantity: req.body.quantity,
       });
     }
-
     res.json(cart);
   } catch (e) {
     next(e);

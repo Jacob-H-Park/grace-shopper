@@ -20,12 +20,9 @@ const Cart = () => {
   // Check if there is a cart in the browser local storage
   const cart = JSON.parse(localStorage.getItem("cart"));
   if (cart) {
-    if (Object.entries(cart).length) {
-      dispatch(combineCart(user.id, cart));
-      // dispatch(getCart(user.id))
-      // localStorage.setItem("cart", JSON.stringify({}));
-      localStorage.removeItem("cart");
-    }
+    dispatch(combineCart(user.id, cart));
+    // dispatch(getCart(user.id))
+    localStorage.removeItem("cart");
   }
 
   if (!order.products || order.products.length < 1) {

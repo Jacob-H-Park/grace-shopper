@@ -96,7 +96,7 @@ export const getCart = (userId) => {
             },
           })
         ).data;
-
+        console.log("GET GET GET CART:", cart);
         dispatch(_getCart(cart));
       }
     } catch (e) {
@@ -114,7 +114,7 @@ export const combineCart = (userId, cart) => {
       *   flower_name_3: { price: 98, quantity: 1, id: 3 }
       * }
     */
-    Object.entries(cart).forEach(async(item) => {
+    for (const item of Object.entries(cart)) {
       const name = item[0];
       const id = item[1].id;
       const quantity = item[1].quantity;
@@ -123,8 +123,7 @@ export const combineCart = (userId, cart) => {
         quantity: quantity,
       });
       dispatch(_addToCart(data));
-    });
-    // dispatch(_getCart(userId));
+    }
   }
 };  
 
