@@ -25,6 +25,36 @@ router.get("/:userId", isLoggedIn, async (req, res, next) => {
   }
 });
 
+router.put("/:userId", async (req, res, next) => {
+  try {
+    const orderId = req.body.orderId;
+    const productId = req.body.productId;
+    const type = req.body.type;
+
+    const singleProduct = await LineItem.findOne({
+      where: {
+        orderId,
+        productId
+      }
+    });
+
+    let quantity = singleProduct.quantity;
+
+    if(type === 'increase') {
+      quantity = quantity + 1;
+    };
+
+    if(type === 'decrease') {
+      quantity = quantity - 1;
+    };
+
+    res.send(await singleProduct.update({ quantity: quantity })).status(200);
+
+  } catch(e) {
+    next(e);
+  }
+})
+
 router.post("/:userId", isLoggedIn, async (req, res, next) => {
   try {
     const cart = await Order.findOrCreate({
@@ -56,6 +86,28 @@ router.post("/:userId", isLoggedIn, async (req, res, next) => {
 
     res.json(cart);
   } catch (e) {
+    next(e);
+  }
+});
+
+router.delete('/:userId', async (req, res, next) => {
+  try {
+    const orderId = req.body.orderId;
+    const productId = req.body.productId;
+
+    const singleProduct = await LineItem.findOne({
+      where: {
+        orderId,
+        productId
+      }
+    });
+
+    console.log(req.body);
+
+    await singleProduct.destroy();
+
+    res.sendStatus(200);
+  } catch(e) {
     next(e);
   }
 });
