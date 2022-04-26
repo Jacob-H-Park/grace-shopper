@@ -43,7 +43,7 @@ router.put("/:userId", async (req, res, next) => {
     };
 
     if(type === 'decrease') {
-      quantity = quantity - 1;
+      quantity = quantity - 1 <= 1 ? 1 : quantity - 1;
     };
 
     res.send(await singleProduct.update({ quantity: quantity })).status(200);
@@ -98,8 +98,6 @@ router.delete('/:userId', async (req, res, next) => {
         productId
       }
     });
-
-    console.log(req.body);
 
     await singleProduct.destroy();
 

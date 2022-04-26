@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { IconButton } from "@mui/material";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import ClearIcon from "@mui/icons-material/Clear";
 
 import { me } from "../store/auth";
 import {
@@ -35,14 +39,8 @@ const Cart = () => {
     dispatch(increaseQuantity(user.id, productId, order.id));
   };
 
-  const handleDecrease = (productId, quantity) => {
-    if (quantity === 1) {
-      dispatch(handleDelete(user.id, productId, order.id));
-      console.log("quantity: ", quantity);
-    } else {
-      dispatch(decreaseQuantity(user.id, productId, order.id));
-      console.log("quantity: ", quantity);
-    }
+  const handleDecrease = (productId) => {
+    dispatch(decreaseQuantity(user.id, productId, order.id));
   };
 
   const handleDelete = (productId) => {
@@ -51,7 +49,7 @@ const Cart = () => {
 
   if (!order.products || order.products.length < 1) {
     return (
-      <div>
+      <div className="cart-container">
         <h1>Your cart is empty!</h1>
         <Link to="/checkout">
           <button>Checkout</button>
@@ -67,7 +65,7 @@ const Cart = () => {
     );
 
     return (
-      <div>
+      <div className="cart-container">
         <h3>Your Cart:</h3>
         <table>
           <thead>
@@ -85,27 +83,30 @@ const Cart = () => {
                   <td>{product.name} </td>
                   <td>{product.price}</td>
                   <td>
-                    <button
-                      onClick={() =>
-                        dispatch(
-                          handleDecrease(product.id, product.lineItem.quantity)
-                        )
-                      }
-                    >
-                      -
-                    </button>
+                    <IconButton>
+                      <RemoveCircleOutlineIcon
+                        onClick={() =>
+                          dispatch(
+                            handleDecrease(
+                              product.id,
+                              product.lineItem.quantity
+                            )
+                          )
+                        }
+                      />
+                    </IconButton>
                     {product.lineItem.quantity}
-                    <button
-                      onClick={() => dispatch(handleIncrease(product.id))}
-                    >
-                      +
-                    </button>
+                    <IconButton>
+                      <AddCircleOutlineIcon
+                        onClick={() => dispatch(handleIncrease(product.id))}
+                      />
+                    </IconButton>
                   </td>
                   <td>${product.price * product.lineItem.quantity}</td>
                   <td>
-                    <button onClick={() => dispatch(handleDelete(product.id))}>
-                      X
-                    </button>
+                    <IconButton>
+                      <ClearIcon onClick={() => dispatch(handleDelete(product.id))} />
+                    </IconButton>
                   </td>
                 </tr>
               );
