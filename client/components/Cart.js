@@ -29,7 +29,8 @@ const Cart = () => {
     dispatch(combineCart(user.id, cart));
     // dispatch(getCart(user.id))
     localStorage.removeItem("cart");
-  }
+  };
+
   const handleIncrease = (productId) => {
     dispatch(increaseQuantity(user.id, productId, order.id));
   };
