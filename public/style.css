@@ -33,17 +33,8 @@ table {
   height: 92vh;
 }
 
-
-.navbar {
-  background-color: #D99BB4;
-  color: white;
-}
-
-.nav-link {
-  color: white !important;
-}
-
-.nav-link:hover {
-  color: rgb(233, 233, 233) !important;
+.cart-container {
+  width: 100%;
+  background-color: white;
 }
 
