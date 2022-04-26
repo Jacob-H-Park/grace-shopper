@@ -127,6 +127,51 @@ export const combineCart = (userId, cart) => {
   }
 };  
 
+export const increaseQuantity = (userId, productId, orderId) => {
+  return async (dispatch) => {
+    try {
+      await axios.put(`/api/cart/${userId}`, {
+        orderId,
+        productId,
+        type: "increase",
+      });
+
+      dispatch(getCart(userId));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const decreaseQuantity = (userId, productId, orderId) => {
+  return async (dispatch) => {
+    try {
+      await axios.put(`/api/cart/${userId}`, {
+        orderId,
+        productId,
+        type: "decrease",
+      });
+
+      dispatch(getCart(userId));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const deleteLineItem = (userId, productId, orderId) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`/api/cart/${userId}`, {
+        data: { orderId, productId },
+      });
+
+      dispatch(getCart(userId));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
 //REDUCER
 
 const order = (state = {}, action) => {
