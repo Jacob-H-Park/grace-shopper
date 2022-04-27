@@ -1,3 +1,13 @@
+import { AddShoppingCart } from "@mui/icons-material";
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import { display } from "@mui/material/node_modules/@mui/system";
 import React, { Component, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -59,23 +69,53 @@ const Flowers = () => {
             })}
         </div>
       ) : (
-        <div>
+        <Box>
           {flowers.map((flower) => {
             return (
-              <div key={flower.id}>
-                {flower.name}
-                <div>
-                  <Link to={`/flower/${flower.id}`}>
-                    <img src={flower.image_url} />
-                  </Link>
-                </div>
-                <button onClick={() => dispatch(addToCart(user.id, flower))}>
-                  Add to cart
-                </button>
-              </div>
+              <Card sx={{ maxWidth: "400px" }}>
+                <CardMedia component="img" image={flower.image_url} />
+                <Box sx={{display: 'flex', alignItems: 'center'}}>
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <CardContent sx={{ flex: "1 0 auto" }}>
+                      <Typography sx={{ fontSize: "15px" }} component="div">
+                        {flower.name}
+                      </Typography>
+                      <Typography sx={{ fontSize: "12px" }}>
+                        ${flower.price}
+                      </Typography>
+                    </CardContent>
+                  </Box>
+                  <Box flexGrow={1}>
+                    <IconButton>
+                      <AddShoppingCart
+                        sx={{ height: "30px", width: "30px" }}
+                        color="secondary"
+                      />
+                    </IconButton>
+                  </Box>
+                </Box>
+              </Card>
             );
           })}
-        </div>
+        </Box>
+
+        // <div>
+        //   {flowers.map((flower) => {
+        //     return (
+        //       <div key={flower.id}>
+        //         {flower.name}
+        //         <div>
+        //           <Link to={`/flower/${flower.id}`}>
+        //             <img src={flower.image_url} />
+        //           </Link>
+        //         </div>
+        //         <button onClick={() => dispatch(addToCart(user.id, flower))}>
+        //           Add to cart
+        //         </button>
+        //       </div>
+        //     );
+        //   })}
+        // </div>
       )}
     </div>
   );
