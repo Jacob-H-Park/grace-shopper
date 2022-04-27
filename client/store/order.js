@@ -51,11 +51,11 @@ export const addToCart = (userId, flower, quantity = 1) => {
         if (!cart) {
           const cart = Object.assign(
             {},
-            { [flower.name]: { price: flower.price, quantity: 1, id: flower.id } }
+            { [flower.name]: { price: flower.price, quantity: 1, id: flower.id, image_url: flower.image_url } }
           );
           localStorage.setItem("cart", JSON.stringify(cart));
         } else if (!Object.keys(cart).includes(flower.name)) {
-          cart[flower.name] = { price: flower.price, quantity: 1, id: flower.id };
+          cart[flower.name] = { price: flower.price, quantity: 1, id: flower.id, image_url: flower.image_url };
           localStorage.setItem("cart", JSON.stringify(cart));
         } else {
           cart[flower.name].quantity += 1;

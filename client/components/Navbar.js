@@ -10,6 +10,7 @@ import {
   Divider,
   IconButton,
   Drawer,
+  Badge,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
@@ -20,9 +21,17 @@ import GuestCart from "./GuestCart";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
-  const isLoggedIn = useSelector((state) => !!state.auth.id);
-  const isAdmin = useSelector((state) => state.auth.isAdmin);
+  const { order, isLoggedIn, isAdmin } = useSelector((state) => ({
+    order: state.order || { products: [] },
+    isLoggedIn: !!state.auth.id,
+    isAdmin: state.auth.isAdmin
+  }));
+
   const dispatch = useDispatch();
+
+
+
+  let cartCount = 0;
 
   // Nav Tabs display differently for different role: Admin, User, Guest
   const navTabsAdmin = [
@@ -44,6 +53,11 @@ const Navbar = () => {
     { tab: "Sign Up", url: "/signup" },
     { tab: "Login", url: "/login" },
   ];
+
+  //TO DO: Add item count to cart logo in navbar
+  if(order.products) {
+    console.log(order);
+  };
 
   return (
     <AppBar position="static">
@@ -92,7 +106,9 @@ const Navbar = () => {
                 </Button>
               </Link>
               <IconButton color="inherit" onClick={() => setOpen(true)}>
-                <ShoppingCartIcon />
+                <Badge badgeContent={cartCount} color="secondary">
+                  <ShoppingCartIcon />
+                </Badge>
               </IconButton>
             </Stack>
           ) : (
@@ -116,7 +132,9 @@ const Navbar = () => {
                 </Button>
               </Link>
               <IconButton color="inherit" onClick={() => setOpen(true)}>
-                <ShoppingCartIcon />
+                <Badge badgeContent={cartCount} color="secondary">
+                  <ShoppingCartIcon />
+                </Badge>
               </IconButton>
             </Stack>
           )
@@ -135,7 +153,9 @@ const Navbar = () => {
             })}
 
             <IconButton color="inherit" onClick={() => setOpen(true)}>
-              <ShoppingCartIcon />
+              <Badge badgeContent={cartCount} color="secondary">
+                <ShoppingCartIcon />
+              </Badge>
             </IconButton>
           </Stack>
         )}
