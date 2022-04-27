@@ -32,9 +32,7 @@ const GuestCart = () => {
   };
 
   const handleDecrease = (flowerName) => {
-    if (cart[flowerName].quantity === 1) {
-      handleDelete(flowerName);
-    } else {
+    if (cart[flowerName].quantity > 1) {
       cart[flowerName].quantity -= 1;
       setCart({ ...cart });
       localStorage.setItem("cart", JSON.stringify(cart));
@@ -76,26 +74,38 @@ const GuestCart = () => {
         {Object.keys(cart).map((flowerName) => {
           return (
             <>
-              <ListItem
+              <ListItem 
                 alignItems="center"
                 secondaryAction={
                   <IconButton>
-                    <ClearIcon
-                      onClick={() => dispatch(handleDelete(flowerName))}
-                    />
+                    <ClearIcon onClick={() => dispatch(handleDelete(flowerName))}/>
                   </IconButton>
                 }
               >
-                <Box display="flex" component="div" flexDirection="column" alignItems="center">
+                <Box
+                  display="flex"
+                  component="div"
+                  flexDirection="column"
+                  alignItems="center"
+                >
                   <IconButton onClick={() => dispatch(handleIncrease(flowerName))}>
                     <AddCircleOutlineIcon />
                   </IconButton>
                   {cart[flowerName].quantity}
-                  <IconButton onClick={() => dispatch(handleDecrease(flowerName))}>
-                    <RemoveCircleOutlineIcon />
-                  </IconButton>
+
+                  {cart[flowerName].quantity === 1 ? (
+                    <IconButton disabled>
+                      <RemoveCircleOutlineIcon />
+                    </IconButton>
+                  ) : (
+                    <IconButton onClick={() => dispatch(handleDecrease(flowerName))}>
+                      <RemoveCircleOutlineIcon />
+                    </IconButton>
+                  )}
                 </Box>
-                <ListItemAvatar sx={{marginRight: '1rem', marginLeft: '.5rem'}}>
+                <ListItemAvatar
+                  sx={{ marginRight: "1rem", marginLeft: ".5rem" }}
+                >
                   <Avatar src={cart[flowerName].image_url} variant="square" />
                 </ListItemAvatar>
                 <ListItemText

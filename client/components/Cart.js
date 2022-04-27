@@ -97,9 +97,16 @@ const Cart = () => {
                       <AddCircleOutlineIcon />
                     </IconButton>
                     {product.lineItem.quantity}
+
+                  {product.lineItem.quantity === 1 ? (
+                    <IconButton disabled>
+                      <RemoveCircleOutlineIcon />
+                    </IconButton>
+                  ) : (
                     <IconButton onClick={() => dispatch(handleDecrease(product.id))}>
                       <RemoveCircleOutlineIcon />
                     </IconButton>
+                  )}
                   </Box>
                   <ListItemAvatar sx={{marginRight: '1rem', marginLeft: '.5rem'}}>
                     <Avatar src={product.image_url} variant="square" />
