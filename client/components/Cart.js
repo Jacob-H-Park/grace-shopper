@@ -11,6 +11,8 @@ import {
   Typography,
   Divider,
   ListItemButton,
+  Box,
+  Button
 } from "@mui/material";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
@@ -75,53 +77,61 @@ const Cart = () => {
     );
 
     return (
-      <List sx={{ width: "350px", bgcolor: "white" }}>
-        <ListItem>
-          <h2>Your Cart:</h2>
-        </ListItem>
-        <Divider variant="fullWidth" component="li" />
-        {order.products.map((product) => {
-          return (
-            <>
-              <ListItem
-                alignItems="flex-start"
-                secondaryAction={
-                  <IconButton>
-                    <ClearIcon
-                      onClick={() => dispatch(handleDelete(product.id))}
-                    />
-                  </IconButton>
-                }
-              >
-                <ListItemAvatar>
-                  <Avatar src={product.image_url} variant="square" />
-                </ListItemAvatar>
-                <ListItemText
-                  primary={product.name}
-                  secondary={
-                    <React.Fragment>
-                      <Typography
-                        sx={{ display: "inline" }}
-                        component="span"
-                        variant="body2"
-                        color="text.primary"
-                      >
-                        ${product.price}
-                      </Typography>
-                      {` x ${product.lineItem.quantity}`}
-                    </React.Fragment>
+      <Box sx={{width: "375px"}}>
+        <List sx={{ width: "375px", bgcolor: "white" }}>
+          <ListItem>
+            <h2>Your Cart:</h2>
+          </ListItem>
+          <Divider variant="fullWidth" component="li" />
+          {order.products.map((product) => {
+            return (
+              <>
+                <ListItem
+                  alignItems="flex-start"
+                  secondaryAction={
+                    <IconButton>
+                      <ClearIcon onClick={() => dispatch(handleDelete(product.id))} />
+                    </IconButton>
                   }
-                />
-              </ListItem>
-              <Divider variant="fullWidth" component="li" />
-            </>
-          );
-        })}
-        <ListItem>
-          <h3>Total: ${total}</h3>
-        </ListItem>
-      </List>
-      
+                >
+                  <ListItemAvatar>
+                    <Avatar src={product.image_url} variant="square" />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={product.name}
+                    secondary={
+                      <React.Fragment>
+                        <Typography
+                          sx={{ display: "inline" }}
+                          component="span"
+                          variant="body2"
+                          color="text.primary"
+                        >
+                          ${product.price}
+                        </Typography>
+                        {` x ${product.lineItem.quantity}`}
+                      </React.Fragment>
+                    }
+                  />
+                </ListItem>
+                <Divider variant="fullWidth" component="li" />
+              </>
+            );
+          })}
+          <ListItem>
+            <h3>Total: ${total}</h3>
+          </ListItem>
+        </List>
+        <Button 
+          color="secondary" 
+          variant="contained" 
+          sx={{width: '90%', 
+              marginLeft: '16px', 
+              marginRight: '16px', 
+              marginBottom: '16px'}}
+          >Check Out</Button>
+      </Box>
+
       // <div className="cart-container">
       //   <h3>Your Cart</h3>
       //   <table>
