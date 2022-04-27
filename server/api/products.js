@@ -16,6 +16,15 @@ router.delete("/:id", requireAdmin, async (req, res, next) => {
   }
 });
 
+router.post('/',async(req,res,next)=>{
+  try{
+    const product = await Product.create(req.body)
+    res.send(product).sendStatus(204)
+  }catch(err){
+    next(err)
+  }
+})
+
 router.put("/:id", async (req, res, next) => {
   try {
     const data = await Product.findByPk(req.params.id);

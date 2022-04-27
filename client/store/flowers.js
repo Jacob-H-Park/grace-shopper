@@ -54,6 +54,12 @@ export const updateProducts = (flower, history) => {
     history.push("/inventory_management");
   };
 };
+export const createProducts = (name,price,category,stock,description, history) => {
+  return async () => {
+    await axios.post('/api/products/',{name,price,category,stock,description});
+    history.push("/admin_products");
+  };
+};
 /* Flower Reducer */
 export default function (state = [], action) {
   switch (action.type) {
