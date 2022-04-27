@@ -12,7 +12,7 @@ import {
   Divider,
   ListItemButton,
   Box,
-  Button
+  Button,
 } from "@mui/material";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
@@ -61,12 +61,9 @@ const Cart = () => {
 
   if (!order.products || order.products.length < 1) {
     return (
-      <div className="cart-container">
-        <h1>Your cart is empty!</h1>
-        <Link to="/checkout">
-          <button>Checkout</button>
-        </Link>
-      </div>
+      <Box sx={{ width: "375px" }}>
+        <img src="/Images/empty-cart.svg" className="empty-img"/>
+      </Box>
     );
   }
 
@@ -77,7 +74,7 @@ const Cart = () => {
     );
 
     return (
-      <Box sx={{width: "375px"}}>
+      <Box sx={{ width: "375px" }}>
         <List sx={{ width: "375px", bgcolor: "white" }}>
           <ListItem>
             <h2>Your Cart:</h2>
@@ -87,14 +84,25 @@ const Cart = () => {
             return (
               <>
                 <ListItem
-                  alignItems="flex-start"
+                  alignItems="center"
                   secondaryAction={
                     <IconButton>
-                      <ClearIcon onClick={() => dispatch(handleDelete(product.id))} />
+                      <ClearIcon
+                        onClick={() => dispatch(handleDelete(product.id))}
+                      />
                     </IconButton>
                   }
                 >
-                  <ListItemAvatar>
+                  <Box display="flex" component="div" flexDirection="column" alignItems="center">
+                    <IconButton onClick={() => dispatch(handleIncrease(product.id))}>
+                      <AddCircleOutlineIcon />
+                    </IconButton>
+                    {product.lineItem.quantity}
+                    <IconButton onClick={() => dispatch(handleDecrease(product.id))}>
+                      <RemoveCircleOutlineIcon />
+                    </IconButton>
+                  </Box>
+                  <ListItemAvatar sx={{marginRight: '1rem', marginLeft: '.5rem'}}>
                     <Avatar src={product.image_url} variant="square" />
                   </ListItemAvatar>
                   <ListItemText
@@ -122,14 +130,18 @@ const Cart = () => {
             <h3>Total: ${total}</h3>
           </ListItem>
         </List>
-        <Button 
-          color="secondary" 
-          variant="contained" 
-          sx={{width: '90%', 
-              marginLeft: '16px', 
-              marginRight: '16px', 
-              marginBottom: '16px'}}
-          >Check Out</Button>
+        <Button
+          color="secondary"
+          variant="contained"
+          sx={{
+            width: "90%",
+            marginLeft: "16px",
+            marginRight: "16px",
+            marginBottom: "16px",
+          }}
+        >
+          Check Out
+        </Button>
       </Box>
 
       // <div className="cart-container">

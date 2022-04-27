@@ -13,12 +13,11 @@ import {
   Divider,
   ListItemButton,
   Box,
-  Button
+  Button,
 } from "@mui/material";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import ClearIcon from "@mui/icons-material/Clear";
-
 
 const GuestCart = () => {
   const cart = JSON.parse(localStorage.getItem("cart"));
@@ -26,10 +25,10 @@ const GuestCart = () => {
 
   const [_cart, setCart] = useState(cart);
   const dispatch = useDispatch();
-  
+
   const handleIncrease = (flowerName) => {
     cart[flowerName].quantity += 1;
-    setCart({...cart});
+    setCart({ ...cart });
     localStorage.setItem("cart", JSON.stringify(cart));
   };
 
@@ -38,26 +37,23 @@ const GuestCart = () => {
       handleDelete(flowerName);
     } else {
       cart[flowerName].quantity -= 1;
-      setCart({...cart});
+      setCart({ ...cart });
       localStorage.setItem("cart", JSON.stringify(cart));
     }
   };
 
   const handleDelete = (flowerName) => {
     delete cart[flowerName];
-    setCart({...cart});
+    setCart({ ...cart });
     localStorage.setItem("cart", JSON.stringify(cart));
   };
 
   // If no product has been added to cart, return text showing "Your cart is empty!"
   if (!cart || !Object.entries(cart).length) {
     return (
-      <div>
-        <h1>Your cart is empty!</h1>
-        <Link to="/checkout">
-          <button>Checkout</button>
-        </Link>
-      </div>
+      <Box sx={{ width: "375px" }}>
+        <img src="/Images/empty-cart.svg" className="empty-img"/>
+      </Box>
     );
   }
 
@@ -67,66 +63,80 @@ const GuestCart = () => {
     total = itemArray.reduce((acc, item) => {
       const price = item[1].price;
       const quantity = item[1].quantity;
-      return acc += (price * quantity);
+      return (acc += price * quantity);
     }, 0);
   }
 
   return (
-    <Box sx={{width: "375px"}}>
-        <List sx={{ width: "375px", bgcolor: "white" }}>
-          <ListItem>
-            <h2>Your Cart:</h2>
-          </ListItem>
-          <Divider variant="fullWidth" component="li" />
-          {Object.keys(cart).map((flowerName) => {
-            return (
-              <>
-                <ListItem
-                  alignItems="flex-start"
-                  secondaryAction={
-                    <IconButton>
-                      <ClearIcon onClick={() => dispatch(handleDelete(flowerName))} />
-                    </IconButton>
+    <Box sx={{ width: "375px" }}>
+      <List sx={{ width: "375px", bgcolor: "white" }}>
+        <ListItem>
+          <h2>Your Cart:</h2>
+        </ListItem>
+        <Divider variant="fullWidth" component="li" />
+        {Object.keys(cart).map((flowerName) => {
+          return (
+            <>
+              <ListItem
+                alignItems="center"
+                secondaryAction={
+                  <IconButton>
+                    <ClearIcon
+                      onClick={() => dispatch(handleDelete(flowerName))}
+                    />
+                  </IconButton>
+                }
+              >
+                <Box display="flex" component="div" flexDirection="column" alignItems="center">
+                  <IconButton onClick={() => dispatch(handleIncrease(flowerName))}>
+                    <AddCircleOutlineIcon />
+                  </IconButton>
+                  {cart[flowerName].quantity}
+                  <IconButton onClick={() => dispatch(handleDecrease(flowerName))}>
+                    <RemoveCircleOutlineIcon />
+                  </IconButton>
+                </Box>
+                <ListItemAvatar sx={{marginRight: '1rem', marginLeft: '.5rem'}}>
+                  <Avatar src={cart[flowerName].image_url} variant="square" />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={flowerName}
+                  secondary={
+                    <React.Fragment>
+                      <Typography
+                        sx={{ display: "inline" }}
+                        component="span"
+                        variant="body2"
+                        color="text.primary"
+                      >
+                        ${cart[flowerName].price}
+                      </Typography>
+                      {` x ${cart[flowerName].quantity}`}
+                    </React.Fragment>
                   }
-                >
-                  <ListItemAvatar>
-                    <Avatar src={cart[flowerName].image_url} variant="square" />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={flowerName}
-                    secondary={
-                      <React.Fragment>
-                        <Typography
-                          sx={{ display: "inline" }}
-                          component="span"
-                          variant="body2"
-                          color="text.primary"
-                        >
-                          ${cart[flowerName].price}
-                        </Typography>
-                        {` x ${cart[flowerName].quantity}`}
-                      </React.Fragment>
-                    }
-                  />
-                </ListItem>
-                <Divider variant="fullWidth" component="li" />
-              </>
-            );
-          })}
-          <ListItem>
-            <h3>Total: ${total}</h3>
-          </ListItem>
-        </List>
-        <Button 
-          color="secondary" 
-          variant="contained" 
-          sx={{width: '90%', 
-              marginLeft: '16px', 
-              marginRight: '16px', 
-              marginBottom: '16px'}}
-          >Check Out</Button>
-      </Box>
-
+                />
+              </ListItem>
+              <Divider variant="fullWidth" component="li" />
+            </>
+          );
+        })}
+        <ListItem>
+          <h3>Total: ${total}</h3>
+        </ListItem>
+      </List>
+      <Button
+        color="secondary"
+        variant="contained"
+        sx={{
+          width: "90%",
+          marginLeft: "16px",
+          marginRight: "16px",
+          marginBottom: "16px",
+        }}
+      >
+        Check Out
+      </Button>
+    </Box>
 
     // <div>
     //   <h3>Your Cart:</h3>

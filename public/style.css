@@ -21,9 +21,6 @@ table {
   text-align: center;
 }
 
-
-
-
 /***CLASS SELECTORS***/ 
 
 .welcome-container {
@@ -36,5 +33,11 @@ table {
 .cart-container {
   width: 100%;
   background-color: white;
+}
+
+.empty-img {
+  margin-top: 6rem;
+  width: 400px;
+  height: 400px;
 }
 

@@ -45,8 +45,6 @@ export const addToCart = (userId, flower, quantity = 1) => {
     try {
       const token = window.localStorage.getItem("token");
 
-      console.log(flower);
-      
       if (!userId) {
         const cart = JSON.parse(localStorage.getItem("cart"));
 
