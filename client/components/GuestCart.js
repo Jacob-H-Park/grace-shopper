@@ -11,7 +11,6 @@ import {
   ListItemText,
   Typography,
   Divider,
-  ListItemButton,
   Box,
   Button,
 } from "@mui/material";
@@ -138,49 +137,6 @@ const GuestCart = () => {
       </Button>
     </Box>
 
-    // <div>
-    //   <h3>Your Cart:</h3>
-    //   <table>
-    //     <thead>
-    //       <tr>
-    //         <th>Name</th>
-    //         <th>Price</th>
-    //         <th>Quantity</th>
-    //         <th>Subtotal</th>
-    //       </tr>
-    //     </thead>
-    //     <tbody>
-    //       {Object.keys(cart).map((flowerName) => {
-    //         return (
-    //           <tr>
-    //             <td>{flowerName}</td>
-    //             <td>{cart[flowerName].price}</td>
-    //             <td>
-    //               <button
-    //                 onClick={() => handleDecrease(flowerName)}
-    //               >
-    //                 -
-    //               </button>
-    //               {cart[flowerName].quantity}
-    //               <button
-    //                 onClick={() => handleIncrease(flowerName)}
-    //               >
-    //                 +
-    //               </button>
-    //             </td>
-    //             <td>${cart[flowerName].price * cart[flowerName].quantity} </td>
-    //             <td>
-    //               <button onClick={() => handleDelete(flowerName)}>
-    //                 X
-    //               </button>
-    //             </td>
-    //           </tr>
-    //         );
-    //       })}
-    //     </tbody>
-    //   </table>
-    //   <h4>Total: ${total}</h4>
-    // </div>
   );
 };
 

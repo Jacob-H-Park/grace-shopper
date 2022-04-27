@@ -10,7 +10,6 @@ import {
   ListItemText,
   Typography,
   Divider,
-  ListItemButton,
   Box,
   Button,
 } from "@mui/material";
@@ -143,60 +142,6 @@ const Cart = () => {
           Check Out
         </Button>
       </Box>
-
-      // <div className="cart-container">
-      //   <h3>Your Cart</h3>
-      //   <table>
-      //     <thead>
-      //       <tr>
-      //         <th>Name</th>
-      //         <th>Price</th>
-      //         <th>Quantity</th>
-      //         <th>Subtotal</th>
-      //       </tr>
-      //     </thead>
-      //     <tbody>
-      //       {order.products.map((product) => {
-      //         return (
-      //           <tr>
-      //             <td>{product.name} </td>
-      //             <td>{product.price}</td>
-      //             <td>
-      //               <IconButton>
-      //                 <RemoveCircleOutlineIcon
-      //                   onClick={() =>
-      //                     dispatch(
-      //                       handleDecrease(
-      //                         product.id,
-      //                         product.lineItem.quantity
-      //                       )
-      //                     )
-      //                   }
-      //                 />
-      //               </IconButton>
-      //               {product.lineItem.quantity}
-      //               <IconButton>
-      //                 <AddCircleOutlineIcon
-      //                   onClick={() => dispatch(handleIncrease(product.id))}
-      //                 />
-      //               </IconButton>
-      //             </td>
-      //             <td>${product.price * product.lineItem.quantity}</td>
-      //             <td>
-      //               <IconButton>
-      //                 <ClearIcon onClick={() => dispatch(handleDelete(product.id))} />
-      //               </IconButton>
-      //             </td>
-      //           </tr>
-      //         );
-      //       })}
-      //     </tbody>
-      //   </table>
-      //   <h4>Total: ${total}</h4>
-      //   <Link to="/checkout">
-      //     <button>Checkout</button>
-      //   </Link>
-      // </div>
     );
   }
 };
