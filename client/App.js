@@ -21,7 +21,8 @@ import Checkout from "./components/Checkout";
 import Welcome from "./components/Welcome";
 import EditUserInfo from "./components/EditUserInfo";
 import ChangePassword from "./components/ChangePassword";
-
+import ADdashboard from "./components/ADdashboard";
+import AddProduct from "./components/Addproduct";
 import { me } from "./store";
 
 
@@ -42,14 +43,16 @@ class App extends Component {
               <Switch>
                 <Route
                   exact
-                  path="/inventory_management"
-                  component={ProductInfo}
+                  path="/admin_dashboard"
+                  component={ADdashboard}
                 />
                 <Route path="/editflowerinfo/:id" component={EditProduct} />
                 <Route exact path="/account" component={UserInfo} />
                 <Route path="/account/edit" component={EditUserInfo} />
                 <Route path="/account/password" component={ChangePassword} />
                 <Route path="/cart" component={Cart} />
+                <Route path="/admin_products" component={ProductInfo} />
+                <Route path="/add_product" component={AddProduct} />
               </Switch>
             ) : (
               <Switch>
