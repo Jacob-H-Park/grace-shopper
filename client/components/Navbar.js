@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -9,12 +9,17 @@ import {
   Button,
   Divider,
   IconButton,
+  Drawer,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import { logout } from "../store";
+import Cart from "./Cart";
+import GuestCart from "./GuestCart";
 
 const Navbar = () => {
+  const [open, setOpen] = useState(false);
+
   const isLoggedIn = useSelector((state) => !!state.auth.id);
   const isAdmin = useSelector((state) => state.auth.isAdmin);
   const dispatch = useDispatch();
@@ -43,6 +48,18 @@ const Navbar = () => {
   return (
     <AppBar position="static">
       <Toolbar>
+        {/* Checking which cart should be displayed */}
+        {isLoggedIn ? (
+          <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
+            <Cart />
+          </Drawer>
+        ) : (
+          <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
+            <GuestCart />
+          </Drawer>
+        )}
+
+        {/* Check which options should be available in the NavBar */}
         <Typography
           variant="h4"
           color="white"
@@ -74,11 +91,9 @@ const Navbar = () => {
                   Logout
                 </Button>
               </Link>
-              <Link to="/cart">
-                <IconButton color="inherit">
-                  <ShoppingCartIcon />
-                </IconButton>
-              </Link>
+              <IconButton color="inherit" onClick={() => setOpen(true)}>
+                <ShoppingCartIcon />
+              </IconButton>
             </Stack>
           ) : (
             <Stack
@@ -100,11 +115,9 @@ const Navbar = () => {
                   Logout
                 </Button>
               </Link>
-              <Link to="/cart">
-                <IconButton color="inherit">
-                  <ShoppingCartIcon />
-                </IconButton>
-              </Link>
+              <IconButton color="inherit" onClick={() => setOpen(true)}>
+                <ShoppingCartIcon />
+              </IconButton>
             </Stack>
           )
         ) : (
@@ -120,11 +133,10 @@ const Navbar = () => {
                 </Link>
               );
             })}
-            <Link to="/cart">
-              <IconButton color="inherit">
-                <ShoppingCartIcon />
-              </IconButton>
-            </Link>
+
+            <IconButton color="inherit" onClick={() => setOpen(true)}>
+              <ShoppingCartIcon />
+            </IconButton>
           </Stack>
         )}
       </Toolbar>

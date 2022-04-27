@@ -1,7 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { IconButton } from "@mui/material";
+import {
+  Avatar,
+  IconButton,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Typography,
+  Divider,
+  ListItemButton,
+} from "@mui/material";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -33,7 +43,7 @@ const Cart = () => {
     dispatch(combineCart(user.id, cart));
     // dispatch(getCart(user.id))
     localStorage.removeItem("cart");
-  };
+  }
 
   const handleIncrease = (productId) => {
     dispatch(increaseQuantity(user.id, productId, order.id));
@@ -65,56 +75,106 @@ const Cart = () => {
     );
 
     return (
-      <div className="cart-container">
-        <h3>Your Cart:</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Subtotal</th>
-            </tr>
-          </thead>
-          <tbody>
-            {order.products.map((product) => {
-              return (
-                <tr>
-                  <td>{product.name} </td>
-                  <td>{product.price}</td>
-                  <td>
-                    <IconButton>
-                      <RemoveCircleOutlineIcon
-                        onClick={() =>
-                          dispatch(
-                            handleDecrease(
-                              product.id,
-                              product.lineItem.quantity
-                            )
-                          )
-                        }
-                      />
-                    </IconButton>
-                    {product.lineItem.quantity}
-                    <IconButton>
-                      <AddCircleOutlineIcon
-                        onClick={() => dispatch(handleIncrease(product.id))}
-                      />
-                    </IconButton>
-                  </td>
-                  <td>${product.price * product.lineItem.quantity}</td>
-                  <td>
-                    <IconButton>
-                      <ClearIcon onClick={() => dispatch(handleDelete(product.id))} />
-                    </IconButton>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        <h4>Total: ${total}</h4>
-      </div>
+      <List sx={{ width: "350px", bgcolor: "white" }}>
+        <ListItem>
+          <h2>Your Cart:</h2>
+        </ListItem>
+        <Divider variant="fullWidth" component="li" />
+        {order.products.map((product) => {
+          return (
+            <>
+              <ListItem
+                alignItems="flex-start"
+                secondaryAction={
+                  <IconButton>
+                    <ClearIcon
+                      onClick={() => dispatch(handleDelete(product.id))}
+                    />
+                  </IconButton>
+                }
+              >
+                <ListItemAvatar>
+                  <Avatar src={product.image_url} variant="square" />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={product.name}
+                  secondary={
+                    <React.Fragment>
+                      <Typography
+                        sx={{ display: "inline" }}
+                        component="span"
+                        variant="body2"
+                        color="text.primary"
+                      >
+                        ${product.price}
+                      </Typography>
+                      {` x ${product.lineItem.quantity}`}
+                    </React.Fragment>
+                  }
+                />
+              </ListItem>
+              <Divider variant="fullWidth" component="li" />
+            </>
+          );
+        })}
+        <ListItem>
+          <h3>Total: ${total}</h3>
+        </ListItem>
+      </List>
+      
+      // <div className="cart-container">
+      //   <h3>Your Cart</h3>
+      //   <table>
+      //     <thead>
+      //       <tr>
+      //         <th>Name</th>
+      //         <th>Price</th>
+      //         <th>Quantity</th>
+      //         <th>Subtotal</th>
+      //       </tr>
+      //     </thead>
+      //     <tbody>
+      //       {order.products.map((product) => {
+      //         return (
+      //           <tr>
+      //             <td>{product.name} </td>
+      //             <td>{product.price}</td>
+      //             <td>
+      //               <IconButton>
+      //                 <RemoveCircleOutlineIcon
+      //                   onClick={() =>
+      //                     dispatch(
+      //                       handleDecrease(
+      //                         product.id,
+      //                         product.lineItem.quantity
+      //                       )
+      //                     )
+      //                   }
+      //                 />
+      //               </IconButton>
+      //               {product.lineItem.quantity}
+      //               <IconButton>
+      //                 <AddCircleOutlineIcon
+      //                   onClick={() => dispatch(handleIncrease(product.id))}
+      //                 />
+      //               </IconButton>
+      //             </td>
+      //             <td>${product.price * product.lineItem.quantity}</td>
+      //             <td>
+      //               <IconButton>
+      //                 <ClearIcon onClick={() => dispatch(handleDelete(product.id))} />
+      //               </IconButton>
+      //             </td>
+      //           </tr>
+      //         );
+      //       })}
+      //     </tbody>
+      //   </table>
+      //   <h4>Total: ${total}</h4>
+      //   <Link to="/checkout">
+      //     <button>Checkout</button>
+      //   </Link>
+      // </div>
     );
   }
 };

@@ -15,5 +15,15 @@ import { createTheme } from "@mui/material/styles";
       'Abril Fatface',
       'Lato'
     ]
+  },
+  components: {
+    MuiAvatar: {
+      styleOverrides: {
+        root: {
+          width: '50px',
+          height: '50px'
+        }
+      }
+    }
   }
 })

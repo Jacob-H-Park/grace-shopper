@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 
 import { Login, Signup } from "./components/AuthForm";
-import Home from "./components/Home";
 import Cart from "./components/Cart";
 import GuestCart from "./components/GuestCart";
 import Navbar from "./components/Navbar";

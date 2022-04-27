@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { fetchProducts } from "../store/flowers";
