@@ -23,7 +23,7 @@ const Navbar = () => {
   const navTabsAdmin = [
     { tab: "Flowers", url: "/flowers" },
     { tab: "Meet The Team", url: "#" },
-    { tab: "Inventory Management", url: "/inventory_management" },
+    { tab: "Admin Dashboard", url: "/admin_dashboard" },
     { tab: "User Management", url: "/user_management" },
   ];
 
