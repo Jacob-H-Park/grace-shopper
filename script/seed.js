@@ -2,9 +2,10 @@
 
 const {
   db,
-  models: { User, Product, LineItem, Order },
+  models: { User, Product, LineItem, Order, Promotion },
 } = require("../server/db");
 const faker = require("faker");
+
 
 /**
  * seed - this function clears the database, updates tables to
@@ -508,7 +509,13 @@ async function seed() {
 
 
 
-  Order.create({ userId: 1 });
+  await Order.create({ userId: 1 });
+  await Promotion.create({
+    Code:"HPMTRD22",
+    Discount: 0.1,
+    Start_Date:'2022-05-02',
+    End_Date:'2022-05-08'
+  })
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
@@ -520,6 +527,8 @@ async function seed() {
     },
   };
 }
+
+
 
 /*
  We've separated the `seed` function from the `runSeed` function.
