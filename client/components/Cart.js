@@ -82,14 +82,12 @@ const Cart = () => {
           <Divider variant="fullWidth" component="li" />
           {order.products.map((product) => {
             return (
-              <>
+              <Box key={product.id}>
                 <ListItem
                   alignItems="center"
                   secondaryAction={
-                    <IconButton>
-                      <ClearIcon
-                        onClick={() => dispatch(handleDelete(product.id))}
-                      />
+                    <IconButton onClick={() => dispatch(handleDelete(product.id))}>
+                      <ClearIcon />
                     </IconButton>
                   }
                 >
@@ -130,7 +128,7 @@ const Cart = () => {
                   />
                 </ListItem>
                 <Divider variant="fullWidth" component="li" />
-              </>
+              </Box>
             );
           })}
           <ListItem>

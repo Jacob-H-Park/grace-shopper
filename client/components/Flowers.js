@@ -4,11 +4,11 @@ import {
   Card,
   CardContent,
   CardMedia,
+  Grid,
   IconButton,
   Typography,
 } from "@mui/material";
-import { display } from "@mui/material/node_modules/@mui/system";
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -48,75 +48,100 @@ const Flowers = () => {
       </div>
 
       {/* When a category is selected, page renders flowers by the given type */}
-      {name ? (
-        <div>
-          {flowers
-            .filter((flower) => flower.category === name)
-            .map((flower) => {
+      <Box>
+        {name ? (
+          <Grid container spacing={3}>
+            {flowers
+              .filter((flower) => flower.category === name)
+              .map((flower) => {
+                return (
+                  <Grid item xs={3}>
+                    <Card key={flower.id} sx={{ maxWidth: "400px" }}>
+                      <Link to={`/flower/${flower.id}`}>
+                        <CardMedia component="img" image={flower.image_url} />
+                      </Link>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Box sx={{ display: "flex", flexDirection: "column" }}>
+                          <CardContent sx={{ flex: "1 0 auto" }}>
+                            <Typography
+                              sx={{ fontSize: "15px" }}
+                              component="div"
+                            >
+                              {flower.name}
+                            </Typography>
+                            <Typography sx={{ fontSize: "12px" }}>
+                              ${flower.price}
+                            </Typography>
+                          </CardContent>
+                        </Box>
+                        <Box>
+                          <IconButton
+                            sx={{ marginRight: "1rem" }}
+                            onClick={() => dispatch(addToCart(user.id, flower))}
+                          >
+                            <AddShoppingCart
+                              sx={{ height: "30px", width: "30px" }}
+                              color="secondary"
+                            />
+                          </IconButton>
+                        </Box>
+                      </Box>
+                    </Card>
+                  </Grid>
+                );
+              })}
+          </Grid>
+        ) : (
+          <Grid container spacing={3}>
+            {flowers.map((flower) => {
               return (
-                <div key={flower.id}>
-                  {flower.name}
-                  <div>
+                <Grid item xs={3}>
+                  <Card key={flower.id} sx={{ maxWidth: "400px" }}>
                     <Link to={`/flower/${flower.id}`}>
-                      <img src={flower.image_url} />
+                      <CardMedia component="img" image={flower.image_url} />
                     </Link>
-                  </div>
-                  <button onClick={() => dispatch(addToCart(user.id, flower))}>
-                    Add to cart
-                  </button>
-                </div>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Box sx={{ display: "flex", flexDirection: "column" }}>
+                        <CardContent sx={{ flex: "1 0 auto" }}>
+                          <Typography sx={{ fontSize: "15px" }} component="div">
+                            {flower.name}
+                          </Typography>
+                          <Typography sx={{ fontSize: "12px" }}>
+                            ${flower.price}
+                          </Typography>
+                        </CardContent>
+                      </Box>
+                      <Box>
+                        <IconButton
+                          sx={{ marginRight: "1rem" }}
+                          onClick={() => dispatch(addToCart(user.id, flower))}
+                        >
+                          <AddShoppingCart
+                            sx={{ height: "30px", width: "30px" }}
+                            color="secondary"
+                          />
+                        </IconButton>
+                      </Box>
+                    </Box>
+                  </Card>
+                </Grid>
               );
             })}
-        </div>
-      ) : (
-        <Box>
-          {flowers.map((flower) => {
-            return (
-              <Card sx={{ maxWidth: "400px" }}>
-                <CardMedia component="img" image={flower.image_url} />
-                <Box sx={{display: 'flex', alignItems: 'center'}}>
-                  <Box sx={{ display: "flex", flexDirection: "column" }}>
-                    <CardContent sx={{ flex: "1 0 auto" }}>
-                      <Typography sx={{ fontSize: "15px" }} component="div">
-                        {flower.name}
-                      </Typography>
-                      <Typography sx={{ fontSize: "12px" }}>
-                        ${flower.price}
-                      </Typography>
-                    </CardContent>
-                  </Box>
-                  <Box flexGrow={1}>
-                    <IconButton>
-                      <AddShoppingCart
-                        sx={{ height: "30px", width: "30px" }}
-                        color="secondary"
-                      />
-                    </IconButton>
-                  </Box>
-                </Box>
-              </Card>
-            );
-          })}
-        </Box>
-
-        // <div>
-        //   {flowers.map((flower) => {
-        //     return (
-        //       <div key={flower.id}>
-        //         {flower.name}
-        //         <div>
-        //           <Link to={`/flower/${flower.id}`}>
-        //             <img src={flower.image_url} />
-        //           </Link>
-        //         </div>
-        //         <button onClick={() => dispatch(addToCart(user.id, flower))}>
-        //           Add to cart
-        //         </button>
-        //       </div>
-        //     );
-        //   })}
-        // </div>
-      )}
+          </Grid>
+        )}
+      </Box>
     </div>
   );
 };
