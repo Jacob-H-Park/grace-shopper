@@ -320,7 +320,7 @@ async function seed() {
 
   // Sympathy
   await Product.create({
-    name: "TALL SYMPATHY ARRANGEMENT",
+    name: "SYMPATHY ARRANGEMENT",
     price: 237,
     image_url: "/Images/sympathy/large-funeral-arrangement-400x400-38668.jpg",
     description: faker.lorem.sentences(),
