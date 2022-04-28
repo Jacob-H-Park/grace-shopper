@@ -63,7 +63,7 @@ export const addToCart = (userId, flower, quantity = 1) => {
         }
       } else {
         if (token) {
-          const data = await axios.post(
+          const data = (await axios.post(
             `/api/cart/${userId}`,
             {
               productId: flower.id,
@@ -74,7 +74,7 @@ export const addToCart = (userId, flower, quantity = 1) => {
                 authorization: token,
               },
             }
-          );
+          )).data;
           dispatch(_addToCart(data));
         }
       }
@@ -118,14 +118,15 @@ export const combineCart = (userId, cart) => {
       const name = item[0];
       const id = item[1].id;
       const quantity = item[1].quantity;
-      const data = await axios.post(`/api/cart/${userId}`, {
+      const data = (await axios.post(`/api/cart/${userId}`, {
         productId: id,
         quantity: quantity,
-      });
+      })).data;
+
       dispatch(_addToCart(data));
     }
   }
-};  
+};
 
 export const increaseQuantity = (userId, productId, orderId) => {
   return async (dispatch) => {
@@ -186,14 +187,3 @@ const order = (state = {}, action) => {
 };
 
 export default order;
-
-/*put this into the log-in
-        Object.entries(cart).forEach((item) => {
-          const name = item[0];
-          const quantity = item[1].quantity;
-          const data = await axios.post(`/api/cart/${userId}`, {
-            productId: flower.id,
-            quantity: quantity,
-          });
-        });
-*/

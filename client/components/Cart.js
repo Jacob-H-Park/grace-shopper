@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import {
   Avatar,
   IconButton,
@@ -22,9 +22,9 @@ import {
   decreaseQuantity,
   deleteLineItem,
   getCart,
-  combineCart,
   increaseQuantity,
 } from "../store/order";
+
 
 const Cart = () => {
   const { user, order } = useSelector((state) => ({
@@ -38,14 +38,6 @@ const Cart = () => {
     dispatch(getCart(user.id));
   }, []);
 
-  // Check if there is a cart in the browser local storage
-  const cart = JSON.parse(localStorage.getItem("cart"));
-  if (cart) {
-    dispatch(combineCart(user.id, cart));
-    // dispatch(getCart(user.id))
-    localStorage.removeItem("cart");
-  }
-
   const handleIncrease = (productId) => {
     dispatch(increaseQuantity(user.id, productId, order.id));
   };
@@ -57,6 +49,10 @@ const Cart = () => {
   const handleDelete = (productId) => {
     dispatch(deleteLineItem(user.id, productId, order.id));
   };
+
+  const handleCheckOut = () => {
+    console.log("Congratulations for your purchase!");
+  }
 
   if (!order.products || order.products.length < 1) {
     return (
@@ -129,18 +125,21 @@ const Cart = () => {
             <h3>Total: ${total}</h3>
           </ListItem>
         </List>
-        <Button
-          color="secondary"
-          variant="contained"
-          sx={{
-            width: "90%",
-            marginLeft: "16px",
-            marginRight: "16px",
-            marginBottom: "16px",
-          }}
-        >
-          Check Out
-        </Button>
+        <Link to="/checkout">
+          <Button
+            color="secondary"
+            variant="contained"
+            sx={{
+              width: "90%",
+              marginLeft: "16px",
+              marginRight: "16px",
+              marginBottom: "16px",
+            }}
+            onClick={handleCheckOut}
+          >
+            Check Out
+          </Button>
+        </Link>
       </Box>
     );
   }
