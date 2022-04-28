@@ -24,7 +24,6 @@ import {
   increaseQuantity,
 } from "../store/order";
 
-
 const Cart = () => {
   const { user, order } = useSelector((state) => ({
     user: state.auth,
@@ -51,7 +50,7 @@ const Cart = () => {
 
   const handleCheckOut = () => {
     console.log("Congratulations for your purchase!");
-  }
+  };
 
   if (!order.products || order.products.length < 1) {
     return (
@@ -99,11 +98,18 @@ const Cart = () => {
                       <AddCircleOutlineIcon />
                     </IconButton>
                     {product.lineItem.quantity}
-                    <IconButton
-                      onClick={() => dispatch(handleDecrease(product.id))}
-                    >
-                      <RemoveCircleOutlineIcon />
-                    </IconButton>
+
+                    {product.lineItem.quantity === 1 ? (
+                      <IconButton disabled>
+                        <RemoveCircleOutlineIcon />
+                      </IconButton>
+                    ) : (
+                      <IconButton
+                        onClick={() => dispatch(handleDecrease(product.id))}
+                      >
+                        <RemoveCircleOutlineIcon />
+                      </IconButton>
+                    )}
                   </Box>
                   <ListItemAvatar
                     sx={{ marginRight: "1rem", marginLeft: ".5rem" }}
