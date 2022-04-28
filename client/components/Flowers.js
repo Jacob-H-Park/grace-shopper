@@ -98,7 +98,7 @@ const Flowers = () => {
               })}
           </Grid>
         ) : (
-          <Grid container spacing={3}>
+          <Grid container spacing={3} sx={{padding: '2rem'}}>
             {flowers.map((flower) => {
               return (
                 <Grid item xs={3}>

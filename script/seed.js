@@ -204,7 +204,7 @@ async function seed() {
 
   // Orchids
   await Product.create({
-    name: "FARM FRESH PHALAENOPSIS ORCHIDS + VASE",
+    name: "PHALAENOPSIS ORCHIDS",
     price: 156,
     image_url: "/Images/orchids/white-orchids-delivery-400x400-38302.jpg",
     description: faker.lorem.sentences(),
@@ -212,7 +212,7 @@ async function seed() {
     stock: 20,
   });
   await Product.create({
-    name: "FARM FRESH VANDA ORCHIDS + VASE",
+    name: "VANDA ORCHIDS",
     price: 146,
     image_url: "/Images/orchids/purple-orchids-delivery-400x400-38303.jpg",
     description: faker.lorem.sentences(),
