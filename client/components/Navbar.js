@@ -24,12 +24,10 @@ const Navbar = () => {
   const { order, isLoggedIn, isAdmin } = useSelector((state) => ({
     order: state.order || { products: [] },
     isLoggedIn: !!state.auth.id,
-    isAdmin: state.auth.isAdmin
+    isAdmin: state.auth.isAdmin,
   }));
 
   const dispatch = useDispatch();
-
-
 
   let cartCount = 0;
 
@@ -55,9 +53,9 @@ const Navbar = () => {
   ];
 
   //TO DO: Add item count to cart logo
-  if(order.products) {
+  if (order.products) {
     console.log(order);
-  };
+  }
 
   return (
     <AppBar position="static">
@@ -95,7 +93,7 @@ const Navbar = () => {
             >
               {navTabsAdmin.map(({ tab, url }) => {
                 return (
-                  <Link to={url}>
+                  <Link key={tab} to={url}>
                     <Button color="inherit">{tab}</Button>
                   </Link>
                 );
@@ -121,7 +119,7 @@ const Navbar = () => {
             >
               {navTabsUser.map(({ tab, url }) => {
                 return (
-                  <Link to={url}>
+                  <Link key={tab} to={url}>
                     <Button color="inherit">{tab}</Button>
                   </Link>
                 );
@@ -146,7 +144,7 @@ const Navbar = () => {
           >
             {navTabsGuest.map(({ tab, url }) => {
               return (
-                <Link to={url}>
+                <Link key={tab} to={url}>
                   <Button color="inherit">{tab}</Button>
                 </Link>
               );

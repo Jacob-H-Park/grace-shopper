@@ -17,7 +17,6 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import ClearIcon from "@mui/icons-material/Clear";
 
-import { me } from "../store/auth";
 import {
   decreaseQuantity,
   deleteLineItem,
@@ -32,7 +31,6 @@ const Cart = () => {
     order: state.order || { products: [] },
   }));
 
-  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -62,7 +60,7 @@ const Cart = () => {
   if (!order.products || order.products.length < 1) {
     return (
       <Box sx={{ width: "375px" }}>
-        <img src="/Images/empty-cart.svg" className="empty-img"/>
+        <img src="/Images/empty-cart.svg" className="empty-img" />
       </Box>
     );
   }
@@ -82,32 +80,38 @@ const Cart = () => {
           <Divider variant="fullWidth" component="li" />
           {order.products.map((product) => {
             return (
-              <Box key={product.id}>
+              <>
                 <ListItem
                   alignItems="center"
                   secondaryAction={
-                    <IconButton onClick={() => dispatch(handleDelete(product.id))}>
-                      <ClearIcon />
+                    <IconButton>
+                      <ClearIcon
+                        onClick={() => dispatch(handleDelete(product.id))}
+                      />
                     </IconButton>
                   }
                 >
-                  <Box display="flex" component="div" flexDirection="column" alignItems="center">
-                    <IconButton onClick={() => dispatch(handleIncrease(product.id))}>
+                  <Box
+                    display="flex"
+                    component="div"
+                    flexDirection="column"
+                    alignItems="center"
+                  >
+                    <IconButton
+                      onClick={() => dispatch(handleIncrease(product.id))}
+                    >
                       <AddCircleOutlineIcon />
                     </IconButton>
                     {product.lineItem.quantity}
-
-                  {product.lineItem.quantity === 1 ? (
-                    <IconButton disabled>
+                    <IconButton
+                      onClick={() => dispatch(handleDecrease(product.id))}
+                    >
                       <RemoveCircleOutlineIcon />
                     </IconButton>
-                  ) : (
-                    <IconButton onClick={() => dispatch(handleDecrease(product.id))}>
-                      <RemoveCircleOutlineIcon />
-                    </IconButton>
-                  )}
                   </Box>
-                  <ListItemAvatar sx={{marginRight: '1rem', marginLeft: '.5rem'}}>
+                  <ListItemAvatar
+                    sx={{ marginRight: "1rem", marginLeft: ".5rem" }}
+                  >
                     <Avatar src={product.image_url} variant="square" />
                   </ListItemAvatar>
                   <ListItemText
@@ -128,7 +132,7 @@ const Cart = () => {
                   />
                 </ListItem>
                 <Divider variant="fullWidth" component="li" />
-              </Box>
+              </>
             );
           })}
           <ListItem>

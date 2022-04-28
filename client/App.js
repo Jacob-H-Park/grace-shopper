@@ -24,7 +24,6 @@ import ADdashboard from "./components/ADdashboard";
 import AddProduct from "./components/Addproduct";
 import { me } from "./store";
 
-
 class App extends Component {
   componentDidMount() {
     this.props.loadInitialData();
@@ -40,11 +39,7 @@ class App extends Component {
           {isLoggedIn ? (
             isAdmin ? (
               <Switch>
-                <Route
-                  exact
-                  path="/admin_dashboard"
-                  component={ADdashboard}
-                />
+                <Route exact path="/admin_dashboard" component={ADdashboard} />
                 <Route path="/editflowerinfo/:id" component={EditProduct} />
                 <Route exact path="/account" component={UserInfo} />
                 <Route path="/account/edit" component={EditUserInfo} />

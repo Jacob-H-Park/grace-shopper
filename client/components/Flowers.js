@@ -7,6 +7,8 @@ import {
   Grid,
   IconButton,
   Typography,
+  Snackbar,
+  Slide,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,6 +26,15 @@ const Flowers = () => {
   //React Hooks
   const [name, setName] = useState("");
 
+  //Snackbar state hook
+  const [state, setState] = useState({
+    open: false,
+    Transition: Slide,
+  });
+
+  const SlideTransition = (props) => {
+    return <Slide {...props} direction="up" />;
+  };
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);
@@ -32,6 +43,22 @@ const Flowers = () => {
   function handleChange(ev) {
     setName(ev.target.value);
   }
+
+  //for snackbar
+  const handleClick = (Transition) => {
+    setState({
+      open: true,
+      Transition,
+    });
+  };
+
+  //for snackbar
+  const handleClose = () => {
+    setState({
+      ...state,
+      open: false,
+    });
+  };
 
   return (
     <div>
@@ -83,7 +110,10 @@ const Flowers = () => {
                         <Box>
                           <IconButton
                             sx={{ marginRight: "1rem" }}
-                            onClick={() => dispatch(addToCart(user.id, flower))}
+                            onClick={() => {
+                              dispatch(addToCart(user.id, flower));
+                              handleClick(SlideTransition);
+                            }}
                           >
                             <AddShoppingCart
                               sx={{ height: "30px", width: "30px" }}
@@ -98,10 +128,10 @@ const Flowers = () => {
               })}
           </Grid>
         ) : (
-          <Grid container spacing={3} sx={{padding: '2rem'}}>
+          <Grid container spacing={3} sx={{ padding: "2rem" }}>
             {flowers.map((flower) => {
               return (
-                <Grid item xs={3}>
+                <Grid key={flower.id} item xs={3}>
                   <Card key={flower.id} sx={{ maxWidth: "400px" }}>
                     <Link to={`/flower/${flower.id}`}>
                       <CardMedia component="img" image={flower.image_url} />
@@ -126,7 +156,10 @@ const Flowers = () => {
                       <Box>
                         <IconButton
                           sx={{ marginRight: "1rem" }}
-                          onClick={() => dispatch(addToCart(user.id, flower))}
+                          onClick={() => {
+                            dispatch(addToCart(user.id, flower));
+                            handleClick(SlideTransition);
+                          }}
                         >
                           <AddShoppingCart
                             sx={{ height: "30px", width: "30px" }}
@@ -142,6 +175,14 @@ const Flowers = () => {
           </Grid>
         )}
       </Box>
+      <Snackbar
+        onClose={handleClose}
+        autoHideDuration={2500}
+        message="Added to Cart"
+        open={state.open}
+        TransitionComponent={state.Transition}
+        key={state.Transition.name}
+      />
     </div>
   );
 };
