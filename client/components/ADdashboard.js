@@ -6,6 +6,7 @@ const ADdashboard = ()=>{
         <div>
             <Link to="/admin_products">View Products</Link>
             <Link to="/admin_orders">View Orders</Link>
+            <Link to="/admin_promotion">View Promotion</Link>
         </div>
 
     )

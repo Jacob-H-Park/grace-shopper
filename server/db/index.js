@@ -6,7 +6,7 @@ const User = require("./models/User");
 const Product = require("./models/Product");
 const LineItem = require("./models/LineItem");
 const Order = require("./models/Order");
-
+const Promotion = require("./models/Promotion")
 Order.belongsTo(User);
 User.hasMany(Order);
 
@@ -19,6 +19,7 @@ module.exports = {
     User,
     Product,
     LineItem,
-    Order
+    Order,
+    Promotion 
   },
 };
