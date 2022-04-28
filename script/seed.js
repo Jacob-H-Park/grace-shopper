@@ -229,7 +229,7 @@ async function seed() {
     stock: 20,
   });
   await Product.create({
-    name: "DOUBLE MAGENTA ORCHID",
+    name: "BIG MAGENTA ORCHID",
     price: 124,
     image_url: "/Images/orchids/double-purple-orchid-delivery-400x400-38210.jpg",
     description: faker.lorem.sentences(),
@@ -321,7 +321,7 @@ async function seed() {
 
   // Sympathy
   await Product.create({
-    name: "SYMPATHY ARRANGEMENT",
+    name: "SYMPATHY BOUQUET",
     price: 237,
     image_url: "/Images/sympathy/large-funeral-arrangement-400x400-38668.jpg",
     description: faker.lorem.sentences(),
@@ -337,7 +337,7 @@ async function seed() {
     stock: 20,
   });
   await Product.create({
-    name: "MEDIUM FLOWER BASKET",
+    name: "FLOWER BASKET",
     price: 208,
     image_url: "/Images/sympathy/medium-flower-basket-400x400-38676.jpg",
     description: faker.lorem.sentences(),
@@ -403,7 +403,7 @@ async function seed() {
     stock: 20,
   });
   await Product.create({
-    name: "PETITE ROSE GOLD RENEE",
+    name: "PETITE GOLD RENEE",
     price: 199,
     image_url: "/Images/preserved_rose/petite-rose-gold-renee-400x400-39310.jpg",
     description: faker.lorem.sentences(),
@@ -451,7 +451,7 @@ async function seed() {
     stock: 20,
   });
   await Product.create({
-    name: "PETITE ROSE GOLD STELLA",
+    name: "PETITE GOLD STELLA",
     price: 199,
     image_url: "/Images/preserved_rose/petite-rose-gold-stella-400x400-39422.jpg",
     description: faker.lorem.sentences(),
