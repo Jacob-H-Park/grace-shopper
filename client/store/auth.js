@@ -2,6 +2,8 @@ import axios from 'axios'
 
 import history from '../history'
 
+import { combineCart } from "../store/order";
+
 const TOKEN = 'token'
 
 /**
@@ -25,6 +27,16 @@ export const me = () => async dispatch => {
         authorization: token
       }
     })
+
+    // Immediately after a user signed up or logged in
+    // Check if there is a cart in the browser local storage
+    // If yes, transmit the guest cart to user cart upon logged in
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    if (cart) {
+      dispatch(combineCart(res.data.id, cart));
+      localStorage.removeItem("cart");
+    }
+
     console.log('me',res.data)
     return dispatch(setAuth(res.data))
   }
