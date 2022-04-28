@@ -54,7 +54,7 @@ const Navbar = () => {
     { tab: "Login", url: "/login" },
   ];
 
-  //TO DO: Add item count to cart logo in navbar
+  //TO DO: Add item count to cart logo
   if(order.products) {
     console.log(order);
   };
