@@ -1,4 +1,5 @@
 import { AddShoppingCart } from "@mui/icons-material";
+import CloseIcon from '@mui/icons-material/Close';
 import {
   Box,
   Card,
@@ -9,6 +10,7 @@ import {
   Typography,
   Snackbar,
   Slide,
+  Skeleton
 } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -56,6 +58,19 @@ const Flowers = () => {
     });
   };
 
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  )
+
   return (
     <div>
       <div>
@@ -73,7 +88,7 @@ const Flowers = () => {
       {/* When a category is selected, page renders flowers by the given type */}
       <Box>
         {name ? (
-          <Grid container spacing={3}>
+          <Grid container spacing={3} sx={{ padding: "2rem" }}>
             {flowers
               .filter((flower) => flower.category === name)
               .map((flower) => {
@@ -178,6 +193,7 @@ const Flowers = () => {
         open={state.open}
         TransitionComponent={state.Transition}
         key={state.Transition.name}
+        action={action}
       />
     </div>
   );
