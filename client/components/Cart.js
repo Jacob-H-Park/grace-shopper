@@ -131,11 +131,16 @@ const Cart = () => {
                       <AddCircleOutlineIcon />
                     </IconButton>
                     {product.lineItem.quantity}
-                    <IconButton
-                      onClick={() => dispatch(handleDecrease(product.id))}
-                    >
+
+                    {product.lineItem.quantity === 1 ? (
+                    <IconButton disabled>
                       <RemoveCircleOutlineIcon />
                     </IconButton>
+                  ) : (
+                    <IconButton onClick={() => dispatch(handleDecrease(product.id))}>
+                      <RemoveCircleOutlineIcon />
+                    </IconButton>
+                  )}
                   </Box>
                   <ListItemAvatar
                     sx={{ marginRight: "1rem", marginLeft: ".5rem" }}
