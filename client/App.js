@@ -23,10 +23,12 @@ import ChangePassword from "./components/ChangePassword";
 import ADdashboard from "./components/ADdashboard";
 import AddProduct from "./components/Addproduct";
 import { me } from "./store";
+import { fetchProducts } from "./store/flowers";
 
 class App extends Component {
   componentDidMount() {
     this.props.loadInitialData();
+    this.props.fetchFlowers();
   }
 
   render() {
@@ -65,8 +67,8 @@ class App extends Component {
           )}
           <Switch>
             <Route path="/home" component={Welcome} />
+            <Route path="/flowers/:id" component={SingleFlower} />
             <Route path="/flowers" component={Flowers} />
-            <Route path="/flower/:id" component={SingleFlower} />
             <Route path="/checkout" component={Checkout} />
           </Switch>
         </Router>
@@ -86,9 +88,8 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    loadInitialData() {
-      dispatch(me());
-    },
+    loadInitialData: () => dispatch(me()),
+    fetchFlowers: () => dispatch(fetchProducts()),
   };
 };
 

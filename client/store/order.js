@@ -51,11 +51,23 @@ export const addToCart = (userId, flower, quantity = 1) => {
         if (!cart) {
           const cart = Object.assign(
             {},
-            { [flower.name]: { price: flower.price, quantity: 1, id: flower.id, image_url: flower.image_url } }
+            {
+              [flower.name]: {
+                price: flower.price,
+                quantity: 1,
+                id: flower.id,
+                image_url: flower.image_url,
+              },
+            }
           );
           localStorage.setItem("cart", JSON.stringify(cart));
         } else if (!Object.keys(cart).includes(flower.name)) {
-          cart[flower.name] = { price: flower.price, quantity: 1, id: flower.id, image_url: flower.image_url };
+          cart[flower.name] = {
+            price: flower.price,
+            quantity: 1,
+            id: flower.id,
+            image_url: flower.image_url,
+          };
           localStorage.setItem("cart", JSON.stringify(cart));
         } else {
           cart[flower.name].quantity += 1;
@@ -63,18 +75,20 @@ export const addToCart = (userId, flower, quantity = 1) => {
         }
       } else {
         if (token) {
-          const data = (await axios.post(
-            `/api/cart/${userId}`,
-            {
-              productId: flower.id,
-              quantity: quantity,
-            },
-            {
-              headers: {
-                authorization: token,
+          const data = (
+            await axios.post(
+              `/api/cart/${userId}`,
+              {
+                productId: flower.id,
+                quantity: quantity,
               },
-            }
-          )).data;
+              {
+                headers: {
+                  authorization: token,
+                },
+              }
+            )
+          ).data;
           dispatch(_addToCart(data));
         }
       }
@@ -96,7 +110,7 @@ export const getCart = (userId) => {
             },
           })
         ).data;
-        
+
         dispatch(_getCart(cart));
       }
     } catch (e) {
@@ -108,24 +122,26 @@ export const getCart = (userId) => {
 export const combineCart = (userId, cart) => {
   return async (dispatch) => {
     /**
-      * The "cart" object created in local storage looks like:
-      * { flower_name_1: { price: 58, quantity: 1, id: 1 },
-      *   flower_name_2: { price: 78, quantity: 1, id: 2 },
-      *   flower_name_3: { price: 98, quantity: 1, id: 3 }
-      * }
-    */
+     * The "cart" object created in local storage looks like:
+     * { flower_name_1: { price: 58, quantity: 1, id: 1 },
+     *   flower_name_2: { price: 78, quantity: 1, id: 2 },
+     *   flower_name_3: { price: 98, quantity: 1, id: 3 }
+     * }
+     */
     for (const item of Object.entries(cart)) {
       const name = item[0];
       const id = item[1].id;
       const quantity = item[1].quantity;
-      const data = (await axios.post(`/api/cart/${userId}`, {
-        productId: id,
-        quantity: quantity,
-      })).data;
+      const data = (
+        await axios.post(`/api/cart/${userId}`, {
+          productId: id,
+          quantity: quantity,
+        })
+      ).data;
 
       dispatch(_addToCart(data));
     }
-  }
+  };
 };
 
 export const increaseQuantity = (userId, productId, orderId) => {

@@ -10,6 +10,11 @@ const SingleFlower = (props) => {
   const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
+  //buys time for useSelector to grab the clicked flower info when page's refreshed
+  if (!flower) {
+    return null;
+  }
+
   return (
     <div>
       <div>Name: {flower.name}</div>
