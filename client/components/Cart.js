@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Avatar,
   IconButton,
@@ -21,8 +21,37 @@ import {
   decreaseQuantity,
   deleteLineItem,
   getCart,
+  combineCart,
   increaseQuantity,
 } from "../store/order";
+
+//still in process
+const StripeCheckout = () => {
+  fetch("/create-checkout-session", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+
+    body: JSON.stringify({
+      items: [
+        { id: 1, quantity: 3 },
+
+        { id: 2, quantity: 1 },
+      ],
+    }),
+  })
+    .then((res) => {
+      if (res.ok) return res.json();
+      return res.json().then((json) => Promise.reject(json));
+    })
+    .then(({ url }) => {
+      window.location = url;
+    })
+    .catch((e) => {
+      console.error(e.error);
+    });
+};
 
 const Cart = () => {
   const { user, order } = useSelector((state) => ({
@@ -36,6 +65,14 @@ const Cart = () => {
     dispatch(getCart(user.id));
   }, []);
 
+  // Check if there is a cart in the browser local storage
+  const cart = JSON.parse(localStorage.getItem("cart"));
+  if (cart) {
+    dispatch(combineCart(user.id, cart));
+    // dispatch(getCart(user.id))
+    localStorage.removeItem("cart");
+  }
+
   const handleIncrease = (productId) => {
     dispatch(increaseQuantity(user.id, productId, order.id));
   };
@@ -46,10 +83,6 @@ const Cart = () => {
 
   const handleDelete = (productId) => {
     dispatch(deleteLineItem(user.id, productId, order.id));
-  };
-
-  const handleCheckOut = () => {
-    console.log("Congratulations for your purchase!");
   };
 
   if (!order.products || order.products.length < 1) {
@@ -98,18 +131,11 @@ const Cart = () => {
                       <AddCircleOutlineIcon />
                     </IconButton>
                     {product.lineItem.quantity}
-
-                    {product.lineItem.quantity === 1 ? (
-                      <IconButton disabled>
-                        <RemoveCircleOutlineIcon />
-                      </IconButton>
-                    ) : (
-                      <IconButton
-                        onClick={() => dispatch(handleDecrease(product.id))}
-                      >
-                        <RemoveCircleOutlineIcon />
-                      </IconButton>
-                    )}
+                    <IconButton
+                      onClick={() => dispatch(handleDecrease(product.id))}
+                    >
+                      <RemoveCircleOutlineIcon />
+                    </IconButton>
                   </Box>
                   <ListItemAvatar
                     sx={{ marginRight: "1rem", marginLeft: ".5rem" }}
@@ -141,21 +167,19 @@ const Cart = () => {
             <h3>Total: ${total}</h3>
           </ListItem>
         </List>
-        <Link to="/checkout">
-          <Button
-            color="secondary"
-            variant="contained"
-            sx={{
-              width: "90%",
-              marginLeft: "16px",
-              marginRight: "16px",
-              marginBottom: "16px",
-            }}
-            onClick={handleCheckOut}
-          >
-            Check Out
-          </Button>
-        </Link>
+        <Button
+          color="secondary"
+          variant="contained"
+          onClick={StripeCheckout}
+          sx={{
+            width: "90%",
+            marginLeft: "16px",
+            marginRight: "16px",
+            marginBottom: "16px",
+          }}
+        >
+          Check Out
+        </Button>
       </Box>
     );
   }

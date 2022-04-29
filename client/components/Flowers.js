@@ -80,7 +80,7 @@ const Flowers = () => {
                 return (
                   <Grid item xs={3}>
                     <Card key={flower.id} sx={{ maxWidth: "400px" }}>
-                      <Link to={`/flower/${flower.id}`}>
+                      <Link to={`/flowers/${flower.id}`}>
                         <CardMedia component="img" image={flower.image_url} />
                       </Link>
                       <Box
@@ -129,7 +129,7 @@ const Flowers = () => {
               return (
                 <Grid key={flower.id} item xs={3}>
                   <Card key={flower.id} sx={{ maxWidth: "400px" }}>
-                    <Link to={`/flower/${flower.id}`}>
+                    <Link to={`/flowers/${flower.id}`}>
                       <CardMedia component="img" image={flower.image_url} />
                     </Link>
                     <Box

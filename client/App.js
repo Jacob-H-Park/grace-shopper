@@ -16,12 +16,12 @@ import SingleFlower from "./components/SingleFlower";
 import EditProduct from "./components/EditProduct";
 import ProductInfo from "./components/ProductInfo";
 import UserInfo from "./components/UserInfo";
-import Checkout from "./components/Checkout";
 import Welcome from "./components/Welcome";
 import EditUserInfo from "./components/EditUserInfo";
 import ChangePassword from "./components/ChangePassword";
 import ADdashboard from "./components/ADdashboard";
 import AddProduct from "./components/Addproduct";
+
 import { me } from "./store";
 import { fetchProducts } from "./store/flowers";
 
@@ -69,7 +69,6 @@ class App extends Component {
             <Route path="/home" component={Welcome} />
             <Route path="/flowers/:id" component={SingleFlower} />
             <Route path="/flowers" component={Flowers} />
-            <Route path="/checkout" component={Checkout} />
           </Switch>
         </Router>
       </div>
