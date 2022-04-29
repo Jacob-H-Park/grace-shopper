@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from 'react-router-dom';
 
 import { addToCart } from "../store/order";
 
 const SingleFlower = (props) => {
+
   const flower = useSelector(({ flowers }) => {
     return flowers.find((flower) => flower.id === props.match.params.id * 1);
   });
+
   const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
+  if(!flower){
+    console.log('no flower');
+    return null;
+  }
   return (
     <div>
       <div>Name: {flower.name}</div>
