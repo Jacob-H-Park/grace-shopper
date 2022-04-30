@@ -1,5 +1,5 @@
 {
-  "name": "fs-app-template",
+  "name": "grace_shopper",
   "version": "2.0.0",
   "description": "Some boilerplate code to get you started - get shakin'!",
   "main": "index.js",
@@ -11,6 +11,7 @@
     "start:dev": "npm run build:dev & npm run start-server",
     "start:dev:logger": "LOGGING=true npm run start:dev",
     "start:dev:seed": "SEED=true npm run start:dev",
+    "start:dev:win": "nodemon server -e html,js,scss --ignore public --ignore client",
     "start-server": "JWT=shh nodemon server -e html,js,scss --ignore public --ignore client",
     "test": "NODE_ENV=test JWT=a_secret mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" --require @babel/register --require esm ",
     "test:dev": "npm run test -- --watch",
@@ -20,15 +21,24 @@
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.6.2",
+    "@mui/material": "^5.6.2",
+    "@mui/x-data-grid": "^5.10.0",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
     "compression": "^1.7.3",
+    "dotenv": "^16.0.0",
     "express": "^4.16.4",
+    "faker": "^5.1.0",
     "history": "^4.9.0",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
     "pg": "^8.5.1",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "stripe": "^8.218.0",
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

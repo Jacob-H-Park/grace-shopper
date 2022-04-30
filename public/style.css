@@ -1,21 +1,43 @@
 body {
-  font-family: sans-serif;
+  font-family: 'Lato', sans-serif;
+  background-color: #E9CFCC;
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
+  color: white !important;
 }
 
 label {
   display: block;
 }
 
-nav a {
-  display: inline-block;
-  margin: 1em;
-}
-
 form div {
   margin: 1em;
   display: inline-block;
 }
+
+table {
+  text-align: center;
+}
+
+/***CLASS SELECTORS***/ 
+
+.welcome-container {
+  font-family: 'Abril Fatface', cursive;
+  color: #D99BB4;
+  width: 100%;
+  height: 92vh;
+}
+
+.cart-container {
+  width: 100%;
+  background-color: white;
+}
+
+.empty-img {
+  margin-top: 6rem;
+  width: 400px;
+  height: 400px;
+}
+

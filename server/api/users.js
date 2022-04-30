@@ -1,8 +1,12 @@
 const router = require('express').Router()
-const { models: { User }} = require('../db')
+const { models: { User } } = require('../db');
+const { requireLoggedIn } = require('./backendProtect');
+
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+// Route "/api/users"
+
+router.get('/', requireLoggedIn, async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and username fields - even though
@@ -14,4 +18,14 @@ router.get('/', async (req, res, next) => {
   } catch (err) {
     next(err)
   }
+});
+
+router.get('/:userId', requireLoggedIn, async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.userId);
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
 })
+
