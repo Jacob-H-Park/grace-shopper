@@ -1,20 +1,14 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
   Typography,
-  Stack,
-  Button,
-  Divider,
-  IconButton,
   Drawer,
-  Badge,
 } from "@mui/material";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-import { logout } from "../store";
+
 import Cart from "./Cart";
 import GuestCart from "./GuestCart";
 import AdminStack from "./NavbarStacks/AdminStack";
@@ -29,10 +23,6 @@ const Navbar = () => {
     isAdmin: state.auth.isAdmin,
   }));
 
-  const dispatch = useDispatch();
-
-  let cartCount = 0;
-
   // Nav Tabs display differently for different role: Admin, User, Guest
   const navTabsAdmin = [
     { tab: "Flowers", url: "/flowers" },
@@ -44,7 +34,6 @@ const Navbar = () => {
   const navTabsUser = [
     { tab: "Flowers", url: "/flowers" },
     { tab: "Meet The Team", url: "#" },
-    { tab: "Account", url: "/account" },
   ];
 
   const navTabsGuest = [
@@ -81,7 +70,7 @@ const Navbar = () => {
 
         {isLoggedIn ? (
           isAdmin ? (
-            <AdminStack navTabsAdmin={navTabsAdmin} setOpen={setOpen} />
+            <AdminStack navTabsAdmin={navTabsAdmin} setOpen={setOpen} isAdmin={isAdmin} />
           ) : (
             <UserStack navTabsUser={navTabsUser} setOpen={setOpen} />
           )

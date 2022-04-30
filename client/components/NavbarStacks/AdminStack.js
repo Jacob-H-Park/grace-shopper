@@ -4,10 +4,9 @@ import { Link } from "react-router-dom";
 import { Stack, Button, Divider, IconButton, Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-import { logout } from "../../store";
+import AccountMenu from "../HelperComponents/AccountMenu";
 
-const AdminStack = ({ setOpen, navTabsAdmin }) => {
-  const dispatch = useDispatch();
+const AdminStack = ({ setOpen, navTabsAdmin, isAdmin }) => {
 
   return (
     <Stack
@@ -22,11 +21,7 @@ const AdminStack = ({ setOpen, navTabsAdmin }) => {
           </Link>
         );
       })}
-      <Link to="/login">
-        <Button color="inherit" onClick={() => dispatch(logout())}>
-          Logout
-        </Button>
-      </Link>
+      <AccountMenu isAdmin={isAdmin}/>
       <IconButton color="inherit" onClick={() => setOpen(true)}>
         <Badge badgeContent={1} color="secondary">
           <ShoppingCartIcon />
