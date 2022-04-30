@@ -128,18 +128,14 @@ export const combineCart = (userId, cart) => {
      *   flower_name_3: { price: 98, quantity: 1, id: 3 }
      * }
      */
-    for (const item of Object.entries(cart)) {
-      const name = item[0];
-      const id = item[1].id;
-      const quantity = item[1].quantity;
-      const data = (
-        await axios.post(`/api/cart/${userId}`, {
-          productId: id,
-          quantity: quantity,
-        })
-      ).data;
 
-      dispatch(_addToCart(data));
+    for (const item of Object.entries(cart)) {
+      const flower = {
+        id: item[1].id,
+        quantity: item[1].quantity
+      }
+      
+      dispatch(addToCart(userId,flower,flower.quantity));
     }
   };
 };

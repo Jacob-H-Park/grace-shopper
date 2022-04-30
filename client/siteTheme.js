@@ -24,6 +24,13 @@ import { createTheme } from "@mui/material/styles";
           height: '70px'
         }
       }
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          color: 'black'
+        }
+      }
     }
   }
 })
