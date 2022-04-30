@@ -1,14 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { styled } from '@mui/material/styles';
 import { fetchProducts, removeProducts } from "../store/flowers";
-import {Container, Grid, Stack} from "@mui/material"
+import {Stack} from "@mui/material"
 import { DataGrid } from '@mui/x-data-grid';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { Button } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { grid } from "@mui/system";
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import Checkbox from '@mui/material/Checkbox';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import { Box } from "@mui/system";
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
 class ProductInfo extends React.Component {
   constructor(){
     super(),
@@ -21,14 +27,14 @@ class ProductInfo extends React.Component {
     this.props.loadProducts();
   }
   handleChange(ev) {
+    console.log(this.state)
     this.setState({
       category: ev.target.value
     });
-    console.log(this.state)
   }
+
   render() {
     const { flowers, removeProducts } = this.props;
-    console.log('hey',flowers)
     const {category} = this .state
     const columns = [
       { field: 'image_url', 
@@ -72,9 +78,9 @@ class ProductInfo extends React.Component {
           return(
             <Stack direction="row" spacing={2}>
               <Link to={`/editflowerinfo/${params.value}`}>
-                <Button variant="outlined" startIcon={<ModeEditIcon/>}>Edit</Button>
+                <Button variant="contained" startIcon={<ModeEditIcon/>}>Edit</Button>
               </Link>
-              <Button variant="outlined" startIcon={<DeleteIcon/>}
+              <Button variant="contained" startIcon={<DeleteIcon/>}
                onClick={()=>{
                   removeProducts(params.value)
                 }
@@ -86,14 +92,68 @@ class ProductInfo extends React.Component {
         }
       },
     ];
+    const categoryList = [
+      {label:"all"},
+      {label:"rose"},
+      {label:"tulip"},
+      {label:"orchid"},
+      {label:"signature_bouquets"},
+      {label:"sympathy"},
+      {label:"preserved_rose"},
+    ]
+    const checkedIcon = <CheckBoxIcon fontSize="medium" />;
+    const icon = <CheckBoxOutlineBlankIcon fontSize="medium" />;
+
     return (
       <div>
-        <Link to='/add_product'>
-          <button>Add product</button>
-        </Link>
-        <div>
+        <Box sx={
+          {
+            display: "flex",
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}
+          direction="row" 
+          spacing={5}
+        >
+          <Link to='/add_product'>
+            <Box sx={{ '& > :not(style)': { m: 1 } }}>
+              <Fab variant='extended' size = 'medium' color="primary" aria-label="add">
+                <AddIcon sx={{mr:1}}/>
+                  Add product 
+              </Fab>
+            </Box>
+          </Link>
+          <Autocomplete
+            sx={{ 
+              width: 400,
+              height: 80,
+              alignItems:"center"
+            }}
+            multiple
+            id="check-box-category"
+            options={categoryList}
+            disableCloseOnSelect
+            getOptionLabel={(option) => option.label}
+            renderOption={(props, option, { selected }) => (
+              <li {...props}>
+                <Checkbox
+                  icon={icon}
+                  checkedIcon={checkedIcon}
+                  style={{ marginRight: 8 }}
+                  checked={selected}
+                />
+                {option.label}
+              </li>
+            )}
+            renderInput={(params) => (
+              <TextField {...params} label="Category" />
+            )}
+          />
+        </Box>
+       
+        {/* <div>
           <label htmlFor="flower-category"></label>
-          <select name="name" id="flower-category" onChange={this.handleChange}>
+          <select name="name" id="flower-category" onChange={this.handleChange} value ={category}>
            <option value="all">All</option>
             <option value="rose">Roses</option>
             <option value="tulip">Tulips</option>
@@ -102,23 +162,26 @@ class ProductInfo extends React.Component {
             <option value="sympathy">Sympathy</option>
             <option value="preserved_rose">Preserved Roses</option>
           </select>
+        </div> */}
+
+        <div style={{height: 605, width: '100%'}}>
+          <DataGrid
+            sx={{
+              boxShadow: 2,
+              border: 2,
+              borderColor: 'primary.light',
+              '& .MuiDataGrid-cell:hover': {
+                color: 'primary.main',
+              },
+            }}
+            rowHeight={85}
+            headerHeight ={40}
+            rows={flowers}
+            columns={columns}
+            pageSize={6}
+            disableSelectionOnClick
+          />
         </div>
-        
-        
-          
-            <div style={{height: 560, width: '100%'}}>
-              <DataGrid
-                rowHeight={90}
-                headerHeight ={40}
-                rows={this.props.flowers}
-                columns={columns}
-                pageSize={5}
-                
-                disableSelectionOnClick
-                
-         
-              />
-            </div>
               {/* {flowers.map((flower) => {
                 return (
                   <Grid key={flower.id} container spacing={1}>
