@@ -10,7 +10,6 @@ import {
   Typography,
   Snackbar,
   Slide,
-  Skeleton,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -73,7 +72,7 @@ const Flowers = () => {
 
   return (
     <div>
-      <div>
+      {/* <div>
         <label htmlFor="flower-category"></label>
         <select name="name" id="flower-category" onChange={handleChange}>
           <option value="rose">Roses</option>
@@ -83,10 +82,20 @@ const Flowers = () => {
           <option value="sympathy">Sympathy</option>
           <option value="preserved_rose">Preserved Roses</option>
         </select>
-      </div>
+      </div> */}
 
       {/* When a category is selected, page renders flowers by the given type */}
       <Box>
+        <Box
+          sx={{ width: "100%", height: "10%", backgroundColor: "#D9B9C7" }}
+          display="flex"
+          flexDirection="column-reverse"
+        >
+          <img
+            src="/Images/headershipping.svg"
+            style={{ width: "100%" }}
+          />
+        </Box>
         {name ? (
           <Grid container spacing={3} sx={{ padding: "2rem" }}>
             {flowers
