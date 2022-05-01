@@ -7,6 +7,9 @@ import Home from "./admin/Home";
 import UserList from "./admin/UserList";
 import User from "./admin/User";
 import NewUser from "./admin/newUser";
+import ProductInfo from "./ProductInfo";
+import AddProduct from "./AddProduct";
+import EditProduct from "./EditProduct";
 import "./ADdashboard.css";
 
 const ADdashboard = ()=>{
@@ -32,15 +35,15 @@ const ADdashboard = ()=>{
                         <Route path="/newUser">
                             <NewUser />
                         </Route>
-                        <Route path="/products">
-                            <ProductList />
+                        <Route path="/admin_products">
+                            <ProductInfo />
                         </Route>
-                        <Route path="/product/:productId">
-                            <Product />
+                        <Route path="/add_product">
+                            <AddProduct />
                         </Route>
-                        <Route path="/newproduct">
-                            <NewProduct />
-                        </Route>
+                        {/* <Route path="/editflowerinfo/:id">
+                            <EditProduct />
+                        </Route> */}
                     </Switch>
                 </div>
             </Router>

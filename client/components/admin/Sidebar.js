@@ -49,7 +49,7 @@ export default function Sidebar() {
                 Users
               </li>
             </Link>
-            <Link to="/products" className="link">
+            <Link to="/admin_products" className="link">
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
                 Products
@@ -57,7 +57,7 @@ export default function Sidebar() {
             </Link>
             <li className="sidebarListItem">
               <AttachMoney className="sidebarIcon" />
-              Transactions
+              Orders
             </li>
             <li className="sidebarListItem">
               <BarChart className="sidebarIcon" />
