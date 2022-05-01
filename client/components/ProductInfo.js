@@ -15,11 +15,12 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import { Box } from "@mui/system";
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
+
 class ProductInfo extends React.Component {
   constructor(){
     super(),
     this.state = {
-      category: 'all'
+      category: []
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -27,7 +28,7 @@ class ProductInfo extends React.Component {
     this.props.loadProducts();
   }
   handleChange(ev) {
-    console.log(this.state)
+    console.log(ev.target.value)
     this.setState({
       category: ev.target.value
     });
@@ -35,7 +36,12 @@ class ProductInfo extends React.Component {
 
   render() {
     const { flowers, removeProducts } = this.props;
-    const {category} = this .state
+    const {category} = this.state
+    const flowersToRender = category.length === 0 ? flowers : flowers.filter((flower)=>{
+      if(category.includes(flower.category)){
+        return flower
+      }
+    })
     const columns = [
       { field: 'image_url', 
         headerName: '', 
@@ -93,7 +99,6 @@ class ProductInfo extends React.Component {
       },
     ];
     const categoryList = [
-      {label:"all"},
       {label:"rose"},
       {label:"tulip"},
       {label:"orchid"},
@@ -127,21 +132,23 @@ class ProductInfo extends React.Component {
             sx={{ 
               width: 400,
               height: 80,
-              alignItems:"center"
             }}
             multiple
-            id="check-box-category"
+            id="category"
             options={categoryList}
             disableCloseOnSelect
             getOptionLabel={(option) => option.label}
-            renderOption={(props, option, { selected }) => (
+            filterSelectedOptions
+            onChange={(event,value)=>{
+              const categoryList= value.map((v)=>{
+                return v.label
+              })
+              this.setState({
+                category: categoryList
+              })
+            }}
+            renderOption={(props, option) => (
               <li {...props}>
-                <Checkbox
-                  icon={icon}
-                  checkedIcon={checkedIcon}
-                  style={{ marginRight: 8 }}
-                  checked={selected}
-                />
                 {option.label}
               </li>
             )}
@@ -150,19 +157,6 @@ class ProductInfo extends React.Component {
             )}
           />
         </Box>
-       
-        {/* <div>
-          <label htmlFor="flower-category"></label>
-          <select name="name" id="flower-category" onChange={this.handleChange} value ={category}>
-           <option value="all">All</option>
-            <option value="rose">Roses</option>
-            <option value="tulip">Tulips</option>
-            <option value="orchid">Orchids</option>
-            <option value="signature_bouquets">Signature Bouquets</option>
-            <option value="sympathy">Sympathy</option>
-            <option value="preserved_rose">Preserved Roses</option>
-          </select>
-        </div> */}
 
         <div style={{height: 605, width: '100%'}}>
           <DataGrid
@@ -176,71 +170,12 @@ class ProductInfo extends React.Component {
             }}
             rowHeight={85}
             headerHeight ={40}
-            rows={flowers}
+            rows={flowersToRender}
             columns={columns}
             pageSize={6}
             disableSelectionOnClick
           />
         </div>
-              {/* {flowers.map((flower) => {
-                return (
-                  <Grid key={flower.id} container spacing={1}>
-                    <Grid item xs = {1}>
-                      <Item><img src={flower.image_url} width = "50" height= "50"/></Item>
-                    </Grid>
-                    <Grid item xs = {3}>
-                      <Item>{flower.name}</Item>
-                    </Grid>
-                    <Grid item xs = {2}>
-                      <Item>Stock: {flower.stock}</Item>
-                    </Grid>
-                    <Grid item xs = {2}>
-                      <Item>Price: {flower.price}</Item>
-                    </Grid>
-                    <Grid item xs = {1}>
-                      <Item>                    
-                        <Link to={`/editflowerinfo/${flower.id}`}>
-                            <button>Edit</button>
-                        </Link>
-                      </Item>
-                    </Grid>
-                    <Grid item xs = {1}>
-                      <Item>
-                        <button onClick={() => {removeProducts(flower.id);}}
-                        >
-                          Remove Product
-                        </button>
-                      </Item>
-                    </Grid>
-
-                  </Grid>
-                );
-              })}
-            </div>
-          ): (
-            <Stack>
-              {flowers.filter((flower)=> flower.category === category).map((flower) => {
-                return (
-                  <div key={flower.id}>
-                    <img src={flower.image_url} />
-                    <p>Name: {flower.name}</p>
-                    <p>Category:{flower.category}</p>
-                    <p>Stock: {flower.stock}</p>
-                    <p>Price: {flower.price}</p>
-                    <Link to={`/editflowerinfo/${flower.id}`}>
-                      <button>Edit</button>
-                    </Link>
-                    <button
-                      onClick={() => {
-                        removeProducts(flower.id);
-                      }}
-                    >
-                      Remove Product
-                    </button>
-                  </div>);
-              })}
-            </Stack>
-          )*/} 
       </div>
     );
   }
