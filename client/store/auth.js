@@ -32,6 +32,7 @@ export const me = () => async dispatch => {
     // Check if there is a cart in the browser local storage
     // If yes, transmit the guest cart to user cart upon logged in
     const cart = JSON.parse(localStorage.getItem("cart"));
+
     if (cart) {
       dispatch(combineCart(res.data.id, cart));
       localStorage.removeItem("cart");

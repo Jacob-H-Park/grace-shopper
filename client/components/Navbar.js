@@ -1,35 +1,27 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
   Typography,
-  Stack,
-  Button,
-  Divider,
-  IconButton,
   Drawer,
-  Badge,
 } from "@mui/material";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-import { logout } from "../store";
+
 import Cart from "./Cart";
 import GuestCart from "./GuestCart";
+import AdminStack from "./NavbarStacks/AdminStack";
+import UserStack from "./NavbarStacks/UserStack";
+import GuestStack from "./NavbarStacks/GuestStack";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
-  const { order, isLoggedIn, isAdmin } = useSelector((state) => ({
-    order: state.order || { products: [] },
+  const { isLoggedIn, isAdmin } = useSelector((state) => ({
     isLoggedIn: !!state.auth.id,
     isAdmin: state.auth.isAdmin,
   }));
-
-  const dispatch = useDispatch();
-
-  let cartCount = 0;
 
   // Nav Tabs display differently for different role: Admin, User, Guest
   const navTabsAdmin = [
@@ -42,7 +34,6 @@ const Navbar = () => {
   const navTabsUser = [
     { tab: "Flowers", url: "/flowers" },
     { tab: "Meet The Team", url: "#" },
-    { tab: "Account", url: "/account" },
   ];
 
   const navTabsGuest = [
@@ -79,78 +70,12 @@ const Navbar = () => {
 
         {isLoggedIn ? (
           isAdmin ? (
-            <Stack
-              direction="row"
-              divider={
-                <Divider color="white" orientation="vertical" flexItem />
-              }
-              spacing={2}
-            >
-              {navTabsAdmin.map(({ tab, url }) => {
-                return (
-                  <Link key={tab} to={url}>
-                    <Button color="inherit">{tab}</Button>
-                  </Link>
-                );
-              })}
-              <Link to="/login">
-                <Button color="inherit" onClick={() => dispatch(logout())}>
-                  Logout
-                </Button>
-              </Link>
-              <IconButton color="inherit" onClick={() => setOpen(true)}>
-                <Badge badgeContent={cartCount} color="secondary">
-                  <ShoppingCartIcon />
-                </Badge>
-              </IconButton>
-            </Stack>
+            <AdminStack navTabsAdmin={navTabsAdmin} setOpen={setOpen} isAdmin={isAdmin} />
           ) : (
-            <Stack
-              direction="row"
-              divider={
-                <Divider color="white" orientation="vertical" flexItem />
-              }
-              spacing={2}
-            >
-              {navTabsUser.map(({ tab, url }) => {
-                return (
-                  <Link key={tab} to={url}>
-                    <Button color="inherit">{tab}</Button>
-                  </Link>
-                );
-              })}
-              <Link to="/login">
-                <Button color="inherit" onClick={() => dispatch(logout())}>
-                  Logout
-                </Button>
-              </Link>
-              <IconButton color="inherit" onClick={() => setOpen(true)}>
-                <Badge badgeContent={cartCount} color="secondary">
-                  <ShoppingCartIcon />
-                </Badge>
-              </IconButton>
-            </Stack>
+            <UserStack navTabsUser={navTabsUser} setOpen={setOpen} />
           )
         ) : (
-          <Stack
-            direction="row"
-            divider={<Divider color="white" orientation="vertical" flexItem />}
-            spacing={2}
-          >
-            {navTabsGuest.map(({ tab, url }) => {
-              return (
-                <Link key={tab} to={url}>
-                  <Button color="inherit">{tab}</Button>
-                </Link>
-              );
-            })}
-
-            <IconButton color="inherit" onClick={() => setOpen(true)}>
-              <Badge badgeContent={cartCount} color="secondary">
-                <ShoppingCartIcon />
-              </Badge>
-            </IconButton>
-          </Stack>
+          <GuestStack navTabsGuest={navTabsGuest} setOpen={setOpen} />
         )}
       </Toolbar>
     </AppBar>

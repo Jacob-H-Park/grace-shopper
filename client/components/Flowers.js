@@ -1,5 +1,5 @@
 import { AddShoppingCart } from "@mui/icons-material";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 import {
   Box,
   Card,
@@ -10,7 +10,7 @@ import {
   Typography,
   Snackbar,
   Slide,
-  Skeleton
+  Skeleton,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -69,7 +69,7 @@ const Flowers = () => {
         <CloseIcon fontSize="small" />
       </IconButton>
     </>
-  )
+  );
 
   return (
     <div>

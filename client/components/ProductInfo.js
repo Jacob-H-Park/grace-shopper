@@ -1,19 +1,26 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { styled } from '@mui/material/styles';
 import { fetchProducts, removeProducts } from "../store/flowers";
-import {Container, Grid, Stack} from "@mui/material"
+import {Stack} from "@mui/material"
 import { DataGrid } from '@mui/x-data-grid';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { Button } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { grid } from "@mui/system";
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import Checkbox from '@mui/material/Checkbox';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import { Box } from "@mui/system";
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+
 class ProductInfo extends React.Component {
   constructor(){
     super(),
     this.state = {
-      category: 'all'
+      category: []
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -21,15 +28,20 @@ class ProductInfo extends React.Component {
     this.props.loadProducts();
   }
   handleChange(ev) {
+    console.log(ev.target.value)
     this.setState({
       category: ev.target.value
     });
-    console.log(this.state)
   }
+
   render() {
     const { flowers, removeProducts } = this.props;
-    console.log('hey',flowers)
-    const {category} = this .state
+    const {category} = this.state
+    const flowersToRender = category.length === 0 ? flowers : flowers.filter((flower)=>{
+      if(category.includes(flower.category)){
+        return flower
+      }
+    })
     const columns = [
       { field: 'image_url', 
         headerName: '', 
@@ -72,9 +84,9 @@ class ProductInfo extends React.Component {
           return(
             <Stack direction="row" spacing={2}>
               <Link to={`/editflowerinfo/${params.value}`}>
-                <Button variant="outlined" startIcon={<ModeEditIcon/>}>Edit</Button>
+                <Button variant="contained" startIcon={<ModeEditIcon/>}>Edit</Button>
               </Link>
-              <Button variant="outlined" startIcon={<DeleteIcon/>}
+              <Button variant="contained" startIcon={<DeleteIcon/>}
                onClick={()=>{
                   removeProducts(params.value)
                 }
@@ -86,98 +98,84 @@ class ProductInfo extends React.Component {
         }
       },
     ];
+    const categoryList = [
+      {label:"rose"},
+      {label:"tulip"},
+      {label:"orchid"},
+      {label:"signature_bouquets"},
+      {label:"sympathy"},
+      {label:"preserved_rose"},
+    ]
+    const checkedIcon = <CheckBoxIcon fontSize="medium" />;
+    const icon = <CheckBoxOutlineBlankIcon fontSize="medium" />;
+
     return (
       <div>
-        <Link to='/add_product'>
-          <button>Add product</button>
-        </Link>
-        <div>
-          <label htmlFor="flower-category"></label>
-          <select name="name" id="flower-category" onChange={this.handleChange}>
-           <option value="all">All</option>
-            <option value="rose">Roses</option>
-            <option value="tulip">Tulips</option>
-            <option value="orchid">Orchids</option>
-            <option value="signature_bouquets">Signature Bouquets</option>
-            <option value="sympathy">Sympathy</option>
-            <option value="preserved_rose">Preserved Roses</option>
-          </select>
-        </div>
-        
-        
-          
-            <div style={{height: 560, width: '100%'}}>
-              <DataGrid
-                rowHeight={90}
-                headerHeight ={40}
-                rows={this.props.flowers}
-                columns={columns}
-                pageSize={5}
-                
-                disableSelectionOnClick
-                
-         
-              />
-            </div>
-              {/* {flowers.map((flower) => {
-                return (
-                  <Grid key={flower.id} container spacing={1}>
-                    <Grid item xs = {1}>
-                      <Item><img src={flower.image_url} width = "50" height= "50"/></Item>
-                    </Grid>
-                    <Grid item xs = {3}>
-                      <Item>{flower.name}</Item>
-                    </Grid>
-                    <Grid item xs = {2}>
-                      <Item>Stock: {flower.stock}</Item>
-                    </Grid>
-                    <Grid item xs = {2}>
-                      <Item>Price: {flower.price}</Item>
-                    </Grid>
-                    <Grid item xs = {1}>
-                      <Item>                    
-                        <Link to={`/editflowerinfo/${flower.id}`}>
-                            <button>Edit</button>
-                        </Link>
-                      </Item>
-                    </Grid>
-                    <Grid item xs = {1}>
-                      <Item>
-                        <button onClick={() => {removeProducts(flower.id);}}
-                        >
-                          Remove Product
-                        </button>
-                      </Item>
-                    </Grid>
+        <Box sx={
+          {
+            display: "flex",
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}
+          direction="row" 
+          spacing={5}
+        >
+          <Link to='/add_product'>
+            <Box sx={{ '& > :not(style)': { m: 1 } }}>
+              <Fab variant='extended' size = 'medium' color="primary" aria-label="add">
+                <AddIcon sx={{mr:1}}/>
+                  Add product 
+              </Fab>
+            </Box>
+          </Link>
+          <Autocomplete
+            sx={{ 
+              width: 400,
+              height: 80,
+            }}
+            multiple
+            id="category"
+            options={categoryList}
+            disableCloseOnSelect
+            getOptionLabel={(option) => option.label}
+            filterSelectedOptions
+            onChange={(event,value)=>{
+              const categoryList= value.map((v)=>{
+                return v.label
+              })
+              this.setState({
+                category: categoryList
+              })
+            }}
+            renderOption={(props, option) => (
+              <li {...props}>
+                {option.label}
+              </li>
+            )}
+            renderInput={(params) => (
+              <TextField {...params} label="Category" />
+            )}
+          />
+        </Box>
 
-                  </Grid>
-                );
-              })}
-            </div>
-          ): (
-            <Stack>
-              {flowers.filter((flower)=> flower.category === category).map((flower) => {
-                return (
-                  <div key={flower.id}>
-                    <img src={flower.image_url} />
-                    <p>Name: {flower.name}</p>
-                    <p>Category:{flower.category}</p>
-                    <p>Stock: {flower.stock}</p>
-                    <p>Price: {flower.price}</p>
-                    <Link to={`/editflowerinfo/${flower.id}`}>
-                      <button>Edit</button>
-                    </Link>
-                    <button
-                      onClick={() => {
-                        removeProducts(flower.id);
-                      }}
-                    >
-                      Remove Product
-                    </button>
-                  </div>);
-              })}
-            </Stack>
-          )*/} 
+        <div style={{height: 605, width: '100%'}}>
+          <DataGrid
+            sx={{
+              boxShadow: 2,
+              border: 2,
+              borderColor: 'primary.light',
+              '& .MuiDataGrid-cell:hover': {
+                color: 'primary.main',
+              },
+            }}
+            rowHeight={85}
+            headerHeight ={40}
+            rows={flowersToRender}
+            columns={columns}
+            pageSize={6}
+            disableSelectionOnClick
+          />
+        </div>
       </div>
     );
   }
