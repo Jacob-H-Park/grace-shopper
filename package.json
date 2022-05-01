@@ -37,6 +37,7 @@
     "morgan": "^1.9.1",
     "pg": "^8.5.1",
     "prop-types": "^15.8.1",
+    "react-material-ui-carousel": "^3.3.3",
     "react-swipeable-views": "^0.14.0",
     "sequelize": "^6.3.5",
     "stripe": "^8.218.0",
