@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, BrowserRouter as Router, Switch, Route, withRouter } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import Sidebar from "./components/Sidebar";
 import Home from "./components/Home";
@@ -10,8 +11,13 @@ import ProductInfo from "../ProductInfo";
 import AddProduct from "../AddProduct";
 import EditProduct from "../EditProduct";
 import "./style/AdminDashboard.css";
+import { fetchUsers } from "../../store/users";
 
 const ADdashboard = ()=>{
+    const users = useSelector(state => state.users);
+    const dispatch = useDispatch();
+    useEffect(() => dispatch(fetchUsers()), []);
+
     return (
         <div>
             {/* <Link to="/admin_products">View Products</Link>
