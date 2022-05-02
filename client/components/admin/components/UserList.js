@@ -1,17 +1,19 @@
-import React from "react";
-import "./userList.css";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
-import { userRows } from "./dummyData";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+
+import "../style/userList.css";
+import { fetchUsers, removeUser } from "../../../store/users";
+
 
 export default function UserList() {
-  const [data, setData] = useState(userRows);
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
-  };
+  const users = useSelector(state => state.users);
+  const dispatch = useDispatch();
+  useEffect(() => dispatch(fetchUsers()), []);
   
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
@@ -35,8 +37,8 @@ export default function UserList() {
       width: 120,
     },
     {
-      field: "transaction",
-      headerName: "Transaction Volume",
+      field: "isAdmin",
+      headerName: "isAdmin",
       width: 160,
     },
     {
@@ -51,7 +53,7 @@ export default function UserList() {
             </Link>
             <DeleteOutline
               className="userListDelete"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => dispatch(removeUser(params.row.id))}
             />
           </>
         );
@@ -62,7 +64,7 @@ export default function UserList() {
   return (
     <div className="userList">
       <DataGrid
-        rows={data}
+        rows={users}
         disableSelectionOnClick
         columns={columns}
         pageSize={8}

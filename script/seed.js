@@ -14,6 +14,8 @@ const faker = require("faker");
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log("db synced!");
+
+  const avatar_url = "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
   // Creating Users
   const users = await Promise.all([
     await User.create({
@@ -21,11 +23,71 @@ async function seed() {
       password: "123",
       email: "cody@fsa.com",
       isAdmin: true,
+      // avatar: faker.image.avatar()
+      avatar: avatar_url
     }),
     await User.create({
       username: "murphy",
       password: "123",
       email: "murphy@fsa.com",
+      // avatar: faker.image.avatar()
+      avatar: avatar_url
+    }),
+    await User.create({
+      username: faker.name.firstName().toLowerCase(),
+      password: "123",
+      email: faker.internet.email(),
+      // avatar: faker.image.avatar()
+      avatar: avatar_url
+    }),
+    await User.create({
+      username: faker.name.firstName().toLowerCase(),
+      password: "123",
+      email: faker.internet.email(),
+      // avatar: faker.image.avatar()
+      avatar: avatar_url
+    }),
+    await User.create({
+      username: faker.name.firstName().toLowerCase(),
+      password: "123",
+      email: faker.internet.email(),
+      // avatar: faker.image.avatar()
+      avatar: avatar_url
+    }),
+    await User.create({
+      username: faker.name.firstName().toLowerCase(),
+      password: "123",
+      email: faker.internet.email(),
+      // avatar: faker.image.avatar()
+      avatar: avatar_url
+    }),
+    await User.create({
+      username: faker.name.firstName().toLowerCase(),
+      password: "123",
+      email: faker.internet.email(),
+      // avatar: faker.image.avatar()
+      avatar: avatar_url
+    }),
+    await User.create({
+      username: faker.name.firstName().toLowerCase(),
+      password: "123",
+      email: faker.internet.email(),
+      // avatar: faker.image.avatar()
+      avatar: avatar_url
+    }),
+    await User.create({
+      username: faker.name.firstName().toLowerCase(),
+      password: "123",
+      email: faker.internet.email(),
+      // avatar: faker.image.avatar()
+      avatar: avatar_url
+    }),
+    await User.create({
+      username: faker.name.firstName().toLowerCase(),
+      password: "123",
+      email: faker.internet.email(),
+      // avatar: faker.image.avatar()
+      avatar: avatar_url
     }),
   ]);
 

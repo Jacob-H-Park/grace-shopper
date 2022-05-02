@@ -19,7 +19,7 @@ import UserInfo from "./components/UserInfo";
 import Welcome from "./components/Welcome";
 import EditUserInfo from "./components/EditUserInfo";
 import ChangePassword from "./components/ChangePassword";
-import ADdashboard from "./components/ADdashboard";
+import ADdashboard from "./components/admin/ADdashboard";
 import AddProduct from "./components/AddProduct";
 
 import { me } from "./store";

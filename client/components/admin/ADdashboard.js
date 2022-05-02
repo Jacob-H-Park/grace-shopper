@@ -1,16 +1,15 @@
 import React from "react";
-import { Link, BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Link, BrowserRouter as Router, Switch, Route, withRouter } from "react-router-dom";
 
-import Topbar from "./admin/Topbar";
-import Sidebar from "./admin/Sidebar";
-import Home from "./admin/Home";
-import UserList from "./admin/UserList";
-import User from "./admin/User";
-import NewUser from "./admin/newUser";
-import ProductInfo from "./ProductInfo";
-import AddProduct from "./AddProduct";
-import EditProduct from "./EditProduct";
-import "./ADdashboard.css";
+import Sidebar from "./components/Sidebar";
+import Home from "./components/Home";
+import UserList from "./components/UserList";
+import User from "./components/User";
+import NewUser from "./components/newUser";
+import ProductInfo from "../ProductInfo";
+import AddProduct from "../AddProduct";
+import EditProduct from "../EditProduct";
+import "./style/ADdashboard.css";
 
 const ADdashboard = ()=>{
     return (
@@ -41,9 +40,7 @@ const ADdashboard = ()=>{
                         <Route path="/add_product">
                             <AddProduct />
                         </Route>
-                        {/* <Route path="/editflowerinfo/:id">
-                            <EditProduct />
-                        </Route> */}
+                        <Route path="/editflowerinfo/:id" component={EditProduct} />  
                     </Switch>
                 </div>
             </Router>

@@ -28,6 +28,13 @@ const User = db.define("user", {
     type: BOOLEAN,
     defaultValue: false,
   },
+  avatar: {
+    type: STRING
+  },
+  status: {
+    type: STRING,
+    defaultValue: "active"
+  }
 });
 
 module.exports = User;

@@ -15,7 +15,7 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import { Box } from "@mui/system";
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import "./admin/productInfo.css";
+import "./admin/style/productInfo.css";
 
 class ProductInfo extends React.Component {
   constructor(){

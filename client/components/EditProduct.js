@@ -40,7 +40,7 @@ class EditProduct extends Component {
     const { name, price, stock } = this.state;
     const { handleSubmit, handleChange } = this;
     return (
-      <div>
+      <div className="productList">
         <form onSubmit={handleSubmit}>
           <label htmlFor="name">Product Name:</label>
           <input name="name" onChange={handleChange} value={name} />
