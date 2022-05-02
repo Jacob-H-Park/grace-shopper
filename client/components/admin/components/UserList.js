@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 
 import "../style/userList.css";
-import { fetchUsers, removeUser } from "../../../store/users";
+import { removeUser } from "../../../store/users";
 
 
 export default function UserList() {

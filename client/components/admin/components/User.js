@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import {
@@ -10,8 +10,10 @@ import {
     PhoneAndroid,
     Publish,
   } from "@material-ui/icons";
+import { Box } from "@mui/system";
+import Fab from '@mui/material/Fab';
+import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import "../style/user.css";
-import { fetchUsers } from "../../../store/users";
 import faker from "faker";
 
   
@@ -27,6 +29,14 @@ export default function User(props) {
     <div className="user">
       <div className="userTitleContainer">
         <h1 className="userTitle">Edit User</h1>
+        <Link to='/users'>
+          <Box sx={{ '& > :not(style)': { m: 1 } }}>
+            <Fab variant='extended' size = 'medium' color="secondary" aria-label="goback">
+              <KeyboardDoubleArrowLeftIcon sx={{mr:1}}/>
+                Go Back 
+            </Fab>
+          </Box>
+        </Link>
         <Link to="/newUser">
           <button className="userAddButton">Create</button>
         </Link>
