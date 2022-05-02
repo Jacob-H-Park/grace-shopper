@@ -9,7 +9,7 @@ import NewUser from "./components/newUser";
 import ProductInfo from "../ProductInfo";
 import AddProduct from "../AddProduct";
 import EditProduct from "../EditProduct";
-import "./style/ADdashboard.css";
+import "./style/AdminDashboard.css";
 
 const ADdashboard = ()=>{
     return (
@@ -28,9 +28,7 @@ const ADdashboard = ()=>{
                         <Route path="/users">
                             <UserList />
                         </Route>
-                        <Route path="/user/:userId">
-                            <User />
-                        </Route>
+                        <Route path="/user/:userId" component={User} />
                         <Route path="/newUser">
                             <NewUser />
                         </Route>

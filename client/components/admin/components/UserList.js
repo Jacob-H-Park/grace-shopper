@@ -14,6 +14,9 @@ export default function UserList() {
   const users = useSelector(state => state.users);
   const dispatch = useDispatch();
   useEffect(() => dispatch(fetchUsers()), []);
+  if (!users.length) {
+    return null;
+  }
   
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
