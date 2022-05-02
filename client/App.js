@@ -19,8 +19,8 @@ import UserInfo from "./components/UserInfo";
 import Welcome from "./components/Welcome";
 import EditUserInfo from "./components/EditUserInfo";
 import ChangePassword from "./components/ChangePassword";
-import ADdashboard from "./components/ADdashboard";
-import AddProduct from "./components/Addproduct";
+import ADdashboard from "./components/admin/AdminDashboard";
+import AddProduct from "./components/AddProduct";
 
 import { me } from "./store";
 import { fetchProducts } from "./store/flowers";

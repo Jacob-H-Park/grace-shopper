@@ -28,7 +28,7 @@ const Navbar = () => {
     { tab: "Flowers", url: "/flowers" },
     { tab: "Meet The Team", url: "#" },
     { tab: "Admin Dashboard", url: "/admin_dashboard" },
-    { tab: "User Management", url: "/user_management" },
+    // { tab: "User Management", url: "/user_management" },
   ];
 
   const navTabsUser = [
