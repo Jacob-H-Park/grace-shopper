@@ -17,13 +17,7 @@ import faker from "faker";
   
 export default function User(props) {
 
-  console.log("USER USER USER PROPS PROPS", props);
-  const users = useSelector(state => state.users);
-  const dispatch = useDispatch();
-  useEffect(() => dispatch(fetchUsers()), []);
-  console.log("USERs USERs USERs", users);    
   const user = useSelector(({ users }) => users.find(user => user.id === props.match.params.userId * 1));
-  console.log("USER USER USER", user);
 
   if (!user) {
     return null;
@@ -54,7 +48,7 @@ export default function User(props) {
             <span className="userShowTitle">Account Details</span>
             <div className="userShowInfo">
               <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">annabeck99</span>
+              <span className="userShowInfoTitle">{user.username}</span>
             </div>
             <div className="userShowInfo">
               <CalendarToday className="userShowIcon" />
@@ -83,7 +77,7 @@ export default function User(props) {
                 <label>Username</label>
                 <input
                   type="text"
-                  placeholder="annabeck99"
+                  placeholder={user.username}
                   className="userUpdateInput"
                 />
               </div>

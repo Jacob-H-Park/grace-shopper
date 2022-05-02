@@ -12,8 +12,9 @@ import { fetchUsers, removeUser } from "../../../store/users";
 export default function UserList() {
 
   const users = useSelector(state => state.users);
-  const dispatch = useDispatch();
-  useEffect(() => dispatch(fetchUsers()), []);
+  
+  // The users are fetched and loaded already in the main panel (AdminDashboard.js) when clicking the Admin Board
+  // Here again is to buy time for useSelector to grab the user list info when page's re-rendering
   if (!users.length) {
     return null;
   }
