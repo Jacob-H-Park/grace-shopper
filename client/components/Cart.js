@@ -26,19 +26,14 @@ import {
 } from "../store/order";
 
 //still in process
-const StripeCheckout = () => {
+const StripeCheckout = (total) => {
   fetch("/create-checkout-session", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-
     body: JSON.stringify({
-      items: [
-        { id: 1, quantity: 3 },
-
-        { id: 2, quantity: 1 },
-      ],
+      items: [{ id: 1, quantity: 1, total }],
     }),
   })
     .then((res) => {
@@ -93,8 +88,9 @@ const Cart = () => {
     );
   }
 
+  let total;
   if (order) {
-    let total = order.products.reduce(
+    total = order.products.reduce(
       (acc, flower) => (acc += flower.price * flower.lineItem.quantity),
       0
     );
@@ -133,14 +129,16 @@ const Cart = () => {
                     {product.lineItem.quantity}
 
                     {product.lineItem.quantity === 1 ? (
-                    <IconButton disabled>
-                      <RemoveCircleOutlineIcon />
-                    </IconButton>
-                  ) : (
-                    <IconButton onClick={() => dispatch(handleDecrease(product.id))}>
-                      <RemoveCircleOutlineIcon />
-                    </IconButton>
-                  )}
+                      <IconButton disabled>
+                        <RemoveCircleOutlineIcon />
+                      </IconButton>
+                    ) : (
+                      <IconButton
+                        onClick={() => dispatch(handleDecrease(product.id))}
+                      >
+                        <RemoveCircleOutlineIcon />
+                      </IconButton>
+                    )}
                   </Box>
                   <ListItemAvatar
                     sx={{ marginRight: "1rem", marginLeft: ".5rem" }}
@@ -175,7 +173,7 @@ const Cart = () => {
         <Button
           color="secondary"
           variant="contained"
-          onClick={StripeCheckout}
+          onClick={() => StripeCheckout(total)}
           sx={{
             width: "90%",
             marginLeft: "16px",

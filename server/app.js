@@ -53,18 +53,30 @@ app.post("/create-checkout-session", async (req, res) => {
       payment_method_types: ["card"],
       mode: "payment",
       line_items: req.body.items.map((item) => {
-        const storeItem = storeItems.get(item.id);
         return {
           price_data: {
             currency: "usd",
             product_data: {
-              name: storeItem.name,
+              name: "Total",
             },
-            unit_amount: storeItem.priceInCents,
+            unit_amount: item.total * 100,
           },
           quantity: item.quantity,
         };
       }),
+      // line_items: req.body.items.map((item) => {
+      //   const storeItem = storeItems.get(item.id);
+      //   return {
+      //     price_data: {
+      //       currency: "usd",
+      //       product_data: {
+      //         name: storeItem.name,
+      //       },
+      //       unit_amount: storeItem.priceInCents,
+      //     },
+      //     quantity: item.quantity,
+      //   };
+      // }),
       success_url: `http://localhost:8080/success.html`,
       cancel_url: `http://localhost:8080/cancel.html`,
     });
