@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { DataGrid } from "@mui/x-data-grid";
-import { DeleteOutline } from "@material-ui/icons";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 import "../style/userList.css";
 import { removeUser } from "../../../store/users";
@@ -12,6 +12,7 @@ import { removeUser } from "../../../store/users";
 export default function UserList() {
 
   const users = useSelector(state => state.users);
+  const dispatch = useDispatch();
   
   // The users are fetched and loaded already in the main panel (AdminDashboard.js) when clicking the Admin Board
   // Here again is to buy time for useSelector to grab the user list info when page's re-rendering
@@ -55,7 +56,7 @@ export default function UserList() {
             <Link to={"/user/" + params.row.id}>
               <button className="userListEdit">Edit</button>
             </Link>
-            <DeleteOutline
+            <DeleteOutlineIcon
               className="userListDelete"
               onClick={() => dispatch(removeUser(params.row.id))}
             />

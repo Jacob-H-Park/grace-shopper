@@ -19,7 +19,7 @@ import UserInfo from "./components/UserInfo";
 import Welcome from "./components/Welcome";
 import EditUserInfo from "./components/EditUserInfo";
 import ChangePassword from "./components/ChangePassword";
-import ADdashboard from "./components/admin/AdminDashboard";
+import AdminDashboard from "./components/admin/AdminDashboard";
 import AddProduct from "./components/AddProduct";
 
 import { me } from "./store";
@@ -41,7 +41,7 @@ class App extends Component {
           {isLoggedIn ? (
             isAdmin ? (
               <Switch>
-                <Route exact path="/admin_dashboard" component={ADdashboard} />
+                <Route exact path="/admin_dashboard" component={AdminDashboard} />
                 <Route path="/editflowerinfo/:id" component={EditProduct} />
                 <Route exact path="/account" component={UserInfo} />
                 <Route path="/account/edit" component={EditUserInfo} />

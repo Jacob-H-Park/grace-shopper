@@ -13,10 +13,10 @@ import EditProduct from "../EditProduct";
 import "./style/AdminDashboard.css";
 import { fetchUsers } from "../../store/users";
 
-const ADdashboard = ()=>{
+const AdminDashboard = ()=>{
     const users = useSelector(state => state.users);
     const dispatch = useDispatch();
-    useEffect(() => dispatch(fetchUsers()), []);
+    useEffect(() => { dispatch(fetchUsers()) }, []);
 
     return (
         <div>
@@ -53,4 +53,4 @@ const ADdashboard = ()=>{
     )
 }
 
-export default ADdashboard;
+export default AdminDashboard;

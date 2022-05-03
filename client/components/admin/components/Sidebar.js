@@ -1,21 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
 import "../style/sidebar.css";
-import {
-  LineStyle,
-  Timeline,
-  TrendingUp,
-  PermIdentity,
-  Storefront,
-  AttachMoney,
-  BarChart,
-  MailOutline,
-  DynamicFeed,
-  ChatBubbleOutline,
-  WorkOutline,
-  Report,
-} from "@material-ui/icons";
-import { Link, useLocation } from "react-router-dom";
+import HomeIcon from '@mui/icons-material/Home';
+import TimelineIcon from '@mui/icons-material/Timeline';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import SettingsIcon from '@mui/icons-material/Settings';
+import FlagIcon from '@mui/icons-material/Flag';
+
 
 export default function Sidebar() {
   const location = useLocation();
@@ -29,16 +28,16 @@ export default function Sidebar() {
           <ul className="sidebarList">
             <Link to="/" className="link">
             <li className={`sidebarListItem ${pathname === "/" ? "active" : ""}`}>
-              <LineStyle className="sidebarIcon" />
+              <HomeIcon className="sidebarIcon" />
               Home
             </li>
             </Link>
             <li className="sidebarListItem">
-              <Timeline className="sidebarIcon" />
+              <TimelineIcon className="sidebarIcon" />
               Analytics
             </li>
             <li className="sidebarListItem">
-              <TrendingUp className="sidebarIcon" />
+              <TrendingUpIcon className="sidebarIcon" />
               Sales
             </li>
           </ul>
@@ -48,22 +47,22 @@ export default function Sidebar() {
           <ul className="sidebarList">
             <Link to="/users" className="link">
               <li className={`sidebarListItem ${pathname === "/users" ? "active" : ""}`}>
-                <PermIdentity className="sidebarIcon" />
+                <PersonOutlineIcon className="sidebarIcon" />
                 Users
               </li>
             </Link>
             <Link to="/admin_products" className="link">
               <li className={`sidebarListItem ${pathname === "/admin_products" ? "active" : ""}`}>
-                <Storefront className="sidebarIcon" />
+                <StorefrontIcon className="sidebarIcon" />
                 Products
               </li>
             </Link>
             <li className="sidebarListItem">
-              <AttachMoney className="sidebarIcon" />
+              <AttachMoneyIcon className="sidebarIcon" />
               Orders
             </li>
             <li className="sidebarListItem">
-              <BarChart className="sidebarIcon" />
+              <BarChartIcon className="sidebarIcon" />
               Reports
             </li>
           </ul>
@@ -72,15 +71,15 @@ export default function Sidebar() {
           <h3 className="sidebarTitle">Notifications</h3>
           <ul className="sidebarList">
             <li className="sidebarListItem">
-              <MailOutline className="sidebarIcon" />
+              <MailOutlineIcon className="sidebarIcon" />
               Mail
             </li>
             <li className="sidebarListItem">
-              <DynamicFeed className="sidebarIcon" />
+              <DynamicFeedIcon className="sidebarIcon" />
               Feedback
             </li>
             <li className="sidebarListItem">
-              <ChatBubbleOutline className="sidebarIcon" />
+              <ChatBubbleOutlineIcon className="sidebarIcon" />
               Messages
             </li>
           </ul>
@@ -89,15 +88,15 @@ export default function Sidebar() {
           <h3 className="sidebarTitle">Staff</h3>
           <ul className="sidebarList">
             <li className="sidebarListItem">
-              <WorkOutline className="sidebarIcon" />
+              <SettingsIcon className="sidebarIcon" />
               Manage
             </li>
             <li className="sidebarListItem">
-              <Timeline className="sidebarIcon" />
+              <TimelineIcon className="sidebarIcon" />
               Analytics
             </li>
             <li className="sidebarListItem">
-              <Report className="sidebarIcon" />
+              <FlagIcon className="sidebarIcon" />
               Reports
             </li>
           </ul>
