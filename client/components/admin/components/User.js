@@ -2,17 +2,15 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import {
-    CalendarToday,
-    LocationSearching,
-    MailOutline,
-    PermIdentity,
-    PhoneAndroid,
-    Publish,
-  } from "@material-ui/icons";
 import { Box } from "@mui/system";
 import Fab from '@mui/material/Fab';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 import "../style/user.css";
 import faker from "faker";
 
@@ -57,24 +55,24 @@ export default function User(props) {
           <div className="userShowBottom">
             <span className="userShowTitle">Account Details</span>
             <div className="userShowInfo">
-              <PermIdentity className="userShowIcon" />
+              <PersonOutlineIcon className="userShowIcon" />
               <span className="userShowInfoTitle">{user.username}</span>
             </div>
             <div className="userShowInfo">
-              <CalendarToday className="userShowIcon" />
+              <CalendarMonthIcon className="userShowIcon" />
               <span className="userShowInfoTitle">10.12.1999</span>
             </div>
             <span className="userShowTitle">Contact Details</span>
             <div className="userShowInfo">
-              <PhoneAndroid className="userShowIcon" />
+              <PhoneAndroidIcon className="userShowIcon" />
               <span className="userShowInfoTitle">+1 123 456 67</span>
             </div>
             <div className="userShowInfo">
-              <MailOutline className="userShowIcon" />
+              <MailOutlineIcon className="userShowIcon" />
               <span className="userShowInfoTitle">{user.email}</span>
             </div>
             <div className="userShowInfo">
-              <LocationSearching className="userShowIcon" />
+              <LocationOnIcon className="userShowIcon" />
               <span className="userShowInfoTitle">New York | USA</span>
             </div>
           </div>
@@ -132,7 +130,7 @@ export default function User(props) {
                   alt=""
                 />
                 <label htmlFor="file">
-                  <Publish className="userUpdateIcon" />
+                  <FileUploadIcon className="userUpdateIcon" />
                 </label>
                 <input type="file" id="file" style={{ display: "none" }} />
               </div>

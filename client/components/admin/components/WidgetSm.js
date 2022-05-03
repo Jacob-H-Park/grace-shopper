@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import faker from "faker";
 import "../style/widgetSm.css";
-import { Visibility } from "@material-ui/icons";
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 export default function WidgetSm() {
   const users = useSelector(state => state.users);
@@ -30,7 +30,7 @@ export default function WidgetSm() {
                 </div>
                 <Link to={"/user/" + user.id}>
                   <button className="widgetSmButton">
-                    <Visibility className="widgetSmIcon" />
+                    <VisibilityIcon className="widgetSmIcon" />
                     Display
                   </button>
                 </Link>
