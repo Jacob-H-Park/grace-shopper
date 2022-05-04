@@ -3,6 +3,7 @@ import axios from "axios";
 //ACTION TYPES
 const GET_CART = "GET_CART";
 const ADD_TO_CART = "ADD_TO_CART";
+const UPDATE_ORDER = "UPDATE_ORDER";
 
 //ACTION CREATORS
 const _addToCart = (cart) => {
@@ -16,6 +17,13 @@ const _getCart = (cart) => {
   return {
     type: GET_CART,
     cart,
+  };
+};
+
+const _fulfillOrder = (orderFulfilled) => {
+  return {
+    type: UPDATE_ORDER,
+    orderFulfilled,
   };
 };
 
@@ -36,6 +44,19 @@ export const createCart = (userId) => {
       }
     } catch (e) {
       console.log(e);
+    }
+  };
+};
+
+export const fulfillOrder = (orderId) => {
+  return async (dispatch) => {
+    try {
+      const orderFulfilled = (
+        await axios.put(`/api/cart/update/${orderId}`, { orderId })
+      ).data;
+      dispatch(_fulfillOrder(orderFulfilled));
+    } catch (err) {
+      console.log(err);
     }
   };
 };
@@ -132,10 +153,10 @@ export const combineCart = (userId, cart) => {
     for (const item of Object.entries(cart)) {
       const flower = {
         id: item[1].id,
-        quantity: item[1].quantity
-      }
-      
-      dispatch(addToCart(userId,flower,flower.quantity));
+        quantity: item[1].quantity,
+      };
+
+      dispatch(addToCart(userId, flower, flower.quantity));
     }
   };
 };
@@ -193,6 +214,8 @@ const order = (state = {}, action) => {
       return action.cart;
     case ADD_TO_CART:
       return action.cart;
+    case UPDATE_ORDER:
+      return action.orderFulfilled;
     default:
       return state;
   }

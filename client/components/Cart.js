@@ -23,17 +23,18 @@ import {
   getCart,
   combineCart,
   increaseQuantity,
+  fulfillOrder,
 } from "../store/order";
 
 //still in process
-const StripeCheckout = (total) => {
+const StripeCheckout = (itemsInCart) => {
   fetch("/create-checkout-session", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      items: [{ id: 1, quantity: 1, total }],
+      itemsInCart,
     }),
   })
     .then((res) => {
@@ -173,7 +174,10 @@ const Cart = () => {
         <Button
           color="secondary"
           variant="contained"
-          onClick={() => StripeCheckout(total)}
+          onClick={() => {
+            StripeCheckout(order.products);
+            dispatch(fulfillOrder(order.id));
+          }}
           sx={{
             width: "90%",
             marginLeft: "16px",
