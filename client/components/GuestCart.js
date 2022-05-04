@@ -49,7 +49,7 @@ const GuestCart = () => {
   if (!cart || !Object.entries(cart).length) {
     return (
       <Box sx={{ width: "375px" }}>
-        <img src="/Images/empty-cart.svg" className="empty-img"/>
+        <img src="/Images/empty-cart.svg" className="empty-img" />
       </Box>
     );
   }
@@ -74,11 +74,13 @@ const GuestCart = () => {
         {Object.keys(cart).map((flowerName) => {
           return (
             <>
-              <ListItem 
+              <ListItem
                 alignItems="center"
                 secondaryAction={
                   <IconButton>
-                    <ClearIcon onClick={() => dispatch(handleDelete(flowerName))}/>
+                    <ClearIcon
+                      onClick={() => dispatch(handleDelete(flowerName))}
+                    />
                   </IconButton>
                 }
               >
@@ -88,7 +90,9 @@ const GuestCart = () => {
                   flexDirection="column"
                   alignItems="center"
                 >
-                  <IconButton onClick={() => dispatch(handleIncrease(flowerName))}>
+                  <IconButton
+                    onClick={() => dispatch(handleIncrease(flowerName))}
+                  >
                     <AddCircleOutlineIcon />
                   </IconButton>
                   {cart[flowerName].quantity}
@@ -98,7 +102,9 @@ const GuestCart = () => {
                       <RemoveCircleOutlineIcon />
                     </IconButton>
                   ) : (
-                    <IconButton onClick={() => dispatch(handleDecrease(flowerName))}>
+                    <IconButton
+                      onClick={() => dispatch(handleDecrease(flowerName))}
+                    >
                       <RemoveCircleOutlineIcon />
                     </IconButton>
                   )}
@@ -145,8 +151,23 @@ const GuestCart = () => {
       >
         Check Out
       </Button>
+      <Box container>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            color: "warning.main",
+            fontSize: "12px",
+            width: "90%",
+            marginLeft: "16px",
+            marginRight: "16px",
+            marginBottom: "16px",
+          }}
+        >
+          Please log in to check out
+        </Box>
+      </Box>
     </Box>
-
   );
 };
 

@@ -16,6 +16,12 @@ app.use("/api", require("./api"));
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "..", "public/index.html"))
 );
+app.get("/payment-success", (req, res) =>
+  res.sendFile(path.join(__dirname, "..", "public/paymentSuccess.html"))
+);
+app.get("/payment-error", (req, res) =>
+  res.sendFile(path.join(__dirname, "..", "public/paymentError.html"))
+);
 
 // // static file-serving middleware
 app.use(express.static(path.join(__dirname, "..", "public")));
@@ -52,33 +58,21 @@ app.post("/create-checkout-session", async (req, res) => {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
-      line_items: req.body.items.map((item) => {
+      line_items: req.body.itemsInCart.map((item) => {
         return {
           price_data: {
             currency: "usd",
             product_data: {
-              name: "Total",
+              name: item.name,
             },
-            unit_amount: item.total * 100,
+            unit_amount: item.price * 100,
           },
-          quantity: item.quantity,
+          quantity: item.lineItem.quantity,
         };
       }),
-      // line_items: req.body.items.map((item) => {
-      //   const storeItem = storeItems.get(item.id);
-      //   return {
-      //     price_data: {
-      //       currency: "usd",
-      //       product_data: {
-      //         name: storeItem.name,
-      //       },
-      //       unit_amount: storeItem.priceInCents,
-      //     },
-      //     quantity: item.quantity,
-      //   };
-      // }),
-      success_url: `http://localhost:8080/success.html`,
-      cancel_url: `http://localhost:8080/cancel.html`,
+
+      success_url: `http://localhost:8080/payment-success`,
+      cancel_url: `http://localhost:8080/payment-error`,
     });
 
     res.json({ url: session.url });
