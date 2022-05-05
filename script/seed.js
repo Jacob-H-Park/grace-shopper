@@ -97,7 +97,7 @@ async function seed() {
   await Product.create({
     name: "PETITE ODETTE",
     price: 56.0,
-    image_url: "/Images/roses/7-pink-roses-400x400-39400.jpeg",
+    image_url: "https://bloom-pics.s3.us-east-2.amazonaws.com/4da74da38cdc830ca59f70c156396a57",
     description: faker.lorem.sentences(),
     category: "rose",
     stock: 20,
@@ -105,7 +105,7 @@ async function seed() {
   await Product.create({
     name: "ODETTE",
     price: 78.0,
-    image_url: "/Images/roses/pink-roses-bouquet-400x400-37411.jpeg",
+    image_url: "https://bloom-pics.s3.us-east-2.amazonaws.com/0ac763ea989ff86ff287bfde74f4ed78",
     description: faker.lorem.sentences(),
     category: "rose",
     stock: 20,
