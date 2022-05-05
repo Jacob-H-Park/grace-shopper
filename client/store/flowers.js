@@ -51,12 +51,14 @@ export const updateProducts = (flower, history) => {
       flower
     );
     dispatch(_updateProducts(flowerToUpdate));
-    history.push("/inventory_management");
+    console.log('history',history)
+    history.push("/admin_products");
   };
 };
-export const createProducts = (name,price,category,stock,description, history) => {
-  return async () => {
-    await axios.post('/api/products/',{name,price,category,stock,description});
+export const createProducts = (name,price,category,stock,description,image_url,history) => {
+  return async (dispatch) => {
+    await axios.post('/api/products/',{name,price,category,stock,description,image_url});
+    console.log(history)
     history.push("/admin_products");
   };
 };
