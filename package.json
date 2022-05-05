@@ -39,6 +39,8 @@
     "multer": "^1.4.4",
     "pg": "^8.5.1",
     "prop-types": "^15.8.1",
+    "react-google-button": "^0.7.2",
+    "react-google-login": "^5.2.2",
     "react-material-ui-carousel": "^3.3.3",
     "react-swipeable-views": "^0.14.0",
     "sequelize": "^6.3.5",
@@ -71,6 +73,7 @@
     "redux-thunk": "^2.3.0",
     "style-loader": "^3.3.1",
     "supertest": "^4.0.2",
+    "url-loader": "^4.1.1",
     "webpack": "^5.15.0",
     "webpack-cli": "^4.3.1"
   }

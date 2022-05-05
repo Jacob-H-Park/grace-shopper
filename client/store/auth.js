@@ -117,6 +117,21 @@ export const logout = () => {
 }
 
 /**
+ * Google OAuth login 
+ */
+export const onSuccessGoogle = (response) => {
+  return async (dispatch) => {
+    console.log('Login Success: currentUser:', res.profileObj);
+    console.log('Response from google:', res);
+    // Check if a token was recieved and send it to our API:
+    if (response.tokenId) {
+      // const googleResponse = await axios.post('/auth/login')
+    }
+  }
+  
+};
+
+/**
  * REDUCER
  */
 export default function(state = {}, action) {

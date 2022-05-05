@@ -1,44 +1,160 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+// import { Link, Redirect } from "react-router-dom";
 
-import { authenticate } from "../store";
+import { GoogleLogin } from "react-google-login";
+import GoogleButton from "react-google-button";
+import {
+  Button,
+  Typography,
+  FormControl,
+  FormControlLabel,
+  Input,
+  InputLabel,
+  InputAdornment,
+  Checkbox,
+  Grid,
+  Paper,
+  Avatar,
+  IconButton,
+} from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import LoginIcon from '@mui/icons-material/Login';
+
+// import bloomLogo from "../../public/Images/bloomLogo.png";
+
+import { authenticate, onSuccessGoogle } from "../store";
+
+const clientId =
+  '1058128297512-29b55ub5cermd4npgdqef22vaa4qpgua.apps.googleusercontent.com';
+
+// MUI hook for generate and apply styles from classic .css way
+// const useStyles = makeStyles({
+//   textfield: {
+//     display: "inline-Block",
+//   },
+// });
 
 /**
  * COMPONENT
  */
 const AuthForm = (props) => {
-  const { name, displayName, handleSubmit, error } = props;
+  const { name, displayName, handleSubmit, onSuccess, error } = props;
+
+  // const classes = useStyles();
+
+  const [isRemember, setIsRemember] = useState(
+    localStorage.getItem("isRemember") === "true" ? true : false
+  );
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  // const onSuccess = (res) => {
+  //   console.log('Login Success: currentUser:', res.profileObj);
+  //   console.log('Response from google:', res);
+  // };
+
+  const onFailure = (res) => {
+    console.log('Login failed: res:', res);
+  };
+
+  const paperStyle={ padding: 20, height:'auto', width: 380, margin:"20px auto" };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        {name === "signup" &&
-          <div>
-            <label htmlFor="email">
-              <small>Email</small>
-            </label>
-            <input name="email" type="text" />
-          </div>
-        }
-        <div>
-          <label htmlFor="username">
-            <small>Username</small>
-          </label>
-          <input name="username" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-    </div>
+    <Grid>
+      <Paper elevation={10} style={paperStyle}>
+        <Grid align='center'>
+          {/* <Avatar src={bloomLogo} /> */}
+          <Avatar sx={{backgroundColor: '#1bbd7e'}}><LoginIcon/></Avatar>
+          <Typography variant="h4" sx={{fontFamily: "Abril Fatface", fontWeight: "600", marginTop: "5px", marginBottom: "15px"}}>Welcome to BLOOM.</Typography>
+        </Grid>
+        <form onSubmit={handleSubmit} name={name}>
+          { name === "signup" &&
+            <FormControl variant="standard" className="textfield" sx={{margin: "8px"}} fullWidth required>
+              <InputLabel htmlFor="email">Email</InputLabel>
+              <Input name="email"/>
+            </FormControl>
+          }
+          <FormControl variant="standard" className="textfield" sx={{margin: "8px"}} fullWidth required>
+            <InputLabel htmlFor="username">Username</InputLabel>
+            <Input name="username"/>
+          </FormControl>
+          <FormControl variant="standard" className="textfield" sx={{margin: "8px"}} fullWidth required>
+            <InputLabel htmlFor="password">Password</InputLabel>
+            <Input 
+              name="password"
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }  
+            />
+          </FormControl>
+          { name === "login" &&
+            <Typography color="textSecondary" sx={{margin: "8px"}}>
+              <strong>Forgot your password?</strong>
+            </Typography>
+          }
+          <FormControlLabel
+            label="Remember Me"
+            control={
+              <Checkbox
+                checked={isRemember}
+                onChange={() => setIsRemember(!isRemember)}
+              />
+            }
+            sx={{marginTop: "8px", marginBottom: "8px", marginLeft: "-3px"}}
+          />
+          <Button variant="contained" color="secondary" sx={{ margin: "0", backgroundColor: "#da0037", fontWeight: "600" }} type="submit" fullWidth>
+            {displayName}
+          </Button>
+        </form>
+        <Grid align='center'>
+          <h5>OR</h5>
+          <hr />
+          <GoogleLogin
+            clientId={clientId}
+            buttonText="Login"
+            render={renderProps => (
+              <GoogleButton onClick={renderProps.onClick} disabled={renderProps.disabled} style={{marginTop: "8px", marginBottom: "10px", display: "inline-block", justifyContent: "center", width: "100%"}}>
+                Log in with Google
+              </GoogleButton>
+            )}
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+            cookiePolicy={'single_host_origin'}
+            isSignedIn={true}
+          />
+          <Typography color="textSecondary" sx={{marginTop: "15px", fontSize: 14, marginBottom: "10px"}}>
+            By continuing, you agree to BLOOM's <strong>Terms of Service, Privacy Policy</strong>
+          </Typography>
+          <hr style={{width: "50%"}}></hr>
+          { name === "login" &&
+            <Typography color="textSecondary" sx={{marginTop: "10px"}}>
+              <strong>Not on BLOOM. yet?</strong>
+              <br />
+              <a href="/signup"><span style={{color: "blue", textDecoration: "underline"}}> Sign up </span></a>
+            </Typography>
+          }
+        </Grid>
+      </Paper>
+    </Grid>
   );
 };
 
@@ -79,6 +195,9 @@ const mapDispatch = (dispatch) => {
       } else {
         dispatch(authenticate(username, password, formName));
       }
+    },
+    onSuccess: (res) => {
+      dispatch(onSuccessGoogle(res))
     },
   };
 };
