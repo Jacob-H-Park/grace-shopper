@@ -17,17 +17,15 @@ import {
   Paper,
   Avatar,
   IconButton,
-} from '@mui/material';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import LoginIcon from '@mui/icons-material/Login';
-
-// import bloomLogo from "../../public/Images/bloomLogo.png";
+} from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import LoginIcon from "@mui/icons-material/Login";
 
 import { authenticate, onSuccessGoogle } from "../store";
 
 const clientId =
-  '1058128297512-29b55ub5cermd4npgdqef22vaa4qpgua.apps.googleusercontent.com';
+  "1058128297512-29b55ub5cermd4npgdqef22vaa4qpgua.apps.googleusercontent.com";
 
 // MUI hook for generate and apply styles from classic .css way
 // const useStyles = makeStyles({
@@ -64,33 +62,71 @@ const AuthForm = (props) => {
   // };
 
   const onFailure = (res) => {
-    console.log('Login failed: res:', res);
+    console.log("Login failed: res:", res);
   };
 
-  const paperStyle={ padding: 20, height:'auto', width: 380, margin:"20px auto" };
+  const paperStyle = {
+    padding: 20,
+    height: "auto",
+    width: 380,
+    margin: "20px auto",
+  };
 
   return (
     <Grid>
       <Paper elevation={10} style={paperStyle}>
-        <Grid align='center'>
-          {/* <Avatar src={bloomLogo} /> */}
-          <Avatar sx={{backgroundColor: '#1bbd7e'}}><LoginIcon/></Avatar>
-          <Typography variant="h4" sx={{fontFamily: "Abril Fatface", fontWeight: "600", marginTop: "5px", marginBottom: "15px"}}>Welcome to BLOOM.</Typography>
+        <Grid align="center">
+          <Avatar
+            sx={{ backgroundColor: "#1bbd7e" }}
+            alt="Bloom Logo"
+            src="/Images/bloomLogo.png"
+          >
+            <LoginIcon />
+          </Avatar>
+          <Typography
+            variant="h4"
+            sx={{
+              fontFamily: "Abril Fatface",
+              fontWeight: "600",
+              marginTop: "5px",
+              marginBottom: "15px",
+            }}
+          >
+            Welcome to Bloom
+          </Typography>
         </Grid>
         <form onSubmit={handleSubmit} name={name}>
-          { name === "signup" &&
-            <FormControl variant="standard" className="textfield" sx={{margin: "8px"}} fullWidth required>
+          {name === "signup" && (
+            <FormControl
+              variant="standard"
+              className="textfield"
+              sx={{ margin: "8px" }}
+              fullWidth
+              required
+            >
               <InputLabel htmlFor="email">Email</InputLabel>
-              <Input name="email"/>
+              <Input name="email" />
             </FormControl>
-          }
-          <FormControl variant="standard" className="textfield" sx={{margin: "8px"}} fullWidth required>
+          )}
+          <FormControl
+            variant="standard"
+            className="textfield"
+            sx={{ margin: "8px" }}
+            fullWidth
+            required
+          >
             <InputLabel htmlFor="username">Username</InputLabel>
-            <Input name="username"/>
+            <Input name="username" />
           </FormControl>
-          <FormControl variant="standard" className="textfield" sx={{margin: "8px"}} fullWidth required>
+          <FormControl
+            variant="standard"
+            className="textfield"
+            sx={{ margin: "8px" }}
+            fullWidth
+            required
+          >
             <InputLabel htmlFor="password">Password</InputLabel>
-            <Input 
+            <Input
               name="password"
               type={showPassword ? "text" : "password"}
               endAdornment={
@@ -103,14 +139,14 @@ const AuthForm = (props) => {
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
-              }  
+              }
             />
           </FormControl>
-          { name === "login" &&
-            <Typography color="textSecondary" sx={{margin: "8px"}}>
+          {name === "login" && (
+            <Typography color="textSecondary" sx={{ margin: "8px" }}>
               <strong>Forgot your password?</strong>
             </Typography>
-          }
+          )}
           <FormControlLabel
             label="Remember Me"
             control={
@@ -119,39 +155,64 @@ const AuthForm = (props) => {
                 onChange={() => setIsRemember(!isRemember)}
               />
             }
-            sx={{marginTop: "8px", marginBottom: "8px", marginLeft: "-3px"}}
+            sx={{ marginTop: "8px", marginBottom: "8px", marginLeft: "-3px" }}
           />
-          <Button variant="contained" color="secondary" sx={{ margin: "0", backgroundColor: "#da0037", fontWeight: "600" }} type="submit" fullWidth>
+          <Button
+            variant="contained"
+            color="secondary"
+            sx={{ margin: "0", backgroundColor: "#da0037", fontWeight: "600" }}
+            type="submit"
+            fullWidth
+          >
             {displayName}
           </Button>
         </form>
-        <Grid align='center'>
+        <Grid align="center">
           <h5>OR</h5>
           <hr />
           <GoogleLogin
             clientId={clientId}
             buttonText="Login"
-            render={renderProps => (
-              <GoogleButton onClick={renderProps.onClick} disabled={renderProps.disabled} style={{marginTop: "8px", marginBottom: "10px", display: "inline-block", justifyContent: "center", width: "100%"}}>
+            render={(renderProps) => (
+              <GoogleButton
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+                style={{
+                  marginTop: "8px",
+                  marginBottom: "10px",
+                  display: "inline-block",
+                  justifyContent: "center",
+                  width: "100%",
+                }}
+              >
                 Log in with Google
               </GoogleButton>
             )}
             onSuccess={onSuccess}
             onFailure={onFailure}
-            cookiePolicy={'single_host_origin'}
+            cookiePolicy={"single_host_origin"}
             isSignedIn={true}
           />
-          <Typography color="textSecondary" sx={{marginTop: "15px", fontSize: 14, marginBottom: "10px"}}>
-            By continuing, you agree to BLOOM's <strong>Terms of Service, Privacy Policy</strong>
+          <Typography
+            color="textSecondary"
+            sx={{ marginTop: "15px", fontSize: 14, marginBottom: "10px" }}
+          >
+            By continuing, you agree to BLOOM's{" "}
+            <strong>Terms of Service, Privacy Policy</strong>
           </Typography>
-          <hr style={{width: "50%"}}></hr>
-          { name === "login" &&
-            <Typography color="textSecondary" sx={{marginTop: "10px"}}>
+          <hr style={{ width: "50%" }}></hr>
+          {name === "login" && (
+            <Typography color="textSecondary" sx={{ marginTop: "10px" }}>
               <strong>Not on BLOOM. yet?</strong>
               <br />
-              <a href="/signup"><span style={{color: "blue", textDecoration: "underline"}}> Sign up </span></a>
+              <a href="/signup">
+                <span style={{ color: "blue", textDecoration: "underline" }}>
+                  {" "}
+                  Sign up{" "}
+                </span>
+              </a>
             </Typography>
-          }
+          )}
         </Grid>
       </Paper>
     </Grid>
@@ -197,7 +258,7 @@ const mapDispatch = (dispatch) => {
       }
     },
     onSuccess: (res) => {
-      dispatch(onSuccessGoogle(res))
+      dispatch(onSuccessGoogle(res));
     },
   };
 };

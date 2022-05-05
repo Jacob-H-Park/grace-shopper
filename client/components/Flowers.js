@@ -5,7 +5,7 @@ import {
   IconButton,
   Snackbar,
   Slide,
-  Pagination
+  Pagination,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,7 +22,6 @@ const Flowers = () => {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setPostsPerPage] = useState(12);
-
 
   //Snackbar state hook
   const [state, setState] = useState({
@@ -62,15 +61,18 @@ const Flowers = () => {
       </IconButton>
     </>
   );
-  
+
   //Pagination
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = flowers.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = flowers.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   const paginate = (evt, value) => {
     setCurrentPage(value);
-  }
+  };
 
   return (
     <div>
@@ -81,19 +83,25 @@ const Flowers = () => {
           display="flex"
           flexDirection="column-reverse"
         >
-          <img
-            src="/Images/headershipping.svg"
-            style={{ width: "100%" }}
-          />
+          <img src="/Images/headershipping.svg" style={{ width: "100%" }} />
         </Box>
-          <Grid container spacing={3} sx={{ padding: "2rem" }}>
-            {currentProducts.map((flower) => {
-              return (
-                <FlowerCard flower={flower} user={user} SlideTransition={SlideTransition} handleClick={handleClick}/>
-              );
-            })}
-          </Grid>
-          <ProductPagination productsPerPage={productsPerPage} totalProducts={flowers.length} paginate={paginate} />
+        <Grid container spacing={3} sx={{ padding: "2rem" }}>
+          {currentProducts.map((flower) => {
+            return (
+              <FlowerCard
+                flower={flower}
+                user={user}
+                SlideTransition={SlideTransition}
+                handleClick={handleClick}
+              />
+            );
+          })}
+        </Grid>
+        <ProductPagination
+          productsPerPage={productsPerPage}
+          totalProducts={flowers.length}
+          paginate={paginate}
+        />
       </Box>
       <Snackbar
         onClose={handleClose}
