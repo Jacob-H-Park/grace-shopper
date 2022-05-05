@@ -14,14 +14,18 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Link from '@mui/material/Link';
 import LockIcon from '@mui/icons-material/Lock';
-// import { makeStyles } from '@mui/styles';
+import bloomLogo from "../../public/Images/bloomLogo.png";
 
 import { authenticate } from "../store";
 import { Block } from "@mui/icons-material";
@@ -48,33 +52,41 @@ const AuthForm = (props) => {
     localStorage.getItem("isRemember") === "true" ? true : false
   );
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   const onSuccess = (res) => {
     console.log('Login Success: currentUser:', res.profileObj);
-    // alert(
-    //   `Logged in successfully welcome ${res.profileObj.name} 😍. \n See console for full profile object.`
-    // );
     // refreshTokenSetup(res);
   };
 
   const onFailure = (res) => {
     console.log('Login failed: res:', res);
-    // alert(
-    //   `Failed to login. 😢 Please ping this to repo owner twitter.com/sivanesh_fiz`
-    // );
   };
 
-  const paperStyle={ padding: 20, height:'70vh', width: 380, margin:"20px auto" };
-  const avatarStyle={backgroundColor:'#1bbd7e'}
-  const btnstyle={margin:'8px 0'}
+  const paperStyle={ padding: 20, height:'auto', width: 380, margin:"20px auto" };
 
   return (
     <Grid>
       <Paper elevation={10} style={paperStyle}>
-          <Grid align='center'>
-                {/* <Avatar style={avatarStyle}><LockIcon/></Avatar> */}
-            <Typography variant="h4">{displayName}</Typography>
-          </Grid>
-          {/* <TextField label='Username' placeholder='Enter username' variant="standard" fullWidth required/> */}
+        <Grid align='center'>
+          <Avatar src={bloomLogo} />
+          <Typography variant="h4" sx={{fontFamily: "Abril Fatface", fontWeight: "600", marginTop: "5px", marginBottom: "15px"}}>Welcome to BLOOM.</Typography>
+        </Grid>
+        <form onSubmit={handleSubmit} name={name}>
+          { name === "signup" &&
+            <FormControl variant="standard" className="textfield" sx={{margin: "8px"}} fullWidth required>
+              <InputLabel htmlFor="email">Email</InputLabel>
+              <Input name="email"/>
+            </FormControl>
+          }
           <FormControl variant="standard" className="textfield" sx={{margin: "8px"}} fullWidth required>
             <InputLabel htmlFor="username">Username</InputLabel>
             <Input name="username"/>
@@ -82,8 +94,27 @@ const AuthForm = (props) => {
           {/* <TextField label='Password' placeholder='Enter password' type='password' fullWidth required/> */}
           <FormControl variant="standard" className="textfield" sx={{margin: "8px"}} fullWidth required>
             <InputLabel htmlFor="password">Password</InputLabel>
-            <Input name="password"/>
+            <Input 
+              name="password"
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }  
+            />
           </FormControl>
+          { name === "login" &&
+            <Typography color="textSecondary" sx={{margin: "8px"}}>
+              <strong>Forgot your password?</strong>
+            </Typography>
+          }
           <FormControlLabel
             label="Remember Me"
             control={
@@ -94,11 +125,11 @@ const AuthForm = (props) => {
             }
             sx={{marginTop: "8px", marginBottom: "8px", marginLeft: "-3px"}}
           />
-          {/* <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button> */}
           <Button variant="contained" color="secondary" sx={{ margin: "0", backgroundColor: "#da0037" }} type="submit" fullWidth>
             {displayName}
           </Button>
-          <Grid align='center'>
+        </form>
+        <Grid align='center'>
           <h5>OR</h5>
           <hr />
           <GoogleLogin
@@ -118,119 +149,16 @@ const AuthForm = (props) => {
             By continuing, you agree to BLOOM's <strong>Terms of Service, Privacy Policy</strong>
           </Typography>
           <hr style={{width: "50%"}}></hr>
-          <Typography color="textSecondary" sx={{marginTop: "10px"}}>
-            <strong>Not on BLOOM. yet?</strong>
-            <br />
-            <a href="/signup"><span style={{color: "blue", textDecoration: "underline"}}> Sign up </span></a>
-          </Typography>
-          </Grid>
-          {/* <Typography >
-                <Link href="#" >
-                  Forgot password ?
-          </Link>
-          </Typography>
-          <Typography > Do you have an account ?
-                <Link href="#" >
-                  Sign Up 
-          </Link>
-          </Typography> */}
+          { name === "login" &&
+            <Typography color="textSecondary" sx={{marginTop: "10px"}}>
+              <strong>Not on BLOOM. yet?</strong>
+              <br />
+              <a href="/signup"><span style={{color: "blue", textDecoration: "underline"}}> Sign up </span></a>
+            </Typography>
+          }
+        </Grid>
       </Paper>
     </Grid>
-    // <div className="card" style={{ paddingTop: "1%", margin: "auto", textAlign: "center", width: 380 }}>
-    //   <Card className="card-body">
-    //     <CardContent>
-    //       <Typography variant="h4">{displayName}</Typography>
-    //       <br />
-    //       <form onSubmit={handleSubmit} name={name}>
-    //         {name === "signup" &&
-    //           <div>
-    //             <label htmlFor="email">
-    //               <small>Email</small>
-    //             </label>
-    //             <input name="email" type="text" />
-    //           </div>
-    //         }
-    //         {/* <TextField
-    //           label="username"
-    //           id="margin-normal"
-    //           name="username"
-    //           helperText="Enter your full name"
-    //         /> */}
-    //         <Box
-    //         component="form"
-    //         sx={{
-    //           '& > :not(style)': { m: 1 },
-    //           display: 'flex',
-    //           alignItems: 'center',
-    //           flexDirection: 'column',
-    //         }}
-    //         noValidate
-    //         autoComplete="off"
-    //         >
-    //         <FormControl variant="standard" className="textfield">
-    //           <InputLabel htmlFor="username">Username</InputLabel>
-    //           <Input name="username" sx={{margin: "0"}}/>
-    //         </FormControl>
-    //         {/* <div>
-    //           <label htmlFor="username">
-    //             <small>Username</small>
-    //           </label>
-    //           <input name="username" type="text" />
-    //         </div> */}
-    //         <FormControl variant="standard" className="textfield">
-    //           <InputLabel htmlFor="password">Password</InputLabel>
-    //           <Input name="password" sx={{margin: "0"}}/>
-    //         </FormControl>
-    //         {/* <div>
-    //           <label htmlFor="password">
-    //             <small>Password</small>
-    //           </label>
-    //           <input name="password" type="password" />
-    //         </div> */}
-    //         <FormControl variant="standard" className="textfield">
-    //           <FormControlLabel
-    //             label={"Remember Me"}
-    //             control={
-    //               <Checkbox
-    //                 checked={isRemember}
-    //                 onChange={() => setIsRemember(!isRemember)}
-    //               />
-    //             }
-    //             // style={{marginLeft: "-61px"}}
-    //           />
-    //         </FormControl>
-    //         </Box>
-    //         <CardActions sx={{ justifyContent: "center", margin: "0", padding: "0" }}>
-    //           <Button variant="contained" color="secondary" sx={{ margin: "0", backgroundColor: "#da0037" }} type="submit">
-    //             {displayName}
-    //           </Button>
-    //         </CardActions>
-    //         {/* <br /> */}
-    //         {error && error.response && <div> {error.response.data} </div>}
-    //       </form>
-    //       <h6>OR</h6>
-    //       <hr />
-    //       <GoogleLogin
-    //         clientId={clientId}
-    //         buttonText="Login"
-    //         render={renderProps => (
-    //           <GoogleButton onClick={renderProps.onClick} disabled={renderProps.disabled} style={{marginTop: "8px", marginBottom: "10px", display: "inline-block", justifyContent: "center"}}>
-    //             Log in with Google
-    //           </GoogleButton>
-    //         )}
-    //         onSuccess={onSuccess}
-    //         onFailure={onFailure}
-    //         cookiePolicy={'single_host_origin'}
-    //         isSignedIn={true}
-    //       />
-    //       <Typography color="textSecondary">
-    //         Already have an account?
-    //         <br />
-    //         <a href="/login"><span style={{color: "blue", textDecoration: "underline"}}> Login </span></a>
-    //       </Typography>
-    //     </CardContent>
-    //   </Card>
-    // </div>
   );
 };
 
