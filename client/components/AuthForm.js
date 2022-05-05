@@ -4,31 +4,27 @@ import { connect } from "react-redux";
 
 import { GoogleLogin } from "react-google-login";
 import GoogleButton from "react-google-button";
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import CardActions from '@mui/material/CardActions';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import Input from '@mui/material/Input';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import TextField from '@mui/material/TextField';
-import Checkbox from '@mui/material/Checkbox';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
+import {
+  Button,
+  Typography,
+  FormControl,
+  FormControlLabel,
+  Input,
+  InputLabel,
+  InputAdornment,
+  Checkbox,
+  Grid,
+  Paper,
+  Avatar,
+  IconButton,
+} from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import Link from '@mui/material/Link';
-import LockIcon from '@mui/icons-material/Lock';
-import bloomLogo from "../../public/Images/bloomLogo.png";
+import LoginIcon from '@mui/icons-material/Login';
 
-import { authenticate } from "../store";
-import { Block } from "@mui/icons-material";
+// import bloomLogo from "../../public/Images/bloomLogo.png";
+
+import { authenticate, onSuccessGoogle } from "../store";
 
 const clientId =
   '1058128297512-29b55ub5cermd4npgdqef22vaa4qpgua.apps.googleusercontent.com';
@@ -44,7 +40,7 @@ const clientId =
  * COMPONENT
  */
 const AuthForm = (props) => {
-  const { name, displayName, handleSubmit, error } = props;
+  const { name, displayName, handleSubmit, onSuccess, error } = props;
 
   // const classes = useStyles();
 
@@ -62,10 +58,10 @@ const AuthForm = (props) => {
     event.preventDefault();
   };
 
-  const onSuccess = (res) => {
-    console.log('Login Success: currentUser:', res.profileObj);
-    // refreshTokenSetup(res);
-  };
+  // const onSuccess = (res) => {
+  //   console.log('Login Success: currentUser:', res.profileObj);
+  //   console.log('Response from google:', res);
+  // };
 
   const onFailure = (res) => {
     console.log('Login failed: res:', res);
@@ -77,7 +73,8 @@ const AuthForm = (props) => {
     <Grid>
       <Paper elevation={10} style={paperStyle}>
         <Grid align='center'>
-          <Avatar src={bloomLogo} />
+          {/* <Avatar src={bloomLogo} /> */}
+          <Avatar sx={{backgroundColor: '#1bbd7e'}}><LoginIcon/></Avatar>
           <Typography variant="h4" sx={{fontFamily: "Abril Fatface", fontWeight: "600", marginTop: "5px", marginBottom: "15px"}}>Welcome to BLOOM.</Typography>
         </Grid>
         <form onSubmit={handleSubmit} name={name}>
@@ -91,7 +88,6 @@ const AuthForm = (props) => {
             <InputLabel htmlFor="username">Username</InputLabel>
             <Input name="username"/>
           </FormControl>
-          {/* <TextField label='Password' placeholder='Enter password' type='password' fullWidth required/> */}
           <FormControl variant="standard" className="textfield" sx={{margin: "8px"}} fullWidth required>
             <InputLabel htmlFor="password">Password</InputLabel>
             <Input 
@@ -125,7 +121,7 @@ const AuthForm = (props) => {
             }
             sx={{marginTop: "8px", marginBottom: "8px", marginLeft: "-3px"}}
           />
-          <Button variant="contained" color="secondary" sx={{ margin: "0", backgroundColor: "#da0037" }} type="submit" fullWidth>
+          <Button variant="contained" color="secondary" sx={{ margin: "0", backgroundColor: "#da0037", fontWeight: "600" }} type="submit" fullWidth>
             {displayName}
           </Button>
         </form>
@@ -199,6 +195,9 @@ const mapDispatch = (dispatch) => {
       } else {
         dispatch(authenticate(username, password, formName));
       }
+    },
+    onSuccess: (res) => {
+      dispatch(onSuccessGoogle(res))
     },
   };
 };
