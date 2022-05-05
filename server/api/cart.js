@@ -2,7 +2,7 @@ const router = require("express").Router();
 const Order = require("../db/models/Order");
 const Product = require("../db/models/Product");
 const LineItem = require("../db/models/LineItem");
-const { requireLoggedIn, not_requireLoggedIn } = require('./backendProtect');
+const { requireLoggedIn, not_requireLoggedIn } = require("./backendProtect");
 
 // Route "/api/cart"
 
@@ -23,6 +23,15 @@ router.get("/:userId", not_requireLoggedIn, async (req, res, next) => {
   }
 });
 
+router.put("/update/:orderId", async (req, res, next) => {
+  try {
+    const orderFulfilled = await Order.findByPk(req.body.orderId);
+    res.send(await orderFulfilled.update({ isFulfilled: true })).status(200);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.put("/:userId", async (req, res, next) => {
   try {
     const orderId = req.body.orderId;
@@ -32,26 +41,25 @@ router.put("/:userId", async (req, res, next) => {
     const singleProduct = await LineItem.findOne({
       where: {
         orderId,
-        productId
-      }
+        productId,
+      },
     });
 
     let quantity = singleProduct.quantity;
 
-    if(type === 'increase') {
+    if (type === "increase") {
       quantity = quantity + 1;
-    };
+    }
 
-    if(type === 'decrease') {
+    if (type === "decrease") {
       quantity = quantity - 1 <= 1 ? 1 : quantity - 1;
-    };
+    }
 
     res.send(await singleProduct.update({ quantity: quantity })).status(200);
-
-  } catch(e) {
+  } catch (e) {
     next(e);
   }
-})
+});
 
 router.post("/:userId", not_requireLoggedIn, async (req, res, next) => {
   try {
@@ -86,7 +94,7 @@ router.post("/:userId", not_requireLoggedIn, async (req, res, next) => {
   }
 });
 
-router.delete('/:userId', async (req, res, next) => {
+router.delete("/:userId", async (req, res, next) => {
   try {
     const orderId = req.body.orderId;
     const productId = req.body.productId;
@@ -94,14 +102,14 @@ router.delete('/:userId', async (req, res, next) => {
     const singleProduct = await LineItem.findOne({
       where: {
         orderId,
-        productId
-      }
+        productId,
+      },
     });
 
     await singleProduct.destroy();
 
     res.sendStatus(200);
-  } catch(e) {
+  } catch (e) {
     next(e);
   }
 });

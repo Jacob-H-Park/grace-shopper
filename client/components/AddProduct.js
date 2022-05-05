@@ -1,6 +1,15 @@
 import React from "react";
 import { createProducts } from "../store/flowers";
 import { connect } from "react-redux";
+import axios from 'axios';
+
+async function postImage({image}) {
+    const formData = new FormData();
+    formData.append("image", image)
+    const result = await axios.post('/api/images', formData, { headers: {'Content-Type': 'multipart/form-data'}})
+    return result.data
+  }
+  
 class AddProduct extends React.Component{
     constructor(){
         super();
@@ -11,9 +20,11 @@ class AddProduct extends React.Component{
             category: '',
             description: '',
             image_url: '',
+            file:''
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.fileSelected = this.fileSelected.bind(this);
     }
     handleChange(evt) {
         this.setState({
@@ -21,15 +32,27 @@ class AddProduct extends React.Component{
         });
         console.log(this.state)
     }
-    handleSubmit(ev) {
-        const { name, price, stock, category,description,image_url } = this.state;
+    async handleSubmit(ev) {
+        const { name, price, stock, category,description, file } = this.state;
         ev.preventDefault();
-        console.log('submit!')
-        this.props.createProduct(name,price,category,stock,description)
+        const result = await postImage({image:file})
+        const _imageUrl = result.imagePath
+        this.setState({
+            image_url: _imageUrl
+        })
+        const {image_url} = this.state
+        this.props.createProduct(name,price,category,stock,description,image_url)
+    }
+    fileSelected(ev) {
+        console.log(ev.target.files)
+        const file = ev.target.files[0]
+        this.setState({
+            file: file
+        })
     }
     render(){
-        const { name, price, stock, category,description,image_url } = this.state;
-        const { handleSubmit, handleChange } = this;
+        const { name, price, stock, category,description} = this.state;
+        const { handleSubmit, handleChange,fileSelected } = this;
         return(
             <div className="productList">
                 <form onSubmit={handleSubmit}>
@@ -40,7 +63,7 @@ class AddProduct extends React.Component{
                     <input name = 'price' onChange={handleChange} value = {price}></input>
         
                     <label>Product Category:</label>
-                    <select onChange={handleChange} value = {category}>
+                    <select name = 'category' onChange={handleChange} value = {category}>
                         <option value="rose">Roses</option>
                         <option value="tulip">Tulips</option>
                         <option value="orchid">Orchids</option>
@@ -54,10 +77,10 @@ class AddProduct extends React.Component{
 
                     <label>Description:</label>
                     <input name = 'description' onChange={handleChange} value = {description}></input>
-        
+
                     {/* to be able to upload images*/}
                     <label>Product images:</label>
-                    
+                    <input id='imageInput' type="file" accept ="image/*" onChange={fileSelected}></input>
                     <button type="submit">Submit</button>
                 </form>
             </div>
@@ -67,8 +90,8 @@ class AddProduct extends React.Component{
 
 const mapDispatch = (dispatch, { history }) => {
     return {
-      createProduct: (name,price,category,stock,description) => {
-        dispatch(createProducts(name,price,category,stock, description, history));
+      createProduct: (name,price,category,stock,description,image_url) => {
+        dispatch(createProducts(name,price,category,stock, description,image_url,history));
       },
     };
   };
