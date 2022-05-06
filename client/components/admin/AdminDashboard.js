@@ -23,10 +23,14 @@ const AdminDashboard = ()=>{
             {/* <Link to="/admin_products">View Products</Link>
             <Link to="/admin_orders">View Orders</Link>
             <Link to="/admin_promotion">View Promotion</Link> */}
-            <Router>
-                {/* <Topbar /> */}
+            <Sidebar />
+            {/* <UserList />
+            <NewUser />
+            <ProductInfo /> */}
+            {/* <Router>
+               
                 <div className="container">
-                    <Sidebar />
+                    
                     <Switch>
                         <Route exact path="/">
                             <Home />
@@ -42,12 +46,12 @@ const AdminDashboard = ()=>{
                             <ProductInfo />
                         </Route>
                         <Route path="/add_product">
-                            <AddProduct />
+                            component = <AddProduct />
                         </Route>
                         <Route path="/editflowerinfo/:id" component={EditProduct} />  
                     </Switch>
                 </div>
-            </Router>
+            </Router> */}
         </div>
 
     )

@@ -21,7 +21,9 @@ import EditUserInfo from "./components/EditUserInfo";
 import ChangePassword from "./components/ChangePassword";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import AddProduct from "./components/AddProduct";
-
+import UserList from "./components/admin/components/UserList";
+import NewUser from "./components/admin/components/newUser";
+import User from "./components/admin/components/User";
 import { me } from "./store";
 import { fetchProducts } from "./store/flowers";
 
@@ -49,6 +51,9 @@ class App extends Component {
                 <Route path="/cart" component={Cart} />
                 <Route path="/admin_products" component={ProductInfo} />
                 <Route path="/add_product" component={AddProduct} />
+                <Route path="/users" component={UserList} />
+                <Route path="/newUsers" component={NewUser} />
+                <Route path="/user/:userId" component={User} />
               </Switch>
             ) : (
               <Switch>

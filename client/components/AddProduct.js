@@ -30,10 +30,9 @@ class AddProduct extends React.Component{
         this.setState({
             [evt.target.name]: evt.target.value,
         });
-        console.log(this.state)
     }
     async handleSubmit(ev) {
-        const { name, price, stock, category,description, file } = this.state;
+        const { name, price, stock, category,description,file} = this.state;
         ev.preventDefault();
         const result = await postImage({image:file})
         const _imageUrl = result.imagePath
@@ -41,7 +40,15 @@ class AddProduct extends React.Component{
             image_url: _imageUrl
         })
         const {image_url} = this.state
-        this.props.createProduct(name,price,category,stock,description,image_url)
+        const newFlower = {
+            name,
+            price,
+            stock,
+            category,
+            description,
+            image_url
+        }
+        this.props.createProduct({...newFlower})
     }
     fileSelected(ev) {
         console.log(ev.target.files)
@@ -88,13 +95,14 @@ class AddProduct extends React.Component{
     }
 }
 
-const mapDispatch = (dispatch, { history }) => {
+const mapDispatch = (dispatch, ownProps) => {
+    console.log('mapdispatch',ownProps)
     return {
-      createProduct: (name,price,category,stock,description,image_url) => {
-        dispatch(createProducts(name,price,category,stock, description,image_url,history));
+      createProduct: (newFlower) => {
+        dispatch(createProducts(newFlower,ownProps.history));
       },
     };
-  };
+};
 
 
 export default connect(null,mapDispatch)(AddProduct);

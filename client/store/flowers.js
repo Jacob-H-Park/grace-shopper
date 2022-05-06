@@ -1,9 +1,9 @@
 import axios from "axios";
-
 /* Action Types */
 const SET_PRODUCTS = "SET_PRODUCTS";
 const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 const UPDATE_PRODUCT = "UPDATE_PRODUCT";
+const ADD_PRODUCT ='ADD_PRODUCT'
 /* Action Creators */
 const _fetchProducts = (allFlowers) => {
   return {
@@ -21,6 +21,12 @@ const _updateProducts = (flowerToUpdate) => {
   return {
     type: UPDATE_PRODUCT,
     flowerToUpdate,
+  };
+};
+const _addProduct = (newFlower) => {
+  return {
+    type: ADD_PRODUCT,
+    newFlower,
   };
 };
 /* Thunks */
@@ -55,10 +61,11 @@ export const updateProducts = (flower, history) => {
     history.push("/admin_products");
   };
 };
-export const createProducts = (name,price,category,stock,description,image_url,history) => {
+export const createProducts = (_newFlower,history) => {
   return async (dispatch) => {
-    await axios.post('/api/products/',{name,price,category,stock,description,image_url});
-    console.log(history)
+    const newFlower = (await axios.post('/api/products/',_newFlower)).data;
+    dispatch(_addProduct(newFlower))
+    console.log('console',history)
     history.push("/admin_products");
   };
 };
@@ -73,6 +80,8 @@ export default function (state = [], action) {
       return state.map((flower) =>
         flower.id !== action.flowerToUpdate.id ? flower : action.flowerToUpdate
       );
+    case ADD_PRODUCT:
+      return [...state,action.newFlower];
     default:
       return state;
   }

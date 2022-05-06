@@ -19,7 +19,7 @@ router.delete("/:id", requireAdmin, async (req, res, next) => {
 router.post('/',async(req,res,next)=>{
   try{
     const product = await Product.create(req.body)
-    res.send(product).sendStatus(204)
+    res.send(product).sendStatus(201)
   }catch(err){
     next(err)
   }
