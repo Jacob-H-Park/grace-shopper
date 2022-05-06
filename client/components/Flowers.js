@@ -97,11 +97,13 @@ const Flowers = () => {
             );
           })}
         </Grid>
-        <ProductPagination
-          productsPerPage={productsPerPage}
-          totalProducts={flowers.length}
-          paginate={paginate}
-        />
+        <Box display="flex" justifyContent="center">
+          <ProductPagination
+            productsPerPage={productsPerPage}
+            totalProducts={flowers.length}
+            paginate={paginate}
+          />
+        </Box>
       </Box>
       <Snackbar
         onClose={handleClose}
