@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { Box, Grid, Typography, Button, Divider } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Typography,
+  Button,
+  Divider,
+  Slide,
+  Snackbar,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import FlowerDetailTabs from "./FlowerDetailTabs";
 
@@ -14,6 +22,32 @@ const SingleFlower = (props) => {
   });
   const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
+  //Snackbar state hook
+  const [state, setState] = useState({
+    open: false,
+    Transition: Slide,
+  });
+
+  const SlideTransition = (props) => {
+    return <Slide {...props} direction="up" />;
+  };
+
+  //for snackbar
+  const handleClick = (Transition) => {
+    setState({
+      open: true,
+      Transition,
+    });
+  };
+
+  //for snackbar
+  const handleClose = () => {
+    setState({
+      ...state,
+      open: false,
+    });
+  };
 
   //buys time for useSelector to grab the clicked flower info when page's refreshed
   if (!flower) {
@@ -75,6 +109,7 @@ const SingleFlower = (props) => {
               }}
               onClick={() => {
                 dispatch(addToCart(user.id, flower));
+                handleClick(SlideTransition);
               }}
               variant="contained"
               startIcon={<AddIcon />}
@@ -96,6 +131,15 @@ const SingleFlower = (props) => {
           <Divider sx={{ mt: 3 }}></Divider>
           <FlowerDetailTabs />
         </Grid>
+        <Snackbar
+          onClose={handleClose}
+          autoHideDuration={2500}
+          message="Added to Cart"
+          open={state.open}
+          TransitionComponent={state.Transition}
+          key={state.Transition.name}
+          // action={action}
+        />
       </Grid>
     </>
   );
