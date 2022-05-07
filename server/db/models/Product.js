@@ -20,6 +20,15 @@ const Product = db.define("product", {
   image_url: {
     type: STRING,
   },
+  image_url2: {
+    type: STRING,
+  },
+  image_url3: {
+    type: STRING,
+  },
+  image_url4: {
+    type: STRING,
+  },
   stock: {
     type: INTEGER,
   },
