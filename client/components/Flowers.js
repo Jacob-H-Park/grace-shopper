@@ -1,11 +1,5 @@
 import CloseIcon from "@mui/icons-material/Close";
-import {
-  Box,
-  Grid,
-  IconButton,
-  Snackbar,
-  Slide
-} from "@mui/material";
+import { Box, Grid, IconButton, Snackbar, Slide } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FlowerCard from "./FlowerCard";

@@ -24,6 +24,7 @@ import AddProduct from "./components/AddProduct";
 import UserList from "./components/admin/components/UserList";
 import NewUser from "./components/admin/components/newUser";
 import User from "./components/admin/components/User";
+import Footer from "./components/Footer";
 import { me } from "./store";
 import { fetchProducts } from "./store/flowers";
 import FlowerCategories from "./components/FlowerTypes/FlowerCategories";
@@ -44,8 +45,8 @@ class App extends Component {
           {isLoggedIn ? (
             isAdmin ? (
               <Switch>
-                <Route exact path="/admin_dashboard" component={AdminDashboard} />
-                <Route path="/editflowerinfo/:id" component={EditProduct} />
+                <Route path="/admin_dashboard" component={AdminDashboard} />
+                {/* <Route path="/editflowerinfo/:id" component={EditProduct} />
                 <Route exact path="/account" component={UserInfo} />
                 <Route path="/account/edit" component={EditUserInfo} />
                 <Route path="/account/password" component={ChangePassword} />
@@ -54,7 +55,7 @@ class App extends Component {
                 <Route path="/add_product" component={AddProduct} />
                 <Route path="/users" component={UserList} />
                 <Route path="/newUsers" component={NewUser} />
-                <Route path="/user/:userId" component={User} />
+                <Route path="/user/:userId" component={User} /> */}
               </Switch>
             ) : (
               <Switch>
@@ -75,13 +76,14 @@ class App extends Component {
             <Route path="/home" component={Welcome} />
             <Route path="/flowers/:id" component={SingleFlower} />
             <Route path="/flowers" component={Flowers} />
-            <Route path="/roses" component={FlowerCategories}/>
-            <Route path="/tulips" component={FlowerCategories}/>
-            <Route path="/orchids" component={FlowerCategories}/>
-            <Route path="/sig-bouquets" component={FlowerCategories}/>
-            <Route path="/sympathy" component={FlowerCategories}/>
+            <Route path="/roses" component={FlowerCategories} />
+            <Route path="/tulips" component={FlowerCategories} />
+            <Route path="/orchids" component={FlowerCategories} />
+            <Route path="/sig-bouquets" component={FlowerCategories} />
+            <Route path="/sympathy" component={FlowerCategories} />
             <Route path="/preserved-rosesy" component={FlowerCategories} />
           </Switch>
+          <Footer />
         </Router>
       </div>
     );
