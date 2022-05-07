@@ -96,7 +96,7 @@ const SingleFlower = (props) => {
                   overflow: "hidden",
                   fontWeight: "bold",
                   border:
-                    chosenImg == flower.image_url2 ? "2px coral solid" : "",
+                    chosenImg == flower.image_url2 ? "2px gray solid" : "",
                 }}
                 alt="flower"
                 src={flower.image_url2}
@@ -113,7 +113,7 @@ const SingleFlower = (props) => {
                   overflow: "hidden",
                   fontWeight: "bold",
                   border:
-                    chosenImg == flower.image_url3 ? "2px coral solid" : "",
+                    chosenImg == flower.image_url3 ? "2px gray solid" : "",
                 }}
                 alt="flower"
                 src={flower.image_url3}
@@ -131,7 +131,7 @@ const SingleFlower = (props) => {
                   overflow: "hidden",
                   fontWeight: "bold",
                   border:
-                    chosenImg == flower.image_url4 ? "2px coral solid" : "",
+                    chosenImg == flower.image_url4 ? "2px gray solid" : "",
                 }}
                 alt="flower"
                 src={flower.image_url4}
