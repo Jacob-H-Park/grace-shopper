@@ -6,7 +6,6 @@ const {
 } = require("../server/db");
 const faker = require("faker");
 
-
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
@@ -15,7 +14,8 @@ async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log("db synced!");
 
-  const avatar_url = "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+  const avatar_url =
+    "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500";
   // Creating Users
   const users = await Promise.all([
     await User.create({
@@ -24,70 +24,70 @@ async function seed() {
       email: "cody@fsa.com",
       isAdmin: true,
       // avatar: faker.image.avatar()
-      avatar: avatar_url
+      avatar: avatar_url,
     }),
     await User.create({
       username: "murphy",
       password: "123",
       email: "murphy@fsa.com",
       // avatar: faker.image.avatar()
-      avatar: avatar_url
+      avatar: avatar_url,
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url
+      avatar: avatar_url,
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url
+      avatar: avatar_url,
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url
+      avatar: avatar_url,
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url
+      avatar: avatar_url,
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url
+      avatar: avatar_url,
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url
+      avatar: avatar_url,
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url
+      avatar: avatar_url,
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url
+      avatar: avatar_url,
     }),
   ]);
 
@@ -97,7 +97,13 @@ async function seed() {
   await Product.create({
     name: "PETITE ODETTE",
     price: 56.0,
-    image_url: "https://bloom-pics.s3.us-east-2.amazonaws.com/4da74da38cdc830ca59f70c156396a57",
+    image_url: "/Images/roses/7-pink-roses-400x400-39400.jpeg",
+    image_url2:
+      "/Images/roses/550x550/valentine-s-day-7-pink-roses-550x550-39400.jpg",
+    image_url3:
+      "/Images/roses/550x550/valentine-s-day-7-pink-roses-550x550-39400-1.jpg",
+    image_url4:
+      "/Images/roses/550x550/valentine-s-day-7-pink-roses-550x550-39400-2.jpg",
     description: faker.lorem.sentences(),
     category: "rose",
     stock: 20,
@@ -105,7 +111,7 @@ async function seed() {
   await Product.create({
     name: "ODETTE",
     price: 78.0,
-    image_url: "https://bloom-pics.s3.us-east-2.amazonaws.com/0ac763ea989ff86ff287bfde74f4ed78",
+    image_url: "/Images/roses/pink-roses-bouquet-400x400-37411.jpeg",
     description: faker.lorem.sentences(),
     category: "rose",
     stock: 20,
@@ -209,7 +215,8 @@ async function seed() {
   await Product.create({
     name: "EROS",
     price: 82.0,
-    image_url: "/Images/roses/valentine-s-day-red-and-pink-roses-bouquet-ode-a-la-rose-400x400-37407.jpg",
+    image_url:
+      "/Images/roses/valentine-s-day-red-and-pink-roses-bouquet-ode-a-la-rose-400x400-37407.jpg",
     description: faker.lorem.sentences(),
     category: "rose",
     stock: 20,
@@ -293,7 +300,8 @@ async function seed() {
   await Product.create({
     name: "BIG MAGENTA ORCHID",
     price: 124,
-    image_url: "/Images/orchids/double-purple-orchid-delivery-400x400-38210.jpg",
+    image_url:
+      "/Images/orchids/double-purple-orchid-delivery-400x400-38210.jpg",
     description: faker.lorem.sentences(),
     category: "orchid",
     stock: 20,
@@ -301,7 +309,8 @@ async function seed() {
   await Product.create({
     name: "MAGENTA ORCHID",
     price: 91,
-    image_url: "/Images/orchids/magenta-phalaenopsis-purple-orchid-delivery-400x400-41887.jpg",
+    image_url:
+      "/Images/orchids/magenta-phalaenopsis-purple-orchid-delivery-400x400-41887.jpg",
     description: faker.lorem.sentences(),
     category: "orchid",
     stock: 20,
@@ -311,7 +320,8 @@ async function seed() {
   await Product.create({
     name: "FELICE",
     price: 82,
-    image_url: "/Images/signature_bouquets/pink-flowers-bouquet-ode-a-la-rose-400x400-39427.jpg",
+    image_url:
+      "/Images/signature_bouquets/pink-flowers-bouquet-ode-a-la-rose-400x400-39427.jpg",
     description: faker.lorem.sentences(),
     category: "signature_bouquets",
     stock: 20,
@@ -409,7 +419,8 @@ async function seed() {
   await Product.create({
     name: "WHITES AND GREENS",
     price: 68,
-    image_url: "/Images/sympathy/designers-choice-white-and-green-bouquet-400x400-39779.jpg",
+    image_url:
+      "/Images/sympathy/designers-choice-white-and-green-bouquet-400x400-39779.jpg",
     description: faker.lorem.sentences(),
     category: "sympathy",
     stock: 20,
@@ -419,7 +430,8 @@ async function seed() {
   await Product.create({
     name: "PETITE MONICA",
     price: 199,
-    image_url: "/Images/preserved_rose/small-preserved-rose-blush-delivery-400x400-38464.jpg",
+    image_url:
+      "/Images/preserved_rose/small-preserved-rose-blush-delivery-400x400-38464.jpg",
     description: faker.lorem.sentences(),
     category: "preserved_rose",
     stock: 20,
@@ -427,7 +439,8 @@ async function seed() {
   await Product.create({
     name: "PETITE JACQUELINE",
     price: 199,
-    image_url: "/Images/preserved_rose/petite-jacqueline-preserved-roses-400x400-40084.jpg",
+    image_url:
+      "/Images/preserved_rose/petite-jacqueline-preserved-roses-400x400-40084.jpg",
     description: faker.lorem.sentences(),
     category: "preserved_rose",
     stock: 20,
@@ -443,7 +456,8 @@ async function seed() {
   await Product.create({
     name: "SOLO JACQUELINE",
     price: 89,
-    image_url: "/Images/preserved_rose/solo-jacqueline-preserved-rose-400x400-40086.jpg",
+    image_url:
+      "/Images/preserved_rose/solo-jacqueline-preserved-rose-400x400-40086.jpg",
     description: faker.lorem.sentences(),
     category: "preserved_rose",
     stock: 20,
@@ -451,7 +465,8 @@ async function seed() {
   await Product.create({
     name: "JACQUELINE",
     price: 299,
-    image_url: "/Images/preserved_rose/jacqueline-preserved-roses-400x400-40082.jpg",
+    image_url:
+      "/Images/preserved_rose/jacqueline-preserved-roses-400x400-40082.jpg",
     description: faker.lorem.sentences(),
     category: "preserved_rose",
     stock: 20,
@@ -459,7 +474,8 @@ async function seed() {
   await Product.create({
     name: "PETITE STELLA",
     price: 199,
-    image_url: "/Images/preserved_rose/preserved-pink-roses-delivery-400x400-38461.jpg",
+    image_url:
+      "/Images/preserved_rose/preserved-pink-roses-delivery-400x400-38461.jpg",
     description: faker.lorem.sentences(),
     category: "preserved_rose",
     stock: 20,
@@ -467,7 +483,8 @@ async function seed() {
   await Product.create({
     name: "PETITE GOLD RENEE",
     price: 199,
-    image_url: "/Images/preserved_rose/petite-rose-gold-renee-400x400-39310.jpg",
+    image_url:
+      "/Images/preserved_rose/petite-rose-gold-renee-400x400-39310.jpg",
     description: faker.lorem.sentences(),
     category: "preserved_rose",
     stock: 20,
@@ -499,7 +516,8 @@ async function seed() {
   await Product.create({
     name: "RENEE",
     price: 296,
-    image_url: "/Images/preserved_rose/preserved-red-roses-delivery-last-1-year-400x400-40577.jpg",
+    image_url:
+      "/Images/preserved_rose/preserved-red-roses-delivery-last-1-year-400x400-40577.jpg",
     description: faker.lorem.sentences(),
     category: "preserved_rose",
     stock: 20,
@@ -507,7 +525,8 @@ async function seed() {
   await Product.create({
     name: "STELLA",
     price: 296,
-    image_url: "/Images/preserved_rose/preserved-pink-roses-delivery-order-roses-400x400-40579.jpg",
+    image_url:
+      "/Images/preserved_rose/preserved-pink-roses-delivery-order-roses-400x400-40579.jpg",
     description: faker.lorem.sentences(),
     category: "preserved_rose",
     stock: 20,
@@ -515,7 +534,8 @@ async function seed() {
   await Product.create({
     name: "PETITE GOLD STELLA",
     price: 199,
-    image_url: "/Images/preserved_rose/petite-rose-gold-stella-400x400-39422.jpg",
+    image_url:
+      "/Images/preserved_rose/petite-rose-gold-stella-400x400-39422.jpg",
     description: faker.lorem.sentences(),
     category: "preserved_rose",
     stock: 20,
@@ -523,7 +543,8 @@ async function seed() {
   await Product.create({
     name: "GRAND SANDRA",
     price: 366,
-    image_url: "/Images/preserved_rose/preserved-purple-roses-real-last-1-year-400x400-40573.jpg",
+    image_url:
+      "/Images/preserved_rose/preserved-purple-roses-real-last-1-year-400x400-40573.jpg",
     description: faker.lorem.sentences(),
     category: "preserved_rose",
     stock: 20,
@@ -531,7 +552,8 @@ async function seed() {
   await Product.create({
     name: "LUCILLE",
     price: 296,
-    image_url: "/Images/preserved_rose/preserved-rose-delivery-mixed-pastel-roses-400x400-40576.jpg",
+    image_url:
+      "/Images/preserved_rose/preserved-rose-delivery-mixed-pastel-roses-400x400-40576.jpg",
     description: faker.lorem.sentences(),
     category: "preserved_rose",
     stock: 20,
@@ -539,7 +561,8 @@ async function seed() {
   await Product.create({
     name: "GRAND RENEE",
     price: 366,
-    image_url: "/Images/preserved_rose/preserved-real-red-roses-that-last-a-year-400x400-40572.jpg",
+    image_url:
+      "/Images/preserved_rose/preserved-real-red-roses-that-last-a-year-400x400-40572.jpg",
     description: faker.lorem.sentences(),
     category: "preserved_rose",
     stock: 20,
@@ -547,7 +570,8 @@ async function seed() {
   await Product.create({
     name: "GRAND LUCILLE",
     price: 364,
-    image_url: "/Images/preserved_rose/preserved-rose-arrangements-100-real-mixed-pastel-roses-400x400-38236.jpg",
+    image_url:
+      "/Images/preserved_rose/preserved-rose-arrangements-100-real-mixed-pastel-roses-400x400-38236.jpg",
     description: faker.lorem.sentences(),
     category: "preserved_rose",
     stock: 20,
@@ -555,7 +579,8 @@ async function seed() {
   await Product.create({
     name: "GRAND STELLA",
     price: 366,
-    image_url: "/Images/preserved_rose/preserved-pink-rose-bouquets-100-real-last-1-year-400x400-40574.jpg",
+    image_url:
+      "/Images/preserved_rose/preserved-pink-rose-bouquets-100-real-last-1-year-400x400-40574.jpg",
     description: faker.lorem.sentences(),
     category: "preserved_rose",
     stock: 20,
@@ -563,21 +588,20 @@ async function seed() {
   await Product.create({
     name: "SANDRA",
     price: 296,
-    image_url: "/Images/preserved_rose/preserved-purple-rose-delivery-order-roses-400x400-40578.jpg",
+    image_url:
+      "/Images/preserved_rose/preserved-purple-rose-delivery-order-roses-400x400-40578.jpg",
     description: faker.lorem.sentences(),
     category: "preserved_rose",
     stock: 20,
   });
 
-
-
   await Order.create({ userId: 1 });
   await Promotion.create({
-    Code:"HPMTRD22",
+    Code: "HPMTRD22",
     Discount: 0.1,
-    Start_Date:'2022-05-02',
-    End_Date:'2022-05-08'
-  })
+    Start_Date: "2022-05-02",
+    End_Date: "2022-05-08",
+  });
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
@@ -589,8 +613,6 @@ async function seed() {
     },
   };
 }
-
-
 
 /*
  We've separated the `seed` function from the `runSeed` function.
