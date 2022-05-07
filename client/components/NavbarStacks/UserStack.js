@@ -32,7 +32,7 @@ const UserStack = ({ navTabsUser, setOpen }) => {
       })}
       <AccountMenu />
       <IconButton color="inherit" onClick={() => setOpen(true)}>
-        <Badge badgeContent={1} color="secondary">
+        <Badge badgeContent={0} color="secondary">
           <ShoppingCartIcon />
         </Badge>
       </IconButton>
