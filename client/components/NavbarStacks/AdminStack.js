@@ -5,6 +5,7 @@ import { Stack, Button, Divider, IconButton, Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import AccountMenu from "../HelperComponents/AccountMenu";
+import FlowerMenu from "../HelperComponents/FlowerMenu";
 
 const AdminStack = ({ setOpen, navTabsAdmin, isAdmin }) => {
 
@@ -14,6 +15,7 @@ const AdminStack = ({ setOpen, navTabsAdmin, isAdmin }) => {
       divider={<Divider color="white" orientation="vertical" flexItem />}
       spacing={2}
     >
+      <FlowerMenu />
       {navTabsAdmin.map(({ tab, url }) => {
         return (
           <Link key={tab} to={url}>
