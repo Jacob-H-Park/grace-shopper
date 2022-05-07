@@ -7,15 +7,11 @@ import {
   Divider,
   IconButton,
   Badge,
-  Menu,
-  MenuItem,
-  Box,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-import { logout } from "../../store";
 import AccountMenu from "../HelperComponents/AccountMenu";
+import FlowerMenu from "../HelperComponents/FlowerMenu";
 
 const UserStack = ({ navTabsUser, setOpen }) => {
   const dispatch = useDispatch();
@@ -26,6 +22,7 @@ const UserStack = ({ navTabsUser, setOpen }) => {
       divider={<Divider color="white" orientation="vertical" flexItem />}
       spacing={2}
     >
+      <FlowerMenu />
       {navTabsUser.map(({ tab, url }) => {
         return (
           <Link key={tab} to={url}>
