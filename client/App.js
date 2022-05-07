@@ -26,6 +26,7 @@ import NewUser from "./components/admin/components/newUser";
 import User from "./components/admin/components/User";
 import { me } from "./store";
 import { fetchProducts } from "./store/flowers";
+import FlowerCategories from "./components/FlowerTypes/FlowerCategories";
 
 class App extends Component {
   componentDidMount() {
@@ -74,6 +75,12 @@ class App extends Component {
             <Route path="/home" component={Welcome} />
             <Route path="/flowers/:id" component={SingleFlower} />
             <Route path="/flowers" component={Flowers} />
+            <Route path="/roses" component={FlowerCategories}/>
+            <Route path="/tulips" component={FlowerCategories}/>
+            <Route path="/orchids" component={FlowerCategories}/>
+            <Route path="/sig-bouquets" component={FlowerCategories}/>
+            <Route path="/sympathy" component={FlowerCategories}/>
+            <Route path="/preserved-rosesy" component={FlowerCategories} />
           </Switch>
         </Router>
       </div>

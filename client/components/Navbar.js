@@ -25,19 +25,15 @@ const Navbar = () => {
 
   // Nav Tabs display differently for different role: Admin, User, Guest
   const navTabsAdmin = [
-    { tab: "Flowers", url: "/flowers" },
     { tab: "Meet The Team", url: "#" },
     { tab: "Admin Dashboard", url: "/admin_dashboard" },
-    // { tab: "User Management", url: "/user_management" },
   ];
 
   const navTabsUser = [
-    { tab: "Flowers", url: "/flowers" },
     { tab: "Meet The Team", url: "#" },
   ];
 
   const navTabsGuest = [
-    { tab: "Flowers", url: "/flowers" },
     { tab: "Meet The Team", url: "#" },
     { tab: "Sign Up", url: "/signup" },
     { tab: "Login", url: "/login" },
