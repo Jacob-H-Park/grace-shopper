@@ -11,7 +11,6 @@ router.get('/:key', (req, res) => {
     console.log(req.params)
     const key = req.params.key
     const readStream = getFileStream(key)
-    
     readStream.pipe(res)
 })
 
