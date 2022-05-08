@@ -102,7 +102,7 @@ const FlowerCategories = () => {
               );
           })}
         </Grid>
-        <Box display="flex" justifyContent="center">
+        <Box display="flex" justifyContent="center" marginBottom='1rem'>
           <ProductPagination
             productsPerPage={productsPerPage}
             totalProducts={flowers.length}
