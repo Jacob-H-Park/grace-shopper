@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-// import { Link, Redirect } from "react-router-dom";
 
 import { GoogleLogin } from "react-google-login";
 import GoogleButton from "react-google-button";
@@ -76,13 +75,13 @@ const AuthForm = (props) => {
     <Grid>
       <Paper elevation={10} style={paperStyle}>
         <Grid align="center">
-          <Avatar
+          {/* <Avatar
             sx={{ backgroundColor: "#1bbd7e" }}
             alt="Bloom Logo"
             src="/Images/bloomLogo.png"
           >
             <LoginIcon />
-          </Avatar>
+          </Avatar> */}
           <Typography
             variant="h4"
             sx={{
@@ -92,7 +91,7 @@ const AuthForm = (props) => {
               marginBottom: "15px",
             }}
           >
-            Welcome to Bloom
+            Welcome to Bloom.
           </Typography>
         </Grid>
         <form onSubmit={handleSubmit} name={name}>
@@ -160,7 +159,11 @@ const AuthForm = (props) => {
           <Button
             variant="contained"
             color="secondary"
-            sx={{ margin: "0", backgroundColor: "#da0037", fontWeight: "600" }}
+            sx={{
+              margin: "0",
+              backgroundColor: "#98798E",
+              fontWeight: "600",
+            }}
             type="submit"
             fullWidth
           >
@@ -206,7 +209,7 @@ const AuthForm = (props) => {
               <strong>Not on BLOOM. yet?</strong>
               <br />
               <a href="/signup">
-                <span style={{ color: "blue", textDecoration: "underline" }}>
+                <span style={{ color: "#98798E", textDecoration: "underline" }}>
                   {" "}
                   Sign up{" "}
                 </span>
