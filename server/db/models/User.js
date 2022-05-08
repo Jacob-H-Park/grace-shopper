@@ -60,12 +60,23 @@ User.prototype.generateToken = function () {
 /**
  * classMethods
  */
-User.authenticate = async function ({ username, password }) {
+User.authenticate = async function ({ username, password }, oauth = false) {
+  console.log("MODEL MODEL MODEL:", username, password);
   const user = await this.findOne({ where: { username } });
-  if (!user || !(await user.correctPassword(password))) {
-    const error = Error("Incorrect username/password");
-    error.status = 401;
-    throw error;
+  console.log("model is there a user??????", user);
+  console.log("is this true????", password === user.password);
+  if (oauth) {
+    if (!user || password !== user.password) {
+      const error = Error("Incorrect username/password");
+      error.status = 401;
+      throw error;
+    }
+  } else {
+    if (!user || !(await user.correctPassword(password))) {
+      const error = Error("Incorrect username/password");
+      error.status = 401;
+      throw error;
+    }
   }
   return user.generateToken();
 };
