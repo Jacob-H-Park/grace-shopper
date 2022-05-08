@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   CardMedia,
+  CardActionArea,
   Grid,
   IconButton,
   Typography,
@@ -15,15 +16,17 @@ import { Link } from "react-router-dom";
 import { addToCart } from "../store/order";
 
 const FlowerCard = ({ flower, user, SlideTransition, handleClick }) => {
-
   const dispatch = useDispatch();
 
   return (
     <Grid key={flower.id} item xs={3}>
       <Card key={flower.id} sx={{ maxWidth: "400px" }}>
-        <Link to={`/flowers/${flower.id}`}>
-          <CardMedia component="img" image={flower.image_url} />
-        </Link>
+        <CardActionArea>
+          <Link to={`/flowers/${flower.id}`}>
+            <CardMedia component="img" image={flower.image_url} />
+          </Link>
+        </CardActionArea>
+
         <Box
           sx={{
             display: "flex",
@@ -39,6 +42,7 @@ const FlowerCard = ({ flower, user, SlideTransition, handleClick }) => {
               <Typography sx={{ fontSize: "12px" }}>${flower.price}</Typography>
             </CardContent>
           </Box>
+
           <Box>
             <IconButton
               sx={{ marginRight: "1rem" }}
@@ -58,6 +62,5 @@ const FlowerCard = ({ flower, user, SlideTransition, handleClick }) => {
     </Grid>
   );
 };
-
 
 export default FlowerCard;
