@@ -16,6 +16,7 @@ import SingleFlower from "./components/SingleFlower";
 import EditProduct from "./components/EditProduct";
 import ProductInfo from "./components/ProductInfo";
 import UserInfo from "./components/UserInfo";
+import LandingPage from "./components/LandingPage";
 import Welcome from "./components/Welcome";
 import EditUserInfo from "./components/EditUserInfo";
 import ChangePassword from "./components/ChangePassword";
@@ -73,7 +74,7 @@ class App extends Component {
             </Switch>
           )}
           <Switch>
-            <Route path="/home" component={Welcome} />
+            <Route exact path="/" component={LandingPage} />
             <Route path="/flowers/:id" component={SingleFlower} />
             <Route path="/flowers" component={Flowers} />
             <Route path="/roses" component={FlowerCategories} />
