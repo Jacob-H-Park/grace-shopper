@@ -16,6 +16,7 @@ import SingleFlower from "./components/SingleFlower";
 import EditProduct from "./components/EditProduct";
 import ProductInfo from "./components/ProductInfo";
 import UserInfo from "./components/UserInfo";
+import LandingPage from "./components/LandingPage";
 import Welcome from "./components/Welcome";
 import EditUserInfo from "./components/EditUserInfo";
 import ChangePassword from "./components/ChangePassword";
@@ -24,8 +25,10 @@ import AddProduct from "./components/AddProduct";
 import UserList from "./components/admin/components/UserList";
 import NewUser from "./components/admin/components/newUser";
 import User from "./components/admin/components/User";
+import Footer from "./components/Footer";
 import { me } from "./store";
 import { fetchProducts } from "./store/flowers";
+import FlowerCategories from "./components/FlowerTypes/FlowerCategories";
 
 class App extends Component {
   componentDidMount() {
@@ -43,17 +46,17 @@ class App extends Component {
           {isLoggedIn ? (
             isAdmin ? (
               <Switch>
-                <Route exact path="/admin_dashboard" component={AdminDashboard} />
-                <Route path="/editflowerinfo/:id" component={EditProduct} />
-                <Route exact path="/account" component={UserInfo} />
-                <Route path="/account/edit" component={EditUserInfo} />
-                <Route path="/account/password" component={ChangePassword} />
-                <Route path="/cart" component={Cart} />
-                <Route path="/admin_products" component={ProductInfo} />
-                <Route path="/add_product" component={AddProduct} />
-                <Route path="/users" component={UserList} />
-                <Route path="/newUsers" component={NewUser} />
-                <Route path="/user/:userId" component={User} />
+                <Route path="/admin_dashboard" component={AdminDashboard} />
+                <Route path="editflowerinfo/:id" component={EditProduct} />
+                <Route exact path="account" component={UserInfo} />
+                <Route path="ccount/edit" component={EditUserInfo} />
+                <Route path="account/password" component={ChangePassword} />
+                <Route path="cart" component={Cart} />
+                <Route path="admin_products" component={ProductInfo} />
+                <Route path="add_product" component={AddProduct} />
+                <Route path="users" component={UserList} />
+                <Route path="newUsers" component={NewUser} />
+                <Route path="user/:userId" component={User} />
               </Switch>
             ) : (
               <Switch>
@@ -71,10 +74,17 @@ class App extends Component {
             </Switch>
           )}
           <Switch>
-            <Route path="/home" component={Welcome} />
+            <Route exact path="/" component={LandingPage} />
             <Route path="/flowers/:id" component={SingleFlower} />
             <Route path="/flowers" component={Flowers} />
+            <Route path="/roses" component={FlowerCategories} />
+            <Route path="/tulips" component={FlowerCategories} />
+            <Route path="/orchids" component={FlowerCategories} />
+            <Route path="/sig-bouquets" component={FlowerCategories} />
+            <Route path="/sympathy" component={FlowerCategories} />
+            <Route path="/preserved-rosesy" component={FlowerCategories} />
           </Switch>
+          <Footer />
         </Router>
       </div>
     );

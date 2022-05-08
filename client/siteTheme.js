@@ -31,6 +31,6 @@ import { createTheme } from "@mui/material/styles";
           color: 'black'
         }
       }
-    }
+    },
   }
 })

@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { Box, Grid, Typography, Button, Divider } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Typography,
+  Button,
+  Divider,
+  Slide,
+  Snackbar,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import FlowerDetailTabs from "./FlowerDetailTabs";
 
@@ -14,6 +22,33 @@ const SingleFlower = (props) => {
   });
   const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
+  const [chosenImg, setChosenImg] = useState("");
+  //Snackbar state hook
+  const [state, setState] = useState({
+    open: false,
+    Transition: Slide,
+  });
+
+  const SlideTransition = (props) => {
+    return <Slide {...props} direction="up" />;
+  };
+
+  //for snackbar
+  const handleClick = (Transition) => {
+    setState({
+      open: true,
+      Transition,
+    });
+  };
+
+  //for snackbar
+  const handleClose = () => {
+    setState({
+      ...state,
+      open: false,
+    });
+  };
 
   //buys time for useSelector to grab the clicked flower info when page's refreshed
   if (!flower) {
@@ -28,24 +63,100 @@ const SingleFlower = (props) => {
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         sx={{ mt: 3, justifyContent: "center", alignItems: "flex-start" }}
       >
-        <Grid item xs={4}>
-          <Box
-            component="img"
-            sx={{
-              maxHeight: 1,
-              maxWidth: 1,
-              borderRadius: "12px",
-              boxShadow: 1,
-              display: "flex",
-              flexDirection: { xs: "column", md: "row" },
-              alignItems: "center",
-              overflow: "hidden",
-              boxShadow: 2,
-              fontWeight: "bold",
-            }}
-            alt="flower"
-            src={flower.image_url}
-          />
+        <Grid
+          item
+          xs={4}
+          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          sx={{ display: "flex", justifyContent: "center" }}
+        >
+          {flower.image_url2 ? (
+            <Grid container justifyContent="center" alignItems="center">
+              <Box
+                component="img"
+                sx={{
+                  maxHeight: 1,
+                  maxWidth: 1,
+                  borderRadius: "12px",
+                  boxShadow: 1,
+                  overflow: "hidden",
+                  fontWeight: "bold",
+                }}
+                alt="flower"
+                src={chosenImg ? chosenImg : flower.image_url2}
+              />
+              <Box
+                component="img"
+                sx={{
+                  mt: 3,
+                  mx: 2,
+                  maxHeight: 0.2,
+                  maxWidth: 0.2,
+                  borderRadius: "12px",
+                  boxShadow: 1,
+                  overflow: "hidden",
+                  fontWeight: "bold",
+                  border:
+                    chosenImg == flower.image_url2 ? "2px gray solid" : "",
+                }}
+                alt="flower"
+                src={flower.image_url2}
+                onClick={() => setChosenImg(flower.image_url2)}
+              />
+              <Box
+                component="img"
+                sx={{
+                  mt: 3,
+                  maxHeight: 0.2,
+                  maxWidth: 0.2,
+                  borderRadius: "12px",
+                  boxShadow: 1,
+                  overflow: "hidden",
+                  fontWeight: "bold",
+                  border:
+                    chosenImg == flower.image_url3 ? "2px gray solid" : "",
+                }}
+                alt="flower"
+                src={flower.image_url3}
+                onClick={() => setChosenImg(flower.image_url3)}
+              />
+              <Box
+                component="img"
+                sx={{
+                  mt: 3,
+                  mx: 2,
+                  maxHeight: 0.2,
+                  maxWidth: 0.2,
+                  borderRadius: "12px",
+                  boxShadow: 1,
+                  overflow: "hidden",
+                  fontWeight: "bold",
+                  border:
+                    chosenImg == flower.image_url4 ? "2px gray solid" : "",
+                }}
+                alt="flower"
+                src={flower.image_url4}
+                onClick={() => setChosenImg(flower.image_url4)}
+              />
+            </Grid>
+          ) : (
+            <Box
+              component="img"
+              sx={{
+                maxHeight: 1,
+                maxWidth: 1,
+                borderRadius: "12px",
+                boxShadow: 1,
+                display: "flex",
+                flexDirection: { xs: "column", md: "row" },
+                alignItems: "center",
+                overflow: "hidden",
+                boxShadow: 2,
+                fontWeight: "bold",
+              }}
+              alt="flower"
+              src={flower.image_url}
+            />
+          )}
         </Grid>
 
         <Grid item xs={4}>
@@ -75,6 +186,7 @@ const SingleFlower = (props) => {
               }}
               onClick={() => {
                 dispatch(addToCart(user.id, flower));
+                handleClick(SlideTransition);
               }}
               variant="contained"
               startIcon={<AddIcon />}
@@ -96,6 +208,15 @@ const SingleFlower = (props) => {
           <Divider sx={{ mt: 3 }}></Divider>
           <FlowerDetailTabs />
         </Grid>
+        <Snackbar
+          onClose={handleClose}
+          autoHideDuration={2500}
+          message="Added to Cart"
+          open={state.open}
+          TransitionComponent={state.Transition}
+          key={state.Transition.name}
+          // action={action}
+        />
       </Grid>
     </>
   );

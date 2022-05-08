@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Stack, Button, Divider, IconButton, Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import FlowerMenu from "../HelperComponents/FlowerMenu";
 
 const GuestStack = ({ navTabsGuest, setOpen }) => {
   return (
@@ -10,6 +11,7 @@ const GuestStack = ({ navTabsGuest, setOpen }) => {
       divider={<Divider color="white" orientation="vertical" flexItem />}
       spacing={2}
     >
+      <FlowerMenu />
       {navTabsGuest.map(({ tab, url }) => {
         return (
           <Link key={tab} to={url}>
@@ -19,7 +21,7 @@ const GuestStack = ({ navTabsGuest, setOpen }) => {
       })}
 
       <IconButton color="inherit" onClick={() => setOpen(true)}>
-        <Badge badgeContent={1} color="secondary">
+        <Badge badgeContent={0} color="secondary">
           <ShoppingCartIcon />
         </Badge>
       </IconButton>

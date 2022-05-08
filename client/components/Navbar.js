@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Drawer,
-} from "@mui/material";
-
+import { AppBar, Toolbar, Typography, Drawer } from "@mui/material";
 
 import Cart from "./Cart";
 import GuestCart from "./GuestCart";
@@ -25,19 +19,13 @@ const Navbar = () => {
 
   // Nav Tabs display differently for different role: Admin, User, Guest
   const navTabsAdmin = [
-    { tab: "Flowers", url: "/flowers" },
     { tab: "Meet The Team", url: "#" },
     { tab: "Admin Dashboard", url: "/admin_dashboard" },
-    // { tab: "User Management", url: "/user_management" },
   ];
 
-  const navTabsUser = [
-    { tab: "Flowers", url: "/flowers" },
-    { tab: "Meet The Team", url: "#" },
-  ];
+  const navTabsUser = [{ tab: "Meet The Team", url: "#" }];
 
   const navTabsGuest = [
-    { tab: "Flowers", url: "/flowers" },
     { tab: "Meet The Team", url: "#" },
     { tab: "Sign Up", url: "/signup" },
     { tab: "Login", url: "/login" },
@@ -65,12 +53,16 @@ const Navbar = () => {
           component="div"
           sx={{ flexGrow: 1 }}
         >
-          <Link to="/home">Bloom.</Link>
+          <Link to="/">Bloom.</Link>
         </Typography>
 
         {isLoggedIn ? (
           isAdmin ? (
-            <AdminStack navTabsAdmin={navTabsAdmin} setOpen={setOpen} isAdmin={isAdmin} />
+            <AdminStack
+              navTabsAdmin={navTabsAdmin}
+              setOpen={setOpen}
+              isAdmin={isAdmin}
+            />
           ) : (
             <UserStack navTabsUser={navTabsUser} setOpen={setOpen} />
           )
