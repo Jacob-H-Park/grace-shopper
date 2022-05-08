@@ -15,6 +15,7 @@ export default function Footer() {
         bgcolor="#d9aaba"
         color="white"
         mt={5}
+        className="footer"
         fontFamily="BlinkMacSystemFont"
       >
         <Container maxWidth="lg">

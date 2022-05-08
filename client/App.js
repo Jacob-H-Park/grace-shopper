@@ -46,16 +46,16 @@ class App extends Component {
             isAdmin ? (
               <Switch>
                 <Route path="/admin_dashboard" component={AdminDashboard} />
-                {/* <Route path="/editflowerinfo/:id" component={EditProduct} />
-                <Route exact path="/account" component={UserInfo} />
-                <Route path="/account/edit" component={EditUserInfo} />
-                <Route path="/account/password" component={ChangePassword} />
-                <Route path="/cart" component={Cart} />
-                <Route path="/admin_products" component={ProductInfo} />
-                <Route path="/add_product" component={AddProduct} />
-                <Route path="/users" component={UserList} />
-                <Route path="/newUsers" component={NewUser} />
-                <Route path="/user/:userId" component={User} /> */}
+                <Route path="editflowerinfo/:id" component={EditProduct} />
+                <Route exact path="account" component={UserInfo} />
+                <Route path="ccount/edit" component={EditUserInfo} />
+                <Route path="account/password" component={ChangePassword} />
+                <Route path="cart" component={Cart} />
+                <Route path="admin_products" component={ProductInfo} />
+                <Route path="add_product" component={AddProduct} />
+                <Route path="users" component={UserList} />
+                <Route path="newUsers" component={NewUser} />
+                <Route path="user/:userId" component={User} />
               </Switch>
             ) : (
               <Switch>
