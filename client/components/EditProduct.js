@@ -94,6 +94,7 @@ class EditProduct extends Component {
       return null;
     }else{
       return (
+        <div className="productList">
         <Box
           sx={{
             display: 'flex',
@@ -186,7 +187,8 @@ class EditProduct extends Component {
               </form>
             </div>
           </Paper >
-        </Box> 
+        </Box>
+        </div> 
       );
     }
   }
