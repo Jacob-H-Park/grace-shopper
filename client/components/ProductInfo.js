@@ -84,7 +84,7 @@ class ProductInfo extends React.Component {
         renderCell:(params)=>{
           return(
             <Stack direction="row" spacing={2}>
-              <Link to={`/editflowerinfo/${params.value}`}>
+              <Link to={`/admin/editflowerinfo/${params.value}`}>
                 <Button variant="contained" startIcon={<ModeEditIcon/>}>Edit</Button>
               </Link>
               <Button variant="contained" startIcon={<DeleteIcon/>}
@@ -121,7 +121,7 @@ class ProductInfo extends React.Component {
           direction="row" 
           spacing={5}
         >
-          <Link to='/add_product'>
+          <Link to='/admin/add_product'>
             <Box sx={{ '& > :not(style)': { m: 1 } }}>
               <Fab variant='extended' size = 'medium' color="primary" aria-label="add">
                 <AddIcon sx={{mr:1}}/>
