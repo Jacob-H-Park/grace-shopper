@@ -27,7 +27,7 @@ export default function User(props) {
     <div className="user">
       <div className="userTitleContainer">
         <h1 className="userTitle">Edit User</h1>
-        <Link to='/users'>
+        <Link to='/admin/users'>
           <Box sx={{ '& > :not(style)': { m: 1 } }}>
             <Fab variant='extended' size = 'medium' color="secondary" aria-label="goback">
               <KeyboardDoubleArrowLeftIcon sx={{mr:1}}/>
@@ -35,7 +35,7 @@ export default function User(props) {
             </Fab>
           </Box>
         </Link>
-        <Link to="/newUser">
+        <Link to="/admin/newUser">
           <button className="userAddButton">Create</button>
         </Link>
       </div>
