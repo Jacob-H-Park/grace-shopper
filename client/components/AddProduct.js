@@ -88,7 +88,7 @@ class AddProduct extends React.Component{
         const { handleSubmit, handleChange, setUrl } = this;
         const {classes} = this.props
         return(
-            
+            <div className="productList">
             <Box
             sx={{
                 display: 'flex',
@@ -181,7 +181,8 @@ class AddProduct extends React.Component{
                         </form>
                     </div>
                 </ Paper >
-            </Box> 
+            </Box>
+            </div> 
         )
     }
 }

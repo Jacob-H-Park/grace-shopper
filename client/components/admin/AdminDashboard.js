@@ -5,6 +5,7 @@ import {
   Switch,
   Route,
   withRouter,
+  useLocation,
 } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -12,7 +13,7 @@ import Sidebar from "./components/Sidebar";
 import Home from "./components/AdminHome";
 import UserList from "./components/UserList";
 import User from "./components/User";
-import NewUser from "./components/newUser";
+import NewUser from "./components/NewUser";
 import ProductInfo from "../ProductInfo";
 import AddProduct from "../AddProduct";
 import EditProduct from "../EditProduct";
@@ -26,24 +27,25 @@ const AdminDashboard = () => {
     dispatch(fetchUsers());
   }, []);
 
+  const { pathname } = useLocation();
+
   return (
     <div>
-      <Router>
+      {/* <Router> */}
         <div className="container">
           <Sidebar />
+          { pathname === "/admin" ? <Home /> : null }
           <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/users" component={UserList} />
-            <Route path="/user/:userId" component={User} />
-            <Route path="/newUser" component={NewUser} />
-            <Route path="/admin_products" component={ProductInfo} />
-            <Route path="/add_product" component={AddProduct} />
-            <Route path="/editflowerinfo/:id" component={EditProduct} />
+            <Route path="/admin/home" component={Home} />
+            <Route path="/admin/users" component={UserList} />
+            <Route path="/admin/user/:userId" component={User} />
+            <Route path="/admin/newUser" component={NewUser} />
+            <Route path="/admin/products" component={ProductInfo} />
+            <Route path="/admin/add_product" component={AddProduct} />
+            <Route path="/admin/editflowerinfo/:id" component={EditProduct} />
           </Switch>
         </div>
-      </Router>
+      {/* </Router> */}
     </div>
   );
 };
