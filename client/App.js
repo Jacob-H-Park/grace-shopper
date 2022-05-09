@@ -17,7 +17,7 @@ import EditProduct from "./components/EditProduct";
 import ProductInfo from "./components/ProductInfo";
 import UserInfo from "./components/UserInfo";
 import LandingPage from "./components/LandingPage";
-import Welcome from "./components/Welcome";
+import MeetTheTeam from "./components/MeetTheTeam";
 import EditUserInfo from "./components/EditUserInfo";
 import ChangePassword from "./components/ChangePassword";
 import AdminDashboard from "./components/admin/AdminDashboard";
@@ -49,7 +49,7 @@ class App extends Component {
                 <Route path="/admin_dashboard" component={AdminDashboard} />
                 <Route path="editflowerinfo/:id" component={EditProduct} />
                 <Route exact path="account" component={UserInfo} />
-                <Route path="ccount/edit" component={EditUserInfo} />
+                <Route path="account/edit" component={EditUserInfo} />
                 <Route path="account/password" component={ChangePassword} />
                 <Route path="cart" component={Cart} />
                 <Route path="admin_products" component={ProductInfo} />
@@ -80,6 +80,7 @@ class App extends Component {
             <Route path="/roses" component={FlowerCategories} />
             <Route path="/tulips" component={FlowerCategories} />
             <Route path="/orchids" component={FlowerCategories} />
+            <Route path="/meet_the_team" component={MeetTheTeam} />
             <Route path="/sig-bouquets" component={FlowerCategories} />
             <Route path="/sympathy" component={FlowerCategories} />
             <Route path="/preserved-rosesy" component={FlowerCategories} />

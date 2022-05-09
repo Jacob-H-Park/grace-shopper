@@ -198,7 +198,7 @@ const SingleFlower = (props) => {
                 display: "flex",
                 justifyContent: "center",
                 fontSize: "13px",
-                mt: 3,
+                mt: 2,
               }}
             >
               Free US Shipping $125+
