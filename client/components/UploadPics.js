@@ -26,7 +26,7 @@ class UploadPics extends Component{
         super(props)
         this.state ={
             file: '',
-            image: ''
+            image: this.props.url
         }
         this.handleUpload.bind(this)
         this.fileSelected = this.fileSelected.bind(this)
@@ -55,6 +55,7 @@ class UploadPics extends Component{
     render(){
         const {fileSelected,handleUpload} = this 
         const {image} = this.state
+        console.log('props',this.props)
         return(
             <Box sx={{
                 display: 'flex',
@@ -67,7 +68,7 @@ class UploadPics extends Component{
                     <label htmlFor="icon-button-file">
                         <Input accept="image/*" id="icon-button-file" type="file" onChange={fileSelected}/>
                         <IconButton color="primary" aria-label="upload picture" component="span">
-                            <PhotoCamera />Add Product Images
+                            <PhotoCamera />Add Images
                         </IconButton>
                         <Button disabled= {this.state.file ? false : true} variant="outlined" type = 'submit' startIcon={<UploadIcon/>}>Upload</Button>
                     </label>
@@ -84,41 +85,19 @@ class UploadPics extends Component{
                         display: 'flex',
                         '& > :not(style)': {
                         m: 1,
-                        width: 300,
+                        width: 150,
                         height: 150,
                         },
                         justifyContent: 'space-evenly'
                     }}
                 >
                     <Paper variant="outlined" square >
-                        <img src = {image} width = '300px' height='150px'/>
+                        <img src = {image} width = '150px' height='150px'/>
                     </ Paper>
                     {/* <Paper variant="outlined" square /> */}
                 </Box>
             </Box>
             
-            // <Box sx={{ display: 'flex', 
-
-            //             justifyContent: 'center'
-                        
-            //         }}>
-            //     <div>
-
-            //         <form onSubmit={this.handleUpload}>
-            //                 <input id='imageInput' type="file" accept ="image/*" onChange={fileSelected}></input> 
-            //                 <button type="submit">Upload</button>
-            //         </form>
-            //         <Box sx={{  bgcolor: 'background.paper',
-            //                     m: 1,
-            //                     border: 1,
-            //                     width: '100%',
-            //                     height: '500',
-            //                     borderRadius: '4px' 
-            //                 }}>
-                        
-            //         </Box>
-            //     </div>
-            // </Box>
         )
     }
 
