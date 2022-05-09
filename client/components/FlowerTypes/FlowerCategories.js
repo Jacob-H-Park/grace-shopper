@@ -1,11 +1,5 @@
 import CloseIcon from "@mui/icons-material/Close";
-import {
-  Box,
-  Grid,
-  IconButton,
-  Snackbar,
-  Slide
-} from "@mui/material";
+import { Box, Grid, IconButton, Snackbar, Slide } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -13,12 +7,14 @@ import FlowerCard from "../FlowerCard";
 import ProductPagination from "../HelperComponents/ProductPagination";
 
 const FlowerCategories = () => {
-    //React-Router Hooks
-    const location = useLocation();
-    const type = location.state;
+  //React-Router Hooks
+  const location = useLocation();
+  const type = location.state;
 
   //Redux hooks
-  const flowers = useSelector((state) => state.flowers.filter((flower) => flower.category === type));
+  const flowers = useSelector((state) =>
+    state.flowers.filter((flower) => flower.category === type)
+  );
   const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -78,7 +74,6 @@ const FlowerCategories = () => {
     setCurrentPage(value);
   };
 
-  console.log(type);
   return (
     <div>
       {/* When a category is selected, page renders flowers by the given type */}
@@ -92,17 +87,17 @@ const FlowerCategories = () => {
         </Box>
         <Grid container spacing={3} sx={{ padding: "2rem" }}>
           {currentProducts.map((flower) => {
-              return (
-                <FlowerCard
-                  flower={flower}
-                  user={user}
-                  SlideTransition={SlideTransition}
-                  handleClick={handleClick}
-                />
-              );
+            return (
+              <FlowerCard
+                flower={flower}
+                user={user}
+                SlideTransition={SlideTransition}
+                handleClick={handleClick}
+              />
+            );
           })}
         </Grid>
-        <Box display="flex" justifyContent="center" marginBottom='1rem'>
+        <Box display="flex" justifyContent="center" marginBottom="1rem">
           <ProductPagination
             productsPerPage={productsPerPage}
             totalProducts={flowers.length}

@@ -20,8 +20,6 @@ import ClearIcon from "@mui/icons-material/Clear";
 
 const GuestCart = () => {
   const cart = JSON.parse(localStorage.getItem("cart"));
-  console.log("this is the cart", cart);
-
   const [_cart, setCart] = useState(cart);
   const dispatch = useDispatch();
 

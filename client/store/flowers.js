@@ -3,7 +3,7 @@ import axios from "axios";
 const SET_PRODUCTS = "SET_PRODUCTS";
 const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 const UPDATE_PRODUCT = "UPDATE_PRODUCT";
-const ADD_PRODUCT ='ADD_PRODUCT'
+const ADD_PRODUCT = "ADD_PRODUCT";
 /* Action Creators */
 const _fetchProducts = (allFlowers) => {
   return {
@@ -39,12 +39,12 @@ export const fetchProducts = () => {
 };
 export const removeProducts = (id) => {
   return async (dispatch) => {
-    const token = window.localStorage.getItem('token');
+    const token = window.localStorage.getItem("token");
     if (token) {
       await axios.delete(`/api/products/${id}`, {
         headers: {
-          authorization: token
-        }
+          authorization: token,
+        },
       });
       dispatch(_removeProducts(id));
     }
@@ -57,15 +57,13 @@ export const updateProducts = (flower, history) => {
       flower
     );
     dispatch(_updateProducts(flowerToUpdate));
-    console.log('history',history)
     history.push("/admin_products");
   };
 };
-export const createProducts = (_newFlower,history) => {
+export const createProducts = (_newFlower, history) => {
   return async (dispatch) => {
-    const newFlower = (await axios.post('/api/products/',_newFlower)).data;
-    dispatch(_addProduct(newFlower))
-    console.log('console',history)
+    const newFlower = (await axios.post("/api/products/", _newFlower)).data;
+    dispatch(_addProduct(newFlower));
     history.push("/admin_products");
   };
 };
@@ -81,7 +79,7 @@ export default function (state = [], action) {
         flower.id !== action.flowerToUpdate.id ? flower : action.flowerToUpdate
       );
     case ADD_PRODUCT:
-      return [...state,action.newFlower];
+      return [...state, action.newFlower];
     default:
       return state;
   }

@@ -16,7 +16,6 @@ class EditUserInfo extends Component {
   }
   componentDidUpdate(prevProps) {
     if (!prevProps.auth && this.props.auth) {
-      console.log("update!");
       this.setState({
         id: this.props.auth.id,
         username: this.props.auth.name,
@@ -26,7 +25,6 @@ class EditUserInfo extends Component {
   }
   handleSubmit(ev) {
     ev.preventDefault();
-    console.log("submit!", ev);
     this.props.updateUser(
       this.state.username,
       this.state.email,
@@ -74,8 +72,10 @@ class EditUserInfo extends Component {
                   style={{ marginBottom: "1rem" }}
                 />
                 <br />
-                
-                <Button variant="contained" color="secondary" type="submit">Update</Button>
+
+                <Button variant="contained" color="secondary" type="submit">
+                  Update
+                </Button>
               </form>
             </Box>
           </Box>
