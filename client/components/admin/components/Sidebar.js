@@ -2,7 +2,8 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import "../style/sidebar.css";
-import HomeIcon from '@mui/icons-material/Home';
+// import HomeIcon from '@mui/icons-material/Home';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
@@ -26,9 +27,9 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
-            <Link to="/" className="link">
-            <li className={`sidebarListItem ${pathname === "/" ? "active" : ""}`}>
-              <HomeIcon className="sidebarIcon" />
+            <Link to="/admin/home" className="link">
+            <li className={`sidebarListItem ${pathname === "/admin/home" ? "active" : ""}`}>
+              <DashboardIcon className="sidebarIcon" />
               Home
             </li>
             </Link>
@@ -45,14 +46,14 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
-            <Link to="/users" className="link">
-              <li className={`sidebarListItem ${pathname === "/users" ? "active" : ""}`}>
+            <Link to="/admin/users" className="link">
+              <li className={`sidebarListItem ${pathname === "/admin/users" ? "active" : ""}`}>
                 <PersonOutlineIcon className="sidebarIcon" />
                 Users
               </li>
             </Link>
-            <Link to="/admin_products" className="link">
-              <li className={`sidebarListItem ${pathname === "/admin_products" ? "active" : ""}`}>
+            <Link to="/admin/products" className="link">
+              <li className={`sidebarListItem ${pathname === "/admin/products" ? "active" : ""}`}>
                 <StorefrontIcon className="sidebarIcon" />
                 Products
               </li>
