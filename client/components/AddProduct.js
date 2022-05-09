@@ -95,8 +95,8 @@ class AddProduct extends React.Component{
                 flexWrap: 'wrap',
                 '& > :not(style)': {
                 m: 1,
-                width: "70%",
-                height: "100%",
+                width: "300",
+                height: "500",
                 },
                 flexDirection:'column',
                 justifyContent :"center",

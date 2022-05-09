@@ -21,7 +21,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LoginIcon from "@mui/icons-material/Login";
 
-import { authenticate, onSuccessGoogle } from "../store";
+import { authenticate, onSuccessGoogle, onFailureGoogle } from "../store";
 
 const clientId =
   "1058128297512-29b55ub5cermd4npgdqef22vaa4qpgua.apps.googleusercontent.com";
@@ -37,7 +37,7 @@ const clientId =
  * COMPONENT
  */
 const AuthForm = (props) => {
-  const { name, displayName, handleSubmit, onSuccess, error } = props;
+  const { name, displayName, handleSubmit, onSuccess, onFailure, error } = props;
 
   // const classes = useStyles();
 
@@ -53,15 +53,6 @@ const AuthForm = (props) => {
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
-  };
-
-  // const onSuccess = (res) => {
-  //   console.log('Login Success: currentUser:', res.profileObj);
-  //   console.log('Response from google:', res);
-  // };
-
-  const onFailure = (res) => {
-    console.log("Login failed: res:", res);
   };
 
   const paperStyle = {
@@ -194,7 +185,7 @@ const AuthForm = (props) => {
             onSuccess={onSuccess}
             onFailure={onFailure}
             cookiePolicy={"single_host_origin"}
-            isSignedIn={true}
+            // isSignedIn={true}
           />
           <Typography
             color="textSecondary"
@@ -262,6 +253,9 @@ const mapDispatch = (dispatch) => {
     },
     onSuccess: (res) => {
       dispatch(onSuccessGoogle(res));
+    },
+    onFailure: (res) => {
+      dispatch(onFailureGoogle(res));
     },
   };
 };
