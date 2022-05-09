@@ -66,13 +66,6 @@ const AuthForm = (props) => {
     <Grid>
       <Paper elevation={10} style={paperStyle}>
         <Grid align="center">
-          {/* <Avatar
-            sx={{ backgroundColor: "#1bbd7e" }}
-            alt="Bloom Logo"
-            src="/Images/bloomLogo.png"
-          >
-            <LoginIcon />
-          </Avatar> */}
           <Typography
             variant="h4"
             sx={{
@@ -185,7 +178,6 @@ const AuthForm = (props) => {
             onSuccess={onSuccess}
             onFailure={onFailure}
             cookiePolicy={"single_host_origin"}
-            // isSignedIn={true}
           />
           <Typography
             color="textSecondary"
@@ -220,6 +212,7 @@ const AuthForm = (props) => {
  *   function, and share the same Component. This is a good example of how we
  *   can stay DRY with interfaces that are very similar to each other!
  */
+
 const mapLogin = (state) => {
   return {
     name: "login",

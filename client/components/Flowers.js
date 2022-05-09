@@ -12,7 +12,6 @@ const Flowers = () => {
   const dispatch = useDispatch();
 
   //React Hooks
-  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setPostsPerPage] = useState(12);
 
