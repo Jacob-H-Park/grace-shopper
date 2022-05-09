@@ -25,9 +25,10 @@ const LandingPage = () => {
         color="text.disabled"
         position="absolute"
         fontSize="80px"
-        // fontFamily="BlinkMacSystemFont"
+        text-shadow="#FC0 1px 0 100px"
         top="10%"
-        left="32%"
+        left="30%"
+        sx={{ textShadow: "blue 1px 1px 80px" }}
       >
         Welcome to Bloom
       </Box>
