@@ -101,7 +101,7 @@ class AddProduct extends React.Component{
                     flexDirection:'column',
                     justifyContent :"center",
                     margin: 8
-                }}
+                }}  
                 >
                     
                     <Paper elevation = {12} >
