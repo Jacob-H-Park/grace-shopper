@@ -9,7 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { Button, Grid, Stack } from "@mui/material";
+import { autocompleteClasses, Button, Grid, Stack } from "@mui/material";
 import { withStyles } from "@material-ui/core/styles";
 import UploadPics from "./UploadPics";
 import LocalFloristSharpIcon from '@mui/icons-material/LocalFloristSharp';
@@ -97,15 +97,18 @@ class EditProduct extends Component {
         <Box
           sx={{
             display: 'flex',
-            flexWrap: 'wrap',
-            '& > :not(style)': {
-            m: 1,
             width: "500px",
             height: "800px",
-            },
+            // flexWrap: 'wrap',
+            // '& > :not(style)': {
+            // m: 1,
+            // width: "500px",
+            // height: "800px",
+            // },
             flexDirection:'column',
             justifyContent :"center",
-            margin: 8
+            marginLeft: "auto",
+            marginRight: "auto"
           }}
         >  
           <Paper elevation = {12} >

@@ -1,6 +1,7 @@
 .sidebar {
     flex: 1;
-    height: calc(100vh - 77px);
+    height: 100vh;
+    max-width: 250px !important;
     background-color: #dab3c0;
     top: 50px;
   }

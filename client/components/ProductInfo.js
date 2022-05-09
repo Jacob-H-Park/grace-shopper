@@ -159,15 +159,11 @@ class ProductInfo extends React.Component {
           />
         </Box>
 
-        <div style={{height: 605, width: '100%'}}>
+        <div style={{ height:'87%', width: '100%'}}>
           <DataGrid
             sx={{
               boxShadow: 2,
-              border: 2,
-              borderColor: 'primary.light',
-              '& .MuiDataGrid-cell:hover': {
-                color: 'primary.main',
-              },
+              backgroundColor: 'white'
             }}
             rowHeight={85}
             headerHeight ={40}
