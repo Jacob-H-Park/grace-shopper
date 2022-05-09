@@ -89,99 +89,99 @@ class AddProduct extends React.Component{
         const {classes} = this.props
         return(
             <div className="productList">
-            <Box
-            sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                '& > :not(style)': {
-                m: 1,
-                width: "300",
-                height: "500",
-                },
-                flexDirection:'column',
-                justifyContent :"center",
-                margin: 8
-            }}
-            >
-                
-                <Paper elevation = {12} >
-                    <div className="productList">
-                        <form onSubmit={handleSubmit}>
-                            <Stack direction="column" spacing ={2} margin={2}> 
-                                <IconButton color="primary"  component="span">
-                                    <LocalFloristSharpIcon />Create Product
-                                </IconButton>
+                <Box
+                sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    '& > :not(style)': {
+                    m: 1,
+                    width: "300",
+                    height: "500",
+                    },
+                    flexDirection:'column',
+                    justifyContent :"center",
+                    margin: 8
+                }}
+                >
+                    
+                    <Paper elevation = {12} >
+                        <div className="productList">
+                            <form onSubmit={handleSubmit}>
+                                <Stack direction="column" spacing ={2} margin={2}> 
+                                    <IconButton color="primary"  component="span">
+                                        <LocalFloristSharpIcon />Create Product
+                                    </IconButton>
+                                    
+                                    <TextField 
+                                        name="name" 
+                                        label="Product Name" 
+                                        variant="outlined" 
+                                        onChange={handleChange} 
+                                        value = {name} 
+                                        InputProps={{
+                                            className: classes.input
+                                        }}
+                                    />
                                 
-                                <TextField 
-                                    name="name" 
-                                    label="Product Name" 
-                                    variant="outlined" 
-                                    onChange={handleChange} 
-                                    value = {name} 
-                                    InputProps={{
-                                        className: classes.input
-                                    }}
-                                />
-                               
-                                <FormControl sx={{ m: 1}}>
-                                    <InputLabel id="demo-multiple-name-label">Category</InputLabel>
-                                        <Select
-                                            name='category'
-                                            value={category}
-                                            onChange={handleChange}
-                                            input={<OutlinedInput label="category" />}
-                                        // MenuProps={MenuProps}
-                                        >
-                                        {categories.map((category) => (
-                                            <MenuItem
-                                                key={category}
+                                    <FormControl sx={{ m: 1}}>
+                                        <InputLabel id="demo-multiple-name-label">Category</InputLabel>
+                                            <Select
+                                                name='category'
                                                 value={category}
-                                            // style={getStyles(name, personName, theme)}
+                                                onChange={handleChange}
+                                                input={<OutlinedInput label="category" />}
+                                            // MenuProps={MenuProps}
                                             >
-                                                {category}
-                                            </MenuItem>
-                                        ))}
-                                        </Select>
-                                </FormControl>
-                                <TextField 
-                                    name="price" 
-                                    label="Product Price" 
+                                            {categories.map((category) => (
+                                                <MenuItem
+                                                    key={category}
+                                                    value={category}
+                                                // style={getStyles(name, personName, theme)}
+                                                >
+                                                    {category}
+                                                </MenuItem>
+                                            ))}
+                                            </Select>
+                                    </FormControl>
+                                    <TextField 
+                                        name="price" 
+                                        label="Product Price" 
+                                        variant="outlined" 
+                                        onChange={handleChange} 
+                                        value = {price} 
+                                        InputProps={{
+                                            className: classes.input
+                                        }}
+                                    />      
+                                    <TextField 
+                                        name="stock" 
+                                        label="Product Stock" 
+                                        variant="outlined" 
+                                        onChange={handleChange} 
+                                        value = {stock} 
+                                        InputProps={{
+                                            className: classes.input
+                                        }}
+                                    />          
+                                    <TextField 
+                                    name="description" 
+                                    label="Product Description" 
                                     variant="outlined" 
                                     onChange={handleChange} 
-                                    value = {price} 
+                                    value = {description} 
                                     InputProps={{
-                                        className: classes.input
+                                        className: classes.description
                                     }}
-                                />      
-                                <TextField 
-                                    name="stock" 
-                                    label="Product Stock" 
-                                    variant="outlined" 
-                                    onChange={handleChange} 
-                                    value = {stock} 
-                                    InputProps={{
-                                        className: classes.input
-                                    }}
-                                />          
-                                <TextField 
-                                name="description" 
-                                label="Product Description" 
-                                variant="outlined" 
-                                onChange={handleChange} 
-                                value = {description} 
-                                InputProps={{
-                                    className: classes.description
-                                }}
-                                multiline
-                                row = {6}
-                                />
-                                <UploadPics setUrl = {setUrl}/>
-                                <Button variant="contained" type="submit">Submit</Button>
-                            </Stack>
-                        </form>
-                    </div>
-                </ Paper >
-            </Box>
+                                    multiline
+                                    row = {6}
+                                    />
+                                    <UploadPics setUrl = {setUrl}/>
+                                    <Button variant="contained" type="submit">Submit</Button>
+                                </Stack>
+                            </form>
+                        </div>
+                    </ Paper >
+                </Box>
             </div> 
         )
     }
