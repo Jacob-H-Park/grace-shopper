@@ -241,10 +241,10 @@ const mapDispatch = (dispatch, { history }) => {
       const password = evt.target.password.value;
       if (email) {
         dispatch(authenticate(username, password, formName, email));
-        history.push("/");
+        history.push("/flowers");
       } else {
         dispatch(authenticate(username, password, formName));
-        history.push("/");
+        history.push("/flowers");
       }
     },
     onSuccess: (res) => {

@@ -46,7 +46,7 @@ const itemData = [
     author: "@CarmenDeng",
   },
   {
-    img: "https://ca.slack-edge.com/T024FPYBQ-U02T627ETJS-29d60bae76d5-512",
+    img: "/Images/trevorprofilepic.jpg",
     title: "Trevor Latimer",
     author: "@Trevor Latimer",
   },
