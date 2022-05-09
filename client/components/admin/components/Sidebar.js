@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import "../style/sidebar.css";
+
 // import HomeIcon from '@mui/icons-material/Home';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import TimelineIcon from '@mui/icons-material/Timeline';
@@ -16,7 +17,6 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import SettingsIcon from '@mui/icons-material/Settings';
 import FlagIcon from '@mui/icons-material/Flag';
 
-
 export default function Sidebar() {
   const location = useLocation();
   const pathname = location.pathname;
@@ -27,6 +27,7 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
+
             <Link to="/admin/home" className="link">
             <li className={`sidebarListItem ${pathname === "/admin/home" ? "active" : ""}`}>
               <DashboardIcon className="sidebarIcon" />
@@ -46,12 +47,14 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
+
             <Link to="/admin/users" className="link">
               <li className={`sidebarListItem ${pathname === "/admin/users" ? "active" : ""}`}>
                 <PersonOutlineIcon className="sidebarIcon" />
                 Users
               </li>
             </Link>
+
             <Link to="/admin/products" className="link">
               <li className={`sidebarListItem ${pathname === "/admin/products" ? "active" : ""}`}>
                 <StorefrontIcon className="sidebarIcon" />

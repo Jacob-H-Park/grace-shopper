@@ -14,7 +14,7 @@ export default function Footer() {
         py={{ xs: 4, sm: 10 }}
         bgcolor="#d9aaba"
         color="white"
-        // mt={5}
+        mt={5}
         className="footer"
         fontFamily="BlinkMacSystemFont"
       >

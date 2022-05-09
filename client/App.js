@@ -17,7 +17,7 @@ import EditProduct from "./components/EditProduct";
 import ProductInfo from "./components/ProductInfo";
 import UserInfo from "./components/UserInfo";
 import LandingPage from "./components/LandingPage";
-import Welcome from "./components/Welcome";
+import MeetTheTeam from "./components/MeetTheTeam";
 import EditUserInfo from "./components/EditUserInfo";
 import ChangePassword from "./components/ChangePassword";
 import AdminDashboard from "./components/admin/AdminDashboard";
@@ -80,6 +80,7 @@ class App extends Component {
             <Route path="/roses" component={FlowerCategories} />
             <Route path="/tulips" component={FlowerCategories} />
             <Route path="/orchids" component={FlowerCategories} />
+            <Route path="/meet_the_team" component={MeetTheTeam} />
             <Route path="/sig-bouquets" component={FlowerCategories} />
             <Route path="/sympathy" component={FlowerCategories} />
             <Route path="/preserved-rosesy" component={FlowerCategories} />
