@@ -37,7 +37,8 @@ const clientId =
  * COMPONENT
  */
 const AuthForm = (props) => {
-  const { name, displayName, handleSubmit, onSuccess, onFailure, error } = props;
+  const { name, displayName, handleSubmit, onSuccess, onFailure, error } =
+    props;
 
   // const classes = useStyles();
 
@@ -229,7 +230,7 @@ const mapSignup = (state) => {
   };
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, { history }) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault();
@@ -240,8 +241,10 @@ const mapDispatch = (dispatch) => {
       const password = evt.target.password.value;
       if (email) {
         dispatch(authenticate(username, password, formName, email));
+        history.push("/");
       } else {
         dispatch(authenticate(username, password, formName));
+        history.push("/");
       }
     },
     onSuccess: (res) => {

@@ -32,13 +32,10 @@ class ChangePassword extends React.Component {
 
   handleClick = async (event) => {
     const { oldPassword } = this.state;
-    console.log("change password");
-    console.log(oldPassword);
     event.preventDefault();
     this.setState({ isChanging: true });
     try {
       if (await this.props.comparePassword(oldPassword)) {
-        console.log("updating the password");
         this.props.updatePassword(this.state.password);
       }
     } catch (err) {
