@@ -41,7 +41,7 @@ const LandingPage = () => {
             {index === currentSlide && (
               <Box
                 component="img"
-                sx={{ width: "100vw", height: "93vh", objectFit: "cover" }}
+                sx={{ width: "99vw", height: "93vh", objectFit: "cover" }}
                 alt="landing page img"
                 src={image}
               />
