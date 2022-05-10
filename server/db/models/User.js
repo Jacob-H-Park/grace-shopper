@@ -2,7 +2,6 @@ const { STRING, BOOLEAN, INTEGER } = require("sequelize");
 const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const axios = require("axios");
 require("dotenv").config();
 const SALT_ROUNDS = 5;
 
@@ -29,12 +28,12 @@ const User = db.define("user", {
     defaultValue: false,
   },
   avatar: {
-    type: STRING
+    type: STRING,
   },
   status: {
     type: STRING,
-    defaultValue: "active"
-  }
+    defaultValue: "active",
+  },
 });
 
 module.exports = User;
@@ -44,11 +43,11 @@ module.exports = User;
  */
 User.prototype.correctPassword = function (candidatePwd) {
   //we need to compare the plain version to an encrypted version of the password
-  
-  if(!(bcrypt.compare(candidatePwd, this.password))){
-    const error = Error('Old password is not correct');
+
+  if (!bcrypt.compare(candidatePwd, this.password)) {
+    const error = Error("Old password is not correct");
     error.status = 401;
-    throw error
+    throw error;
   }
   return bcrypt.compare(candidatePwd, this.password);
 };
