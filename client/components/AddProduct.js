@@ -10,7 +10,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { Button, Grid, Stack } from "@mui/material";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@mui/styles";
 import UploadPics from "./UploadPics";
 import LocalFloristSharpIcon from "@mui/icons-material/LocalFloristSharp";
 import IconButton from "@mui/material/IconButton";
