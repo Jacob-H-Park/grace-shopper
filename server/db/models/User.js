@@ -29,7 +29,7 @@ const User = db.define("user", {
     defaultValue: false,
   },
   avatar: {
-    type: STRING
+    type: STRING(1000)
   },
   status: {
     type: STRING,

@@ -1,6 +1,9 @@
 import React from "react";
 import faker from "faker";
 import "../style/widgetLg.css";
+import { AvatarGenerator } from 'random-avatar-generator';
+ 
+const generator = new AvatarGenerator(); 
 
 export default function WidgetLg() {
   const Button = ({ type }) => {
@@ -19,7 +22,8 @@ export default function WidgetLg() {
         <tr className="widgetLgTr">
           <td className="widgetLgUser">
             <img
-              src="https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+              // src="https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+              src={generator.generateRandomAvatar()}
               alt=""
               className="widgetLgImg"
             />
@@ -34,7 +38,8 @@ export default function WidgetLg() {
         <tr className="widgetLgTr">
           <td className="widgetLgUser">
             <img
-              src="https://images.pexels.com/photos/4171733/pexels-photo-4171733.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+              // src="https://images.pexels.com/photos/4171733/pexels-photo-4171733.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+              src={generator.generateRandomAvatar()}
               alt=""
               className="widgetLgImg"
             />
@@ -49,7 +54,8 @@ export default function WidgetLg() {
         <tr className="widgetLgTr">
           <td className="widgetLgUser">
             <img
-              src="https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+              // src="https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+              src={generator.generateRandomAvatar()}
               alt=""
               className="widgetLgImg"
             />
@@ -64,7 +70,8 @@ export default function WidgetLg() {
         <tr className="widgetLgTr">
           <td className="widgetLgUser">
             <img
-              src="https://images.pexels.com/photos/4171733/pexels-photo-4171733.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+              // src="https://images.pexels.com/photos/4171733/pexels-photo-4171733.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+              src={generator.generateRandomAvatar()}
               alt=""
               className="widgetLgImg"
             />

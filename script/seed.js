@@ -5,6 +5,9 @@ const {
   models: { User, Product, LineItem, Order, Promotion },
 } = require("../server/db");
 const faker = require("faker");
+const { AvatarGenerator } = require("random-avatar-generator");
+ 
+const generator = new AvatarGenerator();
 
 /**
  * seed - this function clears the database, updates tables to
@@ -24,70 +27,70 @@ async function seed() {
       email: "cody@fsa.com",
       isAdmin: true,
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: "murphy",
       password: "123",
       email: "murphy@fsa.com",
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
   ]);
 
