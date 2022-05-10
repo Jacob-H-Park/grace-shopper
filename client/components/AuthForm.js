@@ -21,7 +21,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LoginIcon from "@mui/icons-material/Login";
 
-import { authenticate, onSuccessGoogle, onFailureGoogle } from "../store";
+import { authenticate, onSuccessGoogle, onFailureGoogle, onSuccessTwitter } from "../store";
 
 const clientId =
   "1058128297512-29b55ub5cermd4npgdqef22vaa4qpgua.apps.googleusercontent.com";
@@ -37,7 +37,7 @@ const clientId =
  * COMPONENT
  */
 const AuthForm = (props) => {
-  const { name, displayName, handleSubmit, onSuccess, onFailure, error } =
+  const { name, displayName, handleSubmit, onSuccess, onFailure, onSuccessTwitter, error } =
     props;
 
   // const classes = useStyles();
@@ -180,6 +180,18 @@ const AuthForm = (props) => {
             onFailure={onFailure}
             cookiePolicy={"single_host_origin"}
           />
+          <Button
+            variant="contained"
+            sx={{
+              margin: "0",
+              backgroundColor: "#55ACEE",
+              fontWeight: "600",
+            }}
+            onClick={() => window.location = "/auth/twitter"}
+            fullWidth
+          >
+            Sign in with Twitter
+          </Button>
           <Typography
             color="textSecondary"
             sx={{ marginTop: "15px", fontSize: 14, marginBottom: "10px" }}
@@ -252,6 +264,9 @@ const mapDispatch = (dispatch, { history }) => {
     },
     onFailure: (res) => {
       dispatch(onFailureGoogle(res));
+    },
+    onSuccessTwitter: () => {
+      dispatch(onSuccessTwitter());
     },
   };
 };

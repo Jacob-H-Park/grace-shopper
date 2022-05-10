@@ -154,6 +154,21 @@ export const onFailureGoogle = (res) => {
 };
 
 /**
+ * Twitter login using passport.js middleware
+ */
+export const onSuccessTwitter = () => {
+  return async (dispatch) => {
+    
+      const res = await axios.get("/auth/twitter/callback");
+      console.log("backend RESPONSE login", res);
+      // const { email, username, password } = res.data;
+      // window.localStorage.setItem(TOKEN, res.data.token);
+      // dispatch(me());
+    
+  };
+}
+
+/**
  * REDUCER
  */
 export default function (state = {}, action) {

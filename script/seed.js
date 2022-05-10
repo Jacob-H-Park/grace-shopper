@@ -14,8 +14,8 @@ async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log("db synced!");
 
-  const avatar_url =
-    "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500";
+  const avatar_url = "https://i.pravatar.cc/300";
+    // "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500";
   // Creating Users
   const users = await Promise.all([
     await User.create({

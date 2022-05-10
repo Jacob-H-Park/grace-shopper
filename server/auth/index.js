@@ -3,6 +3,8 @@ const {
   models: { User },
 } = require("../db");
 const { OAuth2Client } = require("google-auth-library");
+const passport = require("passport");
+
 module.exports = router;
 
 const clientId =
@@ -19,6 +21,7 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+// google login
 router.post("/googlelogin", async (req, res, next) => {
   try {
     const { tokenId } = req.body;
@@ -26,7 +29,7 @@ router.post("/googlelogin", async (req, res, next) => {
       idToken: tokenId,
       audience: clientId,
     });
-    const { email_verified, email, name } = response.payload;
+    const { email_verified, email, name, picture } = response.payload;
 
     if (email_verified) {
       const user = await User.findOne({ where: { email } });
@@ -45,6 +48,7 @@ router.post("/googlelogin", async (req, res, next) => {
           email,
           username: name,
           password: "123",
+          avatar: picture,
         });
         res.send({
           token: await newUser.generateToken(),
@@ -102,8 +106,39 @@ router.put("/changepassword", async (req, res, next) => {
 
 router.get("/me", async (req, res, next) => {
   try {
+    // var passedVariable = req.session.passport;
+    // req.session.valid = null; // resets session variable
+    // console.log("MEMEMEMEM", req.body, req.user, passedVariable);
     res.send(await User.findByToken(req.headers.authorization));
   } catch (ex) {
     next(ex);
   }
 });
+
+// authentication with twitter login
+router.get('/twitter', passport.authenticate('twitter'));
+
+// callback route for twitter to redirect to
+// hand control to passport to use code to grab profile info
+router.get('/twitter/callback', 
+  passport.authenticate('twitter', { failureRedirect: '/login' }),
+  async (req, res) => {
+    // Successful authentication, get all the user info as req.user
+    const { email, username, password } = req.user;
+    console.log("NOW REDIRECT REDIRECT REDIRECT TO:", req.user, req.session);
+    // send it to the frontend
+    // res.send(req.user);
+    // res.send({
+    //   token: await User.authenticate(
+    //     { username, password },
+    //     true
+    //   ),
+    //   username,
+    //   email,
+    //   password,
+    // });
+    // redirect to home
+    // req.session.valid = true;
+    res.redirect('/');
+  }
+);
