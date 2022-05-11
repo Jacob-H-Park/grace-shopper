@@ -89,7 +89,7 @@ class EditProduct extends Component {
     const { name, price, stock, category, description, image_url } = this.state;
     const { handleSubmit, handleChange, setUrl } = this;
     const { classes } = this.props;
-    if (!this.state.id) {
+    if (!this.props.flowerToEdit) {
       return null;
     } else {
       return (
@@ -133,7 +133,6 @@ class EditProduct extends Component {
                         value={category}
                         onChange={handleChange}
                         input={<OutlinedInput label="category" />}
-                        // MenuProps={MenuProps}
                       >
                         {categories.map((category) => (
                           <MenuItem

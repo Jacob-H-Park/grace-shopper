@@ -28,7 +28,7 @@ const AccountMenu = ({ isAdmin }) => {
         open={open}
         onClose={handleClose}
       >
-        <Link to="/account">
+        <Link to="/account/edit">
           <MenuItem onClick={handleClose} color="black">
             Edit Account
           </MenuItem>
