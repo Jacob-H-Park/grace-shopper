@@ -105,7 +105,6 @@ const Cart = () => {
       0
     )
     total = Math.round((1-discount)* beforeDiscount,2);
-    console.log('code',promotionCode)
     return (
       <Box sx={{ width: "375px" }}>
         <List sx={{ width: "375px", bgcolor: "white" }}>

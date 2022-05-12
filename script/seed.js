@@ -22,6 +22,7 @@ async function seed() {
       username: "cody",
       password: "123",
       email: "cody@fsa.com",
+      DOB:'1995-01-02',
       isAdmin: true,
       // avatar: faker.image.avatar()
       avatar: avatar_url,
@@ -30,6 +31,7 @@ async function seed() {
       username: "murphy",
       password: "123",
       email: "murphy@fsa.com",
+      DOB:'1995-01-02',
       // avatar: faker.image.avatar()
       avatar: avatar_url,
     }),
@@ -37,12 +39,14 @@ async function seed() {
       username: faker.name.firstName().toLowerCase(),
       password: "123",
       email: faker.internet.email(),
+      DOB:'1995-01-02',
       // avatar: faker.image.avatar()
       avatar: avatar_url,
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
       avatar: avatar_url,
@@ -50,6 +54,7 @@ async function seed() {
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
       avatar: avatar_url,
@@ -57,6 +62,7 @@ async function seed() {
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
       avatar: avatar_url,
@@ -64,6 +70,7 @@ async function seed() {
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
       avatar: avatar_url,
@@ -71,6 +78,7 @@ async function seed() {
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
       avatar: avatar_url,
@@ -78,6 +86,7 @@ async function seed() {
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
       avatar: avatar_url,
@@ -85,6 +94,7 @@ async function seed() {
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
       avatar: avatar_url,
