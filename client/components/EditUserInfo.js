@@ -1,7 +1,44 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateAuth } from "../store";
-import { Box, Button, Paper } from "@mui/material";
+import { Box, Button, Paper, InputBase, Divider,InputLabel } from "@mui/material";
+import { alpha, styled } from '@mui/material/styles';
+const BootstrapInput = styled(InputBase)(({ theme }) => ({
+  'label + &': {
+    marginTop: '0px',
+  },
+  '& .MuiInputBase-input': {
+    borderRadius: 4,
+    position: 'relative',
+    backgroundColor: theme.palette.mode === 'light' ? '#fcfcfb' : '#2b2b2b',
+    border: '1px solid #ced4da',
+    fontSize: 14,
+    width: '200px',
+    padding: '2px',
+    transition: theme.transitions.create([
+      'border-color',
+      'background-color',
+      'box-shadow',
+    ]),
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    '&:focus': {
+      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+      borderColor: theme.palette.primary.main,
+    },
+  },
+}));
 class EditUserInfo extends Component {
   constructor(props) {
     super(props);
@@ -10,6 +47,8 @@ class EditUserInfo extends Component {
       username: this.props.auth.username ? this.props.auth.username : "",
       email: this.props.auth.email ? this.props.auth.email : "",
       password: this.props.auth.password ? this.props.auth.password : "",
+      DOB: this.props.auth.DOB ? this.props.auth.DOB : "",
+      address: this.props.auth.address ? this.props.auth.address : "",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -28,7 +67,9 @@ class EditUserInfo extends Component {
     this.props.updateUser(
       this.state.username,
       this.state.email,
-      this.state.password
+      this.state.password,
+      this.state.DOB,
+      this.state.address
     );
   }
   handleChange(evt) {
@@ -38,49 +79,140 @@ class EditUserInfo extends Component {
   }
 
   render() {
-    const { username, email } = this.state;
+    const { username, email, DOB, address } = this.state;
     const { handleSubmit, handleChange } = this;
-    const paperStyle = {
-      padding: 20,
-      height: "auto",
-      width: 380,
-      margin: "20px auto",
-    };
 
+    const { auth } = this.props;
     return (
-      <div>
-        <Paper elevation={1} style={paperStyle}>
-          <Box display="flex" justifyContent="center" flexDirection="column">
-            <Box>
-              <h1>Update Profile:</h1>
-            </Box>
-            <Box display="flex" flexDirection="column">
-              <form onSubmit={handleSubmit}>
-                <label htmlFor="username">User Name:</label>
-                <input
-                  name="username"
-                  onChange={handleChange}
-                  value={username}
-                  style={{ marginBottom: "1rem" }}
-                />
+      <Box sx={{
+        display:"flex",
+        flexDirection: 'row',
+        width:"60%",
+        height: "350px",
+        justifyContent:'space-around',
+        margin: "20px auto",
+      }}>
+        <Paper 
+          elevation = {12} 
+          variant ="outlined" 
+          sx={{
+            width: "100%",
+            border:1,
+            borderColor: "white"
+          }}
+        >
+          <Box sx={{
+            display:'flex',
+            flexWrap:'wrap',
+            flexDirection:'column',
+          }}
+            
+          >
+            <h4 style={{
+              font:'Abril Fatface',
+              margin:'0.5rem'
+            }}>Update Personal Information</h4>
+            <Divider />
+            <form onSubmit={handleSubmit}>
+              <Box sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-evenly',
+                margin: '0.5rem',
 
-                <label htmlFor="email">Email:</label>
-                <input
-                  name="email"
-                  onChange={handleChange}
-                  value={email}
-                  style={{ marginBottom: "1rem" }}
-                />
-                <br />
-
-                <Button variant="contained" color="secondary" type="submit">
-                  Update
+              }}>
+                <Box>
+                  <InputLabel shrink htmlFor="bootstrap-input"
+                    sx={{
+                      marginTop: "1rem",
+                      marginLeft: '0.5rem'
+                    }}
+                  >
+                    User Name
+                  </InputLabel>
+                  <BootstrapInput 
+                    vdefaultValue={auth.username} 
+                    id="bootstrap-input" 
+                    name="username"
+                    onChange={handleChange}
+                    value={username}
+                  />
+                </Box>
+                <Box>
+                  <InputLabel shrink htmlFor="bootstrap-input"
+                    sx={{
+                      marginTop: "1rem"
+                    }}
+                  >
+                    Email
+                  </InputLabel>
+                  <BootstrapInput 
+                    defaultValue={auth.email} 
+                    id="bootstrap-input" 
+                    name="email"
+                    onChange={handleChange}
+                    value={email}
+                  />
+                </Box>
+              </Box>
+              <Box sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-evenly',
+                  margin: '0.5rem',
+                  marginTop:'1rem'
+                }}
+              >
+                <Box >
+                  <InputLabel shrink htmlFor="bootstrap-input"
+                    sx={{
+                      marginTop: "1rem",
+                      marginLeft: '0.5rem'
+                    }}
+                  >
+                  Date of Birth
+                  </InputLabel>
+                  <BootstrapInput 
+                  defaultValue={auth.DOB} 
+                    id="bootstrap-input" 
+                    name="DOB"
+                    onChange={handleChange}
+                    value={DOB}
+                  />
+                </Box>      
+                <Box>
+                  <InputLabel shrink htmlFor="bootstrap-input"
+                    sx={{
+                      marginTop: "1rem",
+                      marginLeft: '0.5rem'
+                    }}
+                  >
+                    Shipping Address
+                  </InputLabel>
+                  <BootstrapInput 
+                    defaultValue={auth.address} 
+                    id="bootstrap-input" 
+                    name="address"
+                    onChange={handleChange}
+                    value={address}
+                  />
+                </Box>
+                
+              </Box>
+              <Box sx={{
+                display:'flex',
+                flexDirection: 'row',
+                justifyContent:'right',
+                marginRight:'50px'
+              }}>
+                <Button variant="outlined" color="primary" type="submit">
+                   Update
                 </Button>
-              </form>
-            </Box>
+              </Box>
+            </form>
           </Box>
         </Paper>
-      </div>
+      </Box>
     );
   }
 }
@@ -90,8 +222,8 @@ const mapState = ({ auth }) => {
 };
 const mapDispatch = (dispatch, { history }) => {
   return {
-    updateUser: (username, email, password) => {
-      dispatch(updateAuth(username, email, password, history));
+    updateUser: (username, email, password,DOB,address) => {
+      dispatch(updateAuth(username, email, password, DOB,address,history));
     },
   };
 };

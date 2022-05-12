@@ -3,25 +3,26 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { alpha, styled } from '@mui/material/styles';
-
+import { Divider } from "@mui/material";
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   'label + &': {
-    marginTop: theme.spacing(3),
+    marginTop: '0px',
   },
   '& .MuiInputBase-input': {
     borderRadius: 4,
     position: 'relative',
     backgroundColor: theme.palette.mode === 'light' ? '#fcfcfb' : '#2b2b2b',
     border: '1px solid #ced4da',
-    fontSize: 16,
-    width: 'auto',
-    padding: '10px 12px',
+    fontSize: 14,
+    width: '200px',
+    padding: '2px',
     transition: theme.transitions.create([
       'border-color',
       'background-color',
       'box-shadow',
     ]),
+
     // Use the system font instead of the default Roboto font.
     fontFamily: [
       '-apple-system',
@@ -50,25 +51,17 @@ class UserInfo extends React.Component {
   
   render() {
     const { auth } = this.props;
-    const paperStyle = {
-      padding: 20,
-      height: "300px",
-      width: "80%",
-      margin: "20px auto",
-    };
-
     return (
       <Box sx={{
         display:"flex",
         flexDirection: 'row',
         width:"60%",
-        height: "300px",
+        height: "350px",
         justifyContent:'space-around',
         margin: "20px auto",
       }}>
         <Paper elevation = {12} 
                 variant ="outlined"
-                
                 sx={{
                   width: "100%",
                   border:1,
@@ -78,38 +71,74 @@ class UserInfo extends React.Component {
           <Box sx={{
             display:'flex',
             flexWrap:'wrap',
-            flexDirection:'column'
+            flexDirection:'column',
           }}>
             <h4 style={{
               font:'Abril Fatface',
               margin:'0.5rem'
             }}>Personal Information</h4>
-            <InputLabel shrink htmlFor="bootstrap-input">
-              Bootstrap
-            </InputLabel>
-            <BootstrapInput defaultValue="react-bootstrap" id="bootstrap-input" />
-            <label><strong>Username:</strong></label><p style={{style: 'inline'}}>{auth.username}</p>
-            <h1>{auth.email}</h1>
-
+            <Divider />
+            <Box sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-evenly',
+              margin: '0.5rem'
+            }}>
+              <Box>
+                <InputLabel shrink htmlFor="bootstrap-input"
+                  sx={{
+                    marginTop: "1rem",
+                    marginLeft: '0.5rem'
+                  }}
+                >
+                  User Name
+                </InputLabel>
+                <BootstrapInput defaultValue={auth.username} id="bootstrap-input"/>
+              </Box>
+              <Box>
+                <InputLabel shrink htmlFor="bootstrap-input"
+                  sx={{
+                    marginTop: "1rem"
+                  }}
+                >
+                  Email
+                </InputLabel>
+                <BootstrapInput defaultValue={auth.email} id="bootstrap-input" />
+              </Box>
+            </Box>
+            <Box sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-evenly',
+              margin: '0.5rem'
+            }}>
+              <Box>
+                <InputLabel shrink htmlFor="bootstrap-input"
+                  sx={{
+                    marginTop: "1rem",
+                    marginLeft: '0.5rem'
+                  }}
+                >
+                 Date of Birth
+                </InputLabel>
+                <BootstrapInput defaultValue={auth.DOB} id="bootstrap-input" />
+              </Box>      
+              <Box>
+                <InputLabel shrink htmlFor="bootstrap-input"
+                  sx={{
+                    marginTop: "1rem",
+                    marginLeft: '0.5rem'
+                  }}
+                >
+                  Shipping Address
+                </InputLabel>
+                <BootstrapInput defaultValue={auth.address} id="bootstrap-input" />
+              </Box>
+            </Box>
           </Box>
         </Paper>
       </Box>
     )    
-          {/* <h3><u>Welcome To Your Profile!</u></h3>
-            <label><strong>Username:</strong></label><p style={{style: 'inline'}}>{auth.username}</p>
-          <h1>{auth.email}</h1>
-          <Box display='flex' flexDirection='column-reverse'>
-            <Box>
-              <Link to="/account/edit">
-                <button>Basic Information</button>
-              </Link>
-              <Link to="/account/password">
-                <button>Login/Authentication</button>
-              </Link>
-            </Box>
-          </Box> */}
-    
-    
   }
 }
 

@@ -65,12 +65,12 @@ export function authenticate(username, password, method, email) {
 }
 
 export const updateAuth =
-  (username, email, password, history) => async (dispatch) => {
+  (username, email, password, DOB, address, history) => async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
       const res = await axios.put(
         `/auth/edit`,
-        { username, email, password },
+        { username, email, password,DOB,address },
         {
           headers: {
             authorization: token,

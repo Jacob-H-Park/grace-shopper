@@ -40,6 +40,9 @@ const User = db.define("user", {
     type: STRING,
     defaultValue: "active",
   },
+  address:{
+    type:STRING
+  }
 });
 
 module.exports = User;
