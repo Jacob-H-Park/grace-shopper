@@ -142,10 +142,12 @@ class ProductInfo extends React.Component {
           <Autocomplete
             sx={{
               width: 400,
-              height: 80,
+              height: 50,
+              mr: 3,
             }}
             multiple
             id="category"
+            size="small"
             options={categoryList}
             disableCloseOnSelect
             getOptionLabel={(option) => option.label}

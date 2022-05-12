@@ -25,6 +25,7 @@ async function seed() {
       username: "cody",
       password: "123",
       email: "cody@fsa.com",
+      DOB:'1995-01-02',
       isAdmin: true,
       // avatar: faker.image.avatar()
       avatar: generator.generateRandomAvatar(),
@@ -33,6 +34,7 @@ async function seed() {
       username: "murphy",
       password: "123",
       email: "murphy@fsa.com",
+      DOB:'1995-01-02',
       // avatar: faker.image.avatar()
       avatar: generator.generateRandomAvatar(),
     }),
@@ -40,12 +42,14 @@ async function seed() {
       username: faker.name.firstName().toLowerCase(),
       password: "123",
       email: faker.internet.email(),
+      DOB:'1995-01-02',
       // avatar: faker.image.avatar()
       avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
       avatar: generator.generateRandomAvatar(),
@@ -53,6 +57,7 @@ async function seed() {
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
       avatar: generator.generateRandomAvatar(),
@@ -60,6 +65,7 @@ async function seed() {
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
       avatar: generator.generateRandomAvatar(),
@@ -67,6 +73,7 @@ async function seed() {
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
       avatar: generator.generateRandomAvatar(),
@@ -74,6 +81,7 @@ async function seed() {
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
       avatar: generator.generateRandomAvatar(),
@@ -81,6 +89,7 @@ async function seed() {
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
       avatar: generator.generateRandomAvatar(),
@@ -88,6 +97,7 @@ async function seed() {
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
       avatar: generator.generateRandomAvatar(),
@@ -601,9 +611,11 @@ async function seed() {
   await Order.create({ userId: 1 });
   await Promotion.create({
     Code: "HPMTRD22",
+    name: 'Mother-Day',
     Discount: 0.1,
     Start_Date: "2022-05-02",
     End_Date: "2022-05-08",
+    Free_Shipping: true
   });
 
   console.log(`seeded ${users.length} users`);

@@ -26,10 +26,12 @@ import UserList from "./components/admin/components/UserList";
 import NewUser from "./components/admin/components/NewUser";
 import User from "./components/admin/components/User";
 import Footer from "./components/Footer";
+import FlowerCategories from "./components/FlowerTypes/FlowerCategories";
+import Account from "./components/Account";
+import { myContext } from './Context';
 import { me } from "./store";
 import { fetchProducts } from "./store/flowers";
-import FlowerCategories from "./components/FlowerTypes/FlowerCategories";
-import { myContext } from './Context'
+
 
 class App extends Component {
   static contextType = myContext;
@@ -53,10 +55,11 @@ class App extends Component {
             isAdmin ? (
               <Switch>
                 <Route path="/admin" component={AdminDashboard} />
+                <Route path= "/account" component ={Account} />
                 {/* <Route path="editflowerinfo/:id" component={EditProduct} /> */}
-                <Route exact path="account" component={UserInfo} />
-                <Route path="account/edit" component={EditUserInfo} />
-                <Route path="account/password" component={ChangePassword} />
+                {/* <Route path="/account" component={UserInfo} /> */}
+                {/* <Route path="/account/edit" component={EditUserInfo} /> */}
+                {/* <Route path="account/password" component={ChangePassword} /> */}
                 <Route path="cart" component={Cart} />
                 {/* <Route path="admin_products" component={ProductInfo} /> */}
                 {/* <Route path="add_product" component={AddProduct} /> */}
@@ -66,9 +69,10 @@ class App extends Component {
               </Switch>
             ) : (
               <Switch>
-                <Route exact path="/account" component={UserInfo} />
-                <Route path="/account/edit" component={EditUserInfo} />
-                <Route path="/account/password" component={ChangePassword} />
+                <Route path= "/account" component ={Account} />
+                {/* <Route exact path="/account" component={UserInfo} /> */}
+                {/* <Route path="/account/edit" component={EditUserInfo} />
+                <Route path="/account/password" component={ChangePassword} /> */}
                 <Route path="/cart" component={Cart} />
               </Switch>
             )

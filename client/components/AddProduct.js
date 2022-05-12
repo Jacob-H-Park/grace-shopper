@@ -10,7 +10,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { Button, Grid, Stack } from "@mui/material";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@mui/styles";
 import UploadPics from "./UploadPics";
 import LocalFloristSharpIcon from "@mui/icons-material/LocalFloristSharp";
 import IconButton from "@mui/material/IconButton";
@@ -26,13 +26,13 @@ const categories = [
 
 const styles = (theme) => ({
   input: {
-    height: 60,
+    height: 40,
   },
   button: {
     width: 10,
   },
   selectRoot: {
-    height: 40,
+    height: 50,
     display: "table",
     // display: "flex",
     // justifyContent: "center",
@@ -91,16 +91,14 @@ class AddProduct extends React.Component {
       <div className="productList">
         <Box
           sx={{
-            display: "flex",
             flexWrap: "wrap",
-            "& > :not(style)": {
-              m: 1,
-              width: "300",
-              height: "500",
-            },
+            display: "flex",
+            width: "500px",
+            height: "800px",
             flexDirection: "column",
             justifyContent: "center",
-            margin: 8,
+            marginLeft: "auto",
+            marginRight: "auto",
           }}
         >
           <Paper elevation={12}>
@@ -123,7 +121,7 @@ class AddProduct extends React.Component {
                     }}
                   />
 
-                  <FormControl sx={{ m: 1 }}>
+                  <FormControl sx={{ m: 1 }} size ="small">
                     <InputLabel id="demo-multiple-name-label">
                       Category
                     </InputLabel>
@@ -132,7 +130,6 @@ class AddProduct extends React.Component {
                       value={category}
                       onChange={handleChange}
                       input={<OutlinedInput label="category" />}
-                      // MenuProps={MenuProps}
                     >
                       {categories.map((category) => (
                         <MenuItem
@@ -175,7 +172,7 @@ class AddProduct extends React.Component {
                       className: classes.description,
                     }}
                     multiline
-                    row={6}
+                    maxRows={Infinity}
                   />
                   <UploadPics setUrl={setUrl} />
                   <Button variant="contained" type="submit">
