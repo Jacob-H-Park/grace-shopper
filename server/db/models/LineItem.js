@@ -3,27 +3,26 @@ const db = require("../db");
 const Order = require("./Order");
 const Product = require("./Product");
 
-
-const LineItem = db.define('lineItem', {
+const LineItem = db.define("lineItem", {
   orderId: {
     type: Sequelize.INTEGER,
     references: {
       model: Order,
-      key: "id"
+      key: "id",
     },
   },
   productId: {
     type: Sequelize.INTEGER,
     references: {
       model: Product,
-      key: "id"
+      key: "id",
     },
   },
 
   quantity: {
     type: Sequelize.INTEGER,
-    defaultValue: 1
-  }
+    defaultValue: 1,
+  },
 });
 
 module.exports = LineItem;

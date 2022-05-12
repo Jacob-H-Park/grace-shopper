@@ -1,5 +1,6 @@
 import "../style/newUser.css";
 import React from "react";
+
 export default function NewUser() {
   return (
     <div className="newUser">
