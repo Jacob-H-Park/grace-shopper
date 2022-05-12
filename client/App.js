@@ -29,7 +29,7 @@ import Footer from "./components/Footer";
 import { me } from "./store";
 import { fetchProducts } from "./store/flowers";
 import FlowerCategories from "./components/FlowerTypes/FlowerCategories";
-
+import Account from "./components/Account";
 class App extends Component {
   componentDidMount() {
     this.props.loadInitialData();
@@ -47,10 +47,11 @@ class App extends Component {
             isAdmin ? (
               <Switch>
                 <Route path="/admin" component={AdminDashboard} />
+                <Route path= "/account" component ={Account} />
                 {/* <Route path="editflowerinfo/:id" component={EditProduct} /> */}
-                <Route exact path="account" component={UserInfo} />
-                <Route path="account/edit" component={EditUserInfo} />
-                <Route path="account/password" component={ChangePassword} />
+                {/* <Route path="/account" component={UserInfo} /> */}
+                {/* <Route path="/account/edit" component={EditUserInfo} /> */}
+                {/* <Route path="account/password" component={ChangePassword} /> */}
                 <Route path="cart" component={Cart} />
                 {/* <Route path="admin_products" component={ProductInfo} /> */}
                 {/* <Route path="add_product" component={AddProduct} /> */}
@@ -60,9 +61,10 @@ class App extends Component {
               </Switch>
             ) : (
               <Switch>
-                <Route exact path="/account" component={UserInfo} />
-                <Route path="/account/edit" component={EditUserInfo} />
-                <Route path="/account/password" component={ChangePassword} />
+                <Route path= "/account" component ={Account} />
+                {/* <Route exact path="/account" component={UserInfo} /> */}
+                {/* <Route path="/account/edit" component={EditUserInfo} />
+                <Route path="/account/password" component={ChangePassword} /> */}
                 <Route path="/cart" component={Cart} />
               </Switch>
             )
