@@ -106,9 +106,6 @@ router.put("/changepassword", async (req, res, next) => {
 
 router.get("/me", async (req, res, next) => {
   try {
-    // var passedVariable = req.session.passport;
-    // req.session.valid = null; // resets session variable
-    // console.log("MEMEMEMEM", req.body, req.user, passedVariable);
     res.send(await User.findByToken(req.headers.authorization));
   } catch (ex) {
     next(ex);
@@ -123,22 +120,72 @@ router.get('/twitter', passport.authenticate('twitter'));
 router.get('/twitter/callback', 
   passport.authenticate('twitter', { failureRedirect: '/login' }),
   async (req, res) => {
-    // Successful authentication, get all the user info as req.user
-    const { email, username, password } = req.user;
-    console.log("NOW REDIRECT REDIRECT REDIRECT TO:", req.user, req.session);
-    // send it to the frontend
-    // res.send(req.user);
-    // res.send({
-    //   token: await User.authenticate(
-    //     { username, password },
-    //     true
-    //   ),
-    //   username,
-    //   email,
-    //   password,
-    // });
-    // redirect to home
-    // req.session.valid = true;
+    // Successful authentication, all the user info is attched to 
+    // req.user and req.session.passport.user
+    // redirect to the home page
     res.redirect('/');
   }
 );
+
+router.get('/facebook',
+  passport.authenticate('facebook', { scope : ['public_profile', 'email'] }));
+
+router.get('/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  }
+);
+
+router.get('/auth/instagram',
+  passport.authenticate('instagram'));
+
+router.get('/auth/instagram/callback', 
+  passport.authenticate('instagram', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  }
+);
+
+// route that lets the frontend fetch the user info from OAuth login
+router.get('/getUser', async (req, res, next) => {
+  try {
+    // check if req.session exists
+    if (Object.keys(req.session).length !== 0) {
+      const user = req.session.passport.user;
+      const { username, password, email } = user;
+      res.send({
+        token: await User.authenticate(
+          { username, password },
+          true
+        ),
+        username,
+        email,
+        password,
+      });
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+// route logout for OAuth
+router.get("/logout", (req, res, next) => {
+  try {
+    // req.session.passport is available as cookie session for a defined time (1 day) in app.js
+    // as long as you don't remove it.
+    if (Object.keys(req.session).length !== 0) {
+      req.session = null;
+      // req.session.passport.logout();
+      // req.session.destroy();
+      // res.clearCookie('connect.sid');
+    }
+    
+    res.send("done");
+  } catch (err) {
+    next(err);
+  }
+  
+});

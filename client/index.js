@@ -7,12 +7,15 @@ import history from "./history";
 import store from "./store";
 import App from "./App";
 import { theme } from "./siteTheme";
+import Context from './Context';
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <ThemeProvider theme={theme}>
-        <App />
+        <Context>
+          <App />
+        </Context>
       </ThemeProvider>
     </Router>
   </Provider>,

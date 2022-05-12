@@ -23,7 +23,7 @@ app.use(express.json());
 // }));
 app.use(cookieSession({
   name: "twitter-auth-session",
-  keys: ["team-7"],
+  keys: ["team-7-fantastic"],
   maxAge: 24 * 60 * 60 * 100 
 }));
 
