@@ -2,6 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { comparePass } from "../store";
 import { updatePass } from "../store";
+import { Box, Paper, Button ,InputLabel,Divider, Stack, FormControl,FilledInput,InputAdornment,IconButton   } from "@mui/material";
+import {Visibility,VisibilityOff} from '@mui/icons-material';
+
 
 class ChangePassword extends React.Component {
   constructor(props) {
@@ -12,10 +15,13 @@ class ChangePassword extends React.Component {
       isChanging: false,
       confirmPassword: "",
       error: "",
+      showPassword:false
     };
     this.handleSubmit = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.validateForm = this.validateForm.bind(this);
+    this.handleClickShowPassword = this.handleClickShowPassword.bind(this);
+    this.handleMouseDownPassword = this.handleMouseDownPassword.bind(this);
   }
   validateForm() {
     return (
@@ -28,6 +34,18 @@ class ChangePassword extends React.Component {
     this.setState({
       [evt.target.name]: evt.target.value,
     });
+  }
+
+  handleClickShowPassword =()=>{
+    const {showPassword} = this.state
+    this.setState({
+      showPassword:!showPassword
+    })
+    console.log(showPassword)
+  }
+
+  handleMouseDownPassword =(event)=>{
+    event.preventDefault()
   }
 
   handleClick = async (event) => {
@@ -45,49 +63,129 @@ class ChangePassword extends React.Component {
   };
 
   render() {
-    const { oldPassword, password, confirmPassword } = this.state;
-    const { handleClick, handleChange } = this;
+    const { oldPassword, password, confirmPassword,showPassword } = this.state;
+    const { handleClick, handleChange,handleClickShowPassword,handleMouseDownPassword } = this;
     return (
-      <div>
-        <h1>Change your password</h1>
-        <form onSubmit={handleClick}>
-          <div>
-            <label htmlFor="password">Old Password:</label>
-            <input
-              name="oldPassword"
-              type="password"
-              onChange={handleChange}
-              value={oldPassword}
-            />
-          </div>
+      <Box sx={{
+        display:"flex",
+        flexDirection: 'row',
+        width:"60%",
+        height: "350px",
+        justifyContent:'space-around',
+        margin: "20px auto",
+      }}>
+        <Paper elevation = {12} 
+                variant ="outlined"
+                sx={{
+                  width: "100%",
+                  border:1,
+                  borderColor: "white"
+                }}
+        >
+          <Box sx={{
+            display:'flex',
+            flexWrap:'wrap',
+            flexDirection:'column',
+          }}>
+            <h4 style={{
+              font:'Abril Fatface',
+              margin:'0.5rem'
+            }}>Change Password</h4>
+            <Divider />
+            <form onSubmit={handleClick}>
+              <Stack sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-evenly',
+                alignItems:'center',
+                margin: '0.5rem',
+              }}>
+                <FormControl sx={{ m: 2, width: '25ch' }} variant="filled">
+                  <InputLabel htmlFor="filled-adornment-password">Old Password</InputLabel>
+                  <FilledInput
+                    sx={{
+                      height:'40px'
+                    }}
+                    id="filled-adornment-password"
+                    name='oldPassword'
+                    type={showPassword ? 'text' : 'password'}
+                    value={oldPassword}
+                    onChange={handleChange}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+                <FormControl sx={{ m: 2, width: '25ch' }} variant="filled">
+                  <InputLabel htmlFor="filled-adornment-password">New Password</InputLabel>
+                  <FilledInput
+                    sx={{
+                      height:'40px'
+                    }}
+                    id="filled-adornment-password"
+                    name='password'
+                    type={showPassword ? 'text' : 'password'}
+                    value={password}
+                    onChange={handleChange}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+                <FormControl sx={{ m: 2, width: '25ch' }} variant="filled">
+                  <InputLabel htmlFor="filled-adornment-password">Confirm Password</InputLabel>
+                  <FilledInput
+                    sx={{
+                      height:'40px'
+                    }}
+                    id="filled-adornment-password"
+                    name='confirmPassword'
+                    type={showPassword ? 'text' : 'password'}
+                    value={confirmPassword}
+                    onChange={handleChange}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+                
+                <Button variant = 'outlined' color ='primary' type="submit" disabled={!this.validateForm()}>
+                  Update 
+                </Button>
+                
+              </Stack>
+            </form>
+          </Box>
+        </Paper>
+      </Box>
 
-          <div>
-            <label htmlFor="password">New Password:</label>
-            <input
-              name="password"
-              type="password"
-              onChange={handleChange}
-              value={password}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="confirmpassword">Comfirm Password Password:</label>
-            <input
-              name="confirmPassword"
-              type="password"
-              onChange={handleChange}
-              value={confirmPassword}
-            />
-          </div>
-
-          <div>
-            <button type="submit" disabled={!this.validateForm()}>
-              Update Password
-            </button>
-          </div>
-        </form>
-      </div>
     );
   }
 }

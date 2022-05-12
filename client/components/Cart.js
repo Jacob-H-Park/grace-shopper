@@ -179,14 +179,17 @@ const Cart = () => {
           
             <form onSubmit={async(ev)=> {
               ev.preventDefault()
+              const today = new Date()
               const promotion = (await axios.post('/api/promotions',{Code:promotionCode})).data[0];
-              if(promotion!== undefined){
+              const expireDate = promotion ? new Date(promotion.End_Date):null
+              if(promotion === undefined){
+                setDiscountErr('Code is not valid')
+              }else if(expireDate < today){
+                setDiscountErr('Code has expired')
+              }else{
                 const _discount = promotion.Discount 
                 setDiscount(_discount)
                 setShow(true)
-              }else{
-                setDiscountErr('Code is not valid')
-
               }
             }}
             >
