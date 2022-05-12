@@ -1,5 +1,11 @@
 const path = require("path");
 const express = require("express");
+const cors = require("cors");
+// Passport.js middleware for third-party OAuth logins
+const cookieSession = require('cookie-session');
+// const expressSession = require("express-session");
+const passport = require("passport");
+const passportSetup = require("./auth/passport-setup");
 const morgan = require("morgan");
 const app = express();
 
@@ -9,9 +15,26 @@ app.use(morgan("dev"));
 // body parsing middleware
 app.use(express.json());
 
+// twitter authentication requires session support before auth/passport middleware loads
+// app.use(expressSession({
+//   secret: "team-7",
+//   resave: false,
+//   saveUninitialized: true
+// }));
+app.use(cookieSession({
+  name: "twitter-auth-session",
+  keys: ["team-7-fantastic"],
+  maxAge: 24 * 60 * 60 * 100 
+}));
+
 // auth and api routes
 app.use("/auth", require("./auth"));
 app.use("/api", require("./api"));
+
+app.use(cors());
+// passport.js middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "..", "public/index.html"))

@@ -5,6 +5,9 @@ const {
   models: { User, Product, LineItem, Order, Promotion },
 } = require("../server/db");
 const faker = require("faker");
+const { AvatarGenerator } = require("random-avatar-generator");
+ 
+const generator = new AvatarGenerator();
 
 /**
  * seed - this function clears the database, updates tables to
@@ -14,8 +17,8 @@ async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log("db synced!");
 
-  const avatar_url =
-    "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500";
+  const avatar_url = "https://i.pravatar.cc/300";
+    // "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500";
   // Creating Users
   const users = await Promise.all([
     await User.create({
@@ -25,7 +28,7 @@ async function seed() {
       DOB:'1995-01-02',
       isAdmin: true,
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: "murphy",
@@ -33,7 +36,7 @@ async function seed() {
       email: "murphy@fsa.com",
       DOB:'1995-01-02',
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
@@ -41,7 +44,7 @@ async function seed() {
       email: faker.internet.email(),
       DOB:'1995-01-02',
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
@@ -49,7 +52,7 @@ async function seed() {
       DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
@@ -57,7 +60,7 @@ async function seed() {
       DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
@@ -65,7 +68,7 @@ async function seed() {
       DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
@@ -73,7 +76,7 @@ async function seed() {
       DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
@@ -81,7 +84,7 @@ async function seed() {
       DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
@@ -89,7 +92,7 @@ async function seed() {
       DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
@@ -97,7 +100,7 @@ async function seed() {
       DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
   ]);
 

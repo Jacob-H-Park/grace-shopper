@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import { GoogleLogin } from "react-google-login";
-import GoogleButton from "react-google-button";
+import { GoogleLoginButton, FacebookLoginButton, TwitterLoginButton, InstagramLoginButton } from "react-social-login-buttons";
 import {
   Button,
   Typography,
@@ -19,7 +19,6 @@ import {
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import LoginIcon from "@mui/icons-material/Login";
 
 import { authenticate, onSuccessGoogle, onFailureGoogle } from "../store";
 
@@ -162,24 +161,29 @@ const AuthForm = (props) => {
             clientId={clientId}
             buttonText="Login"
             render={(renderProps) => (
-              <GoogleButton
-                onClick={renderProps.onClick}
+              <GoogleLoginButton
                 disabled={renderProps.disabled}
-                style={{
-                  marginTop: "8px",
-                  marginBottom: "10px",
-                  display: "inline-block",
-                  justifyContent: "center",
-                  width: "100%",
-                }}
+                align="center"
+                style={{ backgroundColor: "#dc4a3d", color: "white" }}
+                activeStyle={{ backgroundColor: "#e82517" }}
+                onClick={renderProps.onClick}
               >
-                Log in with Google
-              </GoogleButton>
+                <span>Log in with Google</span>
+              </GoogleLoginButton>
             )}
             onSuccess={onSuccess}
             onFailure={onFailure}
             cookiePolicy={"single_host_origin"}
           />
+          <FacebookLoginButton align="center" onClick={() => window.location = "/auth/facebook"}>
+            <span>Log in with Facebook</span>
+          </FacebookLoginButton>
+          <TwitterLoginButton align="center" onClick={() => window.location = "/auth/twitter"}>
+            <span>Log in with Twitter</span>
+          </TwitterLoginButton>
+          <InstagramLoginButton align="center" onClick={() => console.log("Instagram login")}>
+            <span>Log in with Instagram</span>
+          </InstagramLoginButton>
           <Typography
             color="textSecondary"
             sx={{ marginTop: "15px", fontSize: 14, marginBottom: "10px" }}

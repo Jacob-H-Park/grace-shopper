@@ -120,13 +120,19 @@ export const updatePass = (password, history) => async (dispatch) => {
   }
 };
 
-export const logout = () => {
+export const logout = () => async(dispatch) => {
+  // remove oauth login cookie session, in order to log user out
+  const res = await axios.get("/auth/logout", {
+    withCredentials: true
+  });
+  // also remove the user server token in the browser local storage
   window.localStorage.removeItem(TOKEN);
   // history.push("/login");
-  return {
-    type: SET_AUTH,
-    auth: {},
-  };
+  // return {
+  //   type: SET_AUTH,
+  //   auth: {},
+  // };
+  dispatch(setAuth({}));
 };
 
 /**
@@ -141,8 +147,6 @@ export const onSuccessGoogle = (googleResponse) => {
       const res = await axios.post("/auth/googlelogin", {
         tokenId: googleResponse.tokenId,
       });
-      console.log("backend RESPONSE login", res);
-      const { email, username, password } = res.data;
       window.localStorage.setItem(TOKEN, res.data.token);
       dispatch(me());
     }

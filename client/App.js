@@ -26,11 +26,16 @@ import UserList from "./components/admin/components/UserList";
 import NewUser from "./components/admin/components/NewUser";
 import User from "./components/admin/components/User";
 import Footer from "./components/Footer";
-import { me } from "./store";
-import { fetchProducts } from "./store/flowers";
 import FlowerCategories from "./components/FlowerTypes/FlowerCategories";
 import Account from "./components/Account";
+import { myContext } from './Context';
+import { me } from "./store";
+import { fetchProducts } from "./store/flowers";
+
+
 class App extends Component {
+  static contextType = myContext;
+
   componentDidMount() {
     this.props.loadInitialData();
     this.props.fetchFlowers();
@@ -38,6 +43,9 @@ class App extends Component {
 
   render() {
     const { isLoggedIn, isAdmin } = this.props;
+
+    // user object is immediatly available in the frontend for the whole APP right after oauth login
+    const userObject = this.context;
 
     return (
       <div className="root-container">
