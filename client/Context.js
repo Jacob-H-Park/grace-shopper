@@ -10,14 +10,18 @@ export default function Context(props) {
     const [userObject, setUserObject] = useState({});
     const dispatch = useDispatch();
 
-    useEffect(async () => {
-        const res = await axios.get("/auth/getUser", { withCredentials: true })
-        
-        if (res.data) {
-            setUserObject(res.data);
-            window.localStorage.setItem("token", res.data.token);
-            dispatch(me());
-        }
+    useEffect(() => {
+        async function getLoggedInUser() {
+            const res = await axios.get("/auth/getUser", { withCredentials: true });
+            
+            if (res.data) {
+                setUserObject(res.data);
+                window.localStorage.setItem("token", res.data.token);
+                dispatch(me());
+            }
+        };
+
+        getLoggedInUser();
 
     }, []);
 

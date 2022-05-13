@@ -64,9 +64,10 @@ export const createProducts = (_newFlower, history) => {
   return async (dispatch) => {
     const newFlower = (await axios.post("/api/products/", _newFlower)).data;
     dispatch(_addProduct(newFlower));
-    history.push("/admin_products");
+    history.push("/admin/products");
   };
 };
+
 /* Flower Reducer */
 export default function (state = [], action) {
   switch (action.type) {
