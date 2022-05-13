@@ -38,6 +38,11 @@ const AccountMenu = ({ isAdmin, auth }) => {
             Account
           </MenuItem>
         </Link>
+        <Link to="/favorite">
+          <MenuItem onClick={handleClose} color="black">
+            Favorite
+          </MenuItem>
+        </Link>
         <MenuItem onClick={handleClose}>Orders</MenuItem>
         <Link to="/login">
           <MenuItem

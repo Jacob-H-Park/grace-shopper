@@ -28,6 +28,7 @@ import User from "./components/admin/components/User";
 import Footer from "./components/Footer";
 import FlowerCategories from "./components/FlowerTypes/FlowerCategories";
 import Account from "./components/Account";
+import FavoriteList from "./components/FavoriteList";
 import { myContext } from './Context';
 import { me } from "./store";
 import { fetchProducts } from "./store/flowers";
@@ -94,6 +95,7 @@ class App extends Component {
             <Route path="/sig-bouquets" component={FlowerCategories} />
             <Route path="/sympathy" component={FlowerCategories} />
             <Route path="/preserved-rosesy" component={FlowerCategories} />
+            <Route path="/favorite" component={FavoriteList} />
           </Switch>
           <Footer />
         </Router>

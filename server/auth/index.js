@@ -112,6 +112,17 @@ router.get("/me", async (req, res, next) => {
   }
 });
 
+// route for updating user's favorite list
+router.put("/favorite", async (req, res, next) => {
+  try {
+    const user = await User.findByToken(req.headers.authorization);
+    const updated_user = await user.update(req.body);
+    res.send(updated_user);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // authentication with twitter login
 router.get('/twitter', passport.authenticate('twitter'));
 

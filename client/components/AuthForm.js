@@ -252,7 +252,7 @@ const mapDispatch = (dispatch, { history }) => {
       }
     },
     onSuccess: (res) => {
-      dispatch(onSuccessGoogle(res));
+      dispatch(onSuccessGoogle(res, history));
     },
     onFailure: (res) => {
       dispatch(onFailureGoogle(res));
