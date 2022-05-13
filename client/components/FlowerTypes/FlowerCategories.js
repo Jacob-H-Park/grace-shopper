@@ -2,14 +2,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Box, Grid, IconButton, Snackbar, Slide } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import FlowerCard from "../FlowerCard";
 import ProductPagination from "../HelperComponents/ProductPagination";
 
 const FlowerCategories = () => {
   //React-Router Hooks
-  const location = useLocation();
-  const type = location.state;
+  const { type } = useParams();
 
 
   //Redux hooks

@@ -13,13 +13,8 @@ import GuestCart from "./components/GuestCart";
 import Navbar from "./components/Navbar";
 import Flowers from "./components/Flowers";
 import SingleFlower from "./components/SingleFlower";
-import EditProduct from "./components/EditProduct";
-import ProductInfo from "./components/ProductInfo";
-import UserInfo from "./components/UserInfo";
 import LandingPage from "./components/LandingPage";
 import MeetTheTeam from "./components/MeetTheTeam";
-import EditUserInfo from "./components/EditUserInfo";
-import ChangePassword from "./components/ChangePassword";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import AddProduct from "./components/AddProduct";
 import UserList from "./components/admin/components/UserList";
@@ -27,11 +22,15 @@ import NewUser from "./components/admin/components/NewUser";
 import User from "./components/admin/components/User";
 import UserOrders from "./components/UserOrders";
 import Footer from "./components/Footer";
+import FlowerCategories from "./components/FlowerTypes/FlowerCategories";
+import Account from "./components/Account";
+import { myContext } from "./Context";
 import { me } from "./store";
 import { fetchProducts } from "./store/flowers";
-import FlowerCategories from "./components/FlowerTypes/FlowerCategories";
 
 class App extends Component {
+  static contextType = myContext;
+
   componentDidMount() {
     this.props.loadInitialData();
     this.props.fetchFlowers();
@@ -39,6 +38,9 @@ class App extends Component {
 
   render() {
     const { isLoggedIn, isAdmin } = this.props;
+
+    // user object is immediatly available in the frontend for the whole APP right after oauth login
+    const userObject = this.context;
 
     return (
       <div className="root-container">
@@ -48,22 +50,13 @@ class App extends Component {
             isAdmin ? (
               <Switch>
                 <Route path="/admin" component={AdminDashboard} />
-                {/* <Route path="editflowerinfo/:id" component={EditProduct} /> */}
-                <Route exact path="account" component={UserInfo} />
-                <Route path="account/edit" component={EditUserInfo} />
-                <Route path="account/password" component={ChangePassword} />
+                <Route path="/account" component={Account} />
                 <Route path="cart" component={Cart} />
-                {/* <Route path="admin_products" component={ProductInfo} /> */}
-                {/* <Route path="add_product" component={AddProduct} /> */}
-                {/* <Route path="users" component={UserList} /> */}
-                {/* <Route path="newUsers" component={NewUser} /> */}
-                {/* <Route path="user/:userId" component={User} /> */}
               </Switch>
             ) : (
               <Switch>
-                <Route exact path="/account" component={UserInfo} />
-                <Route path="/account/edit" component={EditUserInfo} />
-                <Route path="/account/password" component={ChangePassword} />
+                <Route path="/account" component={Account} />
+
                 <Route path="/cart" component={Cart} />
               </Switch>
             )
@@ -79,13 +72,8 @@ class App extends Component {
             <Route path="/flowers/:id" component={SingleFlower} />
             <Route path="/flowers" component={Flowers} />
             <Route path="/user-orders" component={UserOrders}/>
-            <Route path="/rose" component={FlowerCategories} />
-            <Route path="/tulip" component={FlowerCategories} />
-            <Route path="/orchid" component={FlowerCategories} />
             <Route path="/meet_the_team" component={MeetTheTeam} />
-            <Route path="/sig-bouquets" component={FlowerCategories} />
-            <Route path="/sympathy" component={FlowerCategories} />
-            <Route path="/preserved-rosesy" component={FlowerCategories} />
+            <Route path="/:type" component={FlowerCategories} />
           </Switch>
           <Footer />
         </Router>

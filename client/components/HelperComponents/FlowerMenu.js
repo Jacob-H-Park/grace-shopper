@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button, Menu, MenuItem, } from "@mui/material";
+import { Button, Menu, MenuItem } from "@mui/material";
 
 const FlowerMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -30,32 +29,32 @@ const FlowerMenu = () => {
             All Flowers
           </MenuItem>
         </Link>
-        <Link to={{pathname: "/rose", state: 'rose'}}>
+        <Link to="/rose">
           <MenuItem onClick={handleClose} color="black">
             Roses
           </MenuItem>
         </Link>
-        <Link to={{pathname: "/tulip", state: 'tulip'}}>
+        <Link to="/tulip">
           <MenuItem onClick={handleClose} color="black">
             Tulips
           </MenuItem>
         </Link>
-        <Link to={{pathname: "/orchid", state: 'orchid'}}>
+        <Link to="/orchid">
           <MenuItem onClick={handleClose} color="black">
             Orchids
           </MenuItem>
-        </Link>        
-        <Link to={{pathname: "/sig-bouquets", state: 'signature_bouquets'}}>
+        </Link>
+        <Link to="/signature_bouquets">
           <MenuItem onClick={handleClose} color="black">
             Signature Bouquets
           </MenuItem>
-        </Link>        
-        <Link to={{pathname: "/sympathy", state: 'sympathy'}}>
+        </Link>
+        <Link to="/sympathy">
           <MenuItem onClick={handleClose} color="black">
             Sympathy
           </MenuItem>
-        </Link>        
-        <Link to={{pathname: "/preserved-rosesy", state: 'preserved_rose'}}>
+        </Link>
+        <Link to="/preserved_rose">
           <MenuItem onClick={handleClose} color="black">
             Preserved Roses
           </MenuItem>

@@ -104,7 +104,7 @@ class UploadPics extends Component {
           }}
         >
           <Paper variant="outlined" square>
-            <img src={image} width="150px" height="150px" />
+            <img src={this.props.url} width="150px" height="150px" />
           </Paper>
           {/* <Paper variant="outlined" square /> */}
         </Box>

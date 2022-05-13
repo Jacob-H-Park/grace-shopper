@@ -1,4 +1,4 @@
-const { STRING, BOOLEAN, INTEGER } = require("sequelize");
+const { STRING, BOOLEAN, INTEGER,DATE } = require("sequelize");
 const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -23,17 +23,26 @@ const User = db.define("user", {
     },
     allowNull: false,
   },
+  DOB:{
+    type: DATE,
+    validate:{
+      isDate: true
+    }
+  },
   isAdmin: {
     type: BOOLEAN,
     defaultValue: false,
   },
   avatar: {
-    type: STRING,
+    type: STRING(1000)
   },
   status: {
     type: STRING,
     defaultValue: "active",
   },
+  address:{
+    type:STRING
+  }
 });
 
 module.exports = User;

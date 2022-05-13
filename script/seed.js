@@ -5,6 +5,9 @@ const {
   models: { User, Product, LineItem, Order, Promotion },
 } = require("../server/db");
 const faker = require("faker");
+const { AvatarGenerator } = require("random-avatar-generator");
+ 
+const generator = new AvatarGenerator();
 
 /**
  * seed - this function clears the database, updates tables to
@@ -14,80 +17,90 @@ async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log("db synced!");
 
-  const avatar_url =
-    "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500";
+  const avatar_url = "https://i.pravatar.cc/300";
+    // "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500";
   // Creating Users
   const users = await Promise.all([
     await User.create({
       username: "cody",
       password: "123",
       email: "cody@fsa.com",
+      DOB:'1995-01-02',
       isAdmin: true,
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: "murphy",
       password: "123",
       email: "murphy@fsa.com",
+      DOB:'1995-01-02',
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
       email: faker.internet.email(),
+      DOB:'1995-01-02',
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
     await User.create({
       username: faker.name.firstName().toLowerCase(),
       password: "123",
+      DOB:'1995-01-02',
       email: faker.internet.email(),
       // avatar: faker.image.avatar()
-      avatar: avatar_url,
+      avatar: generator.generateRandomAvatar(),
     }),
   ]);
 
@@ -598,9 +611,19 @@ async function seed() {
   await Order.create({ userId: 1 });
   await Promotion.create({
     Code: "HPMTRD22",
+    name: 'Mother-Day',
     Discount: 0.1,
     Start_Date: "2022-05-02",
     End_Date: "2022-05-08",
+    Free_Shipping: true
+  });
+  await Promotion.create({
+    Code: "ADMINONLY",
+    name: 'admin',
+    Discount: 0.3,
+    Start_Date: "2000-01-01",
+    End_Date: "2030-12-31",
+    Free_Shipping: true
   });
 
   console.log(`seeded ${users.length} users`);

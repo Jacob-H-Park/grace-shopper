@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { IconButton, Menu, MenuItem } from "@mui/material";
+import { IconButton, Menu, MenuItem, Avatar } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { logout } from "../../store";
 
-const AccountMenu = ({ isAdmin }) => {
+const AccountMenu = ({ auth }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
 
@@ -20,7 +20,15 @@ const AccountMenu = ({ isAdmin }) => {
   return (
     <div>
       <IconButton color="inherit" onClick={handleClick}>
-        <AccountCircleIcon />
+        {auth.avatar ? (
+          <Avatar
+            sx={{ width: 24, height: 24 }}
+            alt={auth.username}
+            src={auth.avatar}
+          />
+        ) : (
+          <AccountCircleIcon />
+        )}
       </IconButton>
       <Menu
         id="user-menu"
@@ -30,7 +38,7 @@ const AccountMenu = ({ isAdmin }) => {
       >
         <Link to="/account">
           <MenuItem onClick={handleClose} color="black">
-            Edit Account
+            Account
           </MenuItem>
         </Link>
         <Link to="/user-orders">
@@ -51,4 +59,8 @@ const AccountMenu = ({ isAdmin }) => {
   );
 };
 
-export default AccountMenu;
+const mapState = ({ auth }) => {
+  return { auth };
+};
+
+export default connect(mapState)(AccountMenu);
