@@ -6,15 +6,20 @@ import {
   Grid,
   Typography,
   Button,
+  IconButton,
   Divider,
   Slide,
   Snackbar,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Icon from '@mui/material/Icon';
 import FlowerDetailTabs from "./FlowerDetailTabs";
 
 import CustomizedRating from "./Rating";
 import { addToCart } from "../store/order";
+import { updateAuthFavoriteList } from "../store/auth";
 
 const SingleFlower = (props) => {
   const flower = useSelector(({ flowers }) => {
@@ -48,6 +53,33 @@ const SingleFlower = (props) => {
       ...state,
       open: false,
     });
+  };
+
+  // hook for creating favorite list
+  let Favorited = false;
+  if (user.id && flower) {
+    Favorited = (user.favoriteList.indexOf(flower.id) === -1 ? false : true);
+  }
+
+  const onClickFavorite = (flower) => {
+    // user has to login in order to add to favorite
+    if (!user.id) {
+      alert("Please Log in first to continue...");
+      return;
+    }
+
+    if (Favorited) {
+      const favoriteList = user.favoriteList;
+      const index = favoriteList.indexOf(flower.id);
+      if (index !== -1) favoriteList.splice(index, 1);
+      user.favoriteList = favoriteList;
+      dispatch(updateAuthFavoriteList(user.favoriteList));
+      Favorited = !Favorited;
+    } else {
+      user.favoriteList.push(flower.id);
+      dispatch(updateAuthFavoriteList(user.favoriteList));
+      Favorited = !Favorited;
+    }
   };
 
   //buys time for useSelector to grab the clicked flower info when page's refreshed
@@ -160,7 +192,17 @@ const SingleFlower = (props) => {
         </Grid>
 
         <Grid item xs={4}>
-          <Box sx={{ fontSize: "h4.fontSize" }}>{flower.name}</Box>
+          <Box display="flex" alignItems="center" sx={{ fontSize: "h4.fontSize" }}>
+            {/* {flower.name} &emsp; <Icon><img src={"/Images/add-to-favorites-button.png"} height={25} width={25}/></Icon> */}
+            {flower.name} &emsp;
+            {/* <Button variant="contained" color="secondary" size="small"> */}
+            <IconButton color="secondary" aria-label="favorite" component="span">
+              {!Favorited ? <FavoriteBorderIcon sx={{height: 25, width: 25}} onClick={() => onClickFavorite(flower)} />
+                : <FavoriteIcon sx={{height: 28, width: 28, color: "#ff6d75"}} onClick={()=> onClickFavorite(flower)} />
+              }
+            </IconButton>
+            {/* </Button> */}
+          </Box>
           <CustomizedRating />
           <Box sx={{ fontSize: 16, mt: 1 }}>${flower.price}</Box>
           <Box

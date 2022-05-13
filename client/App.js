@@ -19,7 +19,8 @@ import AdminDashboard from "./components/admin/AdminDashboard";
 import Footer from "./components/Footer";
 import FlowerCategories from "./components/FlowerTypes/FlowerCategories";
 import Account from "./components/Account";
-import { myContext } from "./Context";
+import FavoriteList from "./components/FavoriteList";
+import { myContext } from './Context';
 import { me } from "./store";
 import { fetchProducts } from "./store/flowers";
 
@@ -67,6 +68,10 @@ class App extends Component {
             <Route path="/flowers/:id" component={SingleFlower} />
             <Route path="/flowers" component={Flowers} />
             <Route path="/meet_the_team" component={MeetTheTeam} />
+            <Route path="/sig-bouquets" component={FlowerCategories} />
+            <Route path="/sympathy" component={FlowerCategories} />
+            <Route path="/preserved-rosesy" component={FlowerCategories} />
+            <Route path="/favorite" component={FavoriteList} />
             <Route path="/:type" component={FlowerCategories} />
           </Switch>
           <Footer />

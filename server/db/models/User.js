@@ -1,4 +1,4 @@
-const { STRING, BOOLEAN, INTEGER,DATE } = require("sequelize");
+const { STRING, BOOLEAN, INTEGER, DATE, ARRAY } = require("sequelize");
 const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -39,6 +39,10 @@ const User = db.define("user", {
   status: {
     type: STRING,
     defaultValue: "active",
+  },
+  favoriteList: {
+    type: ARRAY(INTEGER),
+    defaultValue: [],
   },
   address:{
     type:STRING

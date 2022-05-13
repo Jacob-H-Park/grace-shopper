@@ -14,7 +14,7 @@ const UPDATE = "UPDATE";
 /**
  * ACTION CREATORS
  */
-const setAuth = (auth) => ({ type: SET_AUTH, auth });
+export const setAuth = (auth) => ({ type: SET_AUTH, auth });
 const _updateAuth = (auth) => ({ type: UPDATE, auth });
 /**
  * THUNK CREATORS
@@ -120,6 +120,25 @@ export const updatePass = (password, history) => async (dispatch) => {
   }
 };
 
+// update user's favorite list
+export const updateAuthFavoriteList = (favoriteList) => async (dispatch) => {
+  try {
+    const token = window.localStorage.getItem(TOKEN);
+    const res = await axios.put(
+      '/auth/favorite',
+      { favoriteList },
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    );
+    dispatch(_updateAuth(res.data));
+  } catch (authError) {
+    return dispatch(setAuth({ error: authError }));
+  }
+};
+
 export const logout = () => async(dispatch) => {
   // remove oauth login cookie session, in order to log user out
   const res = await axios.get("/auth/logout", {
@@ -138,7 +157,7 @@ export const logout = () => async(dispatch) => {
 /**
  * Google OAuth login
  */
-export const onSuccessGoogle = (googleResponse) => {
+export const onSuccessGoogle = (googleResponse, history) => {
   return async (dispatch) => {
     // console.log('Login Success: currentUser:', googleResponse.profileObj);
     // console.log('Response from google:', googleResponse);
@@ -149,6 +168,7 @@ export const onSuccessGoogle = (googleResponse) => {
       });
       window.localStorage.setItem(TOKEN, res.data.token);
       dispatch(me());
+      history.push('/');
     }
   };
 };
