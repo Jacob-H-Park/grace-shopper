@@ -57,7 +57,7 @@ export const updateProducts = (flower, history) => {
       flower
     );
     dispatch(_updateProducts(flowerToUpdate));
-    history.push("/admin_products");
+    history.push("/admin/products");
   };
 };
 export const createProducts = (_newFlower, history) => {

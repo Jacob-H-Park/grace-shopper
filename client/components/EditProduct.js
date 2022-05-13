@@ -32,9 +32,7 @@ const styles = (theme) => ({
   },
   select: {
     height: 50,
-    // display: "flex",
-    // justifyContent: "center",
-    // alignItems: "center",
+
   },
   description: {
     height: 150,
@@ -58,19 +56,22 @@ class EditProduct extends Component {
     this.setUrl = this.setUrl.bind(this);
   }
   componentDidUpdate(prevProps) {
-    if (!prevProps.flowerToEdit && flowerToEdit) {
+    console.log('update',this.props.flowerToEdit)
+    if (!prevProps.flowerToEdit && this.props.flowerToEdit) {
       this.setState({
-        id: flowerToEdit.id,
-        name: flowerToEdit.name,
-        price: flowerToEdit.price,
-        stock: flowerToEdit.stock,
-        category: flowerToEdit.category,
-        description: flowerToEdit.description,
-        image_url: flowerToEdit.image_url,
+        id: this.props.flowerToEdit.id,
+        name: this.props.flowerToEdit.name,
+        price: this.props.flowerToEdit.price,
+        stock: this.props.flowerToEdit.stock,
+        category: this.props.flowerToEdit.category,
+        description: this.props.flowerToEdit.description,
+        image_url: this.props.flowerToEdit.image_url,
       });
     }
   }
-
+  componentDidMount(){
+    console.log('mount',this.props.flowerToEdit)
+  }
   handleSubmit(ev) {
     ev.preventDefault();
     this.props.updateProduct({ ...this.props.flowerToEdit, ...this.state });
@@ -89,108 +90,106 @@ class EditProduct extends Component {
     const { name, price, stock, category, description, image_url } = this.state;
     const { handleSubmit, handleChange, setUrl } = this;
     const { classes } = this.props;
-    if (!this.props.flowerToEdit) {
-      return null;
-    } else {
-      return (
-        <div className="productList">
-          <Box
-            sx={{
-              display: "flex",
-              width: "500px",
-              height: "800px",
-              flexDirection: "column",
-              justifyContent: "center",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            <Paper elevation={12}>
-              <div className="productList">
-                <form onSubmit={handleSubmit}>
-                  <Stack direction="column" spacing={2} margin={2}>
-                    <IconButton color="primary" component="span">
-                      <LocalFloristSharpIcon />
-                      Edit Product
-                    </IconButton>
+    console.log('parent',image_url)
+    return (
+      <div className="productList">
+        <Box
+          sx={{
+            display: "flex",
+            width: "500px",
+            height: "800px",
+            flexDirection: "column",
+            justifyContent: "center",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <Paper elevation={12}>
+            <div className="productList">
+              <form onSubmit={handleSubmit}>
+                <Stack direction="column" spacing={2} margin={2}>
+                  <IconButton color="primary" component="span">
+                    <LocalFloristSharpIcon />
+                    Edit Product
+                  </IconButton>
 
-                    <TextField
-                      name="name"
-                      label="Product Name"
-                      variant="outlined"
+                  <TextField
+                    name="name"
+                    label="Product Name"
+                    variant="outlined"
+                    onChange={handleChange}
+                    value={name}
+                    InputProps={{
+                      className: classes.input,
+                    }}
+                  />
+                  <FormControl sx={{ m: 1 }} size="small">
+                    <InputLabel id="demo-multiple-name-label">
+                      Category
+                    </InputLabel>
+                    <Select
+                      name="category"
+                      value={category}
                       onChange={handleChange}
-                      value={name}
-                      InputProps={{
-                        className: classes.input,
-                      }}
-                    />
-                    <FormControl sx={{ m: 1 }} size="small">
-                      <InputLabel id="demo-multiple-name-label">
-                        Category
-                      </InputLabel>
-                      <Select
-                        name="category"
-                        value={category}
-                        onChange={handleChange}
-                        input={<OutlinedInput label="category" />}
-                      >
-                        {categories.map((category) => (
-                          <MenuItem
-                            key={category}
-                            value={category}
-                            // style={getStyles(name, personName, theme)}
-                          >
-                            {category}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                    <TextField
-                      name="price"
-                      label="Product Price"
-                      variant="outlined"
-                      onChange={handleChange}
-                      value={price}
-                      InputProps={{
-                        className: classes.input,
-                      }}
-                    />
-                    <TextField
-                      name="stock"
-                      label="Product Stock"
-                      variant="outlined"
-                      onChange={handleChange}
-                      value={stock}
-                      InputProps={{
-                        className: classes.input,
-                      }}
-                    />
-                    <TextField
-                      name="description"
-                      label="Product Description"
-                      variant="outlined"
-                      onChange={handleChange}
-                      value={description}
-                      InputProps={{
-                        className: classes.description,
-                      }}
-                      multiline
-                      maxRows={Infinity}
-                    />
-                    <div>
-                      <UploadPics setUrl={setUrl} url={this.state.image_url} />
-                    </div>
-                    <Button variant="contained" type="submit">
-                      Submit
-                    </Button>
-                  </Stack>
-                </form>
-              </div>
-            </Paper>
-          </Box>
-        </div>
-      );
-    }
+                      input={<OutlinedInput label="category" />}
+                    >
+                      {categories.map((category) => (
+                        <MenuItem
+                          key={category}
+                          value={category}
+                          // style={getStyles(name, personName, theme)}
+                        >
+                          {category}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                  <TextField
+                    name="price"
+                    label="Product Price"
+                    variant="outlined"
+                    onChange={handleChange}
+                    value={price}
+                    InputProps={{
+                      className: classes.input,
+                    }}
+                  />
+                  <TextField
+                    name="stock"
+                    label="Product Stock"
+                    variant="outlined"
+                    onChange={handleChange}
+                    value={stock}
+                    InputProps={{
+                      className: classes.input,
+                    }}
+                  />
+                  <TextField
+                    name="description"
+                    label="Product Description"
+                    variant="outlined"
+                    onChange={handleChange}
+                    value={description}
+                    InputProps={{
+                      className: classes.description,
+                    }}
+                    multiline
+                    maxRows={Infinity}
+                  />
+                  <div>
+                    <UploadPics setUrl={setUrl} url={this.state.image_url} />
+                  </div>
+                  <Button variant="contained" type="submit">
+                    Submit
+                  </Button>
+                </Stack>
+              </form>
+            </div>
+          </Paper>
+        </Box>
+      </div>
+    );
+    
   }
 }
 
@@ -198,7 +197,7 @@ const mapState = ({ flowers }, { match }) => {
   const flowerToEdit = flowers.find(
     (flower) => flower.id === match.params.id * 1
   );
-  return { flowerToEdit };
+  return { flowerToEdit,flowers };
 };
 
 const mapDispatch = (dispatch, { history }) => {
