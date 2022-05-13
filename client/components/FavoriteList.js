@@ -12,14 +12,10 @@ function FavoriteList() {
     const flowerList = [];
 
     if (user.id && flowers) {
-        console.log("heyheyhey", user, flowers)
-        
         user.favoriteList.map(flowerId => {
-            const flower = flowers.filter(flower => flower.id === flowerId);
-            flowerList.push(...flower);
+        const flower = flowers.filter(flower => flower.id === flowerId);
+        flowerList.push(...flower);
         });
-
-        console.log("another hey", flowerList)
     }
 
     //Snackbar state hook
@@ -72,7 +68,6 @@ function FavoriteList() {
             marginLeft:'25px',
             marginTop:'25px',
             width: "150px",
-           
             backgroundColor: "secondary"
             }}
             >

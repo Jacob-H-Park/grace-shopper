@@ -25,9 +25,7 @@ const SingleFlower = (props) => {
   const flower = useSelector(({ flowers }) => {
     return flowers.find((flower) => flower.id === props.match.params.id * 1);
   });
-  console.log("FLOWER FLOWER FLOWER", flower)
   const user = useSelector((state) => state.auth);
-  console.log("USER USER USER", user, user.favoriteList)
   const dispatch = useDispatch();
 
   const [chosenImg, setChosenImg] = useState("");
@@ -64,6 +62,12 @@ const SingleFlower = (props) => {
   }
 
   const onClickFavorite = (flower) => {
+    // user has to login in order to add to favorite
+    if (!user.id) {
+      alert("Please Log in first to continue...");
+      return;
+    }
+
     if (Favorited) {
       const favoriteList = user.favoriteList;
       const index = favoriteList.indexOf(flower.id);
