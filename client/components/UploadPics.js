@@ -25,7 +25,6 @@ const Input = styled("input")({
 class UploadPics extends Component {
   constructor(props) {
     super(props);
-    console.log('props?',this.props)
     this.state = {
       file: "",
       image: this.props.url,
@@ -50,16 +49,10 @@ class UploadPics extends Component {
       file: file,
     });
   }
-  componentDidMount(){
-    console.log("??",this.props.url)
-  }
-  componentDidUpdate(){
-    console.log("....update!!!",this.props.url)
-  }
+
   render() {
     const { fileSelected, handleUpload } = this;
     const { image } = this.state;
-    console.log('render',this.props.url)
     return (
       <Box
         sx={{

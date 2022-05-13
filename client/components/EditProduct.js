@@ -56,7 +56,6 @@ class EditProduct extends Component {
     this.setUrl = this.setUrl.bind(this);
   }
   componentDidUpdate(prevProps) {
-    console.log('update',this.props.flowerToEdit)
     if (!prevProps.flowerToEdit && this.props.flowerToEdit) {
       this.setState({
         id: this.props.flowerToEdit.id,
@@ -69,9 +68,7 @@ class EditProduct extends Component {
       });
     }
   }
-  componentDidMount(){
-    console.log('mount',this.props.flowerToEdit)
-  }
+
   handleSubmit(ev) {
     ev.preventDefault();
     this.props.updateProduct({ ...this.props.flowerToEdit, ...this.state });
@@ -90,7 +87,6 @@ class EditProduct extends Component {
     const { name, price, stock, category, description, image_url } = this.state;
     const { handleSubmit, handleChange, setUrl } = this;
     const { classes } = this.props;
-    console.log('parent',image_url)
     return (
       <div className="productList">
         <Box
