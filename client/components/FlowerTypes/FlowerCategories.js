@@ -2,7 +2,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Box, Grid, IconButton, Snackbar, Slide } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import FlowerCard from "../FlowerCard";
 import ProductPagination from "../HelperComponents/ProductPagination";
 
@@ -11,9 +11,10 @@ const FlowerCategories = () => {
   const location = useLocation();
   const type = location.state;
 
+
   //Redux hooks
   const flowers = useSelector((state) =>
-    state.flowers.filter((flower) => flower.category === type)
+    state.flowers.filter((flower) => flower.category === type )
   );
   const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();

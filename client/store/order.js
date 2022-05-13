@@ -4,6 +4,7 @@ import axios from "axios";
 const GET_CART = "GET_CART";
 const ADD_TO_CART = "ADD_TO_CART";
 const UPDATE_ORDER = "UPDATE_ORDER";
+const GET_ORDERS = "GET_ORDERS";
 
 //ACTION CREATORS
 const _addToCart = (cart) => {
@@ -24,6 +25,13 @@ const _fulfillOrder = (orderFulfilled) => {
   return {
     type: UPDATE_ORDER,
     orderFulfilled,
+  };
+};
+
+const _getOrders = (orders) => {
+  return {
+    type: GET_ORDERS,
+    orders
   };
 };
 
@@ -118,6 +126,18 @@ export const addToCart = (userId, flower, quantity = 1) => {
     }
   };
 };
+
+export const getOrders = (userId) => {
+  return async (dispatch) => {
+    try {
+      const orders = await (await axios.get(`/api/orders/fulfilled/${userId}`)).data;
+      console.log(orders);
+      dispatch(_getOrders(orders));
+    } catch(err) {
+      console.log(e);
+    }
+  }
+}
 
 export const getCart = (userId) => {
   return async (dispatch) => {
@@ -220,5 +240,14 @@ const order = (state = {}, action) => {
       return state;
   }
 };
+
+export const pastOrders = (state = [], action) => {
+  switch (action.type) {
+    case GET_ORDERS:
+      return action.orders;
+    default:
+      return state;
+  }
+}
 
 export default order;

@@ -30,17 +30,17 @@ const FlowerMenu = () => {
             All Flowers
           </MenuItem>
         </Link>
-        <Link to={{pathname: "/roses", state: 'rose'}}>
+        <Link to={{pathname: "/rose", state: 'rose'}}>
           <MenuItem onClick={handleClose} color="black">
             Roses
           </MenuItem>
         </Link>
-        <Link to={{pathname: "/tulips", state: 'tulip'}}>
+        <Link to={{pathname: "/tulip", state: 'tulip'}}>
           <MenuItem onClick={handleClose} color="black">
             Tulips
           </MenuItem>
         </Link>
-        <Link to={{pathname: "/orchids", state: 'orchid'}}>
+        <Link to={{pathname: "/orchid", state: 'orchid'}}>
           <MenuItem onClick={handleClose} color="black">
             Orchids
           </MenuItem>

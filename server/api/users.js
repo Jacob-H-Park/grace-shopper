@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { models: { User } } = require('../db');
+const { models: { User, Order } } = require('../db');
 const { requireLoggedIn, not_requireLoggedIn } = require('./backendProtect');
 
 module.exports = router

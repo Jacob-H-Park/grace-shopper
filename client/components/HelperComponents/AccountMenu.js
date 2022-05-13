@@ -33,7 +33,9 @@ const AccountMenu = ({ isAdmin }) => {
             Edit Account
           </MenuItem>
         </Link>
-        <MenuItem onClick={handleClose}>Orders</MenuItem>
+        <Link to="/user-orders">
+          <MenuItem onClick={handleClose}>Orders</MenuItem>
+        </Link>
         <Link to="/login">
           <MenuItem
             onClick={() => {

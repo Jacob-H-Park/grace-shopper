@@ -5,9 +5,10 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
 import flowers from "./flowers";
 import order from "./order";
+import { pastOrders } from "./order";
 import users from "./users";
 
-const reducer = combineReducers({ auth, flowers, order, users });
+const reducer = combineReducers({ auth, flowers, order, users, pastOrders });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );

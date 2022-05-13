@@ -25,6 +25,7 @@ import AddProduct from "./components/AddProduct";
 import UserList from "./components/admin/components/UserList";
 import NewUser from "./components/admin/components/NewUser";
 import User from "./components/admin/components/User";
+import UserOrders from "./components/UserOrders";
 import Footer from "./components/Footer";
 import { me } from "./store";
 import { fetchProducts } from "./store/flowers";
@@ -77,9 +78,10 @@ class App extends Component {
             <Route exact path="/" component={LandingPage} />
             <Route path="/flowers/:id" component={SingleFlower} />
             <Route path="/flowers" component={Flowers} />
-            <Route path="/roses" component={FlowerCategories} />
-            <Route path="/tulips" component={FlowerCategories} />
-            <Route path="/orchids" component={FlowerCategories} />
+            <Route path="/user-orders" component={UserOrders}/>
+            <Route path="/rose" component={FlowerCategories} />
+            <Route path="/tulip" component={FlowerCategories} />
+            <Route path="/orchid" component={FlowerCategories} />
             <Route path="/meet_the_team" component={MeetTheTeam} />
             <Route path="/sig-bouquets" component={FlowerCategories} />
             <Route path="/sympathy" component={FlowerCategories} />
