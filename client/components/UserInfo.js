@@ -1,144 +1,175 @@
-import { Box, Paper,InputBase,TextField,InputLabel } from "@mui/material";
+import { Box, Paper, InputBase, InputLabel } from "@mui/material";
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { alpha, styled } from '@mui/material/styles';
+import { alpha, styled } from "@mui/material/styles";
 import { Divider } from "@mui/material";
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
-  'label + &': {
-    marginTop: '0px',
+  "label + &": {
+    marginTop: "0px",
   },
-  '& .MuiInputBase-input': {
+  "& .MuiInputBase-input": {
     borderRadius: 4,
-    position: 'relative',
-    backgroundColor: theme.palette.mode === 'light' ? '#fcfcfb' : '#2b2b2b',
-    border: '1px solid #ced4da',
+    position: "relative",
+    backgroundColor: theme.palette.mode === "light" ? "#fcfcfb" : "#2b2b2b",
+    border: "1px solid #ced4da",
     fontSize: 14,
-    width: '200px',
-    padding: '2px',
+    width: "200px",
+    padding: "2px",
     transition: theme.transitions.create([
-      'border-color',
-      'background-color',
-      'box-shadow',
+      "border-color",
+      "background-color",
+      "box-shadow",
     ]),
 
     // Use the system font instead of the default Roboto font.
     fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
+      "-apple-system",
+      "BlinkMacSystemFont",
       '"Segoe UI"',
-      'Roboto',
+      "Roboto",
       '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
+      "Arial",
+      "sans-serif",
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
-    ].join(','),
-    '&:focus': {
+    ].join(","),
+    "&:focus": {
       boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
       borderColor: theme.palette.primary.main,
     },
   },
 }));
 
-
 class UserInfo extends React.Component {
   constructor() {
     super();
   }
-  
+
   render() {
     const { auth } = this.props;
     return (
-      <Box sx={{
-        display:"flex",
-        flexDirection: 'row',
-        width:"60%",
-        height: "350px",
-        justifyContent:'space-around',
-        margin: "20px auto",
-      }}>
-        <Paper elevation = {12} 
-                variant ="outlined"
-                sx={{
-                  width: "100%",
-                  border:1,
-                  borderColor: "white"
-                }}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          width: "60%",
+          height: "350px",
+          justifyContent: "space-around",
+          margin: "20px auto",
+        }}
+      >
+        <Paper
+          elevation={12}
+          variant="outlined"
+          sx={{
+            width: "100%",
+            border: 1,
+            borderColor: "white",
+          }}
         >
-          <Box sx={{
-            display:'flex',
-            flexWrap:'wrap',
-            flexDirection:'column',
-          }}>
-            <h4 style={{
-              font:'Abril Fatface',
-              margin:'0.5rem'
-            }}>Personal Information</h4>
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              flexDirection: "column",
+            }}
+          >
+            <h4
+              style={{
+                font: "Abril Fatface",
+                margin: "0.5rem",
+              }}
+            >
+              Personal Information
+            </h4>
             <Divider />
-            <Box sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-evenly',
-              margin: '0.5rem'
-            }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-evenly",
+                margin: "0.5rem",
+              }}
+            >
               <Box>
-                <InputLabel shrink htmlFor="bootstrap-input"
+                <InputLabel
+                  shrink
+                  htmlFor="bootstrap-input"
                   sx={{
                     marginTop: "1rem",
-                    marginLeft: '0.5rem'
+                    marginLeft: "0.5rem",
                   }}
                 >
                   User Name
                 </InputLabel>
-                <BootstrapInput defaultValue={auth.username} id="bootstrap-input"/>
+                <BootstrapInput
+                  defaultValue={auth.username}
+                  id="bootstrap-input"
+                />
               </Box>
               <Box>
-                <InputLabel shrink htmlFor="bootstrap-input"
+                <InputLabel
+                  shrink
+                  htmlFor="bootstrap-input"
                   sx={{
-                    marginTop: "1rem"
+                    marginTop: "1rem",
                   }}
                 >
                   Email
                 </InputLabel>
-                <BootstrapInput defaultValue={auth.email} id="bootstrap-input" />
+                <BootstrapInput
+                  defaultValue={auth.email}
+                  id="bootstrap-input"
+                />
               </Box>
             </Box>
-            <Box sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-evenly',
-              margin: '0.5rem'
-            }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-evenly",
+                margin: "0.5rem",
+              }}
+            >
               <Box>
-                <InputLabel shrink htmlFor="bootstrap-input"
+                <InputLabel
+                  shrink
+                  htmlFor="bootstrap-input"
                   sx={{
                     marginTop: "1rem",
-                    marginLeft: '0.5rem'
+                    marginLeft: "0.5rem",
                   }}
                 >
-                 Date of Birth
+                  Date of Birth
                 </InputLabel>
-                <BootstrapInput defaultValue={auth.DOB} id="bootstrap-input" />
-              </Box>      
+                <BootstrapInput
+                  defaultValue={auth.DOB.slice(0, 10)}
+                  id="bootstrap-input"
+                />
+              </Box>
               <Box>
-                <InputLabel shrink htmlFor="bootstrap-input"
+                <InputLabel
+                  shrink
+                  htmlFor="bootstrap-input"
                   sx={{
                     marginTop: "1rem",
-                    marginLeft: '0.5rem'
+                    marginLeft: "0.5rem",
                   }}
                 >
                   Shipping Address
                 </InputLabel>
-                <BootstrapInput defaultValue={auth.address} id="bootstrap-input" />
+                <BootstrapInput
+                  defaultValue={auth.address}
+                  id="bootstrap-input"
+                />
               </Box>
             </Box>
           </Box>
         </Paper>
       </Box>
-    )    
+    );
   }
 }
 
