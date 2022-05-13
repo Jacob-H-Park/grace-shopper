@@ -10,9 +10,10 @@ const FlowerCategories = () => {
   //React-Router Hooks
   const { type } = useParams();
 
+
   //Redux hooks
   const flowers = useSelector((state) =>
-    state.flowers.filter((flower) => flower.category === type)
+    state.flowers.filter((flower) => flower.category === type )
   );
   const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();

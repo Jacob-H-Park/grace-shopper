@@ -41,6 +41,9 @@ const AccountMenu = ({ auth }) => {
             Account
           </MenuItem>
         </Link>
+        <Link to="/user-orders">
+          <MenuItem onClick={handleClose}>Orders</MenuItem>
+        </Link>
         <Link to="/favorite">
           <MenuItem onClick={handleClose} color="black">
             Favorite
