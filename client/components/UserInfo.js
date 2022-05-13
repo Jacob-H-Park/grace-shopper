@@ -1,115 +1,175 @@
-import { Box, Paper,InputBase,TextField,InputLabel } from "@mui/material";
+import { Box, Paper, InputBase, InputLabel } from "@mui/material";
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { alpha, styled } from '@mui/material/styles';
-
+import { alpha, styled } from "@mui/material/styles";
+import { Divider } from "@mui/material";
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
-  'label + &': {
-    marginTop: theme.spacing(3),
+  "label + &": {
+    marginTop: "0px",
   },
-  '& .MuiInputBase-input': {
+  "& .MuiInputBase-input": {
     borderRadius: 4,
-    position: 'relative',
-    backgroundColor: theme.palette.mode === 'light' ? '#fcfcfb' : '#2b2b2b',
-    border: '1px solid #ced4da',
-    fontSize: 16,
-    width: 'auto',
-    padding: '10px 12px',
+    position: "relative",
+    backgroundColor: theme.palette.mode === "light" ? "#fcfcfb" : "#2b2b2b",
+    border: "1px solid #ced4da",
+    fontSize: 14,
+    width: "200px",
+    padding: "2px",
     transition: theme.transitions.create([
-      'border-color',
-      'background-color',
-      'box-shadow',
+      "border-color",
+      "background-color",
+      "box-shadow",
     ]),
+
     // Use the system font instead of the default Roboto font.
     fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
+      "-apple-system",
+      "BlinkMacSystemFont",
       '"Segoe UI"',
-      'Roboto',
+      "Roboto",
       '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
+      "Arial",
+      "sans-serif",
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
-    ].join(','),
-    '&:focus': {
+    ].join(","),
+    "&:focus": {
       boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
       borderColor: theme.palette.primary.main,
     },
   },
 }));
 
-
 class UserInfo extends React.Component {
   constructor() {
     super();
   }
-  
+
   render() {
     const { auth } = this.props;
-    const paperStyle = {
-      padding: 20,
-      height: "300px",
-      width: "80%",
-      margin: "20px auto",
-    };
-
     return (
-      <Box sx={{
-        display:"flex",
-        flexDirection: 'row',
-        width:"60%",
-        height: "300px",
-        justifyContent:'space-around',
-        margin: "20px auto",
-      }}>
-        <Paper elevation = {12} 
-                variant ="outlined"
-                
-                sx={{
-                  width: "100%",
-                  border:1,
-                  borderColor: "white"
-                }}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          width: "60%",
+          height: "350px",
+          justifyContent: "space-around",
+          margin: "20px auto",
+        }}
+      >
+        <Paper
+          elevation={12}
+          variant="outlined"
+          sx={{
+            width: "100%",
+            border: 1,
+            borderColor: "white",
+          }}
         >
-          <Box sx={{
-            display:'flex',
-            flexWrap:'wrap',
-            flexDirection:'column'
-          }}>
-            <h4 style={{
-              font:'Abril Fatface',
-              margin:'0.5rem'
-            }}>Personal Information</h4>
-            <InputLabel shrink htmlFor="bootstrap-input">
-              Bootstrap
-            </InputLabel>
-            <BootstrapInput defaultValue="react-bootstrap" id="bootstrap-input" />
-            <label><strong>Username:</strong></label><p style={{style: 'inline'}}>{auth.username}</p>
-            <h1>{auth.email}</h1>
-
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              flexDirection: "column",
+            }}
+          >
+            <h4
+              style={{
+                font: "Abril Fatface",
+                margin: "0.5rem",
+              }}
+            >
+              Personal Information
+            </h4>
+            <Divider />
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-evenly",
+                margin: "0.5rem",
+              }}
+            >
+              <Box>
+                <InputLabel
+                  shrink
+                  htmlFor="bootstrap-input"
+                  sx={{
+                    marginTop: "1rem",
+                    marginLeft: "0.5rem",
+                  }}
+                >
+                  User Name
+                </InputLabel>
+                <BootstrapInput
+                  defaultValue={auth.username}
+                  id="bootstrap-input"
+                />
+              </Box>
+              <Box>
+                <InputLabel
+                  shrink
+                  htmlFor="bootstrap-input"
+                  sx={{
+                    marginTop: "1rem",
+                  }}
+                >
+                  Email
+                </InputLabel>
+                <BootstrapInput
+                  defaultValue={auth.email}
+                  id="bootstrap-input"
+                />
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-evenly",
+                margin: "0.5rem",
+              }}
+            >
+              <Box>
+                <InputLabel
+                  shrink
+                  htmlFor="bootstrap-input"
+                  sx={{
+                    marginTop: "1rem",
+                    marginLeft: "0.5rem",
+                  }}
+                >
+                  Date of Birth
+                </InputLabel>
+                <BootstrapInput
+                  defaultValue={auth.DOB.slice(0, 10)}
+                  id="bootstrap-input"
+                />
+              </Box>
+              <Box>
+                <InputLabel
+                  shrink
+                  htmlFor="bootstrap-input"
+                  sx={{
+                    marginTop: "1rem",
+                    marginLeft: "0.5rem",
+                  }}
+                >
+                  Shipping Address
+                </InputLabel>
+                <BootstrapInput
+                  defaultValue={auth.address}
+                  id="bootstrap-input"
+                />
+              </Box>
+            </Box>
           </Box>
         </Paper>
       </Box>
-    )    
-          {/* <h3><u>Welcome To Your Profile!</u></h3>
-            <label><strong>Username:</strong></label><p style={{style: 'inline'}}>{auth.username}</p>
-          <h1>{auth.email}</h1>
-          <Box display='flex' flexDirection='column-reverse'>
-            <Box>
-              <Link to="/account/edit">
-                <button>Basic Information</button>
-              </Link>
-              <Link to="/account/password">
-                <button>Login/Authentication</button>
-              </Link>
-            </Box>
-          </Box> */}
-    
-    
+    );
   }
 }
 

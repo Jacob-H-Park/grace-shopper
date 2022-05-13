@@ -1,12 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  Link,
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  withRouter,
-  useLocation,
-} from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import Sidebar from "./components/Sidebar";
@@ -32,19 +25,19 @@ const AdminDashboard = () => {
   return (
     <div>
       {/* <Router> */}
-        <div className="container">
-          <Sidebar />
-          { pathname === "/admin" ? <Home /> : null }
-          <Switch>
-            <Route path="/admin/home" component={Home} />
-            <Route path="/admin/users" component={UserList} />
-            <Route path="/admin/user/:userId" component={User} />
-            <Route path="/admin/newUser" component={NewUser} />
-            <Route path="/admin/products" component={ProductInfo} />
-            <Route path="/admin/add_product" component={AddProduct} />
-            <Route path="/admin/editflowerinfo/:id" component={EditProduct} />
-          </Switch>
-        </div>
+      <div className="container">
+        <Sidebar />
+        {pathname === "/admin" ? <Home /> : null}
+        <Switch>
+          <Route path="/admin/home" component={Home} />
+          <Route path="/admin/users" component={UserList} />
+          <Route path="/admin/user/:userId" component={User} />
+          <Route path="/admin/newUser" component={NewUser} />
+          <Route path="/admin/products" component={ProductInfo} />
+          <Route path="/admin/add_product" component={AddProduct} />
+          <Route path="/admin/editflowerinfo/:id" component={EditProduct} />
+        </Switch>
+      </div>
       {/* </Router> */}
     </div>
   );

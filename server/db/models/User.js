@@ -44,6 +44,9 @@ const User = db.define("user", {
     type: ARRAY(INTEGER),
     defaultValue: [],
   },
+  address:{
+    type:STRING
+  }
 });
 
 module.exports = User;

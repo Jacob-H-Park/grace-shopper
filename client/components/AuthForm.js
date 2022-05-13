@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import { GoogleLogin } from "react-google-login";
-import { GoogleLoginButton, FacebookLoginButton, TwitterLoginButton, InstagramLoginButton } from "react-social-login-buttons";
+import {
+  GoogleLoginButton,
+  FacebookLoginButton,
+  TwitterLoginButton,
+  InstagramLoginButton,
+} from "react-social-login-buttons";
 import {
   Button,
   Typography,
@@ -175,13 +180,22 @@ const AuthForm = (props) => {
             onFailure={onFailure}
             cookiePolicy={"single_host_origin"}
           />
-          <FacebookLoginButton align="center" onClick={() => window.location = "/auth/facebook"}>
+          <FacebookLoginButton
+            align="center"
+            onClick={() => (window.location = "/auth/facebook")}
+          >
             <span>Log in with Facebook</span>
           </FacebookLoginButton>
-          <TwitterLoginButton align="center" onClick={() => window.location = "/auth/twitter"}>
+          <TwitterLoginButton
+            align="center"
+            onClick={() => (window.location = "/auth/twitter")}
+          >
             <span>Log in with Twitter</span>
           </TwitterLoginButton>
-          <InstagramLoginButton align="center" onClick={() => console.log("Instagram login")}>
+          <InstagramLoginButton
+            align="center"
+            onClick={() => console.log("Instagram login")}
+          >
             <span>Log in with Instagram</span>
           </InstagramLoginButton>
           <Typography

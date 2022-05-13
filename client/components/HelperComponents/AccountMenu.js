@@ -5,7 +5,7 @@ import { IconButton, Menu, MenuItem, Avatar } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { logout } from "../../store";
 
-const AccountMenu = ({ isAdmin, auth }) => {
+const AccountMenu = ({ auth }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
 
@@ -20,12 +20,15 @@ const AccountMenu = ({ isAdmin, auth }) => {
   return (
     <div>
       <IconButton color="inherit" onClick={handleClick}>
-        {auth.avatar ? <Avatar
-          sx={{ width: 24, height: 24 }}
-          alt={auth.username}
-          src={auth.avatar}
-          /> : <AccountCircleIcon />
-        }
+        {auth.avatar ? (
+          <Avatar
+            sx={{ width: 24, height: 24 }}
+            alt={auth.username}
+            src={auth.avatar}
+          />
+        ) : (
+          <AccountCircleIcon />
+        )}
       </IconButton>
       <Menu
         id="user-menu"
@@ -59,8 +62,8 @@ const AccountMenu = ({ isAdmin, auth }) => {
   );
 };
 
-const mapState=({ auth }) => {
-  return { auth }
-}
+const mapState = ({ auth }) => {
+  return { auth };
+};
 
 export default connect(mapState)(AccountMenu);

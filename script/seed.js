@@ -617,6 +617,14 @@ async function seed() {
     End_Date: "2022-05-08",
     Free_Shipping: true
   });
+  await Promotion.create({
+    Code: "ADMINONLY",
+    name: 'admin',
+    Discount: 0.3,
+    Start_Date: "2000-01-01",
+    End_Date: "2030-12-31",
+    Free_Shipping: true
+  });
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
