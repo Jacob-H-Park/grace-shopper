@@ -1,6 +1,5 @@
-import React, { useEffect ,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 import {
   Avatar,
@@ -13,7 +12,7 @@ import {
   Divider,
   Box,
   Button,
-  TextField
+  TextField,
 } from "@mui/material";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
@@ -30,7 +29,7 @@ import {
 import axios from "axios";
 
 //still in process
-const StripeCheckout = (itemsInCart) => {
+const StripeCheckout = (itemsInCart, discount) => {
   fetch("/create-checkout-session", {
     method: "POST",
     headers: {
@@ -38,6 +37,7 @@ const StripeCheckout = (itemsInCart) => {
     },
     body: JSON.stringify({
       itemsInCart,
+      discount,
     }),
   })
     .then((res) => {
@@ -52,16 +52,15 @@ const StripeCheckout = (itemsInCart) => {
     });
 };
 
-
 const Cart = () => {
   const { user, order } = useSelector((state) => ({
     user: state.auth,
     order: state.order || { products: [] },
   }));
-  const [promotionCode,setPromotionCode] = useState('')
-  const [discount,setDiscount] = useState(0)
-  const [discountErr, setDiscountErr] = useState('')
-  const [show,setShow] = useState(false)
+  const [promotionCode, setPromotionCode] = useState("");
+  const [discount, setDiscount] = useState(0);
+  const [discountErr, setDiscountErr] = useState("");
+  const [show, setShow] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -88,7 +87,6 @@ const Cart = () => {
     dispatch(deleteLineItem(user.id, productId, order.id));
   };
 
-  
   if (!order.products || order.products.length < 1) {
     return (
       <Box sx={{ width: "375px" }}>
@@ -103,8 +101,8 @@ const Cart = () => {
     beforeDiscount = order.products.reduce(
       (acc, flower) => (acc += flower.price * flower.lineItem.quantity),
       0
-    )
-    total = Math.round((1-discount)* beforeDiscount,2);
+    );
+    total = Math.floor((1 - discount) * beforeDiscount, 2);
     return (
       <Box sx={{ width: "375px" }}>
         <List sx={{ width: "375px", bgcolor: "white" }}>
@@ -176,66 +174,86 @@ const Cart = () => {
               </>
             );
           })}
-          
-            <form onSubmit={async(ev)=> {
-              ev.preventDefault()
-              const today = new Date()
-              const promotion = (await axios.post('/api/promotions',{Code:promotionCode})).data[0];
-              const expireDate = promotion ? new Date(promotion.End_Date):null
-              if(promotion === undefined){
-                setDiscountErr('Code is not valid')
-              }else if(expireDate < today){
-                setDiscountErr('Code has expired')
-              }else{
-                const _discount = promotion.Discount 
-                setDiscount(_discount)
-                setShow(true)
+
+          <form
+            onSubmit={async (ev) => {
+              ev.preventDefault();
+              const today = new Date();
+              const promotion = (
+                await axios.post("/api/promotions", { Code: promotionCode })
+              ).data[0];
+              const expireDate = promotion
+                ? new Date(promotion.End_Date)
+                : null;
+              if (promotion === undefined) {
+                setDiscountErr("Code is not valid");
+              } else if (expireDate < today) {
+                setDiscountErr("Code has expired");
+              } else {
+                const _discount = promotion.Discount;
+                setDiscount(_discount);
+                setShow(true);
               }
             }}
-            >
-              <Box sx={{
+          >
+            <Box
+              sx={{
                 display: "flex",
                 flexDirection: "row",
-                margin: '1rem',
-                justifyContent:'center',
-                
+                margin: "1rem",
+                justifyContent: "center",
               }}
-              > 
-                <TextField
-                  id="promotion-code"
-                  label="Promotion Code"
-                  defaultValue=""
-                  helperText={discountErr}
-                  value = {promotionCode}
-                  onChange={e=> setPromotionCode(e.target.value)}
-                  size= 'medium'
-                />
-                {/* <input placeholder='Promotion Code'value = {promotionCode} onChange={e=> setPromotionCode(e.target.value)} type='text'></input>
-                <p>{discountErr}</p> */}
-                <Button type="submit" variant="outlined" sx={{
+            >
+              <TextField
+                id="promotion-code"
+                label="Promotion Code"
+                defaultValue=""
+                helperText={discountErr}
+                value={promotionCode}
+                onChange={(e) => setPromotionCode(e.target.value)}
+                size="medium"
+              />
+              <Button
+                type="submit"
+                variant="outlined"
+                sx={{
                   width: "80px",
-                  height: "55px"
-                }}>Apply</Button>
-              </Box>
-            </form>
+                  height: "55px",
+                }}
+              >
+                Apply
+              </Button>
+            </Box>
+          </form>
 
-            <ListItem sx={{
+          <ListItem
+            sx={{
               display: "flex",
-              flexDirection:"column",
-              alignItems:'start',
-              
-            }}>
-              { show ? <h5 style={{
-                margin: '0px'
-              }} >You Save: ${Math.round((beforeDiscount*discount),2)}</h5>:null}
-              <h3>Total: ${total}</h3>
-            </ListItem>
+              flexDirection: "column",
+              alignItems: "start",
+            }}
+          >
+            <h3>
+              Total:
+              {discount === 0 ? (
+                <span> ${total}</span>
+              ) : (
+                <>
+                  <span> $</span>
+                  <span style={{ textDecoration: "line-through" }}>
+                    {beforeDiscount}
+                  </span>
+                  <span style={{ color: "blue" }}> ${total}</span>
+                </>
+              )}
+            </h3>
+          </ListItem>
         </List>
         <Button
           color="primary"
           variant="contained"
           onClick={() => {
-            StripeCheckout(order.products);
+            StripeCheckout(order.products, discount);
             dispatch(fulfillOrder(order.id));
           }}
           sx={{
