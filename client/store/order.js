@@ -134,7 +134,19 @@ export const getOrders = (userId) => {
       console.log(orders);
       dispatch(_getOrders(orders));
     } catch(err) {
-      console.log(e);
+      console.log(err);
+    }
+  }
+}
+
+export const getAllOrders = () => {
+  return async (dispatch) => {
+    try {
+      const allOrders = await (await axios.get('/api/orders')).data;
+      console.log("ALL ORDERS", allOrders);
+      dispatch(_getOrders(allOrders));
+    } catch(err) {
+      console.log(err);
     }
   }
 }

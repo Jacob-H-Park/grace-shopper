@@ -60,11 +60,13 @@ export default function Sidebar() {
                 <StorefrontIcon className="sidebarIcon" />
                 Products
               </li>
+            </Link >
+            <Link to="/admin/orders" className="link">
+              <li className={`sidebarListItem ${pathname === "/admin/orders" ? "active" : ""}`}>
+                <AttachMoneyIcon className="sidebarIcon" />
+                Orders
+              </li>
             </Link>
-            <li className="sidebarListItem">
-              <AttachMoneyIcon className="sidebarIcon" />
-              Orders
-            </li>
             <li className="sidebarListItem">
               <BarChartIcon className="sidebarIcon" />
               Reports

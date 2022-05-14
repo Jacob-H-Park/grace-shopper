@@ -10,6 +10,7 @@ import NewUser from "./components/NewUser";
 import ProductInfo from "../ProductInfo";
 import AddProduct from "../AddProduct";
 import EditProduct from "../EditProduct";
+import OrdersBoard from "./components/OdersBoard";
 import "./style/AdminDashboard.css";
 import { fetchUsers } from "../../store/users";
 
@@ -36,6 +37,7 @@ const AdminDashboard = () => {
           <Route path="/admin/products" component={ProductInfo} />
           <Route path="/admin/add_product" component={AddProduct} />
           <Route path="/admin/editflowerinfo/:id" component={EditProduct} />
+          <Route path="/admin/orders" component={OrdersBoard} />
         </Switch>
       </div>
       {/* </Router> */}
