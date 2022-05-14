@@ -1,20 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
-import {
-  Stack,
-  Button,
-  Divider,
-  IconButton,
-  Badge,
-} from "@mui/material";
+import { Stack, Button, Divider, IconButton, Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import AccountMenu from "../HelperComponents/AccountMenu";
 import FlowerMenu from "../HelperComponents/FlowerMenu";
 
 const UserStack = ({ navTabsUser, setOpen }) => {
-  const dispatch = useDispatch();
+  const {
+    order: { products },
+  } = useSelector((state) => ({ order: state.order || { products: [] } }));
+
+  let total;
+  if (products) {
+    total = products.reduce(
+      (acc, flower) => (acc += flower.lineItem.quantity),
+      0
+    );
+  }
 
   return (
     <Stack
@@ -32,7 +38,7 @@ const UserStack = ({ navTabsUser, setOpen }) => {
       })}
       <AccountMenu />
       <IconButton color="inherit" onClick={() => setOpen(true)}>
-        <Badge badgeContent={0} color="secondary">
+        <Badge badgeContent={total || 0} color="secondary">
           <ShoppingCartIcon />
         </Badge>
       </IconButton>
