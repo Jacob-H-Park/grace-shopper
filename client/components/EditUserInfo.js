@@ -195,11 +195,11 @@ class EditUserInfo extends Component {
                     Date of Birth
                   </InputLabel>
                   <BootstrapInput
-                    defaultValue={auth.DOB}
+                    defaultValue={auth.DOB?auth.DOB.slice(0, 10):null}
                     id="bootstrap-input"
                     name="DOB"
                     onChange={handleChange}
-                    value={DOB.slice(0, 10)}
+                    value={auth.DOB?auth.DOB.slice(0, 10):null}
                   />
                 </Box>
                 <Box>

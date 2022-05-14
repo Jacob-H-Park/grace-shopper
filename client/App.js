@@ -53,12 +53,31 @@ class App extends Component {
                 <Route path="/admin" component={AdminDashboard} />
                 <Route path="/account" component={Account} />
                 <Route path="cart" component={Cart} />
+                <Route exact path="/" component={LandingPage} />
+                <Route path="/flowers/:id" component={SingleFlower} />
+                <Route path="/flowers" component={Flowers} />
+                <Route path="/user-orders" component={UserOrders}/>
+                <Route path="/meet_the_team" component={MeetTheTeam} />
+                <Route path="/sig-bouquets" component={FlowerCategories} />
+                <Route path="/sympathy" component={FlowerCategories} />
+                <Route path="/preserved-rosesy" component={FlowerCategories} />
+                <Route path="/favorite" component={FavoriteList} />
+                <Route path="/:type" component={FlowerCategories} />
               </Switch>
             ) : (
               <Switch>
                 <Route path="/account" component={Account} />
-
                 <Route path="/cart" component={Cart} />
+                <Route exact path="/" component={LandingPage} />
+                <Route path="/flowers/:id" component={SingleFlower} />
+                <Route path="/flowers" component={Flowers} />
+                <Route path="/user-orders" component={UserOrders}/>
+                <Route path="/meet_the_team" component={MeetTheTeam} />
+                <Route path="/sig-bouquets" component={FlowerCategories} />
+                <Route path="/sympathy" component={FlowerCategories} />
+                <Route path="/preserved-rosesy" component={FlowerCategories} />
+                <Route path="/favorite" component={FavoriteList} />
+                <Route path="/:type" component={FlowerCategories} />
               </Switch>
             )
           ) : (
@@ -66,9 +85,19 @@ class App extends Component {
               <Route path="/cart" component={GuestCart} />
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
+              <Route exact path="/" component={LandingPage} />
+              <Route path="/flowers/:id" component={SingleFlower} />
+              <Route path="/flowers" component={Flowers} />
+              <Route path="/user-orders" component={UserOrders}/>
+              <Route path="/meet_the_team" component={MeetTheTeam} />
+              <Route path="/sig-bouquets" component={FlowerCategories} />
+              <Route path="/sympathy" component={FlowerCategories} />
+              <Route path="/preserved-rosesy" component={FlowerCategories} />
+              <Route path="/favorite" component={FavoriteList} />
+              <Route path="/:type" component={FlowerCategories} />
             </Switch>
           )}
-          <Switch>
+          {/* <Switch>
             <Route exact path="/" component={LandingPage} />
             <Route path="/flowers/:id" component={SingleFlower} />
             <Route path="/flowers" component={Flowers} />
@@ -79,7 +108,7 @@ class App extends Component {
             <Route path="/preserved-rosesy" component={FlowerCategories} />
             <Route path="/favorite" component={FavoriteList} />
             <Route path="/:type" component={FlowerCategories} />
-          </Switch>
+          </Switch> */}
           <Footer />
         </Router>
       </div>

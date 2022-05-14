@@ -145,7 +145,7 @@ class UserInfo extends React.Component {
                   Date of Birth
                 </InputLabel>
                 <BootstrapInput
-                  defaultValue={auth.DOB.slice(0, 10)}
+                  defaultValue={auth.DOB?auth.DOB.slice(0, 10):null}
                   id="bootstrap-input"
                 />
               </Box>
