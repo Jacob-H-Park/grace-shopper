@@ -21,7 +21,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "light" ? "#fcfcfb" : "#2b2b2b",
     border: "1px solid #ced4da",
     fontSize: 14,
-    width: "200px",
+    width: "100%",
     padding: "2px",
     transition: theme.transitions.create([
       "border-color",
@@ -127,6 +127,13 @@ class EditUserInfo extends Component {
               Update Personal Information
             </h4>
             <Divider />
+            <Paper elevation={0} square sx={{
+                width:'70px',
+                height:'70px',
+                marginLeft: '3rem',
+              }}>
+              <img src={auth.avatar} width="70px" height="70px" />
+            </Paper>
             <form onSubmit={handleSubmit}>
               <Box
                 sx={{

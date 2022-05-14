@@ -14,7 +14,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "light" ? "#fcfcfb" : "#2b2b2b",
     border: "1px solid #ced4da",
     fontSize: 14,
-    width: "200px",
+    width: "100%",
     padding: "2px",
     transition: theme.transitions.create([
       "border-color",
@@ -69,6 +69,7 @@ class UserInfo extends React.Component {
             borderColor: "white",
           }}
         >
+          
           <Box
             sx={{
               display: "flex",
@@ -85,87 +86,112 @@ class UserInfo extends React.Component {
               Personal Information
             </h4>
             <Divider />
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-evenly",
-                margin: "0.5rem",
-              }}
-            >
-              <Box>
-                <InputLabel
-                  shrink
-                  htmlFor="bootstrap-input"
+            <Box sx={{
+              display:'flex',
+              flexDirection: 'row',
+              margin:'auto',
+              marginTop: '0.5rem'
+            }}>
+              <Paper elevation={0} square sx={{
+                width:'100px',
+                height:'100px',
+                marginTop: '3rem',
+                marginLeft: '0.5rem'
+              }}>
+               <img src={auth.avatar} width="100px" height="100px" />
+              </Paper>
+              <Box sx={{
+                display:'flex',
+                flexDirection: 'column'
+              }}>
+                <Box
                   sx={{
-                    marginTop: "1rem",
-                    marginLeft: "0.5rem",
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-around",
+                    margin: "0.5rem",
                   }}
                 >
-                  User Name
-                </InputLabel>
-                <BootstrapInput
-                  defaultValue={auth.username}
-                  id="bootstrap-input"
-                />
-              </Box>
-              <Box>
-                <InputLabel
-                  shrink
-                  htmlFor="bootstrap-input"
+                  <Box sx={{
+                    margin: '1rem'
+                  }}>
+                    <InputLabel
+                      shrink
+                      htmlFor="bootstrap-input"
+                      sx={{
+                        marginTop: "1rem",
+                        marginLeft: "0.5rem",
+                      }}
+                    >
+                      User Name
+                    </InputLabel>
+                    <BootstrapInput
+                      defaultValue={auth.username}
+                      id="bootstrap-input"
+                    />
+                  </Box>
+                  <Box sx={{
+                    margin: '1rem'
+                  }}>
+                    <InputLabel
+                      shrink
+                      htmlFor="bootstrap-input"
+                      sx={{
+                        marginTop: "1rem",
+                      }}
+                    >
+                      Email
+                    </InputLabel>
+                    <BootstrapInput
+                      defaultValue={auth.email}
+                      id="bootstrap-input"
+                    />
+                  </Box>
+                </Box>
+                <Box
                   sx={{
-                    marginTop: "1rem",
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-around",
+                    margin: "0.5rem",
                   }}
                 >
-                  Email
-                </InputLabel>
-                <BootstrapInput
-                  defaultValue={auth.email}
-                  id="bootstrap-input"
-                />
+                  <Box >
+                    <InputLabel
+                      shrink
+                      htmlFor="bootstrap-input"
+                      sx={{
+                        marginTop: "1rem",
+                        marginLeft: "0.5rem",
+                      }}
+                    >
+                      Date of Birth
+                    </InputLabel>
+                    <BootstrapInput
+                      defaultValue={auth.DOB?auth.DOB.slice(0, 10):null}
+                      id="bootstrap-input"
+                    />
+                  </Box>
+                  <Box>
+                    <InputLabel
+                      shrink
+                      htmlFor="bootstrap-input"
+                      sx={{
+                        marginTop: "1rem",
+                        marginLeft: "0.5rem",
+                      }}
+                    >
+                      Shipping Address
+                    </InputLabel>
+                    <BootstrapInput
+                      defaultValue={auth.address}
+                      id="bootstrap-input"
+                    />
+                  </Box>
+                </Box>
               </Box>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-evenly",
-                margin: "0.5rem",
-              }}
-            >
-              <Box>
-                <InputLabel
-                  shrink
-                  htmlFor="bootstrap-input"
-                  sx={{
-                    marginTop: "1rem",
-                    marginLeft: "0.5rem",
-                  }}
-                >
-                  Date of Birth
-                </InputLabel>
-                <BootstrapInput
-                  defaultValue={auth.DOB?auth.DOB.slice(0, 10):null}
-                  id="bootstrap-input"
-                />
-              </Box>
-              <Box>
-                <InputLabel
-                  shrink
-                  htmlFor="bootstrap-input"
-                  sx={{
-                    marginTop: "1rem",
-                    marginLeft: "0.5rem",
-                  }}
-                >
-                  Shipping Address
-                </InputLabel>
-                <BootstrapInput
-                  defaultValue={auth.address}
-                  id="bootstrap-input"
-                />
-              </Box>
-            </Box>
+              
+            </Box>            
           </Box>
         </Paper>
       </Box>

@@ -2,7 +2,7 @@ import { Box, MenuList, MenuItem, ListItemText, Divider } from "@mui/material";
 
 import React from "react";
 import { Link } from "react-router-dom";
-
+import PersonIcon from '@mui/icons-material/Person';
 const UserProfileSideBar = () => {
   return (
     <Box
