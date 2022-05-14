@@ -2,7 +2,7 @@ const path = require("path");
 const express = require("express");
 const cors = require("cors");
 // Passport.js middleware for third-party OAuth logins
-const cookieSession = require('cookie-session');
+const cookieSession = require("cookie-session");
 // const expressSession = require("express-session");
 const passport = require("passport");
 const passportSetup = require("./auth/passport-setup");
@@ -21,11 +21,13 @@ app.use(express.json());
 //   resave: false,
 //   saveUninitialized: true
 // }));
-app.use(cookieSession({
-  name: "twitter-auth-session",
-  keys: ["team-7-fantastic"],
-  maxAge: 24 * 60 * 60 * 100 
-}));
+app.use(
+  cookieSession({
+    name: "twitter-auth-session",
+    keys: ["team-7-fantastic"],
+    maxAge: 24 * 60 * 60 * 100,
+  })
+);
 
 // auth and api routes
 app.use("/auth", require("./auth"));
@@ -88,7 +90,7 @@ app.post("/create-checkout-session", async (req, res) => {
             product_data: {
               name: item.name,
             },
-            unit_amount: item.price * 100,
+            unit_amount: Math.floor(item.price * (1 - req.body.discount)) * 100,
           },
           quantity: item.lineItem.quantity,
         };

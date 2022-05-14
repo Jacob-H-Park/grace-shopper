@@ -10,26 +10,16 @@ import { getCart } from "../../store/order.js";
 
 const AdminStack = ({ setOpen, navTabsAdmin, isAdmin }) => {
   const {
-    user,
     order: { products },
-  } = useSelector((state) => ({
-    user: state.auth,
-    order: state.order || { products: [] },
-  }));
+  } = useSelector((state) => ({ order: state.order || { products: [] } }));
 
   let total;
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getCart(user.id));
-  }, []);
-
   if (products) {
     total = products.reduce(
       (acc, flower) => (acc += flower.lineItem.quantity),
       0
     );
   }
-  const [t, setT] = useState(total);
 
   return (
     <Stack
@@ -47,7 +37,7 @@ const AdminStack = ({ setOpen, navTabsAdmin, isAdmin }) => {
       })}
       <AccountMenu isAdmin={isAdmin} />
       <IconButton color="inherit" onClick={() => setOpen(true)}>
-        <Badge badgeContent={t || 0} color="secondary">
+        <Badge badgeContent={total || 0} color="secondary">
           <ShoppingCartIcon />
         </Badge>
       </IconButton>

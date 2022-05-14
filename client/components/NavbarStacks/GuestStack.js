@@ -1,10 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Stack, Button, Divider, IconButton, Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FlowerMenu from "../HelperComponents/FlowerMenu";
 
 const GuestStack = ({ navTabsGuest, setOpen }) => {
+  const {
+    order: { products },
+  } = useSelector((state) => ({ order: state.order || { products: [] } }));
+
+  let total;
+  if (products) {
+    total = products.reduce(
+      (acc, flower) => (acc += flower.lineItem.quantity),
+      0
+    );
+  }
   return (
     <Stack
       direction="row"
@@ -21,7 +33,7 @@ const GuestStack = ({ navTabsGuest, setOpen }) => {
       })}
 
       <IconButton color="inherit" onClick={() => setOpen(true)}>
-        <Badge badgeContent={0} color="secondary">
+        <Badge badgeContent={total || 0} color="secondary">
           <ShoppingCartIcon />
         </Badge>
       </IconButton>
